@@ -25,7 +25,7 @@ class CitationSettingType extends AbstractType
                         'style' => 'width:100%',
                         'data-list' => $options['citationsEndPoint'],
                         'data-get' => $options['citationEndPoint'],
-                        "placeholder" => "type a citation",
+                        'placeholder' => 'type a citation',
                     ],
                 ]
             )

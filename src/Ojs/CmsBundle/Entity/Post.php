@@ -4,13 +4,13 @@ namespace Ojs\CmsBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * Post
+ * Post.
+ *
  * @GRID\Source(columns="id, title, content")
  */
 abstract class Post extends AbstractTranslatable
@@ -18,7 +18,7 @@ abstract class Post extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      */
     protected $id;
@@ -50,7 +50,7 @@ abstract class Post extends AbstractTranslatable
     private $updatedAt;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -59,9 +59,9 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -69,7 +69,7 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -79,9 +79,10 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return Post
      */
     public function setTitle($title)
@@ -92,8 +93,10 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\CmsBundle\Entity\PostTranslation
      */
     public function translate($locale = null)
@@ -114,7 +117,7 @@ abstract class Post extends AbstractTranslatable
         if (!$translation = $this->translations->get($locale)) {
             $translation = new PostTranslation();
 
-            if(!is_null($defaultTranslation)){
+            if (!is_null($defaultTranslation)) {
                 $translation->setTitle($defaultTranslation->getTitle());
             }
 
@@ -123,11 +126,12 @@ abstract class Post extends AbstractTranslatable
         }
 
         $this->currentTranslation = $translation;
+
         return $translation;
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -137,9 +141,10 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Set content
+     * Set content.
      *
      * @param string $content
+     *
      * @return Post
      */
     public function setContent($content)
@@ -150,7 +155,7 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -160,9 +165,10 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
+     *
      * @return Post
      */
     public function setSlug($slug)
@@ -173,7 +179,7 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -183,9 +189,10 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
+     *
      * @return Post
      */
     public function setCreatedAt($createdAt)
@@ -196,7 +203,7 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -206,9 +213,10 @@ abstract class Post extends AbstractTranslatable
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
+     *
      * @return Post
      */
     public function setUpdatedAt($updatedAt)

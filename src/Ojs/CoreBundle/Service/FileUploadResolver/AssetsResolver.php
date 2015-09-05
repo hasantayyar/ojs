@@ -18,10 +18,10 @@ class AssetsResolver implements ResolverInterface
     protected $directory;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param AssetsHelper $helper
-     * @param string $directory
+     * @param string       $directory
      */
     public function __construct(AssetsHelper $helper, $directory)
     {
@@ -35,7 +35,7 @@ class AssetsResolver implements ResolverInterface
     public function getUrl($key)
     {
         return $this->helper->getUrl(
-            trim($this->directory, '/') . '/' . $key
+            trim($this->directory, '/').'/'.$key
         );
     }
 }

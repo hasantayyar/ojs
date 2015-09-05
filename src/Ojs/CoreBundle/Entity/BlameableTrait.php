@@ -4,12 +4,11 @@ namespace Ojs\CoreBundle\Entity;
 
 trait BlameableTrait
 {
+    /** @var string */
+    protected $createdBy = '';
 
     /** @var string */
-    protected $createdBy = "";
-
-    /** @var string */
-    protected $updatedBy = "";
+    protected $updatedBy = '';
 
     public function getCreatedBy()
     {

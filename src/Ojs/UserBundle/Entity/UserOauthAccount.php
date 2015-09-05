@@ -2,19 +2,18 @@
 
 namespace Ojs\UserBundle\Entity;
 
-
 /**
- * UserOauthAccount
+ * UserOauthAccount.
  */
 class UserOauthAccount
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $user_id;
 
@@ -44,9 +43,9 @@ class UserOauthAccount
     private $user;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -54,9 +53,9 @@ class UserOauthAccount
     }
 
     /**
-     * Get user_id
+     * Get user_id.
      *
-     * @return integer
+     * @return int
      */
     public function getUserId()
     {
@@ -64,9 +63,10 @@ class UserOauthAccount
     }
 
     /**
-     * Set user_id
+     * Set user_id.
      *
-     * @param  integer $userId
+     * @param int $userId
+     *
      * @return UserOauthAccount
      */
     public function setUserId($userId)
@@ -77,7 +77,7 @@ class UserOauthAccount
     }
 
     /**
-     * Get provider
+     * Get provider.
      *
      * @return string
      */
@@ -87,9 +87,10 @@ class UserOauthAccount
     }
 
     /**
-     * Set provider
+     * Set provider.
      *
-     * @param  string $provider
+     * @param string $provider
+     *
      * @return UserOauthAccount
      */
     public function setProvider($provider)
@@ -100,7 +101,7 @@ class UserOauthAccount
     }
 
     /**
-     * Get provider_user_id
+     * Get provider_user_id.
      *
      * @return string
      */
@@ -110,9 +111,10 @@ class UserOauthAccount
     }
 
     /**
-     * Set provider_user_id
+     * Set provider_user_id.
      *
-     * @param  string $providerUserId
+     * @param string $providerUserId
+     *
      * @return UserOauthAccount
      */
     public function setProviderUserId($providerUserId)
@@ -123,7 +125,7 @@ class UserOauthAccount
     }
 
     /**
-     * Get provider_access_token
+     * Get provider_access_token.
      *
      * @return string
      */
@@ -133,9 +135,10 @@ class UserOauthAccount
     }
 
     /**
-     * Set provider_access_token
+     * Set provider_access_token.
      *
-     * @param  string $providerAccessToken
+     * @param string $providerAccessToken
+     *
      * @return UserOauthAccount
      */
     public function setProviderAccessToken($providerAccessToken)
@@ -146,7 +149,7 @@ class UserOauthAccount
     }
 
     /**
-     * Get provider_refresh_token
+     * Get provider_refresh_token.
      *
      * @return string
      */
@@ -156,9 +159,10 @@ class UserOauthAccount
     }
 
     /**
-     * Set provider_refresh_token
+     * Set provider_refresh_token.
      *
-     * @param  string $providerRefreshToken
+     * @param string $providerRefreshToken
+     *
      * @return UserOauthAccount
      */
     public function setProviderRefreshToken($providerRefreshToken)
@@ -169,7 +173,7 @@ class UserOauthAccount
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -179,9 +183,10 @@ class UserOauthAccount
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  User $user
+     * @param User $user
+     *
      * @return UserOauthAccount
      */
     public function setUser(User $user = null)

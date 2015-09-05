@@ -7,13 +7,14 @@ use Ojs\JournalBundle\Entity\Publisher;
 use Ojs\UserBundle\Entity\User;
 
 /**
- * PublisherManagers
+ * PublisherManagers.
+ *
  * @GRID\Source(columns="id, user.username, publisher.name")
  */
 class PublisherManagers
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -39,6 +40,7 @@ class PublisherManagers
 
     /**
      * @param int $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -58,6 +60,7 @@ class PublisherManagers
 
     /**
      * @param Publisher $publisher
+     *
      * @return $this
      */
     public function setPublisher($publisher)
@@ -77,6 +80,7 @@ class PublisherManagers
 
     /**
      * @param User $user
+     *
      * @return $this
      */
     public function setUser($user)

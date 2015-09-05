@@ -4,11 +4,11 @@ namespace Ojs\JournalBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Ojs\CoreBundle\Annotation\Display as Display;
 
 /**
- * PublisherDesign
+ * PublisherDesign.
+ *
  * @GRID\Source(columns="id,journal.title,title")
  */
 class PublisherDesign
@@ -16,7 +16,7 @@ class PublisherDesign
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     private $id;
@@ -42,21 +42,20 @@ class PublisherDesign
     private $editableContent;
 
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="basedesign")
      */
     private $isPublic;
 
     /**
-     *
      * @var Publisher
      */
     private $publisher;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -64,7 +63,7 @@ class PublisherDesign
     }
 
     /**
-     * Get publisher
+     * Get publisher.
      *
      * @return Publisher
      */
@@ -74,8 +73,10 @@ class PublisherDesign
     }
 
     /**
-     * Set publisher
-     * @param  Publisher $publisher
+     * Set publisher.
+     *
+     * @param Publisher $publisher
+     *
      * @return PublisherTheme
      */
     public function setPublisher($publisher)
@@ -102,7 +103,7 @@ class PublisherDesign
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsPublic()
     {
@@ -110,7 +111,7 @@ class PublisherDesign
     }
 
     /**
-     * @param boolean $isPublic
+     * @param bool $isPublic
      */
     public function setIsPublic($isPublic)
     {
@@ -148,6 +149,4 @@ class PublisherDesign
     {
         $this->editableContent = $editableContent;
     }
-
-
 }

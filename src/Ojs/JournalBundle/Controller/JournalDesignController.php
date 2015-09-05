@@ -4,7 +4,6 @@ namespace Ojs\JournalBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Elastica\Exception\NotFoundException;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
@@ -20,14 +19,11 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 /**
  * JournalDesign controller.
- *
  */
 class JournalDesignController extends Controller
 {
-
     /**
      * Lists all JournalDesign entities.
-     *
      */
     public function indexAction()
     {
@@ -46,7 +42,7 @@ class JournalDesignController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_journal_design_show', ['id', 'journalId' => $journal->getId()]);
         $rowAction[] = $gridAction->editAction('ojs_journal_design_edit', ['id', 'journalId' => $journal->getId()]);
@@ -63,7 +59,8 @@ class JournalDesignController extends Controller
     /**
      * Creates a new JournalDesign entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -88,6 +85,7 @@ class JournalDesignController extends Controller
 
             return $this->redirectToRoute('ojs_journal_design_show', ['id' => $entity->getId(), 'journalId' => $journal->getId()]);
         }
+
         return $this->render(
             'OjsJournalBundle:JournalDesign:new.html.twig',
             array(
@@ -98,6 +96,7 @@ class JournalDesignController extends Controller
 
     /**
      * @param Journal $journal
+     *
      * @return Form
      */
     private function createCreateForm(JournalDesign $entity, Journal $journal)
@@ -116,7 +115,8 @@ class JournalDesignController extends Controller
     }
 
     /**
-     * @param  String $editableContent
+     * @param String $editableContent
+     *
      * @return String
      */
     private function prepareDesignContent($editableContent)
@@ -179,6 +179,7 @@ class JournalDesignController extends Controller
 
     /**
      * @param $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -191,9 +192,8 @@ class JournalDesignController extends Controller
         /** @var JournalDesign $design */
         $design = $em->getRepository('OjsJournalBundle:JournalDesign')->find($id);
         $this->throw404IfNotFound($design);
-        if($design->getJournal()->getId() !== $journal->getId())
-        {
-            throw new NotFoundException("Journal Design not found!");
+        if ($design->getJournal()->getId() !== $journal->getId()) {
+            throw new NotFoundException('Journal Design not found!');
         }
         $token = $this
             ->get('security.csrf.token_manager')
@@ -203,14 +203,14 @@ class JournalDesignController extends Controller
             'OjsJournalBundle:JournalDesign:show.html.twig',
             array(
                 'entity' => $design,
-                'token'  => $token,
+                'token' => $token,
             )
         );
     }
 
     /**
+     * @param JournalDesign $journalDesign
      *
-     * @param  JournalDesign  $journalDesign
      * @return Response
      */
     public function editAction(JournalDesign $journalDesign)
@@ -233,7 +233,8 @@ class JournalDesignController extends Controller
     }
 
     /**
-     * @param  String $editableContent
+     * @param String $editableContent
+     *
      * @return String
      */
     private function prepareEditContent($editableContent)
@@ -260,7 +261,8 @@ class JournalDesignController extends Controller
 
     /**
      * @param JournalDesign $entity
-     * @param Journal $journal
+     * @param Journal       $journal
+     *
      * @return Form
      */
     private function createEditForm(JournalDesign $entity, Journal $journal)
@@ -271,7 +273,7 @@ class JournalDesignController extends Controller
             array(
                 'action' => $this->generateUrl('ojs_journal_design_update', [
                     'journalId' => $journal->getId(),
-                    'id'=> $entity->getId()
+                    'id' => $entity->getId(),
                     ]
                 ),
                 'method' => 'PUT',
@@ -284,9 +286,9 @@ class JournalDesignController extends Controller
     }
 
     /**
+     * @param Request       $request
+     * @param JournalDesign $journalDesign
      *
-     * @param  Request                   $request
-     * @param  JournalDesign                   $journalDesign
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, JournalDesign $journalDesign)
@@ -301,7 +303,6 @@ class JournalDesignController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
             $journalDesign->setContent(
                 $this->prepareDesignContent($journalDesign->getEditableContent())
             );
@@ -322,9 +323,11 @@ class JournalDesignController extends Controller
     }
 
     /**
-     * @param  Request                $request
-     * @param  integer                $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse
+     *
      * @throws TokenNotFoundException
      */
     public function deleteAction(Request $request, $id)
@@ -341,10 +344,10 @@ class JournalDesignController extends Controller
             $this->errorFlashBag('journal.design.cannot_delete_active');
         } else {
             $csrf = $this->get('security.csrf.token_manager');
-            $token = $csrf->getToken('ojs_journal_design' . $id);
+            $token = $csrf->getToken('ojs_journal_design'.$id);
 
             if ($token != $request->get('_token')) {
-                throw new TokenNotFoundException("Token Not Found!");
+                throw new TokenNotFoundException('Token Not Found!');
             }
 
             $em->remove($requestedDesign);

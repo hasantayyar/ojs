@@ -11,9 +11,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ChangePasswordController extends Controller
 {
     /**
-     * Change user password
+     * Change user password.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function changePasswordAction(Request $request)
@@ -39,7 +40,7 @@ class ChangePasswordController extends Controller
         }
 
         return $this->render('FOSUserBundle:ChangePassword:changePassword.html.twig', array(
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\LocationBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormEvent;
@@ -15,16 +16,16 @@ class AddProvinceFieldSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::POST_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT    => 'preSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         );
     }
     private function addProvinceForm(FormInterface $form, $country_id)
     {
         $formOptions = array(
-            'class'         => 'Ojs\LocationBundle\Entity\Province',
-            'empty_value'   => 'City',
-            'label'         => 'City',
-            'attr'          => array(
+            'class' => 'Ojs\LocationBundle\Entity\Province',
+            'empty_value' => 'City',
+            'label' => 'City',
+            'attr' => array(
                 'class' => 'select2-element province_selector',
             ),
             'query_builder' => function (EntityRepository $repository) use ($country_id) {
@@ -33,8 +34,9 @@ class AddProvinceFieldSubscriber implements EventSubscriberInterface
                     ->where('country.id = :country')
                     ->setParameter('country', $country_id)
                 ;
+
                 return $qb;
-            }
+            },
         );
         $form->add('city', 'entity', $formOptions);
     }
@@ -45,9 +47,9 @@ class AddProvinceFieldSubscriber implements EventSubscriberInterface
         if (null === $data) {
             return;
         }
-        $accessor    = PropertyAccess::createPropertyAccessor();
+        $accessor = PropertyAccess::createPropertyAccessor();
         /** @var Province $province */
-        $province       = $accessor->getValue($data, 'city');
+        $province = $accessor->getValue($data, 'city');
         $country_id = ($province) ? $province->getCountry()->getId() : null;
         $this->addProvinceForm($form, $country_id);
     }

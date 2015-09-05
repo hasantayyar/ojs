@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 /**
  * Mail controller.
- *
  */
 class MailerService
 {
@@ -19,7 +18,7 @@ class MailerService
     protected $systemEmail;
 
     /**
-     * @param \Swift_Mailer $mailer
+     * @param \Swift_Mailer   $mailer
      * @param EngineInterface $templating
      * @param $systemEmail
      */
@@ -32,9 +31,11 @@ class MailerService
 
     /**
      * Send a mail or add to spool, then log to db.
-     * @param  Mail $mail
-     * @param  Journal $journal
-     * @return integer
+     *
+     * @param Mail    $mail
+     * @param Journal $journal
+     *
+     * @return int
      */
     public function send(Mail $mail, Journal $journal)
     {

@@ -13,7 +13,7 @@ class MenuBuilder extends ContainerAware
 {
     public function leftMenu(FactoryInterface $factory)
     {
-        /**
+        /*
          * @var Journal $journal
          * @var AuthorizationChecker $checker
          */
@@ -27,7 +27,7 @@ class MenuBuilder extends ContainerAware
         if ($checker->isGranted('EDIT', $journal)) {
             $menu->addChild('settings', [
                 'route' => 'ojs_journal_settings_index',
-                'routeParameters' => ['journalId' => $journalId]
+                'routeParameters' => ['journalId' => $journalId],
             ]);
         }
 
@@ -55,14 +55,14 @@ class MenuBuilder extends ContainerAware
         foreach ($items as $item) {
             $field = $item[0];
             $label = $item[1];
-            $path  = $item[2];
-            $icon  = $item[3];
+            $path = $item[2];
+            $icon = $item[3];
 
             if (empty($field) || $checker->isGranted('VIEW', $journal, $field)) {
                 $menu->addChild($label, [
-                    'route'           => $path,
+                    'route' => $path,
                     'routeParameters' => ['journalId' => $journalId],
-                    'extras'          => ['icon'      => $icon]
+                    'extras' => ['icon' => $icon],
                 ]);
             }
         }
@@ -70,6 +70,7 @@ class MenuBuilder extends ContainerAware
         $menuEvent->setMenuItem($menu);
 
         $dispatcher->dispatch(JournalEvents::LEFT_MENU_INITIALIZED, $menuEvent);
+
         return $menuEvent->getMenuItem();
     }
 }

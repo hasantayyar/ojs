@@ -27,7 +27,7 @@ class ContactTypesType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Ojs\JournalBundle\Entity\ContactTypes',
-                'cascade_validation'=>true,
+                'cascade_validation' => true,
                 'attr' => [
                     'class' => 'form-validate',
                 ],

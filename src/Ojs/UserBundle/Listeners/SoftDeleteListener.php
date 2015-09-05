@@ -13,9 +13,9 @@ class SoftDeleteListener
         $entityManager = $args->getEntityManager();
 
         if ($entity instanceof User) {
-            if (strpos($entity->getUsername(), "_deleted_") === false) {
-                $entity->setUsername($entity->getUsername()."_deleted_".time());
-                $entity->setEmail($entity->getEmail()."_deleted_".time());
+            if (strpos($entity->getUsername(), '_deleted_') === false) {
+                $entity->setUsername($entity->getUsername().'_deleted_'.time());
+                $entity->setEmail($entity->getEmail().'_deleted_'.time());
                 $entityManager->persist($entity);
                 $entityManager->flush($entity);
             }

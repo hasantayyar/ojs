@@ -34,16 +34,17 @@ class PackageCommand extends ContainerAwareCommand
         if ($type == 'zip' || $type == 'ZIP') {
             $output->writeln('<info>Creating a ZIP package...</info>');
             $output->writeln('<info>Archiving master branch...</info>');
-            $archiver = new Process('git archive --format zip --output ' . self::OPERATION_DIRECTORY . self::ZIP_FILE_NAME . ' master ');
+            $archiver = new Process('git archive --format zip --output '.self::OPERATION_DIRECTORY.self::ZIP_FILE_NAME.' master ');
             $archiver->run();
 
             if (!$archiver->isSuccessful()) {
                 $output->writeln('<info>Could not archive master branch.</info>');
-                $output->writeln('<error>' . $archiver->getErrorOutput() . '</error>');
+                $output->writeln('<error>'.$archiver->getErrorOutput().'</error>');
+
                 return;
             } else {
                 $output->writeln('<info>Done!</info>');
-                $output->writeln('<info>The archive is at: ' . self::OPERATION_DIRECTORY . self::ZIP_FILE_NAME);
+                $output->writeln('<info>The archive is at: '.self::OPERATION_DIRECTORY.self::ZIP_FILE_NAME);
             }
         }
 
@@ -55,16 +56,17 @@ class PackageCommand extends ContainerAwareCommand
                 $filesystem->mkdir(self::REPO_DIRECTORY);
                 $filesystem->mkdir(self::OUTPUT_DIRECTORY);
             } catch (IOExceptionInterface $error) {
-                echo "An error occurred while creating your directory at " . $error->getPath();
+                echo 'An error occurred while creating your directory at '.$error->getPath();
             }
 
             $output->writeln('<info>Archiving master branch...</info>');
-            $archiver = new Process('git archive master | tar -x -C ' . self::REPO_DIRECTORY);
+            $archiver = new Process('git archive master | tar -x -C '.self::REPO_DIRECTORY);
             $archiver->run();
 
             if (!$archiver->isSuccessful()) {
                 $output->writeln('<info>Could not archive master branch.</info>');
-                $output->writeln('<error>' . $archiver->getErrorOutput() . '</error>');
+                $output->writeln('<error>'.$archiver->getErrorOutput().'</error>');
+
                 return;
             }
 
@@ -82,7 +84,7 @@ class PackageCommand extends ContainerAwareCommand
             $dependencies = [
                 'php5', 'php5-mysql', 'php5-mongo',
                 'php5-mcrypt', 'php5-memcached', 'php5-curl',
-                'memcached', 'mongodb'
+                'memcached', 'mongodb',
             ];
 
             $control = new StandardFile();
@@ -98,8 +100,8 @@ class PackageCommand extends ContainerAwareCommand
             $packager = new Packager();
             $packager->setControl($control);
             $packager->setOutputPath(self::OUTPUT_DIRECTORY);
-            $packager->setPostInstallScript($this->getContainer()->get('kernel')->getRootDir() . '/../tools/debian/postinst');
-            $packager->setPostRemoveScript($this->getContainer()->get('kernel')->getRootDir() . '/../tools/debian/postrm');
+            $packager->setPostInstallScript($this->getContainer()->get('kernel')->getRootDir().'/../tools/debian/postinst');
+            $packager->setPostRemoveScript($this->getContainer()->get('kernel')->getRootDir().'/../tools/debian/postrm');
             $packager->addMount(self::REPO_DIRECTORY, '/opt/ojs');
             $packager->run();
             $command = $packager->build(self::DEB_FILE_NAME);
@@ -112,12 +114,11 @@ class PackageCommand extends ContainerAwareCommand
 
             if (!$process->isSuccessful()) {
                 $output->writeln('<info>Could not create a DEB file.</info>');
-                $output->writeln('<error>' . $process->getErrorOutput() . '</error>');
+                $output->writeln('<error>'.$process->getErrorOutput().'</error>');
             } else {
                 $output->writeln('<info>Done!</info>');
-                $output->writeln('<info>The package is at: ' . self::OPERATION_DIRECTORY . self::DEB_FILE_NAME);
+                $output->writeln('<info>The package is at: '.self::OPERATION_DIRECTORY.self::DEB_FILE_NAME);
             }
         }
     }
-
 }

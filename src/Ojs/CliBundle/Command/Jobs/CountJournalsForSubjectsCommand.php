@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CountJournalsForSubjectsCommand extends ContainerAwareCommand
 {
-
     protected function configure()
     {
         $this
@@ -21,6 +20,7 @@ class CountJournalsForSubjectsCommand extends ContainerAwareCommand
 
     /**
      * @todo not implemented yet
+     *
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
@@ -40,9 +40,8 @@ class CountJournalsForSubjectsCommand extends ContainerAwareCommand
                 $subject->setTotalJournalCount($count);
                 $em->persist($subject);
             }
-            echo ".";
+            echo '.';
         }
         $em->flush();
-
     }
 }

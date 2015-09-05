@@ -17,24 +17,22 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ArticleRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Articles"
      * )
      * @Get("/articles/bulk/{page}/{limit}")
      *
-     * @param  int   $page
-     * @param  int   $limit
+     * @param int $page
+     * @param int $limit
+     *
      * @return Article[]|array
      */
     public function getArticlesAction($page = 0, $limit = 10)
     {
         /** @var ArticleRepository $articleRepo */
         $articleRepo = $this->getDoctrine()->getManager()->getRepository('OjsJournalBundle:Article');
-
 
         $articles = $articleRepo->findAllByLimits($page, $limit);
         if (!is_array($articles)) {
@@ -45,8 +43,8 @@ class ArticleRestController extends FOSRestController
     }
 
     /**
-     *
      * @param $id
+     *
      * @return object
      *
      * @ApiDoc(
@@ -107,10 +105,10 @@ class ArticleRestController extends FOSRestController
     }
 
     /**
+     * @param int      $id
+     * @param Citation $citation
+     * @param Request  $request
      *
-     * @param  integer  $id
-     * @param  Citation $citation
-     * @param  Request  $request
      * @return Article
      */
     private function addCitation2Article($id, Citation $citation, $request)
@@ -147,7 +145,8 @@ class ArticleRestController extends FOSRestController
 
     /**
      * @param $id
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Article
      *
      *
@@ -178,6 +177,7 @@ class ArticleRestController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @return Collection|Citation[]|void
      *
      * @ApiDoc(
@@ -199,8 +199,9 @@ class ArticleRestController extends FOSRestController
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
      * @param $article_id
+     *
      * @return object
      *
      * @ApiDoc(
@@ -225,7 +226,8 @@ class ArticleRestController extends FOSRestController
     /**
      * @param string $field
      * @param $article_id
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return object
      */
     protected function patch($field, $article_id, Request $request)
@@ -253,6 +255,7 @@ class ArticleRestController extends FOSRestController
 
     /**
      * @param $articleId
+     *
      * @return Article
      *
      *
@@ -285,6 +288,7 @@ class ArticleRestController extends FOSRestController
 
     /**
      * @param $articleId
+     *
      * @return Article
      *
      * @ApiDoc(
@@ -300,9 +304,9 @@ class ArticleRestController extends FOSRestController
     }
 
     /**
-     *
-     * @param  Request $request
+     * @param Request $request
      * @param $article_id
+     *
      * @return object
      *
      * @ApiDoc(

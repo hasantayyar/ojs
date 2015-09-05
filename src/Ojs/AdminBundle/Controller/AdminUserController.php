@@ -6,7 +6,6 @@ use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Doctrine\ORM\ORMException;
-use Doctrine\ORM\Query;
 use Ojs\AdminBundle\Form\Type\ChangePasswordType;
 use Ojs\AdminBundle\Form\Type\UpdateUserType;
 use Ojs\AdminBundle\Form\Type\UserType;
@@ -20,25 +19,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
-use Symfony\Component\Yaml;
 
 /**
- * User administration controller
+ * User administration controller.
  */
 class AdminUserController extends Controller
 {
-
     /**
      * Lists all User entities.
+     *
      * @return Response
      */
     public function indexAction()
     {
         if (!$this->isGranted('VIEW', new User())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
-        $source = new Entity("OjsUserBundle:User");
+        $source = new Entity('OjsUserBundle:User');
         $grid = $this->get('grid');
         $gridAction = $this->get('grid_action');
         $grid->setSource($source);
@@ -53,7 +51,7 @@ class AdminUserController extends Controller
             ]
         );
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->switchUserAction('ojs_public_index', ['username']);
         $rowAction[] = $gridAction->showAction('ojs_admin_user_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_user_edit', 'id');
@@ -70,13 +68,14 @@ class AdminUserController extends Controller
     /**
      * Creates a new User entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new User())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new User();
         $form = $this->createCreateForm($entity)
@@ -92,6 +91,7 @@ class AdminUserController extends Controller
             $em->flush();
 
             $this->successFlashBag('successful.create');
+
             return $this->redirectToRoute(
                 'ojs_admin_user_show',
                 [
@@ -111,7 +111,9 @@ class AdminUserController extends Controller
 
     /**
      * Creates a form to create a User entity.
-     * @param  User $entity The entity
+     *
+     * @param User $entity The entity
+     *
      * @return Form The form
      */
     private function createCreateForm(User $entity)
@@ -121,7 +123,7 @@ class AdminUserController extends Controller
             $entity,
             array(
                 'action' => $this->generateUrl('ojs_admin_user_create'),
-                'method' => 'POST'
+                'method' => 'POST',
             )
         );
 
@@ -136,7 +138,7 @@ class AdminUserController extends Controller
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new User())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new User();
         $form = $this->createCreateForm($entity)
@@ -155,6 +157,7 @@ class AdminUserController extends Controller
      * Finds and displays a User entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -162,8 +165,9 @@ class AdminUserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsUserBundle:User')->find($id);
 
-        if (!$this->isGranted('VIEW', $entity))
-            throw new AccessDeniedException("You are not authorized for this page!");
+        if (!$this->isGranted('VIEW', $entity)) {
+            throw new AccessDeniedException('You are not authorized for this page!');
+        }
 
         $this->throw404IfNotFound($entity);
 
@@ -178,7 +182,8 @@ class AdminUserController extends Controller
     }
 
     /**
-     * @param  bool     $username
+     * @param bool $username
+     *
      * @return Response
      */
     public function profileAction($username = false)
@@ -199,7 +204,7 @@ class AdminUserController extends Controller
             array(
                 'entity' => $entity,
                 'delete_form' => array(),
-                'me' => ($sessionUser == $user)
+                'me' => ($sessionUser == $user),
             )
         );
     }
@@ -208,6 +213,7 @@ class AdminUserController extends Controller
      * Displays a form to edit an existing User entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -216,11 +222,11 @@ class AdminUserController extends Controller
         $entity = $em->getRepository('OjsUserBundle:User')->find($id);
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $editForm = $this->createEditForm($entity)
-                        ->add('save','submit');
+                        ->add('save', 'submit');
 
         return $this->render(
             'OjsAdminBundle:AdminUser:edit.html.twig',
@@ -233,7 +239,9 @@ class AdminUserController extends Controller
 
     /**
      * Creates a form to edit a User entity.
-     * @param  User                         $entity The entity
+     *
+     * @param User $entity The entity
+     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(User $entity)
@@ -243,7 +251,7 @@ class AdminUserController extends Controller
             $entity,
             array(
                 'action' => $this->generateUrl('ojs_admin_user_update', array('id' => $entity->getId())),
-                'method' => 'PUT'
+                'method' => 'PUT',
             )
         );
 
@@ -253,8 +261,9 @@ class AdminUserController extends Controller
     /**
      * Edits an existing User entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -264,11 +273,11 @@ class AdminUserController extends Controller
         $entity = $em->getRepository('OjsUserBundle:User')->find($id);
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $oldPassword = $entity->getPassword();
         $editForm = $this->createEditForm($entity)
-            ->add('save','submit');
+            ->add('save', 'submit');
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -301,8 +310,9 @@ class AdminUserController extends Controller
     /**
      * Deletes a User entity.
      *
-     * @param  Request          $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -311,7 +321,7 @@ class AdminUserController extends Controller
         /** @var User $entity */
         $entity = $em->getRepository('OjsUserBundle:User')->find($id);
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         if (!$entity) {
             throw $this->createNotFoundException($this->get('translator')->trans('notFound'));
@@ -320,7 +330,7 @@ class AdminUserController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_user'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $entity->setEnabled(false);
@@ -334,20 +344,21 @@ class AdminUserController extends Controller
 
     /**
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function blockAction($id)
     {
-        /** @var User $user */
+        /* @var User $user */
         $em = $this->getDoctrine()->getManager();
         $user = $em->find('OjsUserBundle:User', $id);
 
         if (!$this->isGranted('EDIT', $user)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         if (!$user) {
-            throw new NotFoundResourceException("User not found.");
+            throw new NotFoundResourceException('User not found.');
         }
 
         $user->setEnabled(false);
@@ -359,21 +370,23 @@ class AdminUserController extends Controller
 
     /**
      * @param $id
+     *
      * @return RedirectResponse
+     *
      * @throws ORMException
      */
     public function unblockAction($id)
     {
-        /** @var User $user */
+        /* @var User $user */
         $em = $this->getDoctrine()->getManager();
         $user = $em->find('OjsUserBundle:User', $id);
 
         if (!$this->isGranted('EDIT', $user)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         if (!$user) {
-            throw new NotFoundResourceException("User not found.");
+            throw new NotFoundResourceException('User not found.');
         }
 
         $user->setEnabled(true);
@@ -385,12 +398,12 @@ class AdminUserController extends Controller
 
     public function changePasswordAction(Request $request, $id)
     {
-        /** @var User $user */
+        /* @var User $user */
         $em = $this->getDoctrine()->getManager();
         $user = $em->find('OjsUserBundle:User', $id);
 
         if (!$this->isGranted('EDIT', $user)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $form = $this->createForm(new ChangePasswordType());

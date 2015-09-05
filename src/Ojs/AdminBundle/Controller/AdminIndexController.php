@@ -13,25 +13,22 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * AdminIndexController controller.
- *
  */
 class AdminIndexController extends Controller
 {
-
     /**
      * Lists all JournalIndex entities.
-     *
      */
     public function indexAction()
     {
         if (!$this->isGranted('VIEW', new JournalIndex())) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $source = new Entity('OjsJournalBundle:JournalIndex');
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_index_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_index_edit', 'id');
@@ -48,13 +45,14 @@ class AdminIndexController extends Controller
     /**
      * Creates a new JournalIndex entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new JournalIndex())) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new JournalIndex();
         $form = $this->createCreateForm($entity)
@@ -103,12 +101,11 @@ class AdminIndexController extends Controller
 
     /**
      * Displays a form to create a new JournalIndex entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new JournalIndex())) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new JournalIndex();
         $form = $this->createCreateForm($entity)
@@ -126,14 +123,15 @@ class AdminIndexController extends Controller
     /**
      * Finds and displays a JournalIndex entity.
      *
-     * @param  JournalIndex $entity
+     * @param JournalIndex $entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(JournalIndex $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
 
         $token = $this
@@ -149,14 +147,15 @@ class AdminIndexController extends Controller
     /**
      * Displays a form to edit an existing JournalIndex entity.
      *
-     * @param  JournalIndex $entity
+     * @param JournalIndex $entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction(JournalIndex $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $editForm = $this->createEditForm($entity)
             ->add('save', 'submit');
@@ -194,15 +193,16 @@ class AdminIndexController extends Controller
     /**
      * Edits an existing JournalIndex entity.
      *
-     * @param  Request $request
-     * @param  JournalIndex $entity
+     * @param Request      $request
+     * @param JournalIndex $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, JournalIndex $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $em = $this->getDoctrine()->getManager();
         $editForm = $this->createEditForm($entity)
@@ -210,7 +210,6 @@ class AdminIndexController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
             $em->persist($entity);
             $em->flush();
             $this->successFlashBag('successful.update');
@@ -230,21 +229,22 @@ class AdminIndexController extends Controller
     /**
      * Deletes a JournalIndex entity.
      *
-     * @param  Request $request
-     * @param  JournalIndex $entity
+     * @param Request      $request
+     * @param JournalIndex $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, JournalIndex $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $em = $this->getDoctrine()->getManager();
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_index'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

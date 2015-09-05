@@ -9,14 +9,14 @@ use Ojs\CoreBundle\Helper\FileHelper;
 class FileHistoryManager extends BaseFileHistoryManager
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function create($fileName, $originalName, $type, $userId)
     {
         $fileHistory = new FileHistory();
         $fileHelper = new FileHelper();
 
-        $fileName = $fileHelper->generatePath($fileName, false) . $fileName;
+        $fileName = $fileHelper->generatePath($fileName, false).$fileName;
 
         $fileHistory->setFileName($fileName);
         $fileHistory->setOriginalName($originalName);
@@ -30,4 +30,3 @@ class FileHistoryManager extends BaseFileHistoryManager
         return $fileHistory;
     }
 }
-

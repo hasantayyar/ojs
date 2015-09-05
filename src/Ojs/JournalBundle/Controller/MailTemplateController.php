@@ -8,7 +8,6 @@ use APY\DataGridBundle\Grid\Column\TextColumn;
 use APY\DataGridBundle\Grid\Row;
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Source\Vector;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\MailTemplate;
@@ -23,11 +22,9 @@ use Symfony\Component\Yaml\Parser;
 
 /**
  * MailTemplate controller.
- *
  */
 class MailTemplateController extends Controller
 {
-
     /**
      * Lists all MailTemplate entities.
      *
@@ -37,13 +34,13 @@ class MailTemplateController extends Controller
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('VIEW', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $source = new Entity('OjsJournalBundle:MailTemplate');
         $source->manipulateRow(
             function (Row $row) {
-                if ($row->getField("title") && strlen($row->getField('title')) > 20) {
-                    $row->setField('title', substr($row->getField('title'), 0, 20)."...");
+                if ($row->getField('title') && strlen($row->getField('title')) > 20) {
+                    $row->setField('title', substr($row->getField('title'), 0, 20).'...');
                 }
 
                 return $row;
@@ -63,7 +60,7 @@ class MailTemplateController extends Controller
         $db_templates = $grid->createGrid('db_templates');
         $db_templates->setSource($source);
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction = [];
 
         $rowAction[] = $gridAction->showAction('ojs_journal_mail_template_show', ['id', 'journalId' => $journal->getId()]);
@@ -105,7 +102,7 @@ class MailTemplateController extends Controller
         );
         $defaultTemplates = $grid->createGrid('default_templates');
         $defaultTemplates->setSource($source);
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction = [];
         $rowAction[] = $gridAction->copyAction('ojs_journal_mail_template_copy', ['id', 'journalId' => $journal->getId()]);
         $actionColumn->setRowActions($rowAction);
@@ -119,7 +116,8 @@ class MailTemplateController extends Controller
     /**
      * Creates a new MailTemplate entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -127,7 +125,7 @@ class MailTemplateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new MailTemplate();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -188,7 +186,7 @@ class MailTemplateController extends Controller
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new MailTemplate();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -205,7 +203,8 @@ class MailTemplateController extends Controller
     /**
      * Finds and displays a MailTemplate entity.
      *
-     * @param  integer  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -213,7 +212,7 @@ class MailTemplateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('VIEW', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = $em->getRepository('OjsJournalBundle:MailTemplate')->findOneBy(
             array('id' => $id, 'journal' => $journal)
@@ -228,7 +227,7 @@ class MailTemplateController extends Controller
             'OjsJournalBundle:MailTemplate:show.html.twig',
             array(
                 'entity' => $entity,
-                'token'  => $token,
+                'token' => $token,
             )
         );
     }
@@ -236,7 +235,8 @@ class MailTemplateController extends Controller
     /**
      * Displays a form to edit an existing MailTemplate entity.
      *
-     * @param  integer  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -244,7 +244,7 @@ class MailTemplateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('EDIT', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         /** @var MailTemplate $entity */
         $entity = $em->getRepository('OjsJournalBundle:MailTemplate')->findOneBy(
@@ -294,8 +294,9 @@ class MailTemplateController extends Controller
     /**
      * Edits an existing MailTemplate entity.
      *
-     * @param  Request                   $request
-     * @param  integer                   $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -303,7 +304,7 @@ class MailTemplateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('EDIT', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         /** @var MailTemplate $entity */
         $entity = $em->getRepository('OjsJournalBundle:MailTemplate')->findOneBy(
@@ -337,8 +338,9 @@ class MailTemplateController extends Controller
     }
 
     /**
-     * @param  Request          $request
-     * @param  integer          $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -346,7 +348,7 @@ class MailTemplateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('DELETE', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         /** @var MailTemplate $entity */
         $entity = $em->getRepository('OjsJournalBundle:MailTemplate')->findOneBy(
@@ -357,7 +359,7 @@ class MailTemplateController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_journal_mail_template'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);
@@ -369,15 +371,16 @@ class MailTemplateController extends Controller
     }
 
     /**
-     * @param  Request                   $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function copyAction(Request $request, $id)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'mailTemplate')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new MailTemplate();
 

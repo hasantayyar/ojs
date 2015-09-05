@@ -11,13 +11,12 @@ use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 
 /**
- * Helps merge two or more translations
+ * Helps merge two or more translations.
  *
  * @link https://gist.github.com/dbu/5883029
  */
 class TranslateSynchronizeCommand extends ContainerAwareCommand
 {
-
     /**
      * @var LoaderInterface
      */
@@ -62,7 +61,7 @@ class TranslateSynchronizeCommand extends ContainerAwareCommand
         $messages = $catMasterFile->all('messages');
         ksort($messages);
         $catSlaveFile->replace($messages);
-        foreach($messages as $key => $value){
+        foreach ($messages as $key => $value) {
             $catSlaveFile->set($key, $value);
         }
         $output->writeln('Slave file can modify');

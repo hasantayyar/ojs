@@ -9,7 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 
 /**
- * PersonTitle
+ * PersonTitle.
+ *
  * @GRID\Source(columns="id, title")
  */
 class PersonTitle extends AbstractTranslatable
@@ -17,7 +18,7 @@ class PersonTitle extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @Grid\Column(title="ID")
      */
     protected $id;
@@ -34,7 +35,7 @@ class PersonTitle extends AbstractTranslatable
     private $title;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -42,8 +43,10 @@ class PersonTitle extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\PersonTitleTranslation
      */
     public function translate($locale = null)
@@ -72,9 +75,9 @@ class PersonTitle extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -82,7 +85,7 @@ class PersonTitle extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
      *
@@ -96,7 +99,7 @@ class PersonTitle extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -108,7 +111,7 @@ class PersonTitle extends AbstractTranslatable
     /**
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         if (!is_string($this->getTitle())) {
             return $this->translations->first()->getName();
@@ -117,4 +120,3 @@ class PersonTitle extends AbstractTranslatable
         }
     }
 }
-

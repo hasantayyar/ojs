@@ -4,10 +4,10 @@ namespace Ojs\JournalBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * JournalDesign
+ * JournalDesign.
+ *
  * @GRID\Source(columns="id,journal.title,title")
  */
 class JournalDesign
@@ -15,7 +15,7 @@ class JournalDesign
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     private $id;
@@ -39,21 +39,20 @@ class JournalDesign
     private $editableContent;
 
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="basedesign")
      */
     private $isPublic;
 
     /**
-     *
      * @var Journal
      */
     private $journal;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,7 +60,7 @@ class JournalDesign
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -71,8 +70,10 @@ class JournalDesign
     }
 
     /**
-     * Set journal
-     * @param  Journal      $journal
+     * Set journal.
+     *
+     * @param Journal $journal
+     *
      * @return JournalTheme
      */
     public function setJournal($journal)
@@ -99,7 +100,7 @@ class JournalDesign
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsPublic()
     {
@@ -107,7 +108,7 @@ class JournalDesign
     }
 
     /**
-     * @param boolean $isPublic
+     * @param bool $isPublic
      */
     public function setIsPublic($isPublic)
     {
@@ -145,6 +146,4 @@ class JournalDesign
     {
         $this->editableContent = $editableContent;
     }
-
-
 }

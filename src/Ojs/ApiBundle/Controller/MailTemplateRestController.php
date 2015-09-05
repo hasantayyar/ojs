@@ -8,9 +8,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class MailTemplateRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Mail Templates",
@@ -36,7 +34,9 @@ class MailTemplateRestController extends FOSRestController
      *    }
      * )
      * @Get("/public/mail_templates/{journal}")
+     *
      * @param $journal
+     *
      * @return array
      */
     public function getJournalMailTemplatesAction($journal)
@@ -60,6 +60,7 @@ class MailTemplateRestController extends FOSRestController
      * @Get("/public/mail_template/{id}")
      *
      * @param $id
+     *
      * @return object
      */
     public function getMailTemplateAction($id)

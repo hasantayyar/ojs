@@ -11,7 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JournalNewUserType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -91,8 +90,8 @@ class JournalNewUserType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 200,
-                    'maxSize' => "[200, 200]"
-                )
+                    'maxSize' => '[200, 200]',
+                ),
             ))
             ->add(
                 'journalRoles',
@@ -106,7 +105,7 @@ class JournalNewUserType extends AbstractType
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('ujr');
                     },
-                    'attr' => array("class" => "select2-element"),
+                    'attr' => array('class' => 'select2-element'),
                 ]
             )
             ->addEventSubscriber(new AddProvinceFieldSubscriber())

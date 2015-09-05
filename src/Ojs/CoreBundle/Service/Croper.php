@@ -6,12 +6,11 @@ use Jb\Bundle\FileUploaderBundle\Service\Croper as BaseCroper;
 
 class Croper extends BaseCroper
 {
-
     /**
-     * Crop an image
+     * Crop an image.
      *
      * @param string $endpoint
-     * @param array $data
+     * @param array  $data
      *
      * @return string
      */
@@ -31,7 +30,7 @@ class Croper extends BaseCroper
         // Return data
         return array(
             'filepath' => $this->resolvers->getResolver($this->getCropResolver($endpoint))->getUrl($data['filename']),
-            'filename' => $data['filename']
+            'filename' => $data['filename'],
         );
     }
 }

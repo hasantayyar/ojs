@@ -1,12 +1,12 @@
 <?php
+
 namespace Ojs\UserBundle\Event;
 
 use Ojs\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class UserEvent
- * @package Ojs\UserBundle\Event
+ * Class UserEvent.
  */
 class UserEvent extends Event
 {

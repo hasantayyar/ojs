@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticlePreviewType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -16,7 +15,7 @@ class ArticlePreviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('note','textarea',array('label' => 'Note for Editor'))
+            ->add('note', 'textarea', array('label' => 'Note for Editor'))
         ;
     }
 

@@ -5,14 +5,13 @@ namespace Ojs\JournalBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class PublisherTypesRepository
- * @package Ojs\JournalBundle\Entity
+ * Class PublisherTypesRepository.
  */
 class PublisherTypesRepository extends EntityRepository
 {
-
     /**
-     * @param  array         $data
+     * @param array $data
+     *
      * @return Publisher[]
      */
     public function getByIds(array $data)

@@ -10,24 +10,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JournalType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $journalId = $options['data']->getId()?$options['data']->getId(): null;
+        $journalId = $options['data']->getId() ? $options['data']->getId() : null;
         $builder
             ->add('translations', 'a2lix_translations')
             ->add('titleAbbr', 'text', [
                 'label' => 'titleabbr',
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add('titleTransliterated', 'text', [
                 'label' => 'titleTransliterated',
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add(
@@ -37,7 +36,7 @@ class JournalType extends AbstractType
                     'label' => 'publisher',
                     'attr' => [
                         'class' => 'select2-element validate[required]',
-                    ]
+                    ],
                 ]
             )
             ->add(
@@ -48,7 +47,7 @@ class JournalType extends AbstractType
                     'class' => 'Ojs\JournalBundle\Entity\Lang',
                     'attr' => [
                         'class' => 'select2-element ',
-                    ]
+                    ],
                 ]
             )
             ->add(
@@ -62,7 +61,7 @@ class JournalType extends AbstractType
                     'expanded' => false,
                     'attr' => [
                         'class' => 'select2-element validate[required]',
-                    ]
+                    ],
                 )
             )
             ->add(
@@ -76,7 +75,7 @@ class JournalType extends AbstractType
                     'expanded' => false,
                     'attr' => [
                         'class' => 'select2-element validate[required]',
-                    ]
+                    ],
                 )
             )
             ->add(
@@ -89,19 +88,19 @@ class JournalType extends AbstractType
                     'multiple' => true,
                     'attr' => [
                         'class' => 'select2-element',
-                    ]
+                    ],
                 ]
             );
 
         $builder
             ->add('path', 'hidden', [
                 'label' => 'journal.path',
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add('domain', 'hidden', [
                 'label' => 'journal.domain',
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add('issn', 'text', [
@@ -109,15 +108,15 @@ class JournalType extends AbstractType
                 'required' => false,
                 'attr' => [
                     'class' => 'maskissn',
-                ]
+                ],
                 ]
             )
             ->add('eissn', 'text', array(
                 'label' => 'eISSN',
                 'required' => false,
                 'attr' => array(
-                    'class' => 'maskissn'
-                )
+                    'class' => 'maskissn',
+                ),
                 )
             )
             ->add(
@@ -175,12 +174,12 @@ class JournalType extends AbstractType
             )
             ->add('published', 'checkbox', [
                 'label' => 'published',
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add('printed', 'checkbox', [
                 'label' => 'printed',
-                'required' => false
+                'required' => false,
                 ]
             )
             ->add(
@@ -209,15 +208,16 @@ class JournalType extends AbstractType
                     'required' => false,
                     'query_builder' => function (EntityRepository $er) use ($journalId, $options) {
                         $query = $er->createQueryBuilder('t');
-                        if(is_null($journalId)){
+                        if (is_null($journalId)) {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE');
-                        }else{
+                        } else {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE OR t.journal = :journal')
                             ->setParameter('journal', $options['data']);
                         }
+
                         return $query;
                     },
-                    'error_bubbling'=>true,
+                    'error_bubbling' => true,
                 )
             )
             ->add(
@@ -230,17 +230,18 @@ class JournalType extends AbstractType
                     'multiple' => false,
                     'expanded' => false,
                     'required' => false,
-                    'query_builder' => function (EntityRepository $er) use ($journalId, $options){
+                    'query_builder' => function (EntityRepository $er) use ($journalId, $options) {
                         $query = $er->createQueryBuilder('t');
-                        if(is_null($journalId)){
+                        if (is_null($journalId)) {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE');
-                        }else{
+                        } else {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE OR t.journal = :journal')
                                 ->setParameter('journal', $options['data']);
                         }
+
                         return $query;
                     },
-                    'error_bubbling'=>true,
+                    'error_bubbling' => true,
                 )
             )
             ->add('header', 'jb_crop_image_ajax', array(
@@ -250,8 +251,8 @@ class JournalType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 960 / 200,
-                    'maxSize' => "[960, 200]"
-                )
+                    'maxSize' => '[960, 200]',
+                ),
             ))
             ->add('image', 'jb_crop_image_ajax', array(
                 'endpoint' => 'journal',
@@ -260,8 +261,8 @@ class JournalType extends AbstractType
                 'img_height' => 300,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 300,
-                    'maxSize' => "[200, 300]"
-                )
+                    'maxSize' => '[200, 300]',
+                ),
             ))
             ->add('logo', 'jb_crop_image_ajax', array(
                 'endpoint' => 'journal',
@@ -269,8 +270,8 @@ class JournalType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 200,
-                    'maxSize' => "[200, 200]"
-                )
+                    'maxSize' => '[200, 200]',
+                ),
             ))
             ;
     }
@@ -287,7 +288,7 @@ class JournalType extends AbstractType
                 'attr' => [
                 ],
                 'translation_domain' => 'messages',
-                'csrf_protection'=>false
+                'csrf_protection' => false,
             )
         );
     }

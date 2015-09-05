@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SystemSettingsType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -17,35 +16,35 @@ class SystemSettingsType extends AbstractType
     {
         $builder
             ->add('user_registration', 'choice', [
-                'choices'   => ['1' => 'on', '0' => 'off'],
-                'label'     => 'title.user_new',
-                'expanded'  => true,
-                'required'  => true
+                'choices' => ['1' => 'on', '0' => 'off'],
+                'label' => 'title.user_new',
+                'expanded' => true,
+                'required' => true,
                 ]
             )
             ->add('journal_application', 'choice', [
-                'choices'   => ['1' => 'on', '0' => 'off'],
-                'label'     => 'title.journal_application',
-                'expanded'  => true,
-                'required'  => true
+                'choices' => ['1' => 'on', '0' => 'off'],
+                'label' => 'title.journal_application',
+                'expanded' => true,
+                'required' => true,
                 ]
             )
             ->add('publisher_application', 'choice', [
-                'choices'   => ['1' => 'on', '0' => 'off'],
+                'choices' => ['1' => 'on', '0' => 'off'],
                     'label' => 'title.publisher_application',
-                'expanded'  => true,
-                'required'  => true
+                'expanded' => true,
+                'required' => true,
                 ]
             )
             ->add('article_submission', 'choice', [
-                'choices'   => ['1' => 'on', '0' => 'off'],
-                'label'     => 'title.submission_new',
-                'expanded'  => true,
-                'required'  => true
+                'choices' => ['1' => 'on', '0' => 'off'],
+                'label' => 'title.submission_new',
+                'expanded' => true,
+                'required' => true,
                 ]
             )
             ->add('submit', 'submit', [
-                'label'     => 'update',
+                'label' => 'update',
                 ]
             )
         ;

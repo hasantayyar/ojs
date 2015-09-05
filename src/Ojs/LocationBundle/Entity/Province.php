@@ -1,16 +1,18 @@
 <?php
+
 namespace Ojs\LocationBundle\Entity;
 
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * $this
+ * $this.
+ *
  * @JMS\ExclusionPolicy("all")
  */
 class Province
 {
     /**
-     * @var integer
+     * @var int
      * @JMS\Expose
      */
     private $id;
@@ -28,9 +30,9 @@ class Province
     private $country;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -46,9 +48,10 @@ class Province
     }
 
     /**
-     * Add Province
+     * Add Province.
      *
-     * @param  Country $country
+     * @param Country $country
+     *
      * @return $this
      */
     public function setCountry(Country $country)
@@ -64,7 +67,7 @@ class Province
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -74,9 +77,10 @@ class Province
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return $this
      */
     public function setName($name)

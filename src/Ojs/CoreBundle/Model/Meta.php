@@ -10,7 +10,6 @@ namespace Ojs\CoreBundle\Model;
  */
 class Meta
 {
-
     /**
      * @var array
      */
@@ -44,7 +43,8 @@ class Meta
     }
 
     /**
-     * @param  string $title
+     * @param string $title
+     *
      * @return string
      */
     public function title($title = null)
@@ -61,8 +61,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     public function set($key, $value = null)
@@ -85,7 +86,8 @@ class Meta
     }
 
     /**
-     * @param  string $text
+     * @param string $text
+     *
      * @return string
      */
     private function fix($text)
@@ -97,8 +99,9 @@ class Meta
     }
 
     /**
-     * @param  string $text
-     * @param  string $key
+     * @param string $text
+     * @param string $key
+     *
      * @return string
      */
     private function cut($text, $key)
@@ -127,8 +130,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     public function meta($key, $value = null)
@@ -137,8 +141,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     public function rawMeta($key, $value = null)
@@ -147,8 +152,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     public function setRaw($key, $value = null)
@@ -157,7 +163,8 @@ class Meta
     }
 
     /**
-     * @param  string $key
+     * @param string $key
+     *
      * @return string
      */
     public function get($key)
@@ -184,8 +191,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     public function tag($key, $value = null)
@@ -204,8 +212,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     private function tagDefault($key, $value = null)
@@ -214,8 +223,9 @@ class Meta
     }
 
     /**
-     * @param  string $key
-     * @param  string $value
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     public function tagMetaName($key, $value = null)
@@ -233,9 +243,10 @@ class Meta
     }
 
     /**
-     * @param  string $name
-     * @param  string $key
-     * @param  string $value
+     * @param string $name
+     * @param string $key
+     * @param string $value
+     *
      * @return string
      */
     private function tagString($name, $key, $value = null)
@@ -253,7 +264,8 @@ class Meta
     }
 
     /**
-     * @param  mixed  $images
+     * @param mixed $images
+     *
      * @return string
      */
     public function tagImage($images = null)

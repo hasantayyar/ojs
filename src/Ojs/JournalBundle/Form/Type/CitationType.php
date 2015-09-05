@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CitationType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -17,10 +16,10 @@ class CitationType extends AbstractType
     {
         $builder
             ->add('raw', 'textarea')
-            ->add('type','choice',[
+            ->add('type', 'choice', [
                 'choices' => [
-                    $options['citationTypes']
-                ]
+                    $options['citationTypes'],
+                ],
             ])
             ->add('orderNum');
     }

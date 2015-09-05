@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\JournalBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -9,7 +10,7 @@ class JournalDesignType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -18,7 +19,7 @@ class JournalDesignType extends AbstractType
                 'title',
                 'text',
                 [
-                    'label' => 'Title'
+                    'label' => 'Title',
                 ]
             )
             ->add('editableContent', 'hidden')
@@ -26,7 +27,7 @@ class JournalDesignType extends AbstractType
                 'isPublic',
                 'checkbox',
                 [
-                    'label' => 'ojs.is_public'
+                    'label' => 'ojs.is_public',
                 ]
             );
     }
@@ -42,7 +43,7 @@ class JournalDesignType extends AbstractType
                 'cascade_validation' => true,
                 'attr' => [
                     'class' => 'form-validate',
-                ]
+                ],
             )
         );
     }

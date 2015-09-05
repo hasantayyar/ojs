@@ -4,13 +4,14 @@ namespace Ojs\CoreBundle\Helper;
 
 class FileHelper
 {
-
     /**
-     * Generates a $n level folder tree for given filename by exploding the filename
-     * @param  string  $fileName
-     * @param  bool    $createDir
-     * @param  string  $uploadRootPath upload root path
-     * @param  integer $level
+     * Generates a $n level folder tree for given filename by exploding the filename.
+     *
+     * @param string $fileName
+     * @param bool   $createDir
+     * @param string $uploadRootPath upload root path
+     * @param int    $level
+     *
      * @return string
      */
     public function generatePath($fileName, $createDir = false, $uploadRootPath = './', $level = 3)

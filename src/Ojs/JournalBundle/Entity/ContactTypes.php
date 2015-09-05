@@ -9,7 +9,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * ContactTypes
+ * ContactTypes.
+ *
  * @GRID\Source(columns="id,name,description")
  */
 class ContactTypes extends AbstractTranslatable
@@ -17,7 +18,7 @@ class ContactTypes extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
@@ -37,7 +38,7 @@ class ContactTypes extends AbstractTranslatable
     private $description;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -45,9 +46,9 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -55,7 +56,7 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -65,9 +66,10 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
@@ -78,7 +80,7 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -88,9 +90,10 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -101,8 +104,10 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\ContactTypesTranslation
      */
     public function translate($locale = null)
@@ -132,7 +137,7 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -146,7 +151,7 @@ class ContactTypes extends AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

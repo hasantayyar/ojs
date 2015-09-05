@@ -4,11 +4,10 @@ namespace Ojs\CoreBundle\Params;
 
 class CommonParams
 {
-
     public static $userStatusArray = [
-        0 => "Passive",
-        1 => "Active",
-        2 => "Banned",
+        0 => 'Passive',
+        1 => 'Active',
+        2 => 'Banned',
     ];
     public static $journalApplicationStatusArray = [
         2 => 'application.status.waiting',
@@ -23,11 +22,11 @@ class CommonParams
         1 => 'application.status.complete',
     ];
     protected static $journalStatusArray = array(
-        -3 => "status.rejected",
-        -2 => "status.unpublished",
-        -1 => "status.not_submitted",
-        0 => "status.inreview",
-        1 => "status.published",
+        -3 => 'status.rejected',
+        -2 => 'status.unpublished',
+        -1 => 'status.not_submitted',
+        0 => 'status.inreview',
+        1 => 'status.published',
     );
     protected static $statusColorArray = array(
         -3 => '#FF2924',
@@ -54,8 +53,9 @@ class CommonParams
     }
 
     /**
-     * @param  string       $statusText
-     * @return null|integer
+     * @param string $statusText
+     *
+     * @return null|int
      */
     public static function getStatusCode($statusText)
     {
@@ -74,8 +74,10 @@ class CommonParams
     }
 
     /**
-     * Return color of this status via status code
-     * @param  int    $statusNum
+     * Return color of this status via status code.
+     *
+     * @param int $statusNum
+     *
      * @return string
      */
     public static function statusColor($statusNum)
@@ -84,7 +86,8 @@ class CommonParams
     }
 
     /**
-     * @param  integer $statusNum
+     * @param int $statusNum
+     *
      * @return array
      */
     public static function journalApplicationStatus($statusNum)
@@ -97,7 +100,8 @@ class CommonParams
     }
 
     /**
-     * @param  integer $statusNum
+     * @param int $statusNum
+     *
      * @return array
      */
     public static function publisherStatus($statusNum)

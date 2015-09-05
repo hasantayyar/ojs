@@ -16,9 +16,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class UserRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get User Action",
@@ -29,6 +27,7 @@ class UserRestController extends FOSRestController
      * @Get("/user/{username}", defaults={"username" = null})
      *
      * @param $username
+     *
      * @return mixed
      */
     public function getUserByUsernameAction($username)
@@ -52,6 +51,7 @@ class UserRestController extends FOSRestController
      * @Get("/user/{username}/articles")
      *
      * @param $username
+     *
      * @return array
      */
     public function getUserArticlesAction($username)
@@ -61,21 +61,20 @@ class UserRestController extends FOSRestController
 
         $qb = $em->createQueryBuilder();
         $qb
-            ->select("a")
-            ->from("OjsJournalBundle:Article", "a")
-            ->join("OjsJournalBundle:ArticleAuthor", 'aa', 'WITH', 'a=aa.article')
-            ->join("OjsJournalBundle:Author", "au", "WITH", "aa.author=au")
-            ->join("OjsUserBundle:User", "u", "WITH", "au.user=u")
+            ->select('a')
+            ->from('OjsJournalBundle:Article', 'a')
+            ->join('OjsJournalBundle:ArticleAuthor', 'aa', 'WITH', 'a=aa.article')
+            ->join('OjsJournalBundle:Author', 'au', 'WITH', 'aa.author=au')
+            ->join('OjsUserBundle:User', 'u', 'WITH', 'au.user=u')
             ->where(
-                $qb->expr()->eq("u.username", ":username")
+                $qb->expr()->eq('u.username', ':username')
             )
-            ->setParameter("username", $username);
+            ->setParameter('username', $username);
 
         return $qb->getQuery()->getResult();
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get User Journals",
@@ -103,7 +102,6 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get User Roles"
@@ -118,7 +116,6 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Users Action",
@@ -139,7 +136,8 @@ class UserRestController extends FOSRestController
      * )
      * @RestView()
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return array
      */
     public function getUsersAction(Request $request)
@@ -162,7 +160,6 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Delete User Action",
@@ -172,8 +169,9 @@ class UserRestController extends FOSRestController
      * )
      * @RestView(statusCode=204)
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $user_id
+     *
      * @return View
      */
     public function deleteUserAction(Request $request, $user_id)
@@ -181,7 +179,7 @@ class UserRestController extends FOSRestController
         $destroy = $request->get('destroy');
         $em = $this->getDoctrine()->getManager();
         /**
-         * @var User $user
+         * @var User
          */
         $user = $this->getUserEntity($user_id);
         if (!is_object($user)) {
@@ -213,8 +211,9 @@ class UserRestController extends FOSRestController
      * )
      * @RestView()
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $user_id
+     *
      * @return View
      */
     public function putUserAction(Request $request, $user_id)
@@ -233,7 +232,6 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Delete User Action"
@@ -241,7 +239,8 @@ class UserRestController extends FOSRestController
      * )
      * @RestView()
      *
-     * @param  Request                                            $request
+     * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function postUsersAction(Request $request)
@@ -264,7 +263,6 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  description="Change user status",
      *  method="PATCH",
@@ -282,8 +280,9 @@ class UserRestController extends FOSRestController
      * )
      * @RestView()
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $user_id
+     *
      * @return User
      */
     public function statusUsersAction(Request $request, $user_id)
@@ -292,7 +291,6 @@ class UserRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  description="Change user 'isActive'",
      *  method="PATCH",
@@ -310,8 +308,9 @@ class UserRestController extends FOSRestController
      * )
      * @RestView()
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $user_id
+     *
      * @return User
      */
     public function activeUsersAction(Request $request, $user_id)

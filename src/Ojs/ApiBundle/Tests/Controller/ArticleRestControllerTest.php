@@ -5,12 +5,10 @@ namespace Ojs\ApiBundle\Tests\Controller;
 use Ojs\CoreBundle\Tests\BaseTestCase;
 
 /**
- * Class ArticleRestControllerTest
- * @package Ojs\ApiBundle\Tests\Controller
+ * Class ArticleRestControllerTest.
  */
 class ArticleRestControllerTest extends BaseTestCase
 {
-
     public function testGetArticles()
     {
         $response = $this->apiRequest('/api/articles/bulk/0/10');

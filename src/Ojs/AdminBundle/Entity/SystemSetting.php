@@ -3,12 +3,12 @@
 namespace Ojs\AdminBundle\Entity;
 
 /**
- * AdminSystemSetting
+ * AdminSystemSetting.
  */
 class SystemSetting
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -35,9 +35,9 @@ class SystemSetting
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -45,7 +45,7 @@ class SystemSetting
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -55,7 +55,7 @@ class SystemSetting
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -69,7 +69,7 @@ class SystemSetting
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -79,7 +79,7 @@ class SystemSetting
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
      *
@@ -108,4 +108,3 @@ class SystemSetting
         $this->description = $description;
     }
 }
-

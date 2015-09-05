@@ -9,10 +9,10 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * Authors of article and orders
+ * Authors of article and orders.
+ *
  * @ExclusionPolicy("all")
  * @GRID\Source(columns="id,author.firstName,author.lastName,article.title")
  */
@@ -20,7 +20,7 @@ class ArticleAuthor implements Translatable
 {
     use GenericEntityTrait;
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      * @GRID\Column(title="id")
@@ -28,7 +28,7 @@ class ArticleAuthor implements Translatable
     private $id;
 
     /**
-     * @var integer
+     * @var int
      * @JMS\Expose
      */
     private $authorOrder;
@@ -50,9 +50,9 @@ class ArticleAuthor implements Translatable
     private $article;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -60,9 +60,9 @@ class ArticleAuthor implements Translatable
     }
 
     /**
-     * Get authorOrder
+     * Get authorOrder.
      *
-     * @return integer
+     * @return int
      */
     public function getAuthorOrder()
     {
@@ -70,9 +70,10 @@ class ArticleAuthor implements Translatable
     }
 
     /**
-     * Set authorOrder
+     * Set authorOrder.
      *
-     * @param  integer $authorOrder
+     * @param int $authorOrder
+     *
      * @return $this
      */
     public function setAuthorOrder($authorOrder)
@@ -83,7 +84,6 @@ class ArticleAuthor implements Translatable
     }
 
     /**
-     *
      * @return Article
      */
     public function getArticle()
@@ -92,14 +92,15 @@ class ArticleAuthor implements Translatable
     }
 
     /**
+     * @param Article $article
      *
-     * @param  Article $article
      * @return $this
      */
     public function setArticle(Article $article)
     {
         $this->article = $article;
         $article->addArticleAuthor($this);
+
         return $this;
     }
 
@@ -110,7 +111,6 @@ class ArticleAuthor implements Translatable
     }
 
     /**
-     *
      * @return Author
      */
     public function getAuthor()
@@ -119,8 +119,8 @@ class ArticleAuthor implements Translatable
     }
 
     /**
+     * @param Author $author
      *
-     * @param  Author $author
      * @return $this
      */
     public function setAuthor(Author $author)

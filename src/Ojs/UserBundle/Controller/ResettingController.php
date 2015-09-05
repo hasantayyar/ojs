@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ResettingController extends Controller
 {
     /**
-     * Request reset user password: show form
+     * Request reset user password: show form.
      */
     public function requestAction()
     {
@@ -23,7 +23,7 @@ class ResettingController extends Controller
     }
 
     /**
-     * Request reset user password: submit form and send email
+     * Request reset user password: submit form and send email.
      */
     public function sendEmailAction(Request $request)
     {
@@ -34,7 +34,7 @@ class ResettingController extends Controller
 
         if (null === $user) {
             return $this->render('FOSUserBundle:Resetting:request.html.twig', array(
-                'invalid_username' => $username
+                'invalid_username' => $username,
             ));
         }
 
@@ -58,7 +58,7 @@ class ResettingController extends Controller
     }
 
     /**
-     * Tell the user to check his email provider
+     * Tell the user to check his email provider.
      */
     public function checkEmailAction(Request $request)
     {
@@ -75,7 +75,7 @@ class ResettingController extends Controller
     }
 
     /**
-     * Reset user password
+     * Reset user password.
      */
     public function resetAction(Request $request, $token)
     {
@@ -139,7 +139,7 @@ class ResettingController extends Controller
     {
         $email = $user->getEmail();
         if (false !== $pos = strpos($email, '@')) {
-            $email = '...' . substr($email, $pos);
+            $email = '...'.substr($email, $pos);
         }
 
         return $email;

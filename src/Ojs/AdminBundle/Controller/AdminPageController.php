@@ -20,24 +20,24 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
  */
 class AdminPageController extends Controller
 {
-
     /**
-     * List all page entities
+     * List all page entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new AdminPage())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $source = new Entity('OjsAdminBundle:AdminPage');
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var AdminPage $entity
+                 * @var AdminPage
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
@@ -54,7 +54,7 @@ class AdminPageController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_admin_page_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_page_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_page_delete', 'id');
@@ -71,7 +71,7 @@ class AdminPageController extends Controller
     {
         $entity = new AdminPage();
         if (!$this->isGranted('CREATE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $form = $this->createCreateForm($entity);
@@ -85,7 +85,8 @@ class AdminPageController extends Controller
     /**
      * Creates a form to create a Page entity.
      *
-     * @param  AdminPage $entity The entity
+     * @param AdminPage $entity The entity
+     *
      * @return Form The form
      */
     private function createCreateForm(AdminPage $entity)
@@ -103,13 +104,14 @@ class AdminPageController extends Controller
     /**
      * Creates a new Page entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new AdminPage())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity = new AdminPage();
@@ -137,7 +139,8 @@ class AdminPageController extends Controller
     /**
      * Finds and displays a Page entity.
      *
-     * @param  AdminPage $entity
+     * @param AdminPage $entity
+     *
      * @return Response
      */
     public function showAction(AdminPage $entity)
@@ -145,7 +148,7 @@ class AdminPageController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $token = $this
@@ -161,7 +164,8 @@ class AdminPageController extends Controller
     /**
      * Displays a form to edit an existing Page entity.
      *
-     * @param  AdminPage $entity
+     * @param AdminPage $entity
+     *
      * @return Response
      */
     public function editAction(AdminPage $entity)
@@ -169,7 +173,7 @@ class AdminPageController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $token = $this
@@ -191,7 +195,8 @@ class AdminPageController extends Controller
     /**
      * Creates a form to edit a Page entity.
      *
-     * @param  AdminPage $entity The entity
+     * @param AdminPage $entity The entity
+     *
      * @return Form The form
      */
     private function createEditForm(AdminPage $entity)
@@ -213,8 +218,9 @@ class AdminPageController extends Controller
     /**
      * Edits an existing Page entity.
      *
-     * @param  Request $request
-     * @param  AdminPage $entity
+     * @param Request   $request
+     * @param AdminPage $entity
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, AdminPage $entity)
@@ -222,7 +228,7 @@ class AdminPageController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -247,8 +253,10 @@ class AdminPageController extends Controller
 
     /**
      * Deletes a Page entity.
-     * @param  Request $request
-     * @param  AdminPage $entity
+     *
+     * @param Request   $request
+     * @param AdminPage $entity
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, AdminPage $entity)
@@ -256,7 +264,7 @@ class AdminPageController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -264,7 +272,7 @@ class AdminPageController extends Controller
         $token = $csrf->getToken('ojs_admin_page'.$entity->getId());
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token not found!");
+            throw new TokenNotFoundException('Token not found!');
         }
 
         $em->remove($entity);

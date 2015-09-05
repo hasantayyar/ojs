@@ -3,12 +3,10 @@
 namespace Ojs\AdminBundle\Entity;
 
 use Ojs\CmsBundle\Entity\Page;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * AdminPage
+ * AdminPage.
  */
 class AdminPage extends Page
 {
 }
-

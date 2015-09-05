@@ -16,9 +16,8 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 
 class SecurityController extends BaseSecurityController
 {
-
     /**
-     * Show unconfirmed user warning page
+     * Show unconfirmed user warning page.
      *
      * @return RedirectResponse|Response
      */
@@ -34,6 +33,7 @@ class SecurityController extends BaseSecurityController
 
     /**
      * @param $code
+     *
      * @return RedirectResponse
      */
     public function confirmEmailAction($code)
@@ -42,7 +42,7 @@ class SecurityController extends BaseSecurityController
         $em = $this->getDoctrine()->getManager();
 
         /**
-         * @var User $user
+         * @var User
          */
         $user = $em->getRepository('OjsUserBundle:User')->findOneBy(['confirmation_token' => $code]);
         if (!$user) {
@@ -114,7 +114,7 @@ class SecurityController extends BaseSecurityController
                 : null;
         }
 
-        return $this->render('OjsUserBundle:Security:login.html.twig',array(
+        return $this->render('OjsUserBundle:Security:login.html.twig', array(
             'last_username' => $lastUsername,
             'error' => $error,
             'csrf_token' => $csrfToken,
@@ -130,7 +130,7 @@ class SecurityController extends BaseSecurityController
             /** @var User $user */
             $user = $this->getUser();
             if (!$user) {
-                throw new AccessDeniedException("ojs.403");
+                throw new AccessDeniedException('ojs.403');
             }
             $user->generateApiKey();
             $user->setEnabled(true);

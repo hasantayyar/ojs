@@ -8,10 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegisterFormType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -53,10 +52,10 @@ class RegisterFormType extends AbstractType
                 'repeated',
                 array(
                     'first_options' => [
-                        'label' => 'user.register.password.first'
+                        'label' => 'user.register.password.first',
                     ],
                     'second_options' => [
-                        'label' => 'user.register.password.second'
+                        'label' => 'user.register.password.second',
                     ],
                     'type' => 'password',
                     'required' => true,
@@ -77,7 +76,7 @@ class RegisterFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-validate',
                 ],
-                'translation_domain' => 'forms'
+                'translation_domain' => 'forms',
             )
         );
     }

@@ -19,14 +19,11 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * Board controller.
- *
  */
 class BoardController extends Controller
 {
-
     /**
      * Lists all Board entities.
-     *
      */
     public function indexAction()
     {
@@ -46,7 +43,7 @@ class BoardController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_journal_board_show', ['id', 'journalId' => $journal->getId()]);
         if ($this->isGranted('EDIT', $journal, 'boards')) {
             $rowAction[] = $gridAction->editAction('ojs_journal_board_edit', ['id', 'journalId' => $journal->getId()]);
@@ -63,7 +60,8 @@ class BoardController extends Controller
     /**
      * Creates a new Board entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -120,7 +118,6 @@ class BoardController extends Controller
 
     /**
      * Displays a form to create a new Board entity.
-     *
      */
     public function newAction()
     {
@@ -146,9 +143,10 @@ class BoardController extends Controller
      * In this page journal manager can :
      *              - list members
      *              - add members to a board
-     *              - change orders of the members
+     *              - change orders of the members.
      *
      * @param $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -173,7 +171,7 @@ class BoardController extends Controller
             array(
                 'members' => $members,
                 'entity' => $board,
-                'token' => $token
+                'token' => $token,
             )
         );
     }
@@ -183,6 +181,7 @@ class BoardController extends Controller
      *
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -234,8 +233,9 @@ class BoardController extends Controller
     /**
      * Edits an existing Board entity.
      *
-     * @param  Request                                                     $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, $id)
@@ -273,8 +273,9 @@ class BoardController extends Controller
     /**
      * Deletes a Board entity.
      *
-     * @param  Request          $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -292,7 +293,7 @@ class BoardController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_journal_board'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();
@@ -302,9 +303,11 @@ class BoardController extends Controller
     }
 
     /**
-     *  add posted user id  as board member with given board id
-     * @param  Request          $req
-     * @param  int              $boardId
+     *  add posted user id  as board member with given board id.
+     *
+     * @param Request $req
+     * @param int     $boardId
+     *
      * @return RedirectResponse
      */
     public function addMemberAction(Request $req, $boardId)
@@ -333,8 +336,9 @@ class BoardController extends Controller
     }
 
     /**
-     * @param  int              $boardId
-     * @param  int              $userId
+     * @param int $boardId
+     * @param int $userId
+     *
      * @return RedirectResponse
      */
     public function removeMemberAction($boardId, $userId)

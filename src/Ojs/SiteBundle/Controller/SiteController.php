@@ -20,9 +20,9 @@ use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
 class SiteController extends Controller
 {
-
     /**
-     * Global index page
+     * Global index page.
+     *
      * @return Response
      */
     public function indexAction()
@@ -45,7 +45,7 @@ class SiteController extends Controller
                 return '<a href="'.$this->generateUrl(
                     'ojs_site_explore_index',
                     ['filter' => ['subject' => $node['id']]]
-                ).'">@todo_this_will_fixed'. //$node['subject'] .
+                ).'">@todo_this_will_fixed'.//$node['subject'] .
                 ' ('.$node['totalJournalCount'].')</a>';
             },
         ];
@@ -118,10 +118,9 @@ class SiteController extends Controller
         return $this->render('OjsSiteBundle::Publisher/publisher_index.html.twig', $data);
     }
 
-
     public function journalIndexAction($publisher, $slug)
     {
-        /**
+        /*
          * @var EntityManager $em
          * @var JournalRepository $journalRepo
          * @var BlockRepository $blockRepo
@@ -144,12 +143,10 @@ class SiteController extends Controller
 
         $journalViews = $journalStatRepo->getMostViewed($journal);
         if ($journal->getIssues()) {
-
             $issueDownloads = $issueFileStatRepo->getTotalDownloadsOfAllFiles($journal->getIssues());
             $data['issueDownloads'] = isset($issueDownloads[0][1]) ? $issueDownloads[0][1] : 0;
         }
         if ($journal->getArticles()) {
-
             $articleDownloads = $articleFileStatRepo->getTotalDownloadsOfAllFiles($journal->getArticles());
             $data['articleDownloads'] = isset($articleDownloads[0][1]) ? $articleDownloads[0][1] : 0;
         }
@@ -174,7 +171,7 @@ class SiteController extends Controller
             'ojs_archive_index',
             [
                 'slug' => $journal->getSlug(),
-                'publisher' => $journal->getPublisher()->getSlug()
+                'publisher' => $journal->getPublisher()->getSlug(),
             ],
             true
         );
@@ -184,6 +181,7 @@ class SiteController extends Controller
 
     /**
      * @param $years
+     *
      * @return mixed
      */
     private function setupIssuesURIsByYear($years)
@@ -210,11 +208,11 @@ class SiteController extends Controller
 
     /**
      * @param Issue $last_issue
+     *
      * @return mixed
      */
     private function setupArticleURIs($last_issue)
     {
-
         if ($last_issue) {
             /** @var Article $article */
             foreach ($last_issue->getArticles() as $article) {
@@ -235,7 +233,7 @@ class SiteController extends Controller
             return $last_issue;
         }
 
-        return null;
+        return;
     }
 
     public function journalArticlesAction($slug)
@@ -259,9 +257,10 @@ class SiteController extends Controller
     }
 
     /**
-     * Also means last issue's articles
+     * Also means last issue's articles.
      *
      * @param $slug
+     *
      * @return Response
      */
     public function lastArticlesIndexAction($slug)
@@ -310,6 +309,7 @@ class SiteController extends Controller
 
     /**
      * @param $slug
+     *
      * @return Response
      */
     public function announcementIndexAction($slug)
@@ -336,6 +336,7 @@ class SiteController extends Controller
     /**
      * @param Request $request
      * @param $slug
+     *
      * @return Response
      */
     public function subscribeAction(Request $request, $slug)
@@ -372,7 +373,7 @@ class SiteController extends Controller
 
     public function issuePageAction($id)
     {
-        /**
+        /*
          * @var BlockRepository $blockRepo
          * @var IssueRepository $issueRepo
          * @var Issue $issue
@@ -411,7 +412,7 @@ class SiteController extends Controller
         /** @var Journal $journal */
         $journal = $em->getRepository('OjsJournalBundle:Journal')->findOneBy(['slug' => $slug]);
         $this->throw404IfNotFound($journal);
-        $data['contacts'] = $em->getRepository("OjsJournalBundle:JournalContact")->findBy(
+        $data['contacts'] = $em->getRepository('OjsJournalBundle:JournalContact')->findBy(
             array('journal' => $journal)
         );
         /** @var BlockRepository $blockRepo */
@@ -420,7 +421,7 @@ class SiteController extends Controller
 
         $data['journal'] = $journal;
 
-        return $this->render("OjsSiteBundle:JournalContact:index.html.twig", $data);
+        return $this->render('OjsSiteBundle:JournalContact:index.html.twig', $data);
     }
 
     public function journalPageDetailAction($slug, $journal_slug)
@@ -451,7 +452,6 @@ class SiteController extends Controller
 
         $post = $em->getRepository('OjsJournalBundle:JournalPost')->findOneBy(['journal' => $journal, 'slug' => $slug]);
         $this->throw404IfNotFound($post);
-
 
         return $this->render('OjsSiteBundle:Journal:post.html.twig', ['journalPost' => $post]);
     }

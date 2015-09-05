@@ -19,8 +19,8 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class BaseTestCase
- * @package Ojs\CoreBundle\Tests
+ * Class BaseTestCase.
+ *
  * @return WebTestCase
  */
 abstract class BaseTestCase extends WebTestCase
@@ -64,9 +64,8 @@ abstract class BaseTestCase extends WebTestCase
     }
 
     /**
-     *
      * @param string $username
-     * @param array $role
+     * @param array  $role
      */
     protected function logIn($username = null, $role = null)
     {
@@ -81,7 +80,7 @@ abstract class BaseTestCase extends WebTestCase
                 ->findOneByRole($_role);
         }
         if (!($user instanceof UserInterface)) {
-            throw new \Exception("User not find. ".get_class($user));
+            throw new \Exception('User not find. '.get_class($user));
         }
 
         $token = new UsernamePasswordToken($user, null, $firewall, $role ? $role : array('ROLE_SUPER_ADMIN'));

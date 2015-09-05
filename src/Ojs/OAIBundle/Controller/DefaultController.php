@@ -12,7 +12,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class DefaultController extends Controller
 {
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
@@ -32,6 +33,7 @@ class DefaultController extends Controller
             case 'GetRecord':
                 return $this->getRecordAction($request);
         }
+
         return $this->response('OjsOAIBundle:Default:index.xml.twig');
     }
 
@@ -40,13 +42,15 @@ class DefaultController extends Controller
      */
     public function identifyAction()
     {
-        return $this->response("OjsOAIBundle:Default:identify.xml.twig");
+        return $this->response('OjsOAIBundle:Default:identify.xml.twig');
     }
 
     /**
-     * Xml response
+     * Xml response.
+     *
      * @param string $template
-     * @param array $data
+     * @param array  $data
+     *
      * @return Response
      */
     private function response($template, $data = [])
@@ -58,7 +62,8 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function recordsAction(Request $request)
@@ -71,10 +76,10 @@ class DefaultController extends Controller
 
         $from = $request->get('from', false);
         $until = $request->get('until', false);
-        $set = $request->get('set',false);
+        $set = $request->get('set', false);
         $qb = $em->createQueryBuilder();
-        $qb->select("a")
-            ->from("OjsJournalBundle:Article", 'a');
+        $qb->select('a')
+            ->from('OjsJournalBundle:Article', 'a');
         if ($from) {
             $_from = new \DateTime();
             $_from->setTimestamp(strtotime($from));
@@ -100,20 +105,20 @@ class DefaultController extends Controller
         }
 
         $resumptionToken = $request->get('resumptionToken');
-        if($resumptionToken){
+        if ($resumptionToken) {
             $token = $session->get($resumptionToken);
-            $currentPage = (int)$token['page'];
+            $currentPage = (int) $token['page'];
             $set = $token['set'];
-        }else{
+        } else {
             $currentPage = 1;
         }
 
-        if($set){
-            $qb->join('a.journal','j','WITH');
+        if ($set) {
+            $qb->join('a.journal', 'j', 'WITH');
             $qb->andWhere(
-                $qb->expr()->eq('j.slug',':slug')
+                $qb->expr()->eq('j.slug', ':slug')
             )
-                ->setParameter('slug',$set);
+                ->setParameter('slug', $set);
         }
 
         $paginator = $this->get('knp_paginator');
@@ -126,19 +131,20 @@ class DefaultController extends Controller
         $data['records'] = $records;
         $key = md5(StringHelper::generateKey());
         $session->set($key, [
-            'page'=>$currentPage+1,
-            'set' => $set
+            'page' => $currentPage + 1,
+            'set' => $set,
         ]);
         $data['resumptionToken'] = $key;
-        $data['isLast'] = $records->getTotalItemCount()>=$currentPage*100?true:false;
+        $data['isLast'] = $records->getTotalItemCount() >= $currentPage * 100 ? true : false;
         $data['currentPage'] = $currentPage;
-        $data['metadataPrefix'] = $request->get('metadataPrefix','oai_dc');
+        $data['metadataPrefix'] = $request->get('metadataPrefix', 'oai_dc');
 
         return $this->response('OjsOAIBundle:Default:records.xml.twig', $data);
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function listSetsAction(Request $request)
@@ -151,8 +157,8 @@ class DefaultController extends Controller
         $from = $request->get('from', false);
         $until = $request->get('until', false);
         $qb = $em->createQueryBuilder();
-        $qb->select("j")
-            ->from("OjsJournalBundle:Journal", 'j');
+        $qb->select('j')
+            ->from('OjsJournalBundle:Journal', 'j');
         if ($from) {
             $_from = new \DateTime();
             $_from->setTimestamp(strtotime($from));
@@ -178,9 +184,9 @@ class DefaultController extends Controller
         }
         $paginator = $this->get('knp_paginator');
         $resumptionToken = $request->get('resumptionToken');
-        if($resumptionToken){
-            $currentPage = (int)$session->get($resumptionToken);
-        }else{
+        if ($resumptionToken) {
+            $currentPage = (int) $session->get($resumptionToken);
+        } else {
             $currentPage = 1;
         }
         $sets = $paginator->paginate(
@@ -190,11 +196,11 @@ class DefaultController extends Controller
         );
         $data['records'] = $sets;
         $key = md5(StringHelper::generateKey());
-        $session->set($key, $currentPage+1);
+        $session->set($key, $currentPage + 1);
         $data['resumptionToken'] = $key;
-        $data['isLast'] = $sets->getTotalItemCount()>=$currentPage*100?true:false;
+        $data['isLast'] = $sets->getTotalItemCount() >= $currentPage * 100 ? true : false;
         $data['currentPage'] = $currentPage;
-        $data['metadataPrefix'] = $request->get('metadataPrefix','oai_dc');
+        $data['metadataPrefix'] = $request->get('metadataPrefix', 'oai_dc');
 
         return $this->response('OjsOAIBundle:Default:sets.xml.twig', $data);
     }
@@ -216,49 +222,53 @@ class DefaultController extends Controller
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
-        $qb->select("a")
-            ->from("OjsJournalBundle:Article", 'a');
-        $set = $request->get("set", false);
+        $qb->select('a')
+            ->from('OjsJournalBundle:Article', 'a');
+        $set = $request->get('set', false);
         if ($set) {
-            $qb->join("a.journal","j","WITH");
+            $qb->join('a.journal', 'j', 'WITH');
             $qb->where(
                 $qb->expr()->gte('j.slug', ':slug')
             )
                 ->setParameter('slug', $set);
         }
         $data['articles'] = $qb->getQuery()->getResult();
-        return $this->response("OjsOAIBundle:Default:identifiers.xml.twig", $data);
+
+        return $this->response('OjsOAIBundle:Default:identifiers.xml.twig', $data);
     }
 
     /**
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getRecordAction(Request $request)
     {
         $data = [];
         $identifier = $request->get('identifier');
-        $base_host = $this->container->getParameter("base_host");
-        preg_match_all('~oai:'.$base_host.':((\barticle\b)|(\brecord\b))/(\d+)~',$identifier,$matches);
-        if(!isset($matches[4]) || !isset($matches[4][0])){
-            throw new NotFoundHttpException("Record not found.");
+        $base_host = $this->container->getParameter('base_host');
+        preg_match_all('~oai:'.$base_host.':((\barticle\b)|(\brecord\b))/(\d+)~', $identifier, $matches);
+        if (!isset($matches[4]) || !isset($matches[4][0])) {
+            throw new NotFoundHttpException('Record not found.');
         }
         $id = $matches[4][0];
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
-        $qb->select("a")
-            ->from("OjsJournalBundle:Article","a");
+        $qb->select('a')
+            ->from('OjsJournalBundle:Article', 'a');
         $qb->where(
-            $qb->expr()->eq("a.id",":id")
+            $qb->expr()->eq('a.id', ':id')
         )
-            ->setParameter("id",$id);
+            ->setParameter('id', $id);
         $data['record'] = $qb->getQuery()->getOneOrNullResult();
-        if(!$data['record']){
-            throw new NotFoundHttpException("Record not found");
+        if (!$data['record']) {
+            throw new NotFoundHttpException('Record not found');
         }
-        $data['metadataPrefix'] = $request->get('metadataPrefix','oai_dc');
-        return $this->response('OjsOAIBundle:Default:record.xml.twig',$data);
+        $data['metadataPrefix'] = $request->get('metadataPrefix', 'oai_dc');
+
+        return $this->response('OjsOAIBundle:Default:record.xml.twig', $data);
     }
 }

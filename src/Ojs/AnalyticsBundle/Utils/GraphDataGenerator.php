@@ -12,7 +12,7 @@ use Ojs\JournalBundle\Entity\Issue;
 
 class GraphDataGenerator
 {
-    const DATE_FORMAT = "Y-m-d";
+    const DATE_FORMAT = 'Y-m-d';
 
     /**
      * @var EntityManager
@@ -21,6 +21,7 @@ class GraphDataGenerator
 
     /**
      * GraphDataGenerator constructor.
+     *
      * @param $manager
      */
     public function __construct($manager)
@@ -29,7 +30,7 @@ class GraphDataGenerator
     }
 
     /**
-     * Returns generator's date format
+     * Returns generator's date format.
      *
      * @return string
      */
@@ -39,10 +40,11 @@ class GraphDataGenerator
     }
 
     /**
-     * Returns an array which can be passed to C3.js for bar chart graph creation
+     * Returns an array which can be passed to C3.js for bar chart graph creation.
      *
      * @param array $journals
      * @param array $dates
+     *
      * @return array
      */
     public function generateJournalBarChartData($journals, $dates)
@@ -67,12 +69,13 @@ class GraphDataGenerator
 
         return $journalViews;
     }
-    
+
     /**
-     * Returns an array which can be passed to C3.js for bar chart graph creation
+     * Returns an array which can be passed to C3.js for bar chart graph creation.
      *
      * @param array $articles
      * @param array $dates
+     *
      * @return array
      */
     public function generateArticleBarChartData($articles, $dates)
@@ -99,10 +102,11 @@ class GraphDataGenerator
     }
 
     /**
-     * Returns an array which can be passed to C3.js for pie chart graph creation
+     * Returns an array which can be passed to C3.js for pie chart graph creation.
      *
      * @param array $issues
      * @param array $dates
+     *
      * @return array
      */
     public function generateIssueFilePieChartData($issues, $dates)
@@ -115,8 +119,7 @@ class GraphDataGenerator
         $issueFileDownloads['charts'] = [];
 
         /** @var Issue $issue */
-        foreach ($issues as $issue)
-        {
+        foreach ($issues as $issue) {
             $key = $issue->getId();
             $allFilesStat = $issueFileStatRepo->getTotalDownloadsOfAllFiles($issue, $dates);
 
@@ -133,7 +136,7 @@ class GraphDataGenerator
                         $issueFileDownloads['charts'][$key][] = [
                             $issueFile->getTitle(),
                             $totalDownloads,
-                            'issueFile'.$issueFile->getId()
+                            'issueFile'.$issueFile->getId(),
                         ];
                     }
                 }
@@ -143,10 +146,11 @@ class GraphDataGenerator
         return $issueFileDownloads;
     }
     /**
-     * Returns an array which can be passed to C3.js for pie chart graph creation
+     * Returns an array which can be passed to C3.js for pie chart graph creation.
      *
      * @param array $articles
      * @param array $dates
+     *
      * @return array
      */
     public function generateArticleFilePieChartData($articles, $dates)
@@ -176,20 +180,21 @@ class GraphDataGenerator
                         $articleFileDownloads['charts'][$key][] = [
                             $articleFile->getTitle(),
                             $totalDownloads,
-                            'articleFile'.$articleFile->getId()];
+                            'articleFile'.$articleFile->getId(), ];
                     }
                 }
             }
         }
-        
+
         return $articleFileDownloads;
     }
 
     /**
-     * Returns an array of journal download statistics which can be displayed in a table
+     * Returns an array of journal download statistics which can be displayed in a table.
      *
      * @param array $journals
      * @param array $dates
+     *
      * @return array
      */
     public function generateJournalViewsData($journals, $dates = null)
@@ -203,7 +208,7 @@ class GraphDataGenerator
             $journalStat = $stat[0];
             $result[] = array(
                 $journalStat->getJournal()->getTitle(),
-                $stat[1]
+                $stat[1],
             );
         }
 
@@ -211,10 +216,11 @@ class GraphDataGenerator
     }
 
     /**
-     * Returns an array of article download statistics which can be displayed in a table
+     * Returns an array of article download statistics which can be displayed in a table.
      *
      * @param array $articles
      * @param array $dates
+     *
      * @return array
      */
     public function generateArticleViewsData($articles, $dates = null)
@@ -228,7 +234,7 @@ class GraphDataGenerator
             $articleStat = $stat[0];
             $result[] = array(
                 $articleStat->getArticle()->getTitle(),
-                $stat['totalViews']
+                $stat['totalViews'],
             );
         }
 
@@ -236,10 +242,11 @@ class GraphDataGenerator
     }
 
     /**
-     * Returns an array of issue download statistics which can be displayed in a table
+     * Returns an array of issue download statistics which can be displayed in a table.
      *
      * @param array $issues
      * @param array $dates
+     *
      * @return array
      */
     public function generateIssueFileDownloadsData($issues, $dates = null)
@@ -254,7 +261,7 @@ class GraphDataGenerator
             $totalDownloads = $stat[1];
             $result[] = array(
                 $issueFileStat->getIssueFile()->getTitle(),
-                $totalDownloads
+                $totalDownloads,
             );
         }
 
@@ -262,10 +269,11 @@ class GraphDataGenerator
     }
 
     /**
-     * Returns an array of article download statistics which can be displayed in a table
+     * Returns an array of article download statistics which can be displayed in a table.
      *
      * @param array $articles
      * @param array $dates
+     *
      * @return array
      */
     public function generateArticleFileDownloadsData($articles, $dates = null)
@@ -280,7 +288,7 @@ class GraphDataGenerator
             $totalDownloads = $stat[1];
             $result[] = array(
                 $articleFileStat->getArticleFile()->getTitle(),
-                $totalDownloads
+                $totalDownloads,
             );
         }
 

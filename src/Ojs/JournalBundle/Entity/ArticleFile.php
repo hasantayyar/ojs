@@ -6,10 +6,10 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 use Ojs\AnalyticsBundle\Entity\ArticleFileStatistic;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * ArticleFile
+ * ArticleFile.
+ *
  * @GRID\Source(columns="id,title,type,version,langcode")
  */
 class ArticleFile
@@ -17,12 +17,12 @@ class ArticleFile
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="articlefile.id")
      */
     private $id;
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="articlefile.type")
      */
     private $type;
@@ -31,7 +31,7 @@ class ArticleFile
      */
     private $file;
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="articlefile.version")
      */
     private $version;
@@ -40,23 +40,19 @@ class ArticleFile
      */
     private $article;
     /**
-     *
      * @var string
      */
     private $keywords = null;
     /**
-     *
      * @var string
      */
     private $description = null;
     /**
-     *
      * @var string
      * @GRID\Column(title="articlefile.title")
      */
     private $title = null;
     /**
-     *
      * @var string
      * @GRID\Column(title="articlefile.langcode")
      */
@@ -67,16 +63,16 @@ class ArticleFile
     private $statistics;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -84,7 +80,7 @@ class ArticleFile
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getType()
     {
@@ -92,7 +88,8 @@ class ArticleFile
     }
 
     /**
-     * @param  integer     $type
+     * @param int $type
+     *
      * @return ArticleFile
      */
     public function setType($type)
@@ -111,7 +108,8 @@ class ArticleFile
     }
 
     /**
-     * @param  string      $title
+     * @param string $title
+     *
      * @return ArticleFile
      */
     public function setTitle($title)
@@ -130,7 +128,8 @@ class ArticleFile
     }
 
     /**
-     * @param  string      $description
+     * @param string $description
+     *
      * @return ArticleFile
      */
     public function setDescription($description)
@@ -149,7 +148,8 @@ class ArticleFile
     }
 
     /**
-     * @param  string      $keywords
+     * @param string $keywords
+     *
      * @return ArticleFile
      */
     public function setKeywords($keywords)
@@ -168,7 +168,8 @@ class ArticleFile
     }
 
     /**
-     * @param  string      $langCode
+     * @param string $langCode
+     *
      * @return ArticleFile
      */
     public function setLangCode($langCode)
@@ -179,7 +180,7 @@ class ArticleFile
     }
 
     /**
-     * Get file
+     * Get file.
      *
      * @return string
      */
@@ -189,9 +190,10 @@ class ArticleFile
     }
 
     /**
-     * Set file
+     * Set file.
      *
-     * @param  string     $file
+     * @param string $file
+     *
      * @return ArticleFile
      */
     public function setFile($file)
@@ -202,9 +204,9 @@ class ArticleFile
     }
 
     /**
-     * Get version
+     * Get version.
      *
-     * @return integer
+     * @return int
      */
     public function getVersion()
     {
@@ -212,9 +214,10 @@ class ArticleFile
     }
 
     /**
-     * Set version
+     * Set version.
      *
-     * @param  integer     $version
+     * @param int $version
+     *
      * @return ArticleFile
      */
     public function setVersion($version)
@@ -225,7 +228,6 @@ class ArticleFile
     }
 
     /**
-     *
      * @return Article
      */
     public function getArticle()
@@ -234,8 +236,8 @@ class ArticleFile
     }
 
     /**
+     * @param Article $article
      *
-     * @param  Article     $article
      * @return ArticleFile
      */
     public function setArticle(Article $article)
@@ -247,7 +249,7 @@ class ArticleFile
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -275,9 +277,9 @@ class ArticleFile
     {
         $this->statistics = $statistics;
     }
-    
+
     /**
-     * Returns the article's download count
+     * Returns the article's download count.
      *
      * @return int
      */

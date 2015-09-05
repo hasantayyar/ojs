@@ -17,6 +17,7 @@ class AnalyticsRestController extends FOSRestController
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function articleViewAction(Request $request, $id)
@@ -46,6 +47,7 @@ class AnalyticsRestController extends FOSRestController
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function issueViewAction(Request $request, $id)
@@ -75,6 +77,7 @@ class AnalyticsRestController extends FOSRestController
      *
      * @param Request $request
      * @param $id
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function journalViewAction(Request $request, $id)

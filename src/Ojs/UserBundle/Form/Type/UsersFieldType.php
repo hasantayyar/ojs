@@ -10,11 +10,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Router;
+
 /**
- *
- *
- * Class UsersFieldType
- * @package Ojs\UserBundle\Form\Type
+ * Class UsersFieldType.
  */
 class UsersFieldType extends AbstractType
 {
@@ -40,7 +38,7 @@ class UsersFieldType extends AbstractType
         // make variables available to the view
         $view->vars['remote_path'] = $this->router->generate($options['remote_route'], $options['remote_params']).'?page_limit='.$options['page_limit'];
         $varNames = array('minimum_input_length', 'placeholder');
-        foreach($varNames as $varName) {
+        foreach ($varNames as $varName) {
             $view->vars[$varName] = $options[$varName];
         }
         $view->vars['full_name'] .= '[]';

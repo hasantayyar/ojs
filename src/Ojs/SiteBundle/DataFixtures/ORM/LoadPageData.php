@@ -12,7 +12,7 @@ class LoadPageData implements FixtureInterface
     {
         $page = new Page();
         $page->setBody(
-            "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
  Autem maxime molestiae, perspiciatis praesentium qui ut voluptatem! Ab aliquid amet
  aspernatur aut beatae blanditiis consectetur cupiditate ducimus eum ex excepturi
  facilis fugiat harum inventore labore minus modi nam natus necessitatibus nostrum
@@ -21,11 +21,11 @@ class LoadPageData implements FixtureInterface
   voluptatum! Architecto commodi cumque, deleniti, eum eveniet ex excepturi harum
    incidunt magni natus pariatur, placeat provident quas repudiandae sit unde vel vero.
     Ad adipisci autem dignissimos doloribus ducimus eum illum incidunt ipsa,
-    libero magnam minima minus, nihil porro praesentium suscipit vitae!</p>"
+    libero magnam minima minus, nihil porro praesentium suscipit vitae!</p>'
         );
-        $page->setTags("demo,test");
-        $page->setTitle("Demo content");
-        $page->setImage("logo.png");
+        $page->setTags('demo,test');
+        $page->setTitle('Demo content');
+        $page->setImage('logo.png');
         $om->persist($page);
         $om->flush();
     }

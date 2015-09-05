@@ -6,10 +6,10 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * Lang
+ * Lang.
+ *
  * @ExclusionPolicy("all")
  * @GRID\Source(columns="id,code,name,rtl")
  */
@@ -18,7 +18,7 @@ class Lang
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @Expose()
      * @GRID\Column(title="id")
      */
@@ -39,16 +39,16 @@ class Lang
     private $name;
 
     /**
-     * @var boolean
+     * @var bool
      * @Expose()
      * @GRID\Column(title="lang.rtl")
      */
     private $rtl;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -56,7 +56,7 @@ class Lang
     }
 
     /**
-     * Get code
+     * Get code.
      *
      * @return string
      */
@@ -66,9 +66,10 @@ class Lang
     }
 
     /**
-     * Set code
+     * Set code.
      *
-     * @param  string $code
+     * @param string $code
+     *
      * @return Lang
      */
     public function setCode($code)
@@ -79,7 +80,7 @@ class Lang
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -89,9 +90,10 @@ class Lang
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Lang
      */
     public function setName($name)
@@ -102,9 +104,9 @@ class Lang
     }
 
     /**
-     * Get rtl
+     * Get rtl.
      *
-     * @return boolean
+     * @return bool
      */
     public function getRtl()
     {
@@ -112,9 +114,10 @@ class Lang
     }
 
     /**
-     * Set rtl
+     * Set rtl.
      *
-     * @param  boolean $rtl
+     * @param bool $rtl
+     *
      * @return Lang
      */
     public function setRtl($rtl)

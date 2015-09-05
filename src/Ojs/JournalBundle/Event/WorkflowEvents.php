@@ -1,6 +1,6 @@
 <?php
-namespace Ojs\JournalBundle\Event;
 
+namespace Ojs\JournalBundle\Event;
 
 final class WorkflowEvents
 {

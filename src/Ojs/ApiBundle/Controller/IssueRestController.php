@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -10,7 +11,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class IssueRestController extends FOSRestController
 {
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get issue detail"
@@ -23,7 +23,7 @@ class IssueRestController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $issue = $em->find('OjsJournalBundle:Issue', $id);
         if (!$issue) {
-            throw new NotFoundHttpException("Issue not exists");
+            throw new NotFoundHttpException('Issue not exists');
         }
 
         return $issue;

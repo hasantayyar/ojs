@@ -20,24 +20,24 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
  */
 class AdminPostController extends Controller
 {
-
     /**
      * Lists all Post entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new AdminPost())) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $source = new Entity('OjsAdminBundle:AdminPost');
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var AdminPost $entity
+                 * @var AdminPost
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
@@ -54,7 +54,7 @@ class AdminPostController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_admin_post_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_post_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_post_delete', 'id');
@@ -72,7 +72,7 @@ class AdminPostController extends Controller
         $entity = new AdminPost();
 
         if (!$this->isGranted('CREATE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $form = $this->createCreateForm($entity);
@@ -86,7 +86,8 @@ class AdminPostController extends Controller
     /**
      * Creates a form to create a Post entity.
      *
-     * @param  AdminPost $entity The entity
+     * @param AdminPost $entity The entity
+     *
      * @return Form The form
      */
     private function createCreateForm(AdminPost $entity)
@@ -104,13 +105,14 @@ class AdminPostController extends Controller
     /**
      * Creates a new Post entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new AdminPost())) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $entity = new AdminPost();
@@ -138,7 +140,8 @@ class AdminPostController extends Controller
     /**
      * Finds and displays a Post entity.
      *
-     * @param  AdminPost $entity
+     * @param AdminPost $entity
+     *
      * @return Response
      */
     public function showAction(AdminPost $entity)
@@ -146,7 +149,7 @@ class AdminPostController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $token = $this
@@ -162,7 +165,8 @@ class AdminPostController extends Controller
     /**
      * Displays a form to edit an existing Post entity.
      *
-     * @param  AdminPost $entity
+     * @param AdminPost $entity
+     *
      * @return Response
      */
     public function editAction(AdminPost $entity)
@@ -170,7 +174,7 @@ class AdminPostController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $token = $this
@@ -192,7 +196,8 @@ class AdminPostController extends Controller
     /**
      * Creates a form to edit a Post entity.
      *
-     * @param  AdminPost $entity The entity
+     * @param AdminPost $entity The entity
+     *
      * @return Form The form
      */
     private function createEditForm(AdminPost $entity)
@@ -214,8 +219,9 @@ class AdminPostController extends Controller
     /**
      * Edits an existing Post entity.
      *
-     * @param  Request $request
-     * @param  AdminPost $entity
+     * @param Request   $request
+     * @param AdminPost $entity
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, AdminPost $entity)
@@ -223,7 +229,7 @@ class AdminPostController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -253,8 +259,10 @@ class AdminPostController extends Controller
 
     /**
      * Deletes a Post entity.
-     * @param  Request $request
-     * @param  AdminPost $entity
+     *
+     * @param Request   $request
+     * @param AdminPost $entity
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, AdminPost $entity)
@@ -262,7 +270,7 @@ class AdminPostController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -270,7 +278,7 @@ class AdminPostController extends Controller
         $token = $csrf->getToken('ojs_admin_post'.$entity->getId());
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token not found!");
+            throw new TokenNotFoundException('Token not found!');
         }
 
         $em->remove($entity);

@@ -5,13 +5,14 @@ namespace Ojs\JournalBundle\Entity;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 
 /**
- * SubmissionFile
+ * SubmissionFile.
+ *
  * @GRID\Source(columns="id,label,locale,visible")
  */
 class SubmissionFile
 {
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      */
     private $id;
@@ -28,23 +29,23 @@ class SubmissionFile
     private $detail;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journalId;
 
     /**
-     * @var integer
+     * @var int
      */
     private $articleId;
 
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="submission_file.visible")
      */
     private $visible;
 
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="submission_file.required")
      */
     private $required;
@@ -77,9 +78,9 @@ class SubmissionFile
     private $file;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -87,9 +88,10 @@ class SubmissionFile
     }
 
     /**
-     * set id
+     * set id.
      *
      * @param null $id
+     *
      * @return $this
      */
     public function setId($id = null)
@@ -100,7 +102,7 @@ class SubmissionFile
     }
 
     /**
-     * Get label
+     * Get label.
      *
      * @return string
      */
@@ -110,9 +112,10 @@ class SubmissionFile
     }
 
     /**
-     * Set label
+     * Set label.
      *
-     * @param  string $label
+     * @param string $label
+     *
      * @return SubmissionFile
      */
     public function setLabel($label)
@@ -123,7 +126,7 @@ class SubmissionFile
     }
 
     /**
-     * Get detail
+     * Get detail.
      *
      * @return string
      */
@@ -133,9 +136,10 @@ class SubmissionFile
     }
 
     /**
-     * Set detail
+     * Set detail.
      *
-     * @param  string $detail
+     * @param string $detail
+     *
      * @return SubmissionFile
      */
     public function setDetail($detail)
@@ -146,9 +150,9 @@ class SubmissionFile
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -156,9 +160,10 @@ class SubmissionFile
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer $journalId
+     * @param int $journalId
+     *
      * @return SubmissionFile
      */
     public function setJournalId($journalId)
@@ -169,9 +174,9 @@ class SubmissionFile
     }
 
     /**
-     * Get visible
+     * Get visible.
      *
-     * @return boolean
+     * @return bool
      */
     public function getVisible()
     {
@@ -179,9 +184,10 @@ class SubmissionFile
     }
 
     /**
-     * Set visible
+     * Set visible.
      *
-     * @param  boolean $visible
+     * @param bool $visible
+     *
      * @return SubmissionFile
      */
     public function setVisible($visible)
@@ -192,9 +198,9 @@ class SubmissionFile
     }
 
     /**
-     * Get required
+     * Get required.
      *
-     * @return boolean
+     * @return bool
      */
     public function getRequired()
     {
@@ -202,9 +208,10 @@ class SubmissionFile
     }
 
     /**
-     * Set required
+     * Set required.
      *
-     * @param  boolean $required
+     * @param bool $required
+     *
      * @return SubmissionFile
      */
     public function setRequired($required)
@@ -215,7 +222,7 @@ class SubmissionFile
     }
 
     /**
-     * Get deletedAt
+     * Get deletedAt.
      *
      * @return \DateTime
      */
@@ -225,9 +232,10 @@ class SubmissionFile
     }
 
     /**
-     * Set deletedAt
+     * Set deletedAt.
      *
-     * @param  \DateTime $deletedAt
+     * @param \DateTime $deletedAt
+     *
      * @return SubmissionFile
      */
     public function setDeletedAt($deletedAt)
@@ -238,7 +246,7 @@ class SubmissionFile
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -248,9 +256,10 @@ class SubmissionFile
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal $journal
+     * @param Journal $journal
+     *
      * @return SubmissionFile
      */
     public function setJournal(Journal $journal = null)
@@ -261,7 +270,7 @@ class SubmissionFile
     }
 
     /**
-     * Get locale
+     * Get locale.
      *
      * @return string
      */
@@ -271,9 +280,10 @@ class SubmissionFile
     }
 
     /**
-     * Set locale
+     * Set locale.
      *
-     * @param  string $locale
+     * @param string $locale
+     *
      * @return SubmissionFile
      */
     public function setLocale($locale)
@@ -293,6 +303,7 @@ class SubmissionFile
 
     /**
      * @param $file
+     *
      * @return $this
      */
     public function setFile($file)
@@ -328,6 +339,7 @@ class SubmissionFile
 
     /**
      * @param Article $article
+     *
      * @return $this
      */
     public function setArticle(Article $article)

@@ -14,6 +14,7 @@ class ViewJournalEvent extends Event
 
     /**
      * ViewJournalEvent constructor.
+     *
      * @param Journal $journal
      */
     public function __construct($journal)

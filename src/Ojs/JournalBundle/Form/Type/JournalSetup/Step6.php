@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Step6 extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

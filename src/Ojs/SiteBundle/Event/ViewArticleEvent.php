@@ -14,6 +14,7 @@ class ViewArticleEvent extends Event
 
     /**
      * ViewArticleEvent constructor.
+     *
      * @param Article $article
      */
     public function __construct($article)

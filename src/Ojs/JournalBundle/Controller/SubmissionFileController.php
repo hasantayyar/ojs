@@ -4,7 +4,6 @@ namespace Ojs\JournalBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\SubmissionFile;
@@ -16,23 +15,20 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * SubmissionFile controller.
- *
  */
 class SubmissionFileController extends Controller
 {
-
     /**
      * Lists all SubmissionFile entities.
-     *
      */
     public function indexAction()
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('VIEW', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         if (!$journal) {
-            throw new NotFoundHttpException("Journal not found!");
+            throw new NotFoundHttpException('Journal not found!');
         }
         $source = new Entity('OjsJournalBundle:SubmissionFile');
         if ($journal) {
@@ -49,7 +45,7 @@ class SubmissionFileController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_journal_file_show', ['id', 'journalId' => $journal->getId()]);
         $rowAction[] = $gridAction->editAction('ojs_journal_file_edit', ['id', 'journalId' => $journal->getId()]);
@@ -67,14 +63,15 @@ class SubmissionFileController extends Controller
     /**
      * Creates a new SubmissionFile entity.
      *
-     * @param  Request                                                                                       $request
+     * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new SubmissionFile();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -143,7 +140,7 @@ class SubmissionFileController extends Controller
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $entity = new SubmissionFile();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -160,7 +157,8 @@ class SubmissionFileController extends Controller
     /**
      * Finds and displays a SubmissionFile entity.
      *
-     * @param  SubmissionFile                        $entity
+     * @param SubmissionFile $entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(SubmissionFile $entity)
@@ -168,7 +166,7 @@ class SubmissionFileController extends Controller
         $this->throw404IfNotFound($entity);
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('VIEW', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
 
         $token = $this
@@ -179,7 +177,7 @@ class SubmissionFileController extends Controller
             'OjsJournalBundle:SubmissionFile:show.html.twig',
             array(
                 'entity' => $entity,
-                'token'  => $token,
+                'token' => $token,
             )
         );
     }
@@ -187,7 +185,8 @@ class SubmissionFileController extends Controller
     /**
      * Displays a form to edit an existing SubmissionFile entity.
      *
-     * @param  SubmissionFile                        $entity
+     * @param SubmissionFile $entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction(SubmissionFile $entity)
@@ -195,7 +194,7 @@ class SubmissionFileController extends Controller
         $this->throw404IfNotFound($entity);
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('EDIT', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $editForm = $this->createEditForm($entity);
 
@@ -244,8 +243,9 @@ class SubmissionFileController extends Controller
     /**
      * Edits an existing SubmissionFile entity.
      *
-     * @param  Request                                                                                       $request
-     * @param  SubmissionFile                                                                           $entity
+     * @param Request        $request
+     * @param SubmissionFile $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, SubmissionFile $entity)
@@ -253,7 +253,7 @@ class SubmissionFileController extends Controller
         $this->throw404IfNotFound($entity);
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('EDIT', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $em = $this->getDoctrine()->getManager();
         $editForm = $this->createEditForm($entity);
@@ -279,8 +279,9 @@ class SubmissionFileController extends Controller
     /**
      * Deletes a SubmissionFile entity.
      *
-     * @param  Request                                            $request
-     * @param  SubmissionFile                                $entity
+     * @param Request        $request
+     * @param SubmissionFile $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, SubmissionFile $entity)
@@ -288,13 +289,13 @@ class SubmissionFileController extends Controller
         $this->throw404IfNotFound($entity);
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('DELETE', $journal, 'file')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $em = $this->getDoctrine()->getManager();
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_journal_file'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);

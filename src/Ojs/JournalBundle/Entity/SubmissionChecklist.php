@@ -5,13 +5,14 @@ namespace Ojs\JournalBundle\Entity;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 
 /**
- * SubmissionChecklist
+ * SubmissionChecklist.
+ *
  * @GRID\Source(columns="id,label,locale,visible")
  */
 class SubmissionChecklist
 {
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      */
     private $id;
@@ -28,12 +29,12 @@ class SubmissionChecklist
     private $detail;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journal_id;
 
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="submission_checklist.visible")
      */
     private $visible;
@@ -53,9 +54,9 @@ class SubmissionChecklist
     private $locale;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -63,7 +64,7 @@ class SubmissionChecklist
     }
 
     /**
-     * Get label
+     * Get label.
      *
      * @return string
      */
@@ -73,9 +74,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set label
+     * Set label.
      *
-     * @param  string $label
+     * @param string $label
+     *
      * @return SubmissionChecklist
      */
     public function setLabel($label)
@@ -86,7 +88,7 @@ class SubmissionChecklist
     }
 
     /**
-     * Get detail
+     * Get detail.
      *
      * @return string
      */
@@ -96,9 +98,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set detail
+     * Set detail.
      *
-     * @param  string $detail
+     * @param string $detail
+     *
      * @return SubmissionChecklist
      */
     public function setDetail($detail)
@@ -109,9 +112,9 @@ class SubmissionChecklist
     }
 
     /**
-     * Get journal_id
+     * Get journal_id.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -119,9 +122,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set journal_id
+     * Set journal_id.
      *
-     * @param  integer $journalId
+     * @param int $journalId
+     *
      * @return SubmissionChecklist
      */
     public function setJournalId($journalId)
@@ -132,9 +136,9 @@ class SubmissionChecklist
     }
 
     /**
-     * Get visible
+     * Get visible.
      *
-     * @return boolean
+     * @return bool
      */
     public function getVisible()
     {
@@ -142,9 +146,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set visible
+     * Set visible.
      *
-     * @param  boolean $visible
+     * @param bool $visible
+     *
      * @return SubmissionChecklist
      */
     public function setVisible($visible)
@@ -155,7 +160,7 @@ class SubmissionChecklist
     }
 
     /**
-     * Get deletedAt
+     * Get deletedAt.
      *
      * @return \DateTime
      */
@@ -165,9 +170,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set deletedAt
+     * Set deletedAt.
      *
-     * @param  \DateTime $deletedAt
+     * @param \DateTime $deletedAt
+     *
      * @return SubmissionChecklist
      */
     public function setDeletedAt($deletedAt)
@@ -178,7 +184,7 @@ class SubmissionChecklist
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -188,9 +194,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal $journal
+     * @param Journal $journal
+     *
      * @return SubmissionChecklist
      */
     public function setJournal(Journal $journal = null)
@@ -201,7 +208,7 @@ class SubmissionChecklist
     }
 
     /**
-     * Get locale
+     * Get locale.
      *
      * @return string
      */
@@ -211,9 +218,10 @@ class SubmissionChecklist
     }
 
     /**
-     * Set locale
+     * Set locale.
      *
-     * @param  string $locale
+     * @param string $locale
+     *
      * @return SubmissionChecklist
      */
     public function setLocale($locale)

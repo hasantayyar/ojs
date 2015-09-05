@@ -5,7 +5,6 @@ namespace Ojs\JournalBundle\Controller;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\Journal;
@@ -24,34 +23,34 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 /**
  * JournalUser controller.
- *
  */
 class JournalUserController extends Controller
 {
     /**
-     * Finds and displays a Users of a Journal with roles
+     * Finds and displays a Users of a Journal with roles.
+     *
      * @return mixed
      */
     public function indexAction(Request $request)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('VIEW', $journal, 'userRole')) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
 
         $source = new Entity('OjsJournalBundle:JournalUser');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var JournalUser $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var JournalUser
                  */
                 $entity = $row->getEntity();
                 $entity->getJournal()->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('journal', $entity->getJournal()->getTitle());
                 }
+
                 return $row;
             }
         );
@@ -59,7 +58,7 @@ class JournalUserController extends Controller
         $alias = $source->getTableAlias();
         $source->manipulateQuery(
             function (QueryBuilder $qb) use ($journal, $alias) {
-                $qb->andWhere($alias . '.journal = :journal')
+                $qb->andWhere($alias.'.journal = :journal')
                     ->setParameter('journal', $journal);
             }
         );
@@ -71,7 +70,7 @@ class JournalUserController extends Controller
         $rowAction = [];
         $rowAction[] = $gridAction->editAction('ojs_journal_user_edit', ['journalId' => $journal->getId(), 'id']);
         $rowAction[] = $gridAction->deleteAction('ojs_journal_user_delete', ['journalId' => $journal->getId(), 'id']);
-        $actionColumn = new ActionsColumn("actions", "actions");
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $actionColumn->setRowActions($rowAction);
         $grid->addColumn($actionColumn);
 
@@ -82,7 +81,7 @@ class JournalUserController extends Controller
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'userRole')) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity = new User();
@@ -99,9 +98,11 @@ class JournalUserController extends Controller
 
     /**
      * Creates a form to create a User entity.
-     * @param   integer $journalId
-     * @param   User $entity
-     * @return  Form    The form
+     *
+     * @param int  $journalId
+     * @param User $entity
+     *
+     * @return Form The form
      */
     private function createCreateForm(User $entity, $journalId)
     {
@@ -121,14 +122,15 @@ class JournalUserController extends Controller
     /**
      * Creates a new User entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createUserAction(Request $request)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'userRole')) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity = new User();
@@ -157,6 +159,7 @@ class JournalUserController extends Controller
 
             $em->flush();
             $this->successFlashBag('successful.create');
+
             return $this->redirectToRoute('ojs_journal_user_index', ['journalId' => $journal->getId()]);
         }
 
@@ -171,18 +174,18 @@ class JournalUserController extends Controller
 
     public function addUserAction(Request $request)
     {
-        /** @var Journal $journal */
+        /* @var Journal $journal */
         $entity = new JournalUser();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         $form = $this->createAddForm($entity, $journal->getId());
 
         if (!$this->isGranted('CREATE', $journal, 'userRole')) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $form->handleRequest($request);
         if ($form->isValid()) {
-            /** @var JournalUser $existingJournalUser */
+            /* @var JournalUser $existingJournalUser */
 
             $em = $this->getDoctrine()->getManager();
             $entity->setJournal($journal);
@@ -208,6 +211,7 @@ class JournalUserController extends Controller
             $em->flush();
 
             $this->successFlashBag('successful.create');
+
             return $this->redirectToRoute('ojs_journal_user_index', ['journalId' => $journal->getId()]);
         }
 
@@ -238,7 +242,7 @@ class JournalUserController extends Controller
 
     public function editUserAction($id)
     {
-        /** @var JournalUser $entity */
+        /* @var JournalUser $entity */
         $em = $this->getDoctrine()->getManager();
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         // Although 'id' column is unique, looking for a matching journal as well is beneficial security-wise
@@ -246,7 +250,7 @@ class JournalUserController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $journal, 'userRole')) {
-            throw new AccessDeniedException("You not authorized to remove this user from the journal.");
+            throw new AccessDeniedException('You not authorized to remove this user from the journal.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -265,6 +269,7 @@ class JournalUserController extends Controller
         $actionUrl = $this->generateUrl('ojs_journal_user_update',
             ['journalId' => $entity->getJournal()->getId(), 'id' => $entity->getId()]);
         $form = $this->createForm(new JournalUserEditType(), $entity, ['method' => 'PUT', 'action' => $actionUrl]);
+
         return $form;
     }
 
@@ -274,7 +279,7 @@ class JournalUserController extends Controller
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('EDIT', $journal, 'userRole')) {
-            throw new AccessDeniedException("You not authorized to remove this user from the journal.");
+            throw new AccessDeniedException('You not authorized to remove this user from the journal.');
         }
 
         /** @var JournalUser $entity */
@@ -287,10 +292,12 @@ class JournalUserController extends Controller
             $em->flush();
 
             $this->successFlashBag('successful.update');
+
             return $this->redirectToRoute('ojs_journal_user_index', ['journalId' => $journal->getId()]);
         }
 
         $this->errorFlashBag('error');
+
         return $this->redirectToRoute('ojs_journal_user_edit', ['journalId' => $journal->getId(), 'id' => $entity->getId()]);
     }
 
@@ -302,13 +309,13 @@ class JournalUserController extends Controller
 
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('DELETE', $journal, 'userRole')) {
-            throw new AccessDeniedException("You not authorized to remove this user from the journal.");
+            throw new AccessDeniedException('You not authorized to remove this user from the journal.');
         }
 
         $csrf = $this->get('security.csrf.token_manager');
-        $token = $csrf->getToken('ojs_journal_user' . $id);
+        $token = $csrf->getToken('ojs_journal_user'.$id);
         if ($token->getValue() !== $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);
@@ -319,7 +326,8 @@ class JournalUserController extends Controller
     }
 
     /**
-     * @param  null|int $journalId
+     * @param null|int $journalId
+     *
      * @return RedirectResponse|Response
      */
     public function registerAsAuthorAction($journalId = null)
@@ -332,9 +340,9 @@ class JournalUserController extends Controller
 
         if ($journalId) {
             /**
-             * @var Journal $journal
-             * @var User    $user
-             * @var Role    $role
+             * @var Journal
+             * @var User
+             * @var Role
              */
             $journal = $doctrine->getRepository('OjsJournalBundle:Journal')->find($journalId);
 
@@ -360,10 +368,9 @@ class JournalUserController extends Controller
         }
 
         /**
-         * @var JournalUser[] $journalUsers
-         * @var Journal[] $allJournals
+         * @var JournalUser[]
+         * @var Journal[]
          */
-
         $journalUsers = $doctrine
             ->getRepository('OjsJournalBundle:JournalUser')
             ->findBy(['user' => $user]);

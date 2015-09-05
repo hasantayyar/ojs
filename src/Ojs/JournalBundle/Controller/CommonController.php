@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Common controller.
- *
  */
 class CommonController extends Controller
 {
@@ -17,6 +16,6 @@ class CommonController extends Controller
         $this->get('session')->set('_locale', $code);
         $referer = $request->headers->get('referer');
 
-        return $this->redirect(empty($referer) ? "/" : $referer);
+        return $this->redirect(empty($referer) ? '/' : $referer);
     }
 }

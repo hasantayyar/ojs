@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * Board
+ * Board.
+ *
  * @GRID\Source(columns="id , journal.title, name, description")
  */
 class Board implements Translatable
@@ -18,13 +18,13 @@ class Board implements Translatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journalId;
 
@@ -51,7 +51,7 @@ class Board implements Translatable
     private $boardMembers;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -59,9 +59,9 @@ class Board implements Translatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -69,9 +69,9 @@ class Board implements Translatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -79,9 +79,10 @@ class Board implements Translatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer $journalId
+     * @param int $journalId
+     *
      * @return Board
      */
     public function setJournalId($journalId)
@@ -92,7 +93,7 @@ class Board implements Translatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -102,9 +103,10 @@ class Board implements Translatable
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Board
      */
     public function setDescription($description)
@@ -115,7 +117,7 @@ class Board implements Translatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -125,9 +127,10 @@ class Board implements Translatable
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal $journal
+     * @param Journal $journal
+     *
      * @return Board
      */
     public function setJournal(Journal $journal = null)
@@ -138,9 +141,10 @@ class Board implements Translatable
     }
 
     /**
-     * Add boardMembers
+     * Add boardMembers.
      *
-     * @param  BoardMember $boardMembers
+     * @param BoardMember $boardMembers
+     *
      * @return Board
      */
     public function addBoardMember(BoardMember $boardMembers)
@@ -151,7 +155,7 @@ class Board implements Translatable
     }
 
     /**
-     * Remove boardMembers
+     * Remove boardMembers.
      *
      * @param BoardMember $boardMembers
      */
@@ -161,7 +165,7 @@ class Board implements Translatable
     }
 
     /**
-     * Get boardMembers
+     * Get boardMembers.
      *
      * @return Collection
      */
@@ -176,7 +180,7 @@ class Board implements Translatable
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -186,9 +190,10 @@ class Board implements Translatable
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Board
      */
     public function setName($name)

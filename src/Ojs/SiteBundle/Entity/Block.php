@@ -6,12 +6,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Block
+ * Block.
  */
 class Block
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -21,7 +21,7 @@ class Block
     private $objectType;
 
     /**
-     * @var integer
+     * @var int
      */
     private $objectId;
 
@@ -49,12 +49,12 @@ class Block
      */
     private $color;
     /**
-     * @var integer
+     * @var int
      */
     private $block_order;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -62,9 +62,9 @@ class Block
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -72,7 +72,7 @@ class Block
     }
 
     /**
-     * Get objectType
+     * Get objectType.
      *
      * @return string
      */
@@ -82,9 +82,10 @@ class Block
     }
 
     /**
-     * Set objectType
+     * Set objectType.
      *
-     * @param  string $objectType
+     * @param string $objectType
+     *
      * @return Block
      */
     public function setObjectType($objectType)
@@ -95,9 +96,9 @@ class Block
     }
 
     /**
-     * Get objectId
+     * Get objectId.
      *
-     * @return integer
+     * @return int
      */
     public function getObjectId()
     {
@@ -105,9 +106,10 @@ class Block
     }
 
     /**
-     * Set objectId
+     * Set objectId.
      *
-     * @param  integer $objectId
+     * @param int $objectId
+     *
      * @return Block
      */
     public function setObjectId($objectId)
@@ -118,7 +120,7 @@ class Block
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -128,9 +130,10 @@ class Block
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Block
      */
     public function setTitle($title)
@@ -141,7 +144,7 @@ class Block
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -151,9 +154,10 @@ class Block
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param  string $type
+     * @param string $type
+     *
      * @return Block
      */
     public function setType($type)
@@ -164,7 +168,7 @@ class Block
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -174,9 +178,10 @@ class Block
     }
 
     /**
-     * Set content
+     * Set content.
      *
-     * @param  string $content
+     * @param string $content
+     *
      * @return Block
      */
     public function setContent($content)
@@ -187,9 +192,10 @@ class Block
     }
 
     /**
-     * Add links
+     * Add links.
      *
-     * @param  BlockLink $links
+     * @param BlockLink $links
+     *
      * @return Block
      */
     public function addLink(BlockLink $links)
@@ -200,7 +206,7 @@ class Block
     }
 
     /**
-     * Remove links
+     * Remove links.
      *
      * @param BlockLink $links
      */
@@ -210,7 +216,7 @@ class Block
     }
 
     /**
-     * Get links
+     * Get links.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -220,7 +226,7 @@ class Block
     }
 
     /**
-     * Get color
+     * Get color.
      *
      * @return string
      */
@@ -230,9 +236,10 @@ class Block
     }
 
     /**
-     * Set color
+     * Set color.
      *
-     * @param  string $color
+     * @param string $color
+     *
      * @return Block
      */
     public function setColor($color)
@@ -243,9 +250,9 @@ class Block
     }
 
     /**
-     * Get block_order
+     * Get block_order.
      *
-     * @return integer
+     * @return int
      */
     public function getBlockOrder()
     {
@@ -253,9 +260,10 @@ class Block
     }
 
     /**
-     * Set block_order
+     * Set block_order.
      *
-     * @param  integer $blockOrder
+     * @param int $blockOrder
+     *
      * @return Block
      */
     public function setBlockOrder($blockOrder)

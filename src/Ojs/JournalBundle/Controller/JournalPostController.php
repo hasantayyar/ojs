@@ -4,7 +4,6 @@ namespace Ojs\JournalBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CmsBundle\Form\Type\PostType;
 use Ojs\CoreBundle\Controller\OjsController;
@@ -17,14 +16,15 @@ class JournalPostController extends OjsController
 {
     /**
      * Lists all JournalPost entities.
-     * @var Request $request
+     *
+     * @var Request
      */
     public function indexAction(Request $request)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('VIEW', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $source = new Entity('OjsJournalBundle:JournalPost');
@@ -39,16 +39,15 @@ class JournalPostController extends OjsController
         );
 
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var JournalPost $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var JournalPost
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
 
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                     $row->setField('content', $entity->getContent());
                 }
@@ -60,7 +59,7 @@ class JournalPostController extends OjsController
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_journal_post_show', ['id', 'journalId' => $journal->getId()]);
         $rowAction[] = $gridAction->editAction('ojs_journal_post_edit', ['id', 'journalId' => $journal->getId()]);
         $rowAction[] = $gridAction->deleteAction('ojs_journal_post_delete', ['id', 'journalId' => $journal->getId()]);
@@ -78,7 +77,7 @@ class JournalPostController extends OjsController
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('CREATE', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $entity = new JournalPost();
@@ -95,6 +94,7 @@ class JournalPostController extends OjsController
      * Creates a form to create a JournalPost entity.
      *
      * @param JournalPost $entity The entity
+     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(JournalPost $entity)
@@ -105,7 +105,7 @@ class JournalPostController extends OjsController
             $entity,
             [
                 'action' => $this->generateUrl('ojs_journal_post_create', ['journalId' => $journal->getId()]),
-                'method' => 'POST'
+                'method' => 'POST',
             ]
         );
         $form->add('submit', 'submit', ['label' => 'Create']);
@@ -116,7 +116,8 @@ class JournalPostController extends OjsController
     /**
      * Creates a new JournalPost entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
@@ -124,7 +125,7 @@ class JournalPostController extends OjsController
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('CREATE', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $entity = new JournalPost();
@@ -139,6 +140,7 @@ class JournalPostController extends OjsController
             $em->flush();
 
             $this->successFlashBag('successful.create');
+
             return $this->redirectToRoute('ojs_journal_post_show',
                 ['id' => $entity->getId(), 'journalId' => $journal->getId()]);
         }
@@ -152,12 +154,13 @@ class JournalPostController extends OjsController
     /**
      * Finds and displays a JournalPost entity.
      *
-     * @param  int $id
+     * @param int $id
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction($id)
     {
-        /** @var JournalPost $entity */
+        /* @var JournalPost $entity */
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         $entity = $this
             ->getDoctrine()
@@ -166,7 +169,7 @@ class JournalPostController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('VIEW', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $token = $this
@@ -181,12 +184,14 @@ class JournalPostController extends OjsController
 
     /**
      * Displays a form to edit an existing Lang entity.
-     * @param  int $id
+     *
+     * @param int $id
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction($id)
     {
-        /** @var JournalPost $entity */
+        /* @var JournalPost $entity */
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         $entity = $this
             ->getDoctrine()
@@ -195,7 +200,7 @@ class JournalPostController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $token = $this
@@ -217,7 +222,8 @@ class JournalPostController extends OjsController
     /**
      * Creates a form to edit a Lang entity.
      *
-     * @param  JournalPost $entity The entity
+     * @param JournalPost $entity The entity
+     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(JournalPost $entity)
@@ -241,13 +247,15 @@ class JournalPostController extends OjsController
 
     /**
      * Edits an existing Lang entity.
-     * @param  Request $request
-     * @param  int $id
+     *
+     * @param Request $request
+     * @param int     $id
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, $id)
     {
-        /** @var JournalPost $entity */
+        /* @var JournalPost $entity */
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         $entity = $this
             ->getDoctrine()
@@ -256,7 +264,7 @@ class JournalPostController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -266,6 +274,7 @@ class JournalPostController extends OjsController
         if ($editForm->isValid()) {
             $em->flush();
             $this->successFlashBag('successful.update');
+
             return $this->redirectToRoute('ojs_journal_post_edit',
                 ['id' => $entity->getId(), 'journalId' => $journal->getId()]);
         }
@@ -280,13 +289,14 @@ class JournalPostController extends OjsController
     }
 
     /**
-     * @param  Request $request
-     * @param  int $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, $id)
     {
-        /** @var JournalPost $entity */
+        /* @var JournalPost $entity */
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         $entity = $this
             ->getDoctrine()
@@ -295,7 +305,7 @@ class JournalPostController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('DELETE', $journal, 'posts')) {
-            throw new AccessDeniedException("You are not authorized for this post!");
+            throw new AccessDeniedException('You are not authorized for this post!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -303,7 +313,7 @@ class JournalPostController extends OjsController
         $token = $csrf->getToken('ojs_journal_post'.$entity->getId());
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token not found!");
+            throw new TokenNotFoundException('Token not found!');
         }
 
         $em->remove($entity);

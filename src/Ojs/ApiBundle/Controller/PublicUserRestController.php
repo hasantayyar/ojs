@@ -12,9 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PublicUserRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="check user name availability. Return true if username is available.",
@@ -29,17 +27,20 @@ class PublicUserRestController extends FOSRestController
      * )
      * @Get("/public/user/checkusername/")
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return bool
      */
     public function getUsernameCheckAction(Request $request)
     {
-        return $this->get("user.helper")->checkUsernameAvailability($request->get('username'));
+        return $this->get('user.helper')->checkUsernameAvailability($request->get('username'));
     }
 
     /**
      * @param $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
@@ -54,7 +55,7 @@ class PublicUserRestController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $user = $em->find('OjsUserBundle:User', $id);
         if ($user) {
-            return JsonResponse::create(['id' => $id, 'text' => $user->getUsername()." <".$user->getEmail().'>']);
+            return JsonResponse::create(['id' => $id, 'text' => $user->getUsername().' <'.$user->getEmail().'>']);
         }
         throw new NotFoundHttpException();
     }

@@ -7,8 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SubmissionFileType
- * @package Ojs\JournalBundle\Form\Type
+ * Class SubmissionFileType.
  */
 class SubmissionFileType extends AbstractType
 {
@@ -25,27 +24,27 @@ class SubmissionFileType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if($this->isArticleSubmissionStartProcess){
+        if ($this->isArticleSubmissionStartProcess) {
             $builder->add('file', 'jb_file_ajax',
                 array(
-                    'endpoint' => 'submissionfiles'
+                    'endpoint' => 'submissionfiles',
                 )
             );
-            return;
 
+            return;
         }
         $builder
             ->add('file', 'jb_file_ajax',
                 array(
-                    'endpoint' => 'submissionfiles'
+                    'endpoint' => 'submissionfiles',
                 )
             )
             ->add('label', 'text', [
-                'label' => 'submission_checklist.label'
+                'label' => 'submission_checklist.label',
                 ]
             )
             ->add('detail', 'textarea', [
-                'label' => 'submission_checklist.detail'
+                'label' => 'submission_checklist.detail',
                 ]
             )
             ->add(
@@ -56,11 +55,11 @@ class SubmissionFileType extends AbstractType
                 ]
             )
             ->add('visible', 'checkbox', [
-                'label' => 'submission_checklist.visible'
+                'label' => 'submission_checklist.visible',
                 ]
             )
             ->add('required', 'checkbox', [
-                'label' => 'submission_checklist.required'
+                'label' => 'submission_checklist.required',
                 ]
             )
         ;

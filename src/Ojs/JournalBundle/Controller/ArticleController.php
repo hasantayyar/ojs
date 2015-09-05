@@ -4,7 +4,6 @@ namespace Ojs\JournalBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\Article;
@@ -18,12 +17,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 /**
- * Article controller
+ * Article controller.
  */
 class ArticleController extends Controller
 {
     /**
-     * Lists all article entities for journal
+     * Lists all article entities for journal.
      *
      * @return Response
      */
@@ -33,25 +32,25 @@ class ArticleController extends Controller
         $this->throw404IfNotFound($journal);
 
         if (!$this->isGranted('VIEW', $journal, 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         $source = new Entity('OjsJournalBundle:Article');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var Article $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var Article
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
-                    if(!is_null($entity->getIssue())){
+                    if (!is_null($entity->getIssue())) {
                         $row->setField('issue', $entity->getIssue()->getTitle());
                     }
                 }
+
                 return $row;
             }
         );
@@ -66,7 +65,7 @@ class ArticleController extends Controller
 
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_journal_article_show', ['id', 'journalId' => $journal->getId()]);
         $rowAction[] = $gridAction->editAction('ojs_journal_article_edit', ['id', 'journalId' => $journal->getId()]);
         $rowAction[] = $gridAction->deleteAction(
@@ -83,7 +82,7 @@ class ArticleController extends Controller
     }
 
     /**
-     * Displays a form to create a new article entity
+     * Displays a form to create a new article entity.
      *
      * @return Response
      */
@@ -93,7 +92,7 @@ class ArticleController extends Controller
         $this->throw404IfNotFound($journal);
 
         if (!$this->isGranted('CREATE', $journal, 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
         $entity = new Article();
         $form = $this->createCreateForm($entity, $journal);
@@ -107,9 +106,10 @@ class ArticleController extends Controller
     /**
      * Creates a form to create a Article entity.
      *
-     * @param  Article $entity The entity
-     * @param  Journal $journal
-     * @return Form    The form
+     * @param Article $entity  The entity
+     * @param Journal $journal
+     *
+     * @return Form The form
      */
     private function createCreateForm(Article $entity, Journal $journal)
     {
@@ -130,7 +130,8 @@ class ArticleController extends Controller
     /**
      * Creates a new Article entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -138,7 +139,7 @@ class ArticleController extends Controller
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('CREATE', $journal, 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         $entity = new Article();
@@ -155,7 +156,7 @@ class ArticleController extends Controller
 
             $this->successFlashBag('successful.create');
 
-            return $this->redirectToRoute('ojs_journal_article_show', ['id' => $entity->getId(), 'journalId'=> $entity->getJournal()->getId()]);
+            return $this->redirectToRoute('ojs_journal_article_show', ['id' => $entity->getId(), 'journalId' => $entity->getJournal()->getId()]);
         }
 
         return $this->render(
@@ -165,9 +166,10 @@ class ArticleController extends Controller
     }
 
     /**
-     * Finds and displays an article entity
+     * Finds and displays an article entity.
      *
-     * @param  int      $id
+     * @param int $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -179,14 +181,12 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (!$this->isGranted('VIEW', $journal, 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
         $entity = $em->getRepository('OjsJournalBundle:Article')->findOneBy(
             array('journal' => $journal, 'id' => $id)
         );
         $this->throw404IfNotFound($entity);
-
-
 
         $token = $this
             ->get('security.csrf.token_manager')
@@ -196,16 +196,17 @@ class ArticleController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing article entity
+     * Displays a form to edit an existing article entity.
      *
-     * @param  int      $id
+     * @param int $id
+     *
      * @return Response
      */
     public function editAction($id)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
-        /** @var Article $entity */
+        /* @var Article $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Article')->findOneBy(
             array('journal' => $journal, 'id' => $id)
@@ -216,7 +217,7 @@ class ArticleController extends Controller
             ->add('update', 'submit', array('label' => 'u'));
 
         if (!$this->isGranted('EDIT', $entity->getJournal(), 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         return $this->render(
@@ -228,9 +229,10 @@ class ArticleController extends Controller
     /**
      * Creates a form to edit a Article entity.
      *
-     * @param  Article $entity The entity
-     * @param  Journal $journal
-     * @return Form    The form
+     * @param Article $entity  The entity
+     * @param Journal $journal
+     *
+     * @return Form The form
      */
     private function createEditForm(Article $entity, Journal $journal)
     {
@@ -250,19 +252,20 @@ class ArticleController extends Controller
     /**
      * Edits an existing Article entity.
      *
-     * @param  Request                   $request
-     * @param  int                       $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
-        /** @var Article $entity */
+        /* @var Article $entity */
         $em = $this->getDoctrine()->getManager();
 
         if (!$this->isGranted('EDIT', $journal, 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         $entity = $em->getRepository('OjsJournalBundle:Article')->findOneBy(
@@ -276,7 +279,6 @@ class ArticleController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
             $em->flush();
             $this->successFlashBag('successful.update');
 
@@ -292,10 +294,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * Deletes an article entity
+     * Deletes an article entity.
      *
-     * @param  Request          $request
-     * @param  int              $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -305,7 +308,7 @@ class ArticleController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (!$this->isGranted('EDIT', $journal, 'articles')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         /** @var Article $entity */
@@ -318,7 +321,7 @@ class ArticleController extends Controller
         $token = $csrf->getToken('ojs_journal_article'.$id);
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);

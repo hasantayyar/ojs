@@ -2,7 +2,6 @@
 
 namespace Ojs\JournalBundle\Controller;
 
-use Doctrine\ORM\Query;
 use Ojs\AdminBundle\Form\Type\PublisherType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\Publisher;
@@ -13,7 +12,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Publisher controller.
- *
  */
 class ManagerPublisherController extends Controller
 {
@@ -21,6 +19,7 @@ class ManagerPublisherController extends Controller
      * Displays a form to edit an existing Publisher entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($publisherId)
@@ -29,7 +28,7 @@ class ManagerPublisherController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($entity);
         if (!$this->isGrantedForPublisher($entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
 
@@ -58,7 +57,7 @@ class ManagerPublisherController extends Controller
                 'action' => $this->generateUrl('ojs_publisher_manager_update', array('publisherId' => $entity->getId())),
                 'method' => 'PUT',
                 'publishersEndPoint' => $this->generateUrl('api_get_publishers'),
-                'publisherEndPoint' => $this->generateUrl('api_get_publisher')
+                'publisherEndPoint' => $this->generateUrl('api_get_publisher'),
             )
         );
 
@@ -68,8 +67,9 @@ class ManagerPublisherController extends Controller
     /**
      * Edits an existing Publisher entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $publisherId)
@@ -78,7 +78,7 @@ class ManagerPublisherController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($entity);
         if (!$this->isGrantedForPublisher($entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);

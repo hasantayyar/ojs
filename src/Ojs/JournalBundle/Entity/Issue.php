@@ -15,7 +15,8 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 use Ojs\CoreBundle\Annotation\Display as Display;
 
 /**
- * Issue
+ * Issue.
+ *
  * @GRID\Source(columns="id,journal.title,volume,number,title,year,datePublished")
  * @ExclusionPolicy("all")
  */
@@ -24,7 +25,7 @@ class Issue extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      * @Expose
      * @Groups({"JournalDetail","IssueDetail"})
@@ -35,13 +36,12 @@ class Issue extends AbstractTranslatable
      */
     protected $translations;
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @Groups({"JournalDetail","IssueDetail"})
      */
     private $journalId;
     /**
-     *
      * @var Journal
      * @Groups({"IssueDetail"})
      */
@@ -75,7 +75,7 @@ class Issue extends AbstractTranslatable
      */
     private $cover;
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="special")
      * @Expose
      * @Groups({"IssueDetail"})
@@ -127,10 +127,10 @@ class Issue extends AbstractTranslatable
      * @var string
      */
     private $publicURI;
-    /** @var  boolean */
+    /** @var  bool */
     private $published = false;
     /**
-     * @var boolean
+     * @var bool
      * @Expose
      * @Groups({"IssueDetail"})
      */
@@ -157,7 +157,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -167,8 +167,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set journal
-     * @param  Journal $journal
+     * Set journal.
+     *
+     * @param Journal $journal
+     *
      * @return Issue
      */
     public function setJournal($journal)
@@ -179,9 +181,9 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -189,9 +191,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer $journalId
+     * @param int $journalId
+     *
      * @return Issue
      */
     public function setJournalId($journalId)
@@ -202,7 +205,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get volume
+     * Get volume.
      *
      * @return string
      */
@@ -212,9 +215,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set volume
+     * Set volume.
      *
-     * @param  string $volume
+     * @param string $volume
+     *
      * @return Issue
      */
     public function setVolume($volume)
@@ -225,7 +229,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get number
+     * Get number.
      *
      * @return string
      */
@@ -235,9 +239,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set number
+     * Set number.
      *
-     * @param  string $number
+     * @param string $number
+     *
      * @return Issue
      */
     public function setNumber($number)
@@ -248,7 +253,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get cover image path
+     * Get cover image path.
      *
      * @return string
      */
@@ -258,9 +263,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set cover image path
+     * Set cover image path.
      *
-     * @param  string $cover
+     * @param string $cover
+     *
      * @return Issue
      */
     public function setCover($cover)
@@ -271,9 +277,9 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * is special
+     * is special.
      *
-     * @return boolean
+     * @return bool
      */
     public function getSpecial()
     {
@@ -282,13 +288,14 @@ class Issue extends AbstractTranslatable
 
     public function isSpecial()
     {
-        return (bool)$this->special;
+        return (bool) $this->special;
     }
 
     /**
-     * Set is special
+     * Set is special.
      *
-     * @param  boolean $special
+     * @param bool $special
+     *
      * @return Issue
      */
     public function setSpecial($special)
@@ -299,7 +306,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -309,9 +316,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Issue
      */
     public function setDescription($description)
@@ -322,7 +330,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get year
+     * Get year.
      *
      * @return string
      */
@@ -332,9 +340,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set year
+     * Set year.
      *
-     * @param  string $year
+     * @param string $year
+     *
      * @return Issue
      */
     public function setYear($year)
@@ -345,7 +354,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get datePublished
+     * Get datePublished.
      *
      * @return \DateTime
      */
@@ -355,9 +364,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set datePublished
+     * Set datePublished.
      *
-     * @param  \DateTime $datePublished
+     * @param \DateTime $datePublished
+     *
      * @return Issue
      */
     public function setDatePublished($datePublished)
@@ -368,9 +378,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Add article
+     * Add article.
      *
-     * @param  Article $article
+     * @param Article $article
+     *
      * @return $this
      */
     public function addArticle(Article $article)
@@ -381,7 +392,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Remove article
+     * Remove article.
      *
      * @param Article $article
      */
@@ -391,7 +402,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get articles
+     * Get articles.
      *
      * @return Collection
      */
@@ -401,8 +412,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Add section to issue
-     * @param  JournalSection $section
+     * Add section to issue.
+     *
+     * @param JournalSection $section
+     *
      * @return $this
      */
     public function addSection(JournalSection $section)
@@ -413,7 +426,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Remove section from issue
+     * Remove section from issue.
      *
      * @param JournalSection $section
      */
@@ -423,7 +436,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get sections
+     * Get sections.
      *
      * @return Collection
      */
@@ -441,7 +454,8 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * @param  string $header
+     * @param string $header
+     *
      * @return $this
      */
     public function setHeader($header)
@@ -452,7 +466,8 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Return formatted issue title and id eg. :  "Issue title [#id]"
+     * Return formatted issue title and id eg. :  "Issue title [#id]".
+     *
      * @return string
      */
     public function __toString()
@@ -461,7 +476,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -471,9 +486,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Issue
      */
     public function setTitle($title)
@@ -484,8 +500,10 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\IssueTranslation
      */
     public function translate($locale = null)
@@ -515,9 +533,9 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -525,7 +543,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPublished()
     {
@@ -533,9 +551,9 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get published
+     * Get published.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPublished()
     {
@@ -543,7 +561,8 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * @param  boolean $published
+     * @param bool $published
+     *
      * @return $this
      */
     public function setPublished($published)
@@ -554,7 +573,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSupplement()
     {
@@ -562,9 +581,9 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Get supplement
+     * Get supplement.
      *
-     * @return boolean
+     * @return bool
      */
     public function getSupplement()
     {
@@ -572,7 +591,8 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * @param  boolean $supplement
+     * @param bool $supplement
+     *
      * @return $this
      */
     public function setSupplement($supplement)
@@ -591,7 +611,8 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * @param  string $full_file
+     * @param string $full_file
+     *
      * @return $this
      */
     public function setFullFile($full_file)
@@ -611,21 +632,25 @@ class Issue extends AbstractTranslatable
 
     /**
      * @param array|Collection|IssueFile[] $issueFiles
+     *
      * @return $this
      */
     public function setIssueFiles($issueFiles)
     {
         $this->issueFiles = $issueFiles;
+
         return $this;
     }
 
     /**
      * @param IssueFile $issueFile
+     *
      * @return $this
      */
     public function addIssueFile(IssueFile $issueFile)
     {
         $this->issueFiles->add($issueFile);
+
         return $this;
     }
 
@@ -638,7 +663,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -652,7 +677,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -682,7 +707,7 @@ class Issue extends AbstractTranslatable
     }
 
     /**
-     * Returns the article's view count
+     * Returns the article's view count.
      *
      * @return int
      */

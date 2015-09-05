@@ -3,10 +3,9 @@
 namespace Ojs\JournalBundle\Entity;
 
 use Ojs\CmsBundle\Entity\Page;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * JournalPage
+ * JournalPage.
  */
 class JournalPage extends Page
 {
@@ -29,4 +28,3 @@ class JournalPage extends Page
         $this->journal = $journal;
     }
 }
-

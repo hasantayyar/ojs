@@ -4,7 +4,6 @@ namespace Ojs\CoreBundle\Entity;
 
 trait SoftDeletableTrait
 {
-
     /** @var \DateTime */
     protected $deletedAt;
 

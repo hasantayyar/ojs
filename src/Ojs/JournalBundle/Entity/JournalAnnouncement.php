@@ -6,7 +6,8 @@ use Ojs\CmsBundle\Entity\Announcement;
 use APY\DataGridBundle\Grid\Mapping\Source;
 
 /**
- * JournalAnnouncement
+ * JournalAnnouncement.
+ *
  * @Source(columns="id, title, content")
  */
 class JournalAnnouncement extends Announcement
@@ -30,4 +31,3 @@ class JournalAnnouncement extends Announcement
         $this->journal = $journal;
     }
 }
-

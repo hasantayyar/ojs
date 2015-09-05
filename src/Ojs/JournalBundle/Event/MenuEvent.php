@@ -5,7 +5,6 @@ namespace Ojs\JournalBundle\Event;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-
 class MenuEvent extends Event
 {
     /** @var  ItemInterface */
@@ -21,6 +20,7 @@ class MenuEvent extends Event
 
     /**
      * @param ItemInterface $menuItem
+     *
      * @return MenuEvent
      */
     public function setMenuItem($menuItem)

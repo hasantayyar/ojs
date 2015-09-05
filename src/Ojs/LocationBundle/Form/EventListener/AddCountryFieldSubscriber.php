@@ -1,6 +1,7 @@
 <?php
 
 namespace Ojs\LocationBundle\Form\EventListener;
+
 use Ojs\LocationBundle\Entity\Province;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -15,7 +16,7 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
     /**
      * @param string $provinceEndPoint
      */
-    function __construct($provinceEndPoint)
+    public function __construct($provinceEndPoint)
     {
         $this->provinceEndPoint = $provinceEndPoint;
     }
@@ -24,7 +25,7 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT   => 'preSubmit'
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         );
     }
 
@@ -34,13 +35,13 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
     private function addCountryForm(FormInterface $form, $country = null)
     {
         $formOptions = array(
-            'class'         => 'Ojs\LocationBundle\Entity\Country',
-            'mapped'        => false,
-            'label'         => 'Country',
-            'empty_value'   => 'Select Country',
-            'attr'          => array(
+            'class' => 'Ojs\LocationBundle\Entity\Country',
+            'mapped' => false,
+            'label' => 'Country',
+            'empty_value' => 'Select Country',
+            'attr' => array(
                 'class' => 'select2-element country_selector',
-                'data-province-source' => $this->provinceEndPoint
+                'data-province-source' => $this->provinceEndPoint,
             ),
         );
 
@@ -63,7 +64,7 @@ class AddCountryFieldSubscriber implements EventSubscriberInterface
         $accessor = PropertyAccess::createPropertyAccessor();
 
         /** @var Province $province */
-        $province   = $accessor->getValue($data, 'city');
+        $province = $accessor->getValue($data, 'city');
         $country = ($province) ? $province->getCountry() : null;
 
         $this->addCountryForm($form, $country);

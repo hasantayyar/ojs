@@ -13,7 +13,7 @@ class AdminSystemSettingsController extends OjsController
     public function indexAction()
     {
         if (!$this->isGranted('VIEW', new SystemSetting())) {
-            throw new AccessDeniedException("You cannot see system settings.");
+            throw new AccessDeniedException('You cannot see system settings.');
         }
 
         $repo = $this->getDoctrine()->getRepository('OjsAdminBundle:SystemSetting');
@@ -37,14 +37,14 @@ class AdminSystemSettingsController extends OjsController
                 'journal_application',
                 'publisher_application',
                 'article_submission',
-            ]
+            ],
         );
     }
 
     public function updateAction(Request $request)
     {
         if (!$this->isGranted('EDIT', new SystemSetting())) {
-            throw new AccessDeniedException("You cannot change system settings.");
+            throw new AccessDeniedException('You cannot change system settings.');
         }
 
         $em = $this->getDoctrine()->getManager();

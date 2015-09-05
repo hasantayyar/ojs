@@ -14,7 +14,7 @@ final class JournalRoleSecurityIdentity implements SecurityIdentityInterface
     private $role;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journal;
 
@@ -63,11 +63,11 @@ final class JournalRoleSecurityIdentity implements SecurityIdentityInterface
      */
     public function equals(SecurityIdentityInterface $sid)
     {
-        if (!$sid instanceof JournalRoleSecurityIdentity) {
+        if (!$sid instanceof self) {
             return false;
         }
 
-        return ($this->role === $sid->getRole() && (int)$this->journal === (int)$sid->getJournal());
+        return ($this->role === $sid->getRole() && (int) $this->journal === (int) $sid->getJournal());
     }
 
     /**

@@ -4,9 +4,8 @@ namespace Ojs\JournalBundle\Tests\Controller;
 
 use Ojs\CoreBundle\Tests\BaseTestCase;
 
-class PublisherControllerTest extends BaseTestCase
+class InstitutionControllerTest extends BaseTestCase
 {
-
     public function testStatus()
     {
         $this->logIn('admin', array('ROLE_SUPER_ADMIN'));

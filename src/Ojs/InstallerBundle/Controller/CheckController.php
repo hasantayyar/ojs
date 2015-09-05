@@ -6,7 +6,6 @@ use Ojs\CoreBundle\Controller\OjsController as Controller;
 
 class CheckController extends Controller
 {
-
     public function checkAction()
     {
         $data['page'] = 'check';
@@ -18,9 +17,9 @@ class CheckController extends Controller
         $data['result'] = '
         <div class="alert alert-warning"><ul>
         '.($iniPath ? sprintf(
-                "<li>Configuration file used by PHP: %s</li>",
+                '<li>Configuration file used by PHP: %s</li>',
                 $iniPath
-            ) : "<li>WARNING: No configuration file (php.ini) used by PHP!</li>").
+            ) : '<li>WARNING: No configuration file (php.ini) used by PHP!</li>').
             '<li>The PHP CLI can use a different php.ini file</li>
         <li>than the one used with your web server.</li>';
         if ('\\' == DIRECTORY_SEPARATOR) {
@@ -34,7 +33,7 @@ class CheckController extends Controller
 
         $checkPassed = true;
         foreach ($symfonyRequirements->getRequirements() as $req) {
-            /** @var $req Requirement */
+            /* @var $req Requirement */
             $data['result'] .= $this->echo_requirement($req);
             if (!$req->isFulfilled()) {
                 $checkPassed = false;
@@ -51,7 +50,7 @@ class CheckController extends Controller
     }
 
     /**
-     * Prints a Requirement instance
+     * Prints a Requirement instance.
      */
     private function echo_requirement(\Requirement $requirement)
     {
@@ -73,7 +72,7 @@ class CheckController extends Controller
                 break;
         }
         $data .= '<td>'.str_pad($result, 9).'</td>';
-        $data .= '<td>'.$requirement->getTestMessage()."</td>";
+        $data .= '<td>'.$requirement->getTestMessage().'</td>';
 
         if (!$requirement->isFulfilled()) {
             $data .= '<td>'.$requirement->getHelpText().'</td>';

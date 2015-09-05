@@ -9,7 +9,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * PublisherTypes
+ * PublisherTypes.
+ *
  * @GRID\Source(columns="id,name,description")
  */
 class PublisherTypes extends AbstractTranslatable
@@ -17,7 +18,7 @@ class PublisherTypes extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
@@ -51,9 +52,9 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -61,7 +62,7 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -71,9 +72,10 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string           $description
+     * @param string $description
+     *
      * @return PublisherTypes
      */
     public function setDescription($description)
@@ -92,7 +94,8 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * @param  mixed $slug
+     * @param mixed $slug
+     *
      * @return $this
      */
     public function setSlug($slug)
@@ -103,7 +106,8 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * @param  Publisher $publisher
+     * @param Publisher $publisher
+     *
      * @return $this
      */
     public function addPublisher(Publisher $publisher)
@@ -114,7 +118,8 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * @param  Publisher $publisher
+     * @param Publisher $publisher
+     *
      * @return $this
      */
     public function removePublisher(Publisher $publisher)
@@ -137,15 +142,15 @@ class PublisherTypes extends AbstractTranslatable
      */
     public function __toString()
     {
-        if(!is_string($this->getName())){
+        if (!is_string($this->getName())) {
             return $this->translations->first()->getName();
-        }else{
+        } else {
             return $this->getName();
         }
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -155,9 +160,10 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return PublisherTypes
      */
     public function setName($name)
@@ -168,8 +174,10 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\PublisherTypesTranslation
      */
     public function translate($locale = null)
@@ -199,7 +207,7 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -213,7 +221,7 @@ class PublisherTypes extends AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

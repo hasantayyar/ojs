@@ -104,7 +104,7 @@ class AclProvider implements AclProviderInterface
         $currentBatch = array();
         $oidLookup = array();
 
-        for ($i = 0, $c = count($oids); $i < $c; $i++) {
+        for ($i = 0, $c = count($oids); $i < $c; ++$i) {
             $oid = $oids[$i];
             $oidLookupKey = $oid->getIdentifier().$oid->getType();
             $oidLookup[$oidLookupKey] = $oid;
@@ -321,7 +321,7 @@ FINDCHILDREN;
      *
      * @param ObjectIdentityInterface $oid
      *
-     * @return string|boolean
+     * @return string|bool
      */
     final protected function retrieveObjectIdentityPrimaryKey(ObjectIdentityInterface $oid)
     {
@@ -414,7 +414,7 @@ SELECTCLAUSE;
 
         $types = array();
         $count = count($batch);
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < $count; ++$i) {
             if (!isset($types[$batch[$i]->getType()])) {
                 $types[$batch[$i]->getType()] = true;
 
@@ -429,8 +429,8 @@ SELECTCLAUSE;
 
         if (1 === count($types)) {
             $ids = array();
-            for ($i = 0; $i < $count; $i++) {
-                $identifier = (string)$batch[$i]->getIdentifier();
+            for ($i = 0; $i < $count; ++$i) {
+                $identifier = (string) $batch[$i]->getIdentifier();
                 $ids[] = $this->connection->quote($identifier);
             }
 
@@ -441,7 +441,7 @@ SELECTCLAUSE;
             );
         } else {
             $where = '(o.object_identifier = %s AND c.class_type = %s)';
-            for ($i = 0; $i < $count; $i++) {
+            for ($i = 0; $i < $count; ++$i) {
                 $sql .= sprintf(
                     $where,
                     $this->connection->quote($batch[$i]->getIdentifier()),

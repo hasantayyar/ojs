@@ -6,10 +6,10 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Ojs\LocationBundle\Entity\Country;
 use Ojs\LocationBundle\Entity\Province;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * JournalContact
+ * JournalContact.
+ *
  * @GRID\Source(columns="id, title, fullName")
  */
 class JournalContact
@@ -17,7 +17,7 @@ class JournalContact
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
@@ -75,9 +75,9 @@ class JournalContact
     private $journal;
 
     /**
-     * Get ID
+     * Get ID.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -85,7 +85,7 @@ class JournalContact
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -95,19 +95,21 @@ class JournalContact
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return JournalContact
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
@@ -117,31 +119,35 @@ class JournalContact
     }
 
     /**
-     * Set firstName
+     * Set firstName.
      *
-     * @param  string $fullName
+     * @param string $fullName
+     *
      * @return JournalContact
      */
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
+
         return $this;
     }
 
     /**
-     * Set phone
+     * Set phone.
      *
-     * @param  string $phone
+     * @param string $phone
+     *
      * @return JournalContact
      */
     public function setPhone($phone)
     {
         $this->phone = $phone;
+
         return $this;
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -151,9 +157,10 @@ class JournalContact
     }
 
     /**
-     * Set email
+     * Set email.
      *
-     * @param  string         $email
+     * @param string $email
+     *
      * @return JournalContact
      */
     public function setEmail($email)
@@ -164,7 +171,7 @@ class JournalContact
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -174,14 +181,16 @@ class JournalContact
     }
 
     /**
-     * Set address
+     * Set address.
      *
-     * @param  string $address
+     * @param string $address
+     *
      * @return JournalContact
      */
     public function setAddress($address)
     {
         $this->address = $address;
+
         return $this;
     }
 
@@ -194,12 +203,14 @@ class JournalContact
     }
 
     /**
-     * @param  Province $city
+     * @param Province $city
+     *
      * @return $this
      */
     public function setCity(Province $city)
     {
         $this->city = $city;
+
         return $this;
     }
 
@@ -212,17 +223,19 @@ class JournalContact
     }
 
     /**
-     * @param  Country $country
+     * @param Country $country
+     *
      * @return $this
      */
     public function setCountry(Country $country)
     {
         $this->country = $country;
+
         return $this;
     }
 
     /**
-     * Get phone
+     * Get phone.
      *
      * @return string
      */
@@ -240,7 +253,8 @@ class JournalContact
     }
 
     /**
-     * @param  string $affiliation
+     * @param string $affiliation
+     *
      * @return $this
      */
     public function setAffiliation($affiliation)
@@ -251,7 +265,7 @@ class JournalContact
     }
 
     /**
-     * Get contactType
+     * Get contactType.
      *
      * @return ContactTypes
      */
@@ -261,18 +275,18 @@ class JournalContact
     }
 
     /**
+     * @param ContactTypes $contactType
      *
-     * @param  ContactTypes $contactType
      * @return $this
      */
     public function setContactType(ContactTypes $contactType)
     {
         $this->contactType = $contactType;
+
         return $this;
     }
 
     /**
-     *
      * @return Journal
      */
     public function getJournal()
@@ -281,13 +295,14 @@ class JournalContact
     }
 
     /**
+     * @param Journal $journal
      *
-     * @param  Journal $journal
      * @return $this
      */
     public function setJournal(Journal $journal)
     {
         $this->journal = $journal;
+
         return $this;
     }
 

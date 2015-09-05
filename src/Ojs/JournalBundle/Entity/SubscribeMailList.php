@@ -2,30 +2,27 @@
 
 namespace Ojs\JournalBundle\Entity;
 
-use APY\DataGridBundle\Grid\Mapping as GRID;
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * SubscribeMailList
+ * SubscribeMailList.
  */
 class SubscribeMailList implements Translatable
 {
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journalId;
 
     /**
-     *
      * @var Journal
      */
     private $journal;
@@ -36,9 +33,9 @@ class SubscribeMailList implements Translatable
     private $mail;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -46,7 +43,7 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -56,8 +53,10 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Set journal
-     * @param  Journal $journal
+     * Set journal.
+     *
+     * @param Journal $journal
+     *
      * @return Issue
      */
     public function setJournal($journal)
@@ -68,9 +67,9 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -78,9 +77,10 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer $journalId
+     * @param int $journalId
+     *
      * @return Issue
      */
     public function setJournalId($journalId)
@@ -91,7 +91,7 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Get mail
+     * Get mail.
      *
      * @return string
      */
@@ -101,9 +101,10 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Set mail
+     * Set mail.
      *
-     * @param  string $mail
+     * @param string $mail
+     *
      * @return $this
      */
     public function setMail($mail)
@@ -114,7 +115,7 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -128,7 +129,7 @@ class SubscribeMailList implements Translatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

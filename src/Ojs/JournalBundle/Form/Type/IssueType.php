@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class IssueType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -49,10 +48,10 @@ class IssueType extends AbstractType
             ->add('tags', 'tags')
             ->add('published', 'checkbox', [
                 'label' => 'published',
-                'required' => false
+                'required' => false,
             ])
             ->add('full_file', 'jb_file_ajax', array(
-                'endpoint' => 'issuefiles'
+                'endpoint' => 'issuefiles',
             ))
             ->add('cover', 'jb_crop_image_ajax', array(
                 'endpoint' => 'journal',
@@ -60,8 +59,8 @@ class IssueType extends AbstractType
                 'img_height' => 300,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 300,
-                    'maxSize' => "[200, 300]"
-                )
+                    'maxSize' => '[200, 300]',
+                ),
             ))
             ->add('header', 'jb_crop_image_ajax', array(
                 'endpoint' => 'journal',
@@ -69,8 +68,8 @@ class IssueType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 960 / 200,
-                    'maxSize' => "[960, 200]"
-                )
+                    'maxSize' => '[960, 200]',
+                ),
             ))
         ;
     }

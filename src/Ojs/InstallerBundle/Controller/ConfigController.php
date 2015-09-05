@@ -14,7 +14,6 @@ use Symfony\Component\Yaml\Parser;
 
 class ConfigController extends Controller
 {
-
     public function configureAction()
     {
         $data = [];
@@ -52,7 +51,7 @@ class ConfigController extends Controller
         );
         $data['form'] = $form->createView();
 
-        return $this->render("OjsInstallerBundle:Default:configure.html.twig", $data);
+        return $this->render('OjsInstallerBundle:Default:configure.html.twig', $data);
     }
 
     public function saveAction(Request $request)

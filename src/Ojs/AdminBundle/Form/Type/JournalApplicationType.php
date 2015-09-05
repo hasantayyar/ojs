@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JournalApplicationType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -58,7 +57,7 @@ class JournalApplicationType extends AbstractType
                     'class' => 'Ojs\JournalBundle\Entity\Lang',
                     'attr' => [
                         'class' => 'select2-element ',
-                    ]
+                    ],
                 ]
             )
             ->add(
@@ -72,7 +71,7 @@ class JournalApplicationType extends AbstractType
                     'expanded' => false,
                     'attr' => [
                         'class' => 'select2-element validate[required]',
-                    ]
+                    ],
                 )
             )
             ->add('tags', 'tags', ['attr' => ['class' => 'validate[required]', 'label' => 'journal.tags']])
@@ -82,7 +81,7 @@ class JournalApplicationType extends AbstractType
                 'entity',
                 array(
                     'class' => 'OjsJournalBundle:Publisher',
-                    'query_builder' => function(EntityRepository $er) {
+                    'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('i')
                                     ->andWhere('i.status = :status')
                                     ->setParameter('status', 1);
@@ -119,8 +118,8 @@ class JournalApplicationType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 960 / 200,
-                    'maxSize' => "[960, 200]"
-                )
+                    'maxSize' => '[960, 200]',
+                ),
             ))
             ->add('image', 'jb_crop_image_ajax', array(
                 'endpoint' => 'journal',
@@ -129,8 +128,8 @@ class JournalApplicationType extends AbstractType
                 'img_height' => 300,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 300,
-                    'maxSize' => "[200, 300]"
-                )
+                    'maxSize' => '[200, 300]',
+                ),
             ))
             ->add('address', null, ['label' => 'journal.address', 'attr' => ['class' => 'validate[required]']])
             ->add('phone', null, ['label' => 'journal.phone', 'attr' => ['class' => 'validate[required,custom[email]]']])

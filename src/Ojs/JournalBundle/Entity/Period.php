@@ -4,13 +4,13 @@ namespace Ojs\JournalBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Serializer\Annotation as JMS;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * Period
+ * Period.
+ *
  * @GRID\Source(columns="id,period")
  */
 class Period extends AbstractTranslatable
@@ -18,7 +18,7 @@ class Period extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
@@ -38,9 +38,9 @@ class Period extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -62,17 +62,21 @@ class Period extends AbstractTranslatable
 
     /**
      * @param $period
+     *
      * @return $this
      */
     public function setPeriod($period)
     {
         $this->translate()->setPeriod($period);
+
         return $this;
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\PeriodTranslation
      */
     public function translate($locale = null)

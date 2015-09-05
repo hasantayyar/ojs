@@ -22,8 +22,8 @@ class AnnouncementType extends AbstractType
                 'img_height' => 128,
                 'crop_options' => array(
                     'aspect-ratio' => 128 / 128,
-                    'maxSize' => "[128, 128]"
-                )
+                    'maxSize' => '[128, 128]',
+                ),
             ))
             ->add('content', 'ace_editor', array(
                     'wrapper_attr' => array(),
@@ -37,7 +37,7 @@ class AnnouncementType extends AbstractType
                     'use_soft_tabs' => null,
                     'use_wrap_mode' => null,
                     'show_print_margin' => null,
-                    'highlight_active_line' => null
+                    'highlight_active_line' => null,
                 )
             )
         ;
@@ -50,7 +50,7 @@ class AnnouncementType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'Ojs\CmsBundle\Entity\Announcement',
-            'cascade_validation' => true
+            'cascade_validation' => true,
             ]
         );
     }

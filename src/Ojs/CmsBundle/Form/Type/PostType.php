@@ -10,7 +10,7 @@ class PostType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,9 +35,9 @@ class PostType extends AbstractType
                             'use_soft_tabs' => null,
                             'use_wrap_mode' => null,
                             'show_print_margin' => null,
-                            'highlight_active_line' => null
-                        )
-                    )
+                            'highlight_active_line' => null,
+                        ),
+                    ),
                 )
             );
     }
@@ -53,7 +53,7 @@ class PostType extends AbstractType
                 'cascade_validation' => true,
                 'object' => null,
                 'objectId' => null,
-                'post_type' => 'default'
+                'post_type' => 'default',
             )
         );
     }

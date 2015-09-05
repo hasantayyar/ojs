@@ -11,15 +11,15 @@ class IssueFileType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $languages = $options["languages"];
+        $languages = $options['languages'];
 
         $builder
             ->add('file', 'jb_file_ajax', array(
-                'endpoint' => 'issuefiles'
+                'endpoint' => 'issuefiles',
             ))
             ->add('type',
                 'choice',
@@ -27,13 +27,13 @@ class IssueFileType extends AbstractType
                     'choices' => ArticleFileParams::$FILE_TYPES,
                 ])
             ->add('version')
-            ->add('langCode','choice',[
-                'choices'=>$languages
+            ->add('langCode', 'choice', [
+                'choices' => $languages,
             ])
             ->add('translations', 'a2lix_translations')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
@@ -41,7 +41,7 @@ class IssueFileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Ojs\JournalBundle\Entity\IssueFile',
-            'languages'=>[]
+            'languages' => [],
         ));
     }
 

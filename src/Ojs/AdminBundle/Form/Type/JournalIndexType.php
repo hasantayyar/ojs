@@ -22,8 +22,8 @@ class JournalIndexType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 200,
-                    'maxSize' => "[200, 200]"
-                )
+                    'maxSize' => '[200, 200]',
+                ),
             ))
             ->add('status', 'checkbox', ['label' => 'ojs.is_active']);
     }

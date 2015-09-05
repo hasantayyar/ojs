@@ -14,7 +14,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
-
     protected $userProvider;
 
     public function __construct(ApiKeyUserProvider $userProvider)
@@ -64,6 +63,6 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new Response("Authentication Failed.", 403);
+        return new Response('Authentication Failed.', 403);
     }
 }

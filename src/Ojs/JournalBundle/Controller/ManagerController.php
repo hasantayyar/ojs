@@ -20,17 +20,19 @@ class ManagerController extends Controller
 {
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function journalSettingsAction(Request $request)
     {
-        $journal = $this->get("ojs.journal_service")->getSelectedJournal();
+        $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         $this->throw404IfNotFound($journal);
         if (!$this->isGranted('EDIT', $journal)) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         $form = $this->createJournalEditForm($journal);
+
         return $this->render(
             'OjsJournalBundle:Manager:journal_settings.html.twig',
             array(
@@ -56,18 +58,19 @@ class ManagerController extends Controller
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function updateJournalAction(Request $request)
     {
-        /** @var Journal $entity */
+        /* @var Journal $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $this->get('ojs.journal_service')->getSelectedJournal();
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createJournalEditForm($entity);
         $editForm->handleRequest($request);
@@ -90,8 +93,10 @@ class ManagerController extends Controller
 
     /**
      * @todo setttings enumeration should be done, otherwise setting keys will be a garbage
-     * @param  Request $request
-     * @param  integer $journalId
+     *
+     * @param Request $request
+     * @param int     $journalId
+     *
      * @return Response
      */
     public function journalSettingsSubmissionAction(Request $request, $journalId = null)
@@ -99,11 +104,11 @@ class ManagerController extends Controller
         $em = $this->getDoctrine()->getManager();
         /* @var $journal  Journal */
         $journal = !$journalId ?
-            $this->get("ojs.journal_service")->getSelectedJournal() :
+            $this->get('ojs.journal_service')->getSelectedJournal() :
             $em->getRepository('OjsJournalBundle:Journal')->find($journalId);
 
         if (!$this->isGranted('EDIT', $journal)) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         if ($request->getMethod() == 'POST') {
@@ -137,7 +142,7 @@ class ManagerController extends Controller
             ),
             'abstractTemplates' => $yamlParser->parse(
                 file_get_contents(
-                    $root .
+                    $root.
                     '/../src/Ojs/JournalBundle/Resources/data/abstracttemplates.yml'
                 )
             ),
@@ -148,10 +153,11 @@ class ManagerController extends Controller
     }
 
     /**
-     * @param  Journal $journal
-     * @param  string $settingName
-     * @param  string $settingValue if null, function will return current value
-     * @param  bool $encoded set true if setting stored as json_encoded
+     * @param Journal $journal
+     * @param string  $settingName
+     * @param string  $settingValue if null, function will return current value
+     * @param bool    $encoded      set true if setting stored as json_encoded
+     *
      * @return array|mixed|string
      */
     private function updateJournalSetting($journal, $settingName, $settingValue, $encoded = false)
@@ -179,8 +185,9 @@ class ManagerController extends Controller
     }
 
     /**
-     * @param  Request $req
-     * @param  null|integer $journalId
+     * @param Request  $req
+     * @param null|int $journalId
+     *
      * @return Response
      */
     public function journalSettingsMailAction(Request $req, $journalId = null)
@@ -188,7 +195,7 @@ class ManagerController extends Controller
         $em = $this->getDoctrine()->getManager();
         /* @var $journal Journal */
         $journal = !$journalId ?
-            $this->get("ojs.journal_service")->getSelectedJournal() :
+            $this->get('ojs.journal_service')->getSelectedJournal() :
             $em->getRepository('OjsJournalBundle:Journal')->find($journalId);
 
         if (!$this->isGranted('EDIT', $journal)) {
@@ -207,7 +214,8 @@ class ManagerController extends Controller
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function userIndexAction(Request $request)
@@ -224,7 +232,7 @@ class ManagerController extends Controller
             [
                 'switcher' => $switcher,
                 'articles' => $articles,
-                'data' => $this->createStats()
+                'data' => $this->createStats(),
             ]
         );
 
@@ -239,7 +247,8 @@ class ManagerController extends Controller
     }
 
     /**
-     *  Arranges statistics
+     *  Arranges statistics.
+     *
      * @return array
      */
     private function createStats()
@@ -247,8 +256,8 @@ class ManagerController extends Controller
         $generator = new GraphDataGenerator($this->getDoctrine()->getManager());
 
         $lastMonth = ['x'];
-        for ($i = 0; $i < 30; $i++) {
-            $lastMonth[] = date($generator->getDateFormat(), strtotime('-' . $i . ' days'));
+        for ($i = 0; $i < 30; ++$i) {
+            $lastMonth[] = date($generator->getDateFormat(), strtotime('-'.$i.' days'));
         }
 
         $slicedLastMonth = array_slice($lastMonth, 1);
@@ -277,6 +286,7 @@ class ManagerController extends Controller
 
     /**
      * @return Response
+     *
      * @throws HttpException
      */
     public function myJournalsAction()

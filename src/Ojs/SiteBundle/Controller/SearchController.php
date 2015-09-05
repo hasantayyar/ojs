@@ -13,16 +13,17 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchController extends Controller
 {
     /**
-     * search page index controller
+     * search page index controller.
      *
      * @param Request $request
-     * @param int $page
+     * @param int     $page
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request, $page = 1)
     {
         /**
-         * @var \Ojs\SearchBundle\Manager\SearchManager $searchManager
+         * @var \Ojs\SearchBundle\Manager\SearchManager
          */
         $searchManager = $this->get('ojs_search_manager');
 
@@ -52,13 +53,11 @@ class SearchController extends Controller
 
         //set query according to query type
         if ($queryType == 'basic') {
-
             $fieldQuery = new Query\MultiMatch();
             $fieldQuery->setFields(['_all']);
             $fieldQuery->setQuery($query);
             $boolQuery->addMust($fieldQuery);
         } elseif ($queryType == 'advanced') {
-
             $parseQuery = $searchManager->parseSearchQuery($query);
             foreach ($parseQuery as $searchTerm) {
                 $condition = $searchTerm['condition'];
@@ -76,7 +75,6 @@ class SearchController extends Controller
                 }
             }
         } elseif ($queryType == 'tag') {
-
             $matchQuery = new Query\Match();
             $matchQuery->setField('tags', $query);
             $boolQuery->addMust($matchQuery);
@@ -84,7 +82,6 @@ class SearchController extends Controller
 
         //set aggregations if requested
         if (!empty($roleFilters) || !empty($subjectFilters) || !empty($journalFilters)) {
-
             foreach ($roleFilters as $role) {
                 $match = new Query\Match();
                 $match->setField('user.userJournalRoles.role.name', $role);
@@ -129,7 +126,7 @@ class SearchController extends Controller
         $journalAgg->setSize(0);
         $searchQuery->addAggregation($journalAgg);
         /**
-         * @var ResultSet $resultData
+         * @var ResultSet
          */
         $resultData = $searcher->search($searchQuery);
 
@@ -137,13 +134,12 @@ class SearchController extends Controller
         $subjects = $resultData->getAggregation('subjects')['buckets'];
         $journals = $resultData->getAggregation('journals')['buckets'];
 
-
         if ($resultData->count() > 0) {
-            /**
+            /*
              * manipulate result data for easily use on template
              */
             $results = $searchManager->buildResultsObject($resultData, $section);
-            /**
+            /*
              * if search section is not defined or empty redirect to first result section
              */
             if (empty($section)) {
@@ -152,13 +148,12 @@ class SearchController extends Controller
 
                 return $this->redirectToRoute('ojs_search_index', $redirectParams);
             } else {
-                /**
+                /*
                  * if section result is empty redirect to first that have result section
                  */
                 if (!isset($results[$section])) {
                     foreach ($results as $resultKey => $result) {
                         if ($result['total_item'] > 0) {
-
                             $redirectParams = array_merge($request->query->all(), ['section' => $resultKey]);
 
                             return $this->redirectToRoute('ojs_search_index', $redirectParams);
@@ -171,7 +166,7 @@ class SearchController extends Controller
             $pagerfanta->setMaxPerPage(10);
             $pagerfanta->setCurrentPage($page);
             $results[$section]['data'] = $pagerfanta->getCurrentPageResults();
-            /**
+            /*
              * add search query to query history
              * history data stores on session
              */
@@ -188,15 +183,14 @@ class SearchController extends Controller
                 'role_filters' => $roleFilters,
                 'subject_filters' => $subjectFilters,
                 'journal_filters' => $journalFilters,
-                'pagerfanta' => $pagerfanta
+                'pagerfanta' => $pagerfanta,
             ];
-
         } else {
             $data = [
                 'query' => $query,
                 'queryType' => $queryType,
                 'total_count' => $searchManager->getTotalHit(),
-                'journals' => []
+                'journals' => [],
             ];
         }
 
@@ -204,11 +198,13 @@ class SearchController extends Controller
     }
 
     /**
-     * store query to query history for future searches
+     * store query to query history for future searches.
+     *
      * @param Request $request
      * @param $query
      * @param $queryType
-     * @param integer $totalCount
+     * @param int $totalCount
+     *
      * @return bool
      */
     private function addQueryToHistory(Request $request, $query, $queryType, $totalCount)
@@ -220,7 +216,7 @@ class SearchController extends Controller
         $queryHistory = $session->get('_query_history');
         $queryCount = count($queryHistory);
         $setQuery['type'] = $queryType;
-        $setQuery['time'] = date("H:i:s");
+        $setQuery['time'] = date('H:i:s');
         $setQuery['id'] = $queryCount + 1;
         $setQuery['query'] = $query;
         $setQuery['totalHits'] = $totalCount;
@@ -231,7 +227,8 @@ class SearchController extends Controller
     }
 
     /**
-     * advanced search builder page
+     * advanced search builder page.
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function advancedAction()
@@ -240,15 +237,16 @@ class SearchController extends Controller
         $mapping = $search->getMapping();
 
         return $this->render(
-            "OjsSiteBundle:Search:advanced.html.twig",
+            'OjsSiteBundle:Search:advanced.html.twig',
             [
-                'mapping' => $mapping
+                'mapping' => $mapping,
             ]
         );
     }
 
     /**
-     * Tag cloud page
+     * Tag cloud page.
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function tagCloudAction()
@@ -263,7 +261,7 @@ class SearchController extends Controller
         $tagsAgg->setSize(0);
         $searchQuery->addAggregation($tagsAgg);
         /**
-         * @var ResultSet $results
+         * @var ResultSet
          */
         $results = $search->search($searchQuery);
 

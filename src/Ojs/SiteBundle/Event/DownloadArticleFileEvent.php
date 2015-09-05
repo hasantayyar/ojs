@@ -14,6 +14,7 @@ class DownloadArticleFileEvent extends Event
 
     /**
      * DownloadArticleFileEvent constructor.
+     *
      * @param ArticleFile $articleFile
      */
     public function __construct($articleFile)

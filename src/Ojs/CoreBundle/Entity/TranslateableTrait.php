@@ -24,12 +24,14 @@ trait TranslateableTrait
 
     /**
      * @deprecated
+     *
      * @var string
      */
     protected $locale;
 
     /**
      * @deprecated
+     *
      * @return mixed
      */
     public function getLocale()
@@ -39,6 +41,7 @@ trait TranslateableTrait
 
     /**
      * @deprecated
+     *
      * @param mixed $locale
      */
     public function setLocale($locale)
@@ -79,18 +82,21 @@ trait TranslateableTrait
     }
 
     /**
-     * Returns translation of given locale
+     * Returns translation of given locale.
+     *
      * @param null $locale
+     *
      * @return mixed
      */
     public function getTranslationByLocale($locale = null)
     {
-        if(null === $locale){
+        if (null === $locale) {
             throw new \RuntimeException('please support an locale');
         }
-        foreach($this->translations as $translation){
+        foreach ($this->translations as $translation) {
             $translations[$translation->getLocale()] = $translation;
         }
+
         return $translations[$locale];
     }
 }

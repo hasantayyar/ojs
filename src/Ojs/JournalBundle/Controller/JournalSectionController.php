@@ -5,7 +5,6 @@ namespace Ojs\JournalBundle\Controller;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Row;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\JournalSection;
@@ -19,14 +18,11 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * JournalSection controller.
- *
  */
 class JournalSectionController extends Controller
 {
-
     /**
      * Lists all JournalSection entities.
-     *
      */
     public function indexAction(Request $request)
     {
@@ -48,16 +44,16 @@ class JournalSectionController extends Controller
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var JournalSection $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var JournalSection
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                     $row->setField('journal', $entity->getJournal()->getTitle());
-                    if ($row->getField("title") && strlen($row->getField('title')) > 20) {
-                        $row->setField('title', substr($row->getField('title'), 0, 20)."...");
+                    if ($row->getField('title') && strlen($row->getField('title')) > 20) {
+                        $row->setField('title', substr($row->getField('title'), 0, 20).'...');
                     }
                 }
 
@@ -67,7 +63,7 @@ class JournalSectionController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_journal_section_show', ['id', 'journalId' => $journal->getId()]);
         if ($this->isGranted('EDIT', $this->get('ojs.journal_service')->getSelectedJournal(), 'sections')) {
@@ -89,14 +85,15 @@ class JournalSectionController extends Controller
     /**
      * Creates a new JournalSection entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'sections')) {
-            throw new AccessDeniedException("You are not authorized for create section on this journal!");
+            throw new AccessDeniedException('You are not authorized for create section on this journal!');
         }
         $entity = new JournalSection();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -129,8 +126,10 @@ class JournalSectionController extends Controller
 
     /**
      * Creates a form to create a JournalSection entity.
-     * @param  JournalSection $entity The entity
-     * @return Form           The form
+     *
+     * @param JournalSection $entity The entity
+     *
+     * @return Form The form
      */
     private function createCreateForm(JournalSection $entity, $journalId)
     {
@@ -159,7 +158,7 @@ class JournalSectionController extends Controller
     {
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
         if (!$this->isGranted('CREATE', $journal, 'sections')) {
-            throw new AccessDeniedException("You are not authorized for create section on this journal!");
+            throw new AccessDeniedException('You are not authorized for create section on this journal!');
         }
         $entity = new JournalSection();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -176,8 +175,9 @@ class JournalSectionController extends Controller
     /**
      * Finds and displays a JournalSection entity.
      *
-     * @param Request $request
+     * @param Request        $request
      * @param JournalSection $entity
+     *
      * @return Response
      */
     public function showAction(Request $request, JournalSection $entity)
@@ -200,7 +200,7 @@ class JournalSectionController extends Controller
             'OjsJournalBundle:JournalSection:show.html.twig',
             array(
                 'entity' => $entity,
-                'token'  => $token,
+                'token' => $token,
             )
         );
     }
@@ -209,6 +209,7 @@ class JournalSectionController extends Controller
      * Displays a form to edit an existing JournalSection entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -264,8 +265,9 @@ class JournalSectionController extends Controller
     /**
      * Edits an existing JournalSection entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -311,8 +313,9 @@ class JournalSectionController extends Controller
     /**
      * Deletes a JournalSection entity.
      *
-     * @param  Request          $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -330,7 +333,7 @@ class JournalSectionController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_journal_section'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);

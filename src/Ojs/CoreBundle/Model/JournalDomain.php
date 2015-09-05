@@ -4,7 +4,6 @@ namespace Ojs\CoreBundle\Model;
 
 class JournalDomain
 {
-
     private $currentJournal;
 
     public function getCurrentJournal()

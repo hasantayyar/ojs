@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\CoreBundle\Service;
 
 use Elastica\Exception\ExceptionInterface;
@@ -19,7 +20,7 @@ class ElasticaClient extends BaseClient
                     'path' => $path,
                     'method' => $method,
                     'data' => $data,
-                    'query' => $query
+                    'query' => $query,
                 ));
             }
 

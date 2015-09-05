@@ -7,14 +7,15 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
- * Role
+ * Role.
+ *
  * @ExclusionPolicy("all")
  * @GRID\Source(columns="id, name, role")
  */
 class Role
 {
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @GRID\Column(title="role.id")
      */
@@ -35,9 +36,9 @@ class Role
     private $role;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -45,7 +46,7 @@ class Role
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -55,9 +56,10 @@ class Role
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Role
      */
     public function setName($name)
@@ -73,7 +75,7 @@ class Role
     }
 
     /**
-     * Get role
+     * Get role.
      *
      * @return string
      */
@@ -83,9 +85,10 @@ class Role
     }
 
     /**
-     * Set role
+     * Set role.
      *
-     * @param  string $role
+     * @param string $role
+     *
      * @return Role
      */
     public function setRole($role)

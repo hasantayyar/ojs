@@ -17,7 +17,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * ContactTypes controller.
- *
  */
 class AdminContactTypeController extends Controller
 {
@@ -25,18 +24,19 @@ class AdminContactTypeController extends Controller
      * Lists all ContactTypes entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new ContactTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $source = new Entity('OjsJournalBundle:ContactTypes');
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var ContactTypes $entity
+                 * @var ContactTypes
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
@@ -51,7 +51,7 @@ class AdminContactTypeController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_contact_type_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_contact_type_edit', 'id');
@@ -68,13 +68,14 @@ class AdminContactTypeController extends Controller
     /**
      * Creates a new ContactTypes entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new ContactTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new ContactTypes();
         $form = $this->createCreateForm($entity);
@@ -127,7 +128,7 @@ class AdminContactTypeController extends Controller
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new ContactTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new ContactTypes();
         $form = $this->createCreateForm($entity);
@@ -144,14 +145,15 @@ class AdminContactTypeController extends Controller
     /**
      * Finds and displays a ContactTypes entity.
      *
-     * @param Request $request
+     * @param Request      $request
      * @param ContactTypes $entity
+     *
      * @return Response
      */
     public function showAction(Request $request, ContactTypes $entity)
     {
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity->setDefaultLocale($request->getDefaultLocale());
@@ -171,6 +173,7 @@ class AdminContactTypeController extends Controller
      * Displays a form to edit an existing ContactTypes entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -178,7 +181,7 @@ class AdminContactTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:ContactTypes')->find($id);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity);
@@ -218,8 +221,9 @@ class AdminContactTypeController extends Controller
     /**
      * Edits an existing ContactTypes entity.
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -227,7 +231,7 @@ class AdminContactTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:ContactTypes')->find($id);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity);
@@ -251,8 +255,9 @@ class AdminContactTypeController extends Controller
     /**
      * Deletes a ContactTypes entity.
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -260,14 +265,14 @@ class AdminContactTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:ContactTypes')->find($id);
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_contact_type'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

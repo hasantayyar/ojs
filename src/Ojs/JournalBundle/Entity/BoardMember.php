@@ -5,32 +5,31 @@ namespace Ojs\JournalBundle\Entity;
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Ojs\UserBundle\Entity\User;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * BoardMember
+ * BoardMember.
  */
 class BoardMember implements Translatable
 {
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $userId;
 
     /**
-     * @var integer
+     * @var int
      */
     private $boardId;
 
     /**
-     * @var integer
+     * @var int
      */
     private $seq;
 
@@ -45,9 +44,9 @@ class BoardMember implements Translatable
     private $user;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -55,9 +54,9 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Get userId
+     * Get userId.
      *
-     * @return integer
+     * @return int
      */
     public function getUserId()
     {
@@ -65,9 +64,10 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Set userId
+     * Set userId.
      *
-     * @param  integer     $userId
+     * @param int $userId
+     *
      * @return BoardMember
      */
     public function setUserId($userId)
@@ -78,9 +78,9 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Get boardId
+     * Get boardId.
      *
-     * @return integer
+     * @return int
      */
     public function getBoardId()
     {
@@ -88,9 +88,10 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Set boardId
+     * Set boardId.
      *
-     * @param  integer     $boardId
+     * @param int $boardId
+     *
      * @return BoardMember
      */
     public function setBoardId($boardId)
@@ -101,9 +102,9 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Get seq
+     * Get seq.
      *
-     * @return integer
+     * @return int
      */
     public function getSeq()
     {
@@ -111,9 +112,10 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Set seq
+     * Set seq.
      *
-     * @param  integer     $seq
+     * @param int $seq
+     *
      * @return BoardMember
      */
     public function setSeq($seq)
@@ -124,7 +126,7 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Get board
+     * Get board.
      *
      * @return Board
      */
@@ -134,9 +136,10 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Set board
+     * Set board.
      *
-     * @param  Board       $board
+     * @param Board $board
+     *
      * @return BoardMember
      */
     public function setBoard(Board $board = null)
@@ -147,7 +150,7 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -157,9 +160,10 @@ class BoardMember implements Translatable
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  User        $user
+     * @param User $user
+     *
      * @return BoardMember
      */
     public function setUser(User $user = null)

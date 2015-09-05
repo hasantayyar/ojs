@@ -14,7 +14,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class RoleRestController extends FOSRestController
 {
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Role Action",
@@ -25,6 +24,7 @@ class RoleRestController extends FOSRestController
      * @Get("/role/{id}")
      *
      * @param $id
+     *
      * @return object
      */
     public function getRoleAction($id)
@@ -69,14 +69,15 @@ class RoleRestController extends FOSRestController
      * )
      * @Get("/role/{role}/journal/{journal}/users")
      *
-     * @param  Role              $role
-     * @param  Journal           $journal
+     * @param Role    $role
+     * @param Journal $journal
+     *
      * @return JournalUser[]
      */
     public function getJournalRoleUsersAction(Role $role, Journal $journal)
     {
         /** @var JournalUserRepository $journalUserRepo */
-        /** @var JournalUser[] $result */
+        /* @var JournalUser[] $result */
 
         $journalUserRepo = $this
             ->getDoctrine()

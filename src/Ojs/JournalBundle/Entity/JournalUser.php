@@ -7,16 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Ojs\UserBundle\Entity\Role;
 use Ojs\UserBundle\Entity\User;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * JournalUser
+ * JournalUser.
+ *
  * @GRID\Source(columns="id, user.username, journal")
  */
 class JournalUser
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
     /**
@@ -49,6 +49,7 @@ class JournalUser
 
     /**
      * @param int $id
+     *
      * @return $this
      */
     public function setId($id)
@@ -68,6 +69,7 @@ class JournalUser
 
     /**
      * @param Journal $journal
+     *
      * @return $this
      */
     public function setJournal($journal)
@@ -87,6 +89,7 @@ class JournalUser
 
     /**
      * @param User $user
+     *
      * @return $this
      */
     public function setUser($user)
@@ -106,6 +109,7 @@ class JournalUser
 
     /**
      * @param Collection $roles
+     *
      * @return $this
      */
     public function setRoles($roles)
@@ -117,6 +121,7 @@ class JournalUser
 
     /**
      * @param Role $role
+     *
      * @return $this
      */
     public function addRole(Role $role)
@@ -130,6 +135,7 @@ class JournalUser
 
     /**
      * @param Role $role
+     *
      * @return $this
      */
     public function removeRole(Role $role)

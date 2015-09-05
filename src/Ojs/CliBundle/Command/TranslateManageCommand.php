@@ -20,7 +20,6 @@ use Symfony\Component\Translation\Translator;
  */
 class TranslateManageCommand extends ContainerAwareCommand
 {
-
     const MESSAGE_MISSING = 0;
     const MESSAGE_UNUSED = 1;
     const MESSAGE_EQUALS_FALLBACK = 2;
@@ -75,10 +74,10 @@ EOF
     {
         $locale = $input->getArgument('locale');
         $domain = $input->getOption('domain');
-        $bundle_array = explode(",", $input->getArgument('bundle'));
+        $bundle_array = explode(',', $input->getArgument('bundle'));
 
         foreach ($bundle_array as $bundle_name) {
-            $bundle_name = "Ojs".$bundle_name."Bundle";
+            $bundle_name = 'Ojs'.$bundle_name.'Bundle';
 
             $bundle = $this->getContainer()->get('kernel')->getBundle($bundle_name);
             $loader = $this->getContainer()->get('translation.loader');

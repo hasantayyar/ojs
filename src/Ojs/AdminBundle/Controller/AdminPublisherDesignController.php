@@ -4,7 +4,6 @@ namespace Ojs\AdminBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Ojs\AdminBundle\Form\Type\PublisherDesignType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\PublisherDesign;
@@ -16,24 +15,22 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * PublisherDesign controller.
- *
  */
 class AdminPublisherDesignController extends Controller
 {
     /**
      * Lists all PublisherDesigns entities.
-     *
      */
     public function indexAction()
     {
         if (!$this->isGranted('VIEW', new PublisherDesign())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $source = new Entity('OjsJournalBundle:PublisherDesign');
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_publisher_design_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_publisher_design_edit', 'id');
@@ -50,13 +47,14 @@ class AdminPublisherDesignController extends Controller
     /**
      * Creates a new PublisherDesign entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new PublisherDesign())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherDesign();
         $form = $this->createCreateForm($entity);
@@ -105,7 +103,8 @@ class AdminPublisherDesignController extends Controller
     }
 
     /**
-     * @param  String $editableContent
+     * @param String $editableContent
+     *
      * @return String
      */
     private function prepareDesignContent($editableContent)
@@ -146,12 +145,11 @@ class AdminPublisherDesignController extends Controller
 
     /**
      * Displays a form to create a new PublisherDesign entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new PublisherDesign())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherDesign();
         $form = $this->createCreateForm($entity);
@@ -169,6 +167,7 @@ class AdminPublisherDesignController extends Controller
      * Finds and displays a PublisherDesign entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -176,12 +175,13 @@ class AdminPublisherDesignController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:PublisherDesign')->find($id);
         $this->throw404IfNotFound($entity);
-        if (!$this->isGranted('VIEW', $entity))
-            throw new AccessDeniedException("You are not authorized for this page!");
+        if (!$this->isGranted('VIEW', $entity)) {
+            throw new AccessDeniedException('You are not authorized for this page!');
+        }
 
         $token = $this
             ->get('security.csrf.token_manager')
-            ->refreshToken('ojs_admin_publisher_Design' . $entity->getId());
+            ->refreshToken('ojs_admin_publisher_Design'.$entity->getId());
 
         return $this->render(
             'OjsAdminBundle:AdminPublisherDesign:show.html.twig',
@@ -193,6 +193,7 @@ class AdminPublisherDesignController extends Controller
      * Displays a form to edit an existing PublisherDesign entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -202,7 +203,7 @@ class AdminPublisherDesignController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:PublisherDesign')->find($id);
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity->setEditableContent($this->prepareEditContent($entity->getEditableContent()));
         $editForm = $this->createEditForm($entity);
@@ -217,7 +218,8 @@ class AdminPublisherDesignController extends Controller
     }
 
     /**
-     * @param  String $editableContent
+     * @param String $editableContent
+     *
      * @return String
      */
     private function prepareEditContent($editableContent)
@@ -267,8 +269,9 @@ class AdminPublisherDesignController extends Controller
     /**
      * Edits an existing PublisherDesigns entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -278,7 +281,7 @@ class AdminPublisherDesignController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:PublisherDesign')->find($id);
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
@@ -303,23 +306,25 @@ class AdminPublisherDesignController extends Controller
     }
 
     /**
-     * @param  Request                                            $request
-     * @param  PublisherDesign $entity
+     * @param Request         $request
+     * @param PublisherDesign $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws TokenNotFoundException
      */
     public function deleteAction(Request $request, PublisherDesign $entity)
     {
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $em = $this->getDoctrine()->getManager();
 
         $csrf = $this->get('security.csrf.token_manager');
-        $token = $csrf->getToken('ojs_admin_publisher_design' . $entity->getId());
+        $token = $csrf->getToken('ojs_admin_publisher_design'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

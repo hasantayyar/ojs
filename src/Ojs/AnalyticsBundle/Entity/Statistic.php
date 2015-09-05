@@ -3,12 +3,12 @@
 namespace Ojs\AnalyticsBundle\Entity;
 
 /**
- * Statistic
+ * Statistic.
  */
 abstract class Statistic
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -18,9 +18,9 @@ abstract class Statistic
     private $date;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -28,7 +28,7 @@ abstract class Statistic
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
      *
@@ -42,7 +42,7 @@ abstract class Statistic
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -51,4 +51,3 @@ abstract class Statistic
         return $this->date;
     }
 }
-

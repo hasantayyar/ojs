@@ -8,10 +8,11 @@ use Ojs\JournalBundle\Entity\IssueFile;
 class IssueFileStatisticRepository extends EntityRepository
 {
     /**
-     * Returns the download count of the given issue file on given dates
+     * Returns the download count of the given issue file on given dates.
      *
      * @param IssueFile $issueFile
-     * @param array $dates
+     * @param array     $dates
+     *
      * @return array
      */
     public function getTotalDownloads($issueFile, $dates)
@@ -24,18 +25,19 @@ class IssueFileStatisticRepository extends EntityRepository
             ->andWhere('file = :file')
             ->groupBy('file')
             ->setParameters([
-                'file'  => $issueFile,
-                'dates' => $dates
+                'file' => $issueFile,
+                'dates' => $dates,
             ]);
 
         return $builder->getQuery()->getResult();
     }
 
     /**
-     * Returns the download count of the given issue's files on given dates
+     * Returns the download count of the given issue's files on given dates.
      *
      * @param $issues
      * @param $dates
+     *
      * @return array
      */
     public function getTotalDownloadsOfAllFiles($issues, $dates = null)

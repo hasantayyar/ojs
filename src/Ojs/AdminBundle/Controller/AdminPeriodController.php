@@ -4,7 +4,6 @@ namespace Ojs\AdminBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Ojs\AdminBundle\Form\Type\PeriodType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\Period;
@@ -17,35 +16,34 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * Period controller.
- *
  */
 class AdminPeriodController extends Controller
 {
-
     /**
      * Lists all Period entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new Period())) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $source = new Entity('OjsJournalBundle:Period');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var Period $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var Period
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('period', $entity->getPeriod());
                 }
+
                 return $row;
             }
         );
@@ -53,7 +51,7 @@ class AdminPeriodController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_period_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_period_edit', 'id');
@@ -70,13 +68,14 @@ class AdminPeriodController extends Controller
     /**
      * Creates a new Period entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new Period())) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $entity = new Period();
         $form = $this->createCreateForm($entity);
@@ -125,12 +124,11 @@ class AdminPeriodController extends Controller
 
     /**
      * Displays a form to create a new Period entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new Period())) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $entity = new Period();
         $form = $this->createCreateForm($entity);
@@ -148,12 +146,13 @@ class AdminPeriodController extends Controller
      * Finds and displays a Period entity.
      *
      * @param Period $entity
+     *
      * @return Response
      */
     public function showAction(Period $entity)
     {
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $this->throw404IfNotFound($entity);
 
@@ -165,7 +164,7 @@ class AdminPeriodController extends Controller
             'OjsAdminBundle:AdminPeriod:show.html.twig',
             array(
                 'entity' => $entity,
-                'token'  => $token,
+                'token' => $token,
             )
         );
     }
@@ -174,12 +173,13 @@ class AdminPeriodController extends Controller
      * Displays a form to edit an existing Period entity.
      *
      * @param Period $entity
+     *
      * @return Response
      */
     public function editAction(Period $entity)
     {
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity);
@@ -220,7 +220,8 @@ class AdminPeriodController extends Controller
      * Edits an existing Period entity.
      *
      * @param Request $request
-     * @param Period $entity
+     * @param Period  $entity
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, Period $entity)
@@ -228,7 +229,7 @@ class AdminPeriodController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $this->throw404IfNotFound($entity);
 
@@ -252,7 +253,8 @@ class AdminPeriodController extends Controller
 
     /**
      * @param Request $request
-     * @param Period $entity
+     * @param Period  $entity
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, Period $entity)
@@ -260,14 +262,14 @@ class AdminPeriodController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page");
+            throw new AccessDeniedException('You are not authorized for view this page');
         }
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_period'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

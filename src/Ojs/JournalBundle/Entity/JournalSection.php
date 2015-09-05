@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * JournalSection
+ * JournalSection.
+ *
  * @GRID\Source(columns="id,title,allowIndex,hideTitle,journal")
  */
 class JournalSection extends AbstractTranslatable
@@ -18,7 +19,7 @@ class JournalSection extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      */
     protected $id;
@@ -32,17 +33,17 @@ class JournalSection extends AbstractTranslatable
      */
     private $title;
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="journalsection.allow_index")
      */
     private $allowIndex = true;
     /**
-     * @var boolean
+     * @var bool
      * @GRID\Column(title="journalsection.hide_title")
      */
     private $hideTitle = false;
     /**
-     * @var integer
+     * @var int
      */
     private $journalId;
     /**
@@ -62,9 +63,9 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -72,9 +73,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Add articles
+     * Add articles.
      *
-     * @param  Article $article
+     * @param Article $article
+     *
      * @return $this
      */
     public function addArticle(Article $article)
@@ -85,7 +87,7 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Remove articles
+     * Remove articles.
      *
      * @param Article $article
      */
@@ -95,7 +97,7 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get articles
+     * Get articles.
      *
      * @return Collection
      */
@@ -105,9 +107,9 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get allowIndex
+     * Get allowIndex.
      *
-     * @return boolean
+     * @return bool
      */
     public function getAllowIndex()
     {
@@ -115,9 +117,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Set allowIndex
+     * Set allowIndex.
      *
-     * @param  boolean        $allowIndex
+     * @param bool $allowIndex
+     *
      * @return JournalSection
      */
     public function setAllowIndex($allowIndex)
@@ -128,9 +131,9 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get hideTitle
+     * Get hideTitle.
      *
-     * @return boolean
+     * @return bool
      */
     public function getHideTitle()
     {
@@ -138,9 +141,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Set hideTitle
+     * Set hideTitle.
      *
-     * @param  boolean        $hideTitle
+     * @param bool $hideTitle
+     *
      * @return JournalSection
      */
     public function setHideTitle($hideTitle)
@@ -151,9 +155,9 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -161,9 +165,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer        $journalId
+     * @param int $journalId
+     *
      * @return JournalSection
      */
     public function setJournalId($journalId)
@@ -174,7 +179,7 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -184,9 +189,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal        $journal
+     * @param Journal $journal
+     *
      * @return JournalSection
      */
     public function setJournal($journal)
@@ -202,7 +208,7 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -212,9 +218,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return JournalSection
      */
     public function setTitle($title)
@@ -225,8 +232,10 @@ class JournalSection extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\JournalSectionTranslation
      */
     public function translate($locale = null)

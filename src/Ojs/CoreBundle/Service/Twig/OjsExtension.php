@@ -37,14 +37,14 @@ class OjsExtension extends \Twig_Extension
     private $requestStack;
 
     /**
-     * @param EntityManager $em
-     * @param Router $router
-     * @param TranslatorInterface $translator
-     * @param JournalService $journalService
+     * @param EntityManager         $em
+     * @param Router                $router
+     * @param TranslatorInterface   $translator
+     * @param JournalService        $journalService
      * @param TokenStorageInterface $tokenStorage
-     * @param Session $session
-     * @param RequestStack $requestStack
-     * @param null $cmsShowRoutes
+     * @param Session               $session
+     * @param RequestStack          $requestStack
+     * @param null                  $cmsShowRoutes
      */
     public function __construct(
         EntityManager $em = null,
@@ -71,7 +71,7 @@ class OjsExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('issn', array($this, 'issnValidateFilter')),
             new \Twig_SimpleFilter('pop', array($this, 'popFilter')),
-            new \Twig_SimpleFilter('sanitize', array($this, 'sanitize'))
+            new \Twig_SimpleFilter('sanitize', array($this, 'sanitize')),
         );
     }
 
@@ -116,13 +116,14 @@ class OjsExtension extends \Twig_Extension
         );
     }
 
-    public function sanitize($string) {
+    public function sanitize($string)
+    {
         $string = strip_tags($string, '<a><blockquote><b><u><i>');
         $dom = new \DOMDocument();
         $dom->loadHTML($string, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         foreach ($dom->getElementsByTagName('*') as $node) {
             /** @var \DOMElement  $node */
-            for ($i = $node->attributes->length - 1; $i >= 0; $i--) {
+            for ($i = $node->attributes->length - 1; $i >= 0; --$i) {
                 /** @var \DOMAttr $attribute */
                 $attribute = $node->attributes->item($i);
                 if ($node->nodeName == 'a') {
@@ -144,13 +145,12 @@ class OjsExtension extends \Twig_Extension
                             'prefetch',
                             'prev',
                             'search',
-                            'tag'
+                            'tag',
                         );
                         if (!in_array($attribute->value, $relValues, true)) {
                             $node->setAttributeNode(new \DOMAttr('rel', 'nofollow'));
                         }
-                    }
-                    elseif ($attribute->name === 'target') {
+                    } elseif ($attribute->name === 'target') {
                         $targetValues = array(
                             '_blank',
                             '_self',
@@ -160,8 +160,7 @@ class OjsExtension extends \Twig_Extension
                         if (!in_array($attribute->value, $targetValues, true)) {
                             $node->setAttributeNode(new \DOMAttr('target', '_blank'));
                         }
-                    }
-                    else {
+                    } else {
                         $node->removeAttributeNode($attribute);
                     }
                 } else {
@@ -169,6 +168,7 @@ class OjsExtension extends \Twig_Extension
                 }
             }
         }
+
         return $dom->saveHTML();
     }
     public function generateJournalUrl($journal)
@@ -177,8 +177,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * $list =  array( array('link'=>'...','title'=>'...'), array('link'=>'...','title'=>'...') )
-     * @param  null $list
+     * $list =  array( array('link'=>'...','title'=>'...'), array('link'=>'...','title'=>'...') ).
+     *
+     * @param null $list
+     *
      * @return string
      */
     public function generateBreadcrumb($list = null)
@@ -197,10 +199,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
+     * @param mixed $needle
+     * @param array $haystack
      *
-     * @param  mixed $needle
-     * @param  array $haystack
-     * @return boolean
+     * @return bool
      */
     public function hasId($needle, $haystack)
     {
@@ -219,6 +221,7 @@ class OjsExtension extends \Twig_Extension
     /**
      * @param $needle
      * @param $haystack
+     *
      * @return bool
      */
     public function hasIdInObjects($needle, $haystack)
@@ -235,6 +238,7 @@ class OjsExtension extends \Twig_Extension
 
     /**
      * @param $session_key
+     *
      * @return mixed
      */
     public function getSession($session_key)
@@ -243,7 +247,6 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     *
      * @return mixed
      */
     public function getUserJournals()
@@ -270,7 +273,6 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     *
      * @return mixed
      */
     public function getUserClients()
@@ -304,7 +306,9 @@ class OjsExtension extends \Twig_Extension
 
     /**
      * @todo reformat and validate given issn
-     * @param  string $issn
+     *
+     * @param string $issn
+     *
      * @return string
      */
     public function issnValidateFilter($issn)
@@ -325,7 +329,7 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Check if user is selected journal publisher manager
+     * Check if user is selected journal publisher manager.
      *
      * @return bool
      */
@@ -357,8 +361,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * return translated "yes" or "no" statement after checking $arg
+     * return translated "yes" or "no" statement after checking $arg.
+     *
      * @param $arg
+     *
      * @return string
      */
     public function printYesNo($arg)
@@ -371,8 +377,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Returns status color from given status integer value
-     * @param  integer $arg
+     * Returns status color from given status integer value.
+     *
+     * @param int $arg
+     *
      * @return string
      */
     public function statusColor($arg)
@@ -383,8 +391,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Returns status text string from given status integer value
-     * @param  integer $arg
+     * Returns status text string from given status integer value.
+     *
+     * @param int $arg
+     *
      * @return string
      */
     public function statusText($arg)
@@ -395,8 +405,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Return file type string from given filetype integer value
-     * @param  integer $arg
+     * Return file type string from given filetype integer value.
+     *
+     * @param int $arg
+     *
      * @return string
      */
     public function fileType($arg)
@@ -407,7 +419,8 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Get current user's api key
+     * Get current user's api key.
+     *
      * @return string
      */
     public function apiKey()
@@ -416,6 +429,7 @@ class OjsExtension extends \Twig_Extension
         if ($token && method_exists($token, 'getUser')) {
             /** @var User $user */
             $user = $token->getUser();
+
             return $user->getApiKey();
         } else {
             return false;
@@ -425,7 +439,9 @@ class OjsExtension extends \Twig_Extension
     /**
      * @param $object
      * @param $id
+     *
      * @return string
+     *
      * @throws ORMException
      */
     public function getObject($object, $id)
@@ -438,8 +454,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Basic encoding
+     * Basic encoding.
+     *
      * @param $string
+     *
      * @return string
      */
     public function decode($string)
@@ -453,8 +471,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Basic encoding
+     * Basic encoding.
+     *
      * @param $string
+     *
      * @return string
      */
     public function encode($string)
@@ -468,9 +488,11 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Removes specified element from a number indexed array
-     * @param  array $array
-     * @param  mixed $element
+     * Removes specified element from a number indexed array.
+     *
+     * @param array $array
+     * @param mixed $element
+     *
      * @return array
      */
     public function popFilter($array, $element)
@@ -485,9 +507,10 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Returns entity object from entity name
+     * Returns entity object from entity name.
      *
      * @param $entityObjectName
+     *
      * @return object
      */
     public function getEntityObject($entityObjectName)
@@ -498,7 +521,7 @@ class OjsExtension extends \Twig_Extension
     }
 
     /**
-     * Returns all AdminPage entities
+     * Returns all AdminPage entities.
      *
      * @return array
      */

@@ -1,7 +1,7 @@
 <?php
+
 namespace Ojs\JournalBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Ojs\CoreBundle\Entity\DisplayTrait;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
@@ -16,7 +16,8 @@ class ArticleTranslation extends AbstractTranslation
     protected $translatable;
 
     /**
-     * Original article title
+     * Original article title.
+     *
      * @var string
      */
     protected $title;

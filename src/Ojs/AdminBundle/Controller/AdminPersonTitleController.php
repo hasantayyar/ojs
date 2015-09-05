@@ -6,7 +6,6 @@ use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Ojs\CoreBundle\Controller\OjsController;
 use Symfony\Component\HttpFoundation\Request;
-
 use Ojs\JournalBundle\Entity\PersonTitle;
 use Ojs\AdminBundle\Form\Type\PersonTitleType;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -14,26 +13,23 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 /**
  * PersonTitle controller.
- *
  */
 class AdminPersonTitleController extends OjsController
 {
-
     /**
      * Lists all PersonTitle entities.
-     *
      */
     public function indexAction()
     {
         if (!$this->isGranted('VIEW', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $source = new Entity('OjsJournalBundle:PersonTitle');
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_admin_person_title_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_person_title_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_person_title_delete', 'id');
@@ -44,12 +40,11 @@ class AdminPersonTitleController extends OjsController
     }
     /**
      * Creates a new PersonTitle entity.
-     *
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity = new PersonTitle();
@@ -71,7 +66,7 @@ class AdminPersonTitleController extends OjsController
 
         return $this->render('OjsAdminBundle:AdminPersonTitle:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
@@ -96,31 +91,29 @@ class AdminPersonTitleController extends OjsController
 
     /**
      * Displays a form to create a new PersonTitle entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity = new PersonTitle();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('OjsAdminBundle:AdminPersonTitle:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * Finds and displays a PersonTitle entity.
-     *
      */
     public function showAction($id)
     {
         if (!$this->isGranted('VIEW', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -136,18 +129,17 @@ class AdminPersonTitleController extends OjsController
 
         return $this->render('OjsAdminBundle:AdminPersonTitle:show.html.twig', array(
             'entity' => $entity,
-            'token'  => $token
+            'token' => $token,
         ));
     }
 
     /**
      * Displays a form to edit an existing PersonTitle entity.
-     *
      */
     public function editAction($id)
     {
         if (!$this->isGranted('EDIT', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -164,19 +156,19 @@ class AdminPersonTitleController extends OjsController
             ->refreshToken('ojs_admin_person_title'.$entity->getId());
 
         return $this->render('OjsAdminBundle:AdminPersonTitle:edit.html.twig', array(
-            'entity'    => $entity,
-            'token'     => $token,
+            'entity' => $entity,
+            'token' => $token,
             'edit_form' => $editForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a PersonTitle entity.
-    *
-    * @param PersonTitle $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a PersonTitle entity.
+     *
+     * @param PersonTitle $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(PersonTitle $entity)
     {
         $form = $this->createForm(new PersonTitleType(), $entity, array(
@@ -190,12 +182,11 @@ class AdminPersonTitleController extends OjsController
     }
     /**
      * Edits an existing PersonTitle entity.
-     *
      */
     public function updateAction(Request $request, $id)
     {
         if (!$this->isGranted('EDIT', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -220,19 +211,18 @@ class AdminPersonTitleController extends OjsController
             ->refreshToken('ojs_admin_person_title'.$entity->getId());
 
         return $this->render('OjsAdminBundle:AdminPersonTitle:edit.html.twig', array(
-            'entity'    => $entity,
-            'token'     => $token,
+            'entity' => $entity,
+            'token' => $token,
             'edit_form' => $editForm->createView(),
         ));
     }
     /**
      * Deletes a PersonTitle entity.
-     *
      */
     public function deleteAction(Request $request, $id)
     {
         if (!$this->isGranted('DELETE', new PersonTitle())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -240,14 +230,14 @@ class AdminPersonTitleController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_person_title'.$entity->getId());
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token not found!");
+            throw new TokenNotFoundException('Token not found!');
         }
 
         $em->remove($entity);

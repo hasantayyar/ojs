@@ -14,7 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JournalsIndexType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

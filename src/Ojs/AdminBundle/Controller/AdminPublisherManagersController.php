@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * PublisherManagers controller.
- *
  */
 class AdminPublisherManagersController extends Controller
 {
@@ -30,7 +29,7 @@ class AdminPublisherManagersController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_publisher_managers_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_publisher_managers_edit', 'id');
@@ -47,13 +46,14 @@ class AdminPublisherManagersController extends Controller
     /**
      * Creates a new PublisherManagers entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new PublisherManagers())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherManagers();
         $form = $this->createCreateForm($entity);
@@ -67,7 +67,7 @@ class AdminPublisherManagersController extends Controller
             return $this->redirectToRoute(
                 'ojs_admin_publisher_managers_show',
                 [
-                    'id' => $entity->getId()
+                    'id' => $entity->getId(),
                 ]
             );
         }
@@ -105,12 +105,11 @@ class AdminPublisherManagersController extends Controller
 
     /**
      * Displays a form to create a new PublisherManagers entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new PublisherManagers())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherManagers();
         $form = $this->createCreateForm($entity);
@@ -128,13 +127,14 @@ class AdminPublisherManagersController extends Controller
      * Finds and displays a PublisherManagers entity.
      *
      * @param PublisherManagers $entity
+     *
      * @return Response
      */
     public function showAction(PublisherManagers $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $token = $this
@@ -151,13 +151,14 @@ class AdminPublisherManagersController extends Controller
      * Displays a form to edit an existing PublisherManagers entity.
      *
      * @param PublisherManagers $entity
+     *
      * @return Response
      */
     public function editAction(PublisherManagers $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
 
@@ -195,8 +196,9 @@ class AdminPublisherManagersController extends Controller
     /**
      * Edits an existing PublisherManagers entity.
      *
-     * @param Request $request
+     * @param Request           $request
      * @param PublisherManagers $entity
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, PublisherManagers $entity)
@@ -204,7 +206,7 @@ class AdminPublisherManagersController extends Controller
         $em = $this->getDoctrine()->getManager();
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
@@ -225,15 +227,17 @@ class AdminPublisherManagersController extends Controller
     }
 
     /**
-     * @param  Request $request
-     * @param  PublisherManagers $entity
+     * @param Request           $request
+     * @param PublisherManagers $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws TokenNotFoundException
      */
     public function deleteAction(Request $request, PublisherManagers $entity)
     {
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $em = $this->getDoctrine()->getManager();
@@ -241,7 +245,7 @@ class AdminPublisherManagersController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_publisher_managers'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

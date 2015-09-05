@@ -3,27 +3,27 @@
 namespace Ojs\JournalBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * JournalsIndex
+ * JournalsIndex.
+ *
  * @GRID\Source(columns="id,journal,journal_index.name,link")
  */
 class JournalsIndex
 {
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journal_index_id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $journal_id;
 
@@ -44,9 +44,9 @@ class JournalsIndex
     private $journal_index;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -54,9 +54,9 @@ class JournalsIndex
     }
 
     /**
-     * Get journal_index_id
+     * Get journal_index_id.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalIndexId()
     {
@@ -64,9 +64,10 @@ class JournalsIndex
     }
 
     /**
-     * Set journal_index_id
+     * Set journal_index_id.
      *
-     * @param  integer       $journalIndexId
+     * @param int $journalIndexId
+     *
      * @return JournalsIndex
      */
     public function setJournalIndexId($journalIndexId)
@@ -77,9 +78,9 @@ class JournalsIndex
     }
 
     /**
-     * Get journal_id
+     * Get journal_id.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -87,9 +88,10 @@ class JournalsIndex
     }
 
     /**
-     * Set journal_id
+     * Set journal_id.
      *
-     * @param  integer       $journalId
+     * @param int $journalId
+     *
      * @return JournalsIndex
      */
     public function setJournalId($journalId)
@@ -100,7 +102,7 @@ class JournalsIndex
     }
 
     /**
-     * Get link
+     * Get link.
      *
      * @return string
      */
@@ -110,9 +112,10 @@ class JournalsIndex
     }
 
     /**
-     * Set link
+     * Set link.
      *
-     * @param  string        $link
+     * @param string $link
+     *
      * @return JournalsIndex
      */
     public function setLink($link)
@@ -123,7 +126,7 @@ class JournalsIndex
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -133,9 +136,10 @@ class JournalsIndex
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal       $journal
+     * @param Journal $journal
+     *
      * @return JournalsIndex
      */
     public function setJournal(Journal $journal = null)
@@ -146,7 +150,7 @@ class JournalsIndex
     }
 
     /**
-     * Get journal_index
+     * Get journal_index.
      *
      * @return JournalIndex
      */
@@ -156,9 +160,10 @@ class JournalsIndex
     }
 
     /**
-     * Set journal_index
+     * Set journal_index.
      *
-     * @param  JournalIndex  $journalIndex
+     * @param JournalIndex $journalIndex
+     *
      * @return JournalsIndex
      */
     public function setJournalIndex(JournalIndex $journalIndex = null)

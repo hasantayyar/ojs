@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class JournalRepository extends EntityRepository
 {
-
     private $currentPage;
     private $count;
     private $filter = [];
@@ -19,7 +18,6 @@ class JournalRepository extends EntityRepository
     private $publisher = null;
 
     /**
-     * @return null
      */
     public function getPublisher()
     {
@@ -27,7 +25,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  null $publisher
+     * @param null $publisher
+     *
      * @return $this
      */
     public function setPublisher($publisher)
@@ -38,7 +37,7 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getOffset()
     {
@@ -46,7 +45,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  mixed $offset
+     * @param mixed $offset
+     *
      * @return $this
      */
     public function setOffset($offset)
@@ -57,7 +57,7 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getStart()
     {
@@ -65,7 +65,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  mixed $start
+     * @param mixed $start
+     *
      * @return $this
      */
     public function setStart($start)
@@ -97,7 +98,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return $this
      */
     public function setFilter(Request $request)
@@ -112,6 +114,7 @@ class JournalRepository extends EntityRepository
 
     /**
      * @param $filter
+     *
      * @return array|null
      */
     public function parseFilter($filter)
@@ -132,7 +135,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  mixed $count
+     * @param mixed $count
+     *
      * @return $this
      */
     public function setCount($count)
@@ -151,7 +155,7 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param integer $currentPage
+     * @param int $currentPage
      */
     public function setCurrentPage($currentPage)
     {
@@ -182,14 +186,14 @@ class JournalRepository extends EntityRepository
             $publishers = $this->getFilter()['publisher_type'];
             foreach ($publishers as $key => $publisher) {
                 $qb
-                    ->join('j.publisher', 'i_' . $key)
+                    ->join('j.publisher', 'i_'.$key)
                     ->join(
-                        'i_' . $key . '.publisher_type',
+                        'i_'.$key.'.publisher_type',
                         'it_'.$key,
                         'WITH',
-                        'it_' . $key . '.slug=:publisher_type_slug_' . $key
+                        'it_'.$key.'.slug=:publisher_type_slug_'.$key
                     )
-                    ->setParameter('publisher_type_slug_' . $key, $publisher);
+                    ->setParameter('publisher_type_slug_'.$key, $publisher);
             }
         }
         if ($this->getPublisher()) {
@@ -213,9 +217,11 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * Ban user
-     * @param  User    $user
-     * @param  Journal $journal
+     * Ban user.
+     *
+     * @param User    $user
+     * @param Journal $journal
+     *
      * @return bool
      */
     public function banUser(User $user, Journal $journal)
@@ -240,9 +246,11 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * Unban user
-     * @param  User    $user
-     * @param  Journal $journal
+     * Unban user.
+     *
+     * @param User    $user
+     * @param Journal $journal
+     *
      * @return bool
      */
     public function removeBannedUser(User $user, Journal $journal)
@@ -267,9 +275,11 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * Check ban status
-     * @param  User    $user
-     * @param  Journal $journal
+     * Check ban status.
+     *
+     * @param User    $user
+     * @param Journal $journal
+     *
      * @return bool
      */
     public function checkUserPermit(User $user, Journal $journal)
@@ -278,8 +288,10 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * Just get journal's last issue id
-     * @param  Journal $journal
+     * Just get journal's last issue id.
+     *
+     * @param Journal $journal
+     *
      * @return mixed
      */
     public function getLastIssueId($journal)
@@ -318,8 +330,10 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     *  return all issues as array as grouped by year
-     * @param  Journal $journal
+     *  return all issues as array as grouped by year.
+     *
+     * @param Journal $journal
+     *
      * @return array
      */
     public function getIssuesByYear(Journal $journal, $maxYearCount = 10)
@@ -329,7 +343,7 @@ class JournalRepository extends EntityRepository
         /* @var $issue Issue */
         $count = 0;
         foreach ($issues as $issue) {
-            if($issue->getPublished()){
+            if ($issue->getPublished()) {
                 if ($count++ > $maxYearCount) {
                     break;
                 }
@@ -343,8 +357,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
+     * @param Journal $journal
      *
-     * @param  Journal $journal
      * @return array
      */
     public function getVolumes(Journal $journal)
@@ -362,7 +376,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  array     $data
+     * @param array $data
+     *
      * @return Journal[]
      */
     public function getByIds(array $data)
@@ -377,7 +392,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  User      $user
+     * @param User $user
+     *
      * @return Journal[]
      */
     public function findAllByUser(User $user)
@@ -393,7 +409,8 @@ class JournalRepository extends EntityRepository
     }
 
     /**
-     * @param  User         $user
+     * @param User $user
+     *
      * @return Journal|null
      */
     public function findOneByUser(User $user)

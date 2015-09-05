@@ -15,12 +15,10 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 
 /**
  * Extending MutableAclProvider for JournalRoleSecurityIdentity support
- * Class SecurityIdentityRetrievalStrategy
- * @package Ojs\CoreBundle\Acl
+ * Class SecurityIdentityRetrievalStrategy.
  */
 class SecurityIdentityRetrievalStrategy extends BaseSecurityIdentityRetrievalStrategy
 {
-
     /**
      * @var RoleHierarchyInterface
      */

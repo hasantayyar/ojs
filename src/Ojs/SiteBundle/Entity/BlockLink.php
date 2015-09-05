@@ -3,17 +3,17 @@
 namespace Ojs\SiteBundle\Entity;
 
 /**
- * BlockLink
+ * BlockLink.
  */
 class BlockLink
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
-     * @var integer
+     * @var int
      */
     private $block_id;
 
@@ -35,17 +35,17 @@ class BlockLink
     /** @var  Post */
     private $post;
 
-    /** @var  integer */
+    /** @var  int */
     private $post_id;
     /**
-     * @var integer
+     * @var int
      */
     private $link_order;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -53,9 +53,10 @@ class BlockLink
     }
 
     /**
-     * Set id
+     * Set id.
      *
-     * @param  integer $id
+     * @param int $id
+     *
      * @return BlockLink
      */
     public function setId($id)
@@ -66,9 +67,9 @@ class BlockLink
     }
 
     /**
-     * Get block_id
+     * Get block_id.
      *
-     * @return integer
+     * @return int
      */
     public function getBlockId()
     {
@@ -76,9 +77,10 @@ class BlockLink
     }
 
     /**
-     * Set block_id
+     * Set block_id.
      *
-     * @param  integer $blockId
+     * @param int $blockId
+     *
      * @return BlockLink
      */
     public function setBlockId($blockId)
@@ -89,7 +91,7 @@ class BlockLink
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -99,9 +101,10 @@ class BlockLink
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return BlockLink
      */
     public function setText($text)
@@ -112,7 +115,7 @@ class BlockLink
     }
 
     /**
-     * Get url
+     * Get url.
      *
      * @return string
      */
@@ -122,9 +125,10 @@ class BlockLink
     }
 
     /**
-     * Set url
+     * Set url.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return BlockLink
      */
     public function setUrl($url)
@@ -135,7 +139,7 @@ class BlockLink
     }
 
     /**
-     * Get block
+     * Get block.
      *
      * @return \Ojs\SiteBundle\Entity\Block
      */
@@ -145,9 +149,10 @@ class BlockLink
     }
 
     /**
-     * Set block
+     * Set block.
      *
-     * @param  Block $block
+     * @param Block $block
+     *
      * @return BlockLink
      */
     public function setBlock(Block $block = null)
@@ -158,9 +163,9 @@ class BlockLink
     }
 
     /**
-     * Get link_order
+     * Get link_order.
      *
-     * @return integer
+     * @return int
      */
     public function getLinkOrder()
     {
@@ -168,9 +173,10 @@ class BlockLink
     }
 
     /**
-     * Set link_order
+     * Set link_order.
      *
-     * @param  integer $linkOrder
+     * @param int $linkOrder
+     *
      * @return BlockLink
      */
     public function setLinkOrder($linkOrder)
@@ -189,7 +195,8 @@ class BlockLink
     }
 
     /**
-     * @param  \Ojs\AdminBundle\Entity\AdminPost $post
+     * @param \Ojs\AdminBundle\Entity\AdminPost $post
+     *
      * @return $this
      */
     public function setPost($post)
@@ -208,7 +215,8 @@ class BlockLink
     }
 
     /**
-     * @param  int $post_id
+     * @param int $post_id
+     *
      * @return $this
      */
     public function setPostId($post_id)

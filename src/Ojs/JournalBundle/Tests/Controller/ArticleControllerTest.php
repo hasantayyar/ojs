@@ -9,7 +9,6 @@ use Ojs\CoreBundle\Tests\BaseTestCase;
  */
 class ArticleControllerTest extends BaseTestCase
 {
-
     public function testIndex()
     {
         $this->logIn();

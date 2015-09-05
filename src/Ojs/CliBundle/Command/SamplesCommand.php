@@ -18,7 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SamplesCommand extends ContainerAwareCommand
 {
-
     protected function configure()
     {
         $this
@@ -45,8 +44,8 @@ class SamplesCommand extends ContainerAwareCommand
         $post->setCurrentLocale('en');
         $post->setTitle('Welcome to OJS!');
         $post->setContent(
-            'Hello! We are now online and waiting for your submissions. ' .
-            'Our readers will be able to follow you and read your work ' .
+            'Hello! We are now online and waiting for your submissions. '.
+            'Our readers will be able to follow you and read your work '.
             'right after it gets published!'
         );
 

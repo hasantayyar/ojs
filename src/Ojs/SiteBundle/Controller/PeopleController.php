@@ -12,8 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class PeopleController extends Controller
 {
     /**
-     * @param  Request $request
-     * @param  int $page
+     * @param Request $request
+     * @param int     $page
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request, $page = 1)
@@ -89,7 +90,7 @@ class PeopleController extends Controller
             'role_filters' => $roleFilters,
             'subject_filters' => $subjectFilters,
             'journal_filters' => $journalFilters,
-            'page' => 'ojs_site_people_index'
+            'page' => 'ojs_site_people_index',
         ];
 
         return $this->render('OjsSiteBundle:People:index.html.twig', $data);

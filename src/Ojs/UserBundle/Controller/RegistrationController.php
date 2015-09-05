@@ -32,12 +32,11 @@ class RegistrationController extends  BaseController
                     'OjsSiteBundle:Site:not_available.html.twig',
                     [
                         'title' => 'title.register',
-                        'message' => 'message.registration_not_available'
+                        'message' => 'message.registration_not_available',
                     ]
                 );
             }
         }
-
 
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');

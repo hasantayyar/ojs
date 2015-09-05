@@ -6,7 +6,6 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class BaseTypeTestcase extends TypeTestCase
 {
-
     public $faker;
 
     public function __construct($name = null, $data = [], $dataName = '')
@@ -17,10 +16,11 @@ class BaseTypeTestcase extends TypeTestCase
     }
 
     /**
-     * Generate basic form submit test
+     * Generate basic form submit test.
+     *
      * @param  $type object
      * @param  $formData array
-     * @param  string $objectClass string
+     * @param string $objectClass string
      */
     public function basicSubmitTest($type, $formData, $objectClass, $options = [])
     {
@@ -42,9 +42,11 @@ class BaseTypeTestcase extends TypeTestCase
     }
 
     /**
-     * Create object from array values
+     * Create object from array values.
+     *
      * @param $data array
      * @param $class string
+     *
      * @return object
      */
     public function createObject($data, $class)
@@ -61,9 +63,11 @@ class BaseTypeTestcase extends TypeTestCase
     }
 
     /**
-     * Get array
+     * Get array.
+     *
      * @param $object object
      * @param $refer array
+     *
      * @return array
      */
     public function toArray($object, $refer)

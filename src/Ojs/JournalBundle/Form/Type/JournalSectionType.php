@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JournalSectionType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -23,14 +22,14 @@ class JournalSectionType extends AbstractType
                 'allowIndex',
                 'checkbox',
                 array(
-                    'label' => 'journalsection.hide_title'
+                    'label' => 'journalsection.hide_title',
                 )
             )
             ->add(
                 'hideTitle',
                 'checkbox',
                 array(
-                    'label' => 'journalsection.allow_index'
+                    'label' => 'journalsection.allow_index',
                 )
             );
     }

@@ -12,12 +12,11 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class SetupController extends Controller
 {
-
     public function setupAction()
     {
         $data = [];
         $data['data']['page'] = 'setup';
-        /**
+        /*
          * 1 - Run doctrine db schema
          * 2 - Show user form
          * 3 - Create user
@@ -39,7 +38,7 @@ class SetupController extends Controller
             ]
         )->createView();
 
-        return $this->render("OjsInstallerBundle:Default:setup.html.twig", $data);
+        return $this->render('OjsInstallerBundle:Default:setup.html.twig', $data);
     }
 
     private function insertRoles()

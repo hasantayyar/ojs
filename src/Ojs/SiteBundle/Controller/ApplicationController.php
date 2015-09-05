@@ -14,12 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Application controller.
- *
  */
 class ApplicationController extends Controller
 {
     /**
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function journalAction(Request $request)
@@ -35,7 +35,7 @@ class ApplicationController extends Controller
                     'OjsSiteBundle:Site:not_available.html.twig',
                     [
                         'title' => 'title.journal_application',
-                        'message' => 'message.application_not_available'
+                        'message' => 'message.application_not_available',
                     ]
                 );
             }
@@ -50,8 +50,8 @@ class ApplicationController extends Controller
             if ($form->isValid()) {
                 $application->setStatus(0);
 
-                /** @var JournalContact $contact */
-                if($application->getJournalContacts()){
+                /* @var JournalContact $contact */
+                if ($application->getJournalContacts()) {
                     foreach ($application->getJournalContacts() as $contact) {
                         $contact->setJournal($application);
                     }
@@ -86,7 +86,7 @@ class ApplicationController extends Controller
                     'OjsSiteBundle:Site:not_available.html.twig',
                     [
                         'title' => 'title.journal_application',
-                        'message' => 'message.application_not_available'
+                        'message' => 'message.application_not_available',
                     ]
                 );
             }
@@ -106,7 +106,7 @@ class ApplicationController extends Controller
             }
 
             $session = $this->get('session');
-            $session->getFlashBag()->add('error',$this->get('translator')
+            $session->getFlashBag()->add('error', $this->get('translator')
                 ->trans('An error has occured. Please check form and resubmit.'));
         }
 

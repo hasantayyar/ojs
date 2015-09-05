@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PublisherApplicationType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -43,8 +42,8 @@ class PublisherApplicationType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 200,
-                    'maxSize' => "[200, 200]"
-                )
+                    'maxSize' => '[200, 200]',
+                ),
             ))
             ->add('header', 'jb_crop_image_ajax', array(
                 'endpoint' => 'publisher',
@@ -52,8 +51,8 @@ class PublisherApplicationType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 960 / 200,
-                    'maxSize' => "[960, 200]"
-                )
+                    'maxSize' => '[960, 200]',
+                ),
             ))
             ->addEventSubscriber(new AddProvinceFieldSubscriber())
             ->addEventSubscriber(new AddCountryFieldSubscriber('/location/cities/'))

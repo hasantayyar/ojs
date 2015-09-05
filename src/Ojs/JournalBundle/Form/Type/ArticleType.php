@@ -11,7 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -21,23 +20,23 @@ class ArticleType extends AbstractType
         /** @var Journal $journal */
         $journal = $options['journal'];
         $builder
-            ->add('translations', 'a2lix_translations',[
+            ->add('translations', 'a2lix_translations', [
                 'fields' => [
                     'title' => [
-                        'field_type' => 'text'
+                        'field_type' => 'text',
                     ],
                     'subtitle' => [],
                     'subjects' => [],
                     'keywords' => [
                         'label' => 'keywords',
-                        'field_type' => 'tags'
+                        'field_type' => 'tags',
                     ],
                     'abstract' => [
                         'required' => false,
                         'attr' => array('class' => ' form-control wysihtml5'),
-                        'field_type' => 'textarea'
-                    ]
-                ]
+                        'field_type' => 'textarea',
+                    ],
+                ],
             ])
             ->add('titleTransliterated')
             ->add(
@@ -164,7 +163,7 @@ class ArticleType extends AbstractType
                 array(
                     'label' => 'article.type',
                     'class' => 'Ojs\JournalBundle\Entity\ArticleTypes',
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add('orderNum', 'integer', array('label' => 'order', 'required' => false))
@@ -191,8 +190,8 @@ class ArticleType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 960 / 200,
-                    'maxSize' => "[960, 200]"
-                )
+                    'maxSize' => '[960, 200]',
+                ),
             ))
             ;
     }

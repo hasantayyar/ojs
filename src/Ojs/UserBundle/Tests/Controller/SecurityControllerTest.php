@@ -13,16 +13,16 @@ class SecurityControllerTest extends BaseTestCase
 
         $this->isAccessible(['fos_user_registration_register']);
         $form = $this->crawler->selectButton('Register')->form();
-        $form['ojs_user_register[username]'] = "test-user";
-        $form['ojs_user_register[email]'] = "test@user.com";
-        $form['ojs_user_register[firstName]'] = "Aybars";
-        $form['ojs_user_register[lastName]'] = "Cengaver";
-        $form['ojs_user_register[password][first]'] = "cengaver";
-        $form['ojs_user_register[password][second]'] = "cengaver";
+        $form['ojs_user_register[username]'] = 'test-user';
+        $form['ojs_user_register[email]'] = 'test@user.com';
+        $form['ojs_user_register[firstName]'] = 'Aybars';
+        $form['ojs_user_register[lastName]'] = 'Cengaver';
+        $form['ojs_user_register[password][first]'] = 'cengaver';
+        $form['ojs_user_register[password][second]'] = 'cengaver';
         $this->client->submit($form);
         $result = $this->client->followRedirect();
         $this->assertEquals(1, $result->filter('html:contains("Success")')->count());
-        /** @var MessageDataCollector $mailCollector */
+        /* @var MessageDataCollector $mailCollector */
         //  $mailCollector = $this->client->getProfile()->getCollector('swiftmailer');
         //  $this->assertEquals(1,$mailCollector->getMessageCount());
     }

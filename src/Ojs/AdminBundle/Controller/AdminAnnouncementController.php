@@ -13,14 +13,13 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 class AdminAnnouncementController extends OjsController
 {
-
     /**
      * Lists all AdminAnnouncement entities.
      */
     public function indexAction()
     {
         if (!$this->isGranted('VIEW', new AdminAnnouncement())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $source = new Entity('OjsAdminBundle:AdminAnnouncement');
@@ -28,7 +27,7 @@ class AdminAnnouncementController extends OjsController
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_admin_announcement_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_announcement_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_announcement_delete', 'id');
@@ -44,7 +43,7 @@ class AdminAnnouncementController extends OjsController
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new AdminAnnouncement())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new AdminAnnouncement();
         $form = $this->createCreateForm($entity);
@@ -59,6 +58,7 @@ class AdminAnnouncementController extends OjsController
      * Creates a form to create a AdminAnnouncement entity.
      *
      * @param AdminAnnouncement $entity The entity
+     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(AdminAnnouncement $entity)
@@ -76,13 +76,14 @@ class AdminAnnouncementController extends OjsController
     /**
      * Creates a new AdminAnnouncement entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new AdminAnnouncement())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity = new AdminAnnouncement();
@@ -108,7 +109,8 @@ class AdminAnnouncementController extends OjsController
     /**
      * Finds and displays a AdminAnnouncement entity.
      *
-     * @param  AdminAnnouncement $entity
+     * @param AdminAnnouncement $entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(AdminAnnouncement $entity)
@@ -116,7 +118,7 @@ class AdminAnnouncementController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $token = $this
@@ -131,7 +133,9 @@ class AdminAnnouncementController extends OjsController
 
     /**
      * Displays a form to edit an existing AdminAnnouncement entity.
-     * @param  AdminAnnouncement $entity
+     *
+     * @param AdminAnnouncement $entity
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editAction(AdminAnnouncement $entity)
@@ -139,7 +143,7 @@ class AdminAnnouncementController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $token = $this
@@ -161,7 +165,8 @@ class AdminAnnouncementController extends OjsController
     /**
      * Creates a form to edit a AdminAnnouncement entity.
      *
-     * @param  AdminAnnouncement $entity The entity
+     * @param AdminAnnouncement $entity The entity
+     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createEditForm(AdminAnnouncement $entity)
@@ -182,8 +187,10 @@ class AdminAnnouncementController extends OjsController
 
     /**
      * Edits an existing AdminAnnouncement entity.
-     * @param  Request $request
-     * @param  AdminAnnouncement $entity
+     *
+     * @param Request           $request
+     * @param AdminAnnouncement $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction(Request $request, AdminAnnouncement $entity)
@@ -191,7 +198,7 @@ class AdminAnnouncementController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -215,8 +222,9 @@ class AdminAnnouncementController extends OjsController
     }
 
     /**
-     * @param  Request $request
-     * @param  AdminAnnouncement $entity
+     * @param Request           $request
+     * @param AdminAnnouncement $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, AdminAnnouncement $entity)
@@ -224,7 +232,7 @@ class AdminAnnouncementController extends OjsController
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -232,7 +240,7 @@ class AdminAnnouncementController extends OjsController
         $token = $csrf->getToken('ojs_admin_announcement'.$entity->getId());
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token not found!");
+            throw new TokenNotFoundException('Token not found!');
         }
 
         $em->remove($entity);

@@ -1,15 +1,16 @@
 <?php
+
 namespace Ojs\CoreBundle\Service;
 
 use Monolog\Logger;
 
 class OrcidService
 {
-    const PUBLIC_API = "https://pub.orcid.org";
-    const MEMBER_API = "https://orcid.org";
-    const SANDBOX_API = "https://api.sandbox.orcid.org";
-    const TOKEN_PATH = "oauth/token";
-    const AUTHORIZATION_PATH = "oauth/authorize";
+    const PUBLIC_API = 'https://pub.orcid.org';
+    const MEMBER_API = 'https://orcid.org';
+    const SANDBOX_API = 'https://api.sandbox.orcid.org';
+    const TOKEN_PATH = 'oauth/token';
+    const AUTHORIZATION_PATH = 'oauth/authorize';
 
     /**
      * @var Logger
@@ -48,7 +49,8 @@ class OrcidService
     }
 
     /**
-     * Get OrcidLogin Url
+     * Get OrcidLogin Url.
+     *
      * @return string
      */
     public function loginUrl()
@@ -89,7 +91,7 @@ class OrcidService
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSandbox()
     {
@@ -97,7 +99,7 @@ class OrcidService
     }
 
     /**
-     * @param boolean $sandbox
+     * @param bool $sandbox
      */
     public function setSandbox($sandbox)
     {

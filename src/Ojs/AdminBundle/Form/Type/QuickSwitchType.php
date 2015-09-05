@@ -35,5 +35,4 @@ class QuickSwitchType extends AbstractType
     {
         return 'ojs_admin_quickswitch';
     }
-
 }

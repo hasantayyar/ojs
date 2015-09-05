@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleSubmissionType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -22,32 +21,32 @@ class ArticleSubmissionType extends AbstractType
                 array(
                     'label' => 'article.type',
                     'class' => 'Ojs\JournalBundle\Entity\ArticleTypes',
-                    'required' => false
+                    'required' => false,
                 )
             )
-            ->add('translations', 'a2lix_translations',[
+            ->add('translations', 'a2lix_translations', [
                 'locales' => $options['locales'],
                 'default_locale' => $options['default_locale'],
                 'required_locales' => [$options['default_locale']],
                 'fields' => [
                     'title' => [
-                        'field_type' => 'text'
+                        'field_type' => 'text',
                     ],
                     'subtitle' => [],
                     'subjects' => [
                         'label' => 'subjects',
-                        'field_type' => 'tags'
+                        'field_type' => 'tags',
                     ],
                     'keywords' => [
                         'label' => 'keywords',
-                        'field_type' => 'tags'
+                        'field_type' => 'tags',
                     ],
                     'abstract' => [
                         'required' => false,
                         'attr' => array('class' => ' form-control wysihtml5'),
-                        'field_type' => 'textarea'
-                    ]
-                ]
+                        'field_type' => 'textarea',
+                    ],
+                ],
             ])
 
             ->add('citations', 'collection', array(
@@ -55,8 +54,8 @@ class ArticleSubmissionType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'options' => array(
-                        'citationTypes' => $options['citationTypes']
-                    )
+                        'citationTypes' => $options['citationTypes'],
+                    ),
                 )
             )
             ->add('articleFiles', 'collection', array(
@@ -64,8 +63,8 @@ class ArticleSubmissionType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'options' => array(
-                        'locales' => $options['locales']
-                    )
+                        'locales' => $options['locales'],
+                    ),
                 )
             )
             ->add('articleAuthors', 'collection', array(

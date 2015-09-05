@@ -10,6 +10,7 @@ class ArticleController extends Controller
      * @param $slug
      * @param $article_id
      * @param null $issue_id
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function articlePageAction($slug, $article_id, $issue_id = null)
@@ -25,14 +26,13 @@ class ArticleController extends Controller
         $data['page'] = 'journals';
         $data['blocks'] = $em->getRepository('OjsSiteBundle:Block')->journalBlocks($data['journal']);
         $data['journal']->setPublicURI($journalService->generateUrl($data['journal']));
-        $data['archive_uri'] = $this->generateUrl('ojs_archive_index',[
+        $data['archive_uri'] = $this->generateUrl('ojs_archive_index', [
             'slug' => $data['journal']->getSlug(),
             'publisher' => $data['journal']->getPublisher()->getSlug(),
         ], true);
         $data['token'] = $this
             ->get('security.csrf.token_manager')
             ->refreshToken('article_view');
-
 
         return $this->render('OjsSiteBundle:Article:article_page.html.twig', $data);
     }

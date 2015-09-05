@@ -12,7 +12,8 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class OrcidController extends Controller
 {
     /**
-     * @param  Request          $request
+     * @param Request $request
+     *
      * @return RedirectResponse
      */
     public function loginAction(Request $request)

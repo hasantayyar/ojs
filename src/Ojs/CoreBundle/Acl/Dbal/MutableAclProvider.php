@@ -97,7 +97,7 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
      *
      * @param string $classType
      *
-     * @return string|boolean
+     * @return string|bool
      */
     private function createOrRetrieveClassId($classType)
     {
@@ -147,8 +147,8 @@ class MutableAclProvider extends AclProvider implements MutableAclProviderInterf
      * Constructs the SQL for inserting an object identity.
      *
      * @param string $identifier
-     * @param int $classId
-     * @param bool $entriesInheriting
+     * @param int    $classId
+     * @param bool   $entriesInheriting
      *
      * @return string
      */
@@ -302,7 +302,7 @@ QUERY;
 
     /**
      * Deletes the security identity from the database.
-     * ACL entries have the CASCADE option on their foreign key so they will also get deleted
+     * ACL entries have the CASCADE option on their foreign key so they will also get deleted.
      *
      * @param SecurityIdentityInterface $sid
      *
@@ -331,7 +331,7 @@ QUERY;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getSelectSecurityIdentityIdSql(SecurityIdentityInterface $sid)
     {
@@ -653,14 +653,14 @@ QUERY;
      * This processes old entries changes on an ACE related property (classAces, or objectAces).
      *
      * @param string $name
-     * @param array $changes
+     * @param array  $changes
      */
     private function updateOldAceProperty($name, array $changes)
     {
         list($old, $new) = $changes;
         $currentIds = array();
 
-        for ($i = 0, $c = count($new); $i < $c; $i++) {
+        for ($i = 0, $c = count($new); $i < $c; ++$i) {
             $ace = $new[$i];
 
             if (null !== $ace->getId()) {
@@ -668,7 +668,7 @@ QUERY;
             }
         }
 
-        for ($i = 0, $c = count($old); $i < $c; $i++) {
+        for ($i = 0, $c = count($old); $i < $c; ++$i) {
             $ace = $old[$i];
 
             if (!isset($currentIds[$ace->getId()])) {
@@ -698,13 +698,13 @@ QUERY;
      * This processes old entries changes on an ACE related property (classFieldAces, or objectFieldAces).
      *
      * @param string $name
-     * @param array $changes
+     * @param array  $changes
      */
     private function updateOldFieldAceProperty($name, array $changes)
     {
         $currentIds = array();
         foreach ($changes[1] as $field => $new) {
-            for ($i = 0, $c = count($new); $i < $c; $i++) {
+            for ($i = 0, $c = count($new); $i < $c; ++$i) {
                 $ace = $new[$i];
 
                 if (null !== $ace->getId()) {
@@ -714,7 +714,7 @@ QUERY;
         }
 
         foreach ($changes[0] as $old) {
-            for ($i = 0, $c = count($old); $i < $c; $i++) {
+            for ($i = 0, $c = count($old); $i < $c; ++$i) {
                 $ace = $old[$i];
 
                 if (!isset($currentIds[$ace->getId()])) {
@@ -805,7 +805,7 @@ QUERY;
      * This processes new entries changes on an ACE related property (classAces, or objectAces).
      *
      * @param string $name
-     * @param array $changes
+     * @param array  $changes
      */
     private function updateNewAceProperty($name, array $changes)
     {
@@ -813,7 +813,7 @@ QUERY;
 
         $sids = new \SplObjectStorage();
         $classIds = new \SplObjectStorage();
-        for ($i = 0, $c = count($new); $i < $c; $i++) {
+        for ($i = 0, $c = count($new); $i < $c; ++$i) {
             $ace = $new[$i];
 
             if (null === $ace->getId()) {
@@ -853,7 +853,7 @@ QUERY;
 
                 $aceIdProperty = new \ReflectionProperty($ace, 'id');
                 $aceIdProperty->setAccessible(true);
-                $aceIdProperty->setValue($ace, (int)$aceId);
+                $aceIdProperty->setValue($ace, (int) $aceId);
             }
         }
     }
@@ -866,7 +866,7 @@ QUERY;
      *
      * @param SecurityIdentityInterface $sid
      *
-     * @return string|boolean
+     * @return string|bool
      */
     private function createOrRetrieveSecurityIdentityId(SecurityIdentityInterface $sid)
     {
@@ -917,16 +917,16 @@ QUERY;
     /**
      * Constructs the SQL for inserting an ACE.
      *
-     * @param int $classId
-     * @param int|null $objectIdentityId
+     * @param int         $classId
+     * @param int|null    $objectIdentityId
      * @param string|null $field
-     * @param int $aceOrder
-     * @param int $securityIdentityId
-     * @param string $strategy
-     * @param int $mask
-     * @param bool $granting
-     * @param bool $auditSuccess
-     * @param bool $auditFailure
+     * @param int         $aceOrder
+     * @param int         $securityIdentityId
+     * @param string      $strategy
+     * @param int         $mask
+     * @param bool        $granting
+     * @param bool        $auditSuccess
+     * @param bool        $auditFailure
      *
      * @return string
      */
@@ -962,7 +962,7 @@ QUERY;
             $query,
             $this->options['entry_table_name'],
             $classId,
-            null === $objectIdentityId ? 'NULL' : (int)$objectIdentityId,
+            null === $objectIdentityId ? 'NULL' : (int) $objectIdentityId,
             null === $field ? 'NULL' : $this->connection->quote($field),
             $aceOrder,
             $securityIdentityId,
@@ -977,10 +977,10 @@ QUERY;
     /**
      * Constructs the SQL for selecting an ACE.
      *
-     * @param int $classId
-     * @param int $oid
+     * @param int    $classId
+     * @param int    $oid
      * @param string $field
-     * @param int $order
+     * @param int    $order
      *
      * @return string
      */
@@ -992,7 +992,7 @@ QUERY;
             $classId,
             null === $oid ?
                 $this->connection->getDatabasePlatform()->getIsNullExpression('object_identity_id')
-                : 'object_identity_id = '.(int)$oid,
+                : 'object_identity_id = '.(int) $oid,
             null === $field ?
                 $this->connection->getDatabasePlatform()->getIsNullExpression('field_name')
                 : 'field_name = '.$this->connection->quote($field),
@@ -1011,7 +1011,7 @@ QUERY;
         $sids = new \SplObjectStorage();
         $classIds = new \SplObjectStorage();
         foreach ($changes[1] as $field => $new) {
-            for ($i = 0, $c = count($new); $i < $c; $i++) {
+            for ($i = 0, $c = count($new); $i < $c; ++$i) {
                 $ace = $new[$i];
 
                 if (null === $ace->getId()) {
@@ -1060,7 +1060,7 @@ QUERY;
     /**
      * Constructs the SQL for updating an object identity.
      *
-     * @param int $pk
+     * @param int   $pk
      * @param array $changes
      *
      * @throws \InvalidArgumentException
@@ -1082,10 +1082,10 @@ QUERY;
     }
 
     /**
-     * Updates a user security identity when the user's username changes
+     * Updates a user security identity when the user's username changes.
      *
      * @param UserSecurityIdentity $usid
-     * @param string $oldUsername
+     * @param string               $oldUsername
      */
     public function updateUserSecurityIdentity(UserSecurityIdentity $usid, $oldUsername)
     {
@@ -1096,7 +1096,7 @@ QUERY;
      * Constructs the SQL for updating a user security identity.
      *
      * @param UserSecurityIdentity $usid
-     * @param string $oldUsername
+     * @param string               $oldUsername
      *
      * @return string
      */

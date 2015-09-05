@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\SiteBundle\Controller;
 
 use Ojs\CoreBundle\Controller\OjsController as Controller;
@@ -30,7 +31,7 @@ class SitemapController extends Controller
             $siteMap
                 ->add(
                     $request->getSchemeAndHttpHost()
-                    . $router->generate($map, ['_format' => 'xml']),
+                    .$router->generate($map, ['_format' => 'xml']),
                     (new \DateTime())->format('Y-m-d')
                 );
         }
@@ -78,7 +79,7 @@ class SitemapController extends Controller
         );
 
         foreach ($journals as $journal) {
-            /** @var Journal $journal */
+            /* @var Journal $journal */
             $siteMap->add(
                 $router->generate(
                     'ojs_journal_index',
@@ -110,7 +111,7 @@ class SitemapController extends Controller
 
         foreach ($subjects as $subject) {
             $siteMapIndex->add(
-                $request->getSchemeAndHttpHost() .
+                $request->getSchemeAndHttpHost().
                 $router->generate(
                     'ojs_subject_sitemap',
                     ['subject' => $subject->getSlug(), 'publisher' => $publisher, '_format' => 'xml']
@@ -128,10 +129,10 @@ class SitemapController extends Controller
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
         /** @var Journal $journal */
-        $journal = $em->getRepository("OjsJournalBundle:Journal")->findOneBy(['slug' => $journal]);
+        $journal = $em->getRepository('OjsJournalBundle:Journal')->findOneBy(['slug' => $journal]);
 
         if (!$journal) {
-            throw new \Exception("Journal not found!");
+            throw new \Exception('Journal not found!');
         }
         $router = $this->get('router');
         $maps = [
@@ -143,7 +144,7 @@ class SitemapController extends Controller
         foreach ($maps as $map) {
             $siteMapIndex->add(
                 $request->getSchemeAndHttpHost()
-                . $router->generate(
+                .$router->generate(
                     $map,
                     [
                         'journal' => $journal->getSlug(),
@@ -162,7 +163,7 @@ class SitemapController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         /** @var Journal $journal */
-        $journal = $em->getRepository("OjsJournalBundle:Journal")->findOneBy(['slug' => $journal]);
+        $journal = $em->getRepository('OjsJournalBundle:Journal')->findOneBy(['slug' => $journal]);
 
         $siteMap = new Sitemap();
         $router = $this->get('router');
@@ -176,7 +177,7 @@ class SitemapController extends Controller
         foreach ($maps as $map) {
             $siteMap->add(
                 $request->getSchemeAndHttpHost()
-                . $router->generate(
+                .$router->generate(
                     $map,
                     ['slug' => $journal->getSlug(), 'publisher' => $journal->getPublisher()->getSlug()]
                 ),
@@ -200,9 +201,9 @@ class SitemapController extends Controller
         /** @var Issue $issue $lastIssue */
         $issue = $journal->getIssues()->last();
         foreach ($issue->getArticles() as $article) {
-            /** @var Article $article */
+            /* @var Article $article */
             $siteMap->add(
-                $request->getSchemeAndHttpHost() .
+                $request->getSchemeAndHttpHost().
                 $router->generate(
                     'ojs_article_page',
                     [
@@ -246,7 +247,7 @@ class SitemapController extends Controller
         foreach ($journals as $journal) {
             $siteMap->add(
                 $request->getSchemeAndHttpHost()
-                . $router->generate(
+                .$router->generate(
                     'ojs_journal_sitemap',
                     [
                         'journal' => $journal->getId(),
@@ -282,10 +283,10 @@ class SitemapController extends Controller
             $publisher->getUpdated()->format('Y-m-d')
         );
         foreach ($journals as $journal) {
-            /** @var Journal $journal */
+            /* @var Journal $journal */
             $siteMap->add(
                 $request->getSchemeAndHttpHost()
-                . $router->generate(
+                .$router->generate(
                     'ojs_journal_sitemap',
                     [
                         'journal' => $journal->getSlug(),
@@ -308,9 +309,9 @@ class SitemapController extends Controller
         $em = $this->getDoctrine()->getManager();
         $publishers = $em->getRepository('OjsJournalBundle:Publisher')->findAll();
         foreach ($publishers as $publisher) {
-            /** @var Publisher $publisher */
+            /* @var Publisher $publisher */
             $siteMapIndex->add(
-                $request->getScheme() . ':' . $router->generate(
+                $request->getScheme().':'.$router->generate(
                     'ojs_publisher_sitemap',
                     [
                         'publisher' => $publisher->getSlug(),
@@ -335,10 +336,10 @@ class SitemapController extends Controller
         $articles = $journal->getArticles();
 
         foreach ($articles as $article) {
-            /** @var Article $article */
+            /* @var Article $article */
             $siteMap
                 ->add(
-                    $request->getSchemeAndHttpHost() . $router->generate(
+                    $request->getSchemeAndHttpHost().$router->generate(
                         'ojs_article_page',
                         [
                             'slug' => $journal->getSlug(),
@@ -367,7 +368,7 @@ class SitemapController extends Controller
         ];
         foreach ($maps as $map) {
             $siteMap->add(
-                $request->getSchemeAndHttpHost() .
+                $request->getSchemeAndHttpHost().
                 $router->generate($map),
                 (new \DateTime())->format('Y-m-d')
             );

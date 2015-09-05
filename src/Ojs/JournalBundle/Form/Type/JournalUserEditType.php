@@ -14,6 +14,7 @@ class JournalUserEditType extends AbstractType
 
     /**
      * Returns the parent of this type.
+     *
      * @return string The parent of this type
      */
     public function getParent()
@@ -23,6 +24,7 @@ class JournalUserEditType extends AbstractType
 
     /**
      * Returns the name of this type.
+     *
      * @return string The name of this type
      */
     public function getName()

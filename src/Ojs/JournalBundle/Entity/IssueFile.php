@@ -11,7 +11,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * IssueFile
+ * IssueFile.
+ *
  * @GRID\Source(columns="id,title,langCode,file.name")
  * @ExclusionPolicy("all")
  */
@@ -20,7 +21,7 @@ class IssueFile extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
@@ -29,7 +30,7 @@ class IssueFile extends AbstractTranslatable
      */
     protected $translations;
     /**
-     * @var integer
+     * @var int
      */
     private $type;
     /**
@@ -37,7 +38,7 @@ class IssueFile extends AbstractTranslatable
      */
     private $file;
     /**
-     * @var integer
+     * @var int
      */
     private $version;
     /**
@@ -73,9 +74,9 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -83,9 +84,9 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get type
+     * Get type.
      *
-     * @return integer
+     * @return int
      */
     public function getType()
     {
@@ -93,9 +94,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param integer $type
+     * @param int $type
+     *
      * @return IssueFile
      */
     public function setType($type)
@@ -106,7 +108,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get file
+     * Get file.
      *
      * @return string
      */
@@ -116,9 +118,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set file
+     * Set file.
      *
      * @param string $file
+     *
      * @return IssueFile
      */
     public function setFile($file)
@@ -129,9 +132,9 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get version
+     * Get version.
      *
-     * @return integer
+     * @return int
      */
     public function getVersion()
     {
@@ -139,9 +142,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set version
+     * Set version.
      *
-     * @param integer $version
+     * @param int $version
+     *
      * @return IssueFile
      */
     public function setVersion($version)
@@ -152,7 +156,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get keywords
+     * Get keywords.
      *
      * @return string
      */
@@ -162,9 +166,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set keywords
+     * Set keywords.
      *
      * @param string $keywords
+     *
      * @return IssueFile
      */
     public function setKeywords($keywords)
@@ -175,7 +180,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -185,9 +190,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set description
+     * Set description.
      *
      * @param string $description
+     *
      * @return IssueFile
      */
     public function setDescription($description)
@@ -198,8 +204,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\IssueFileTranslation
      */
     public function translate($locale = null)
@@ -229,7 +237,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -239,9 +247,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
      * @param string $title
+     *
      * @return IssueFile
      */
     public function setTitle($title)
@@ -252,7 +261,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get langCode
+     * Get langCode.
      *
      * @return string
      */
@@ -262,9 +271,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set langCode
+     * Set langCode.
      *
      * @param string $langCode
+     *
      * @return IssueFile
      */
     public function setLangCode($langCode)
@@ -275,7 +285,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Get issue
+     * Get issue.
      *
      * @return Issue
      */
@@ -285,9 +295,10 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set issue
+     * Set issue.
      *
      * @param Issue $issue
+     *
      * @return IssueFile
      */
     public function setIssue(Issue $issue = null)
@@ -298,7 +309,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -328,7 +339,7 @@ class IssueFile extends AbstractTranslatable
     }
 
     /**
-     * Returns the issue's download count
+     * Returns the issue's download count.
      *
      * @return int
      */

@@ -3,13 +3,12 @@
 namespace Ojs\CoreBundle\Entity;
 
 /**
- * Class DisplayTrait
- * @package Ojs\CoreBundle\Entity
+ * Class DisplayTrait.
  */
 trait DisplayTrait
 {
     /**
-     * get object vars
+     * get object vars.
      *
      * @return array
      */

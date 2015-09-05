@@ -7,8 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SubmissionChecklistType
- * @package Ojs\JournalBundle\Form\Type
+ * Class SubmissionChecklistType.
  */
 class SubmissionChecklistType extends AbstractType
 {

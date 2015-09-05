@@ -6,15 +6,14 @@ use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 
 /**
- * CliLog
+ * CliLog.
  */
 class CliLog implements Translatable
 {
-
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -29,13 +28,14 @@ class CliLog implements Translatable
     private $output;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $isSuccess;
 
     /**
-     * Get id
-     * @return integer
+     * Get id.
+     *
+     * @return int
      */
     public function getId()
     {
@@ -43,7 +43,7 @@ class CliLog implements Translatable
     }
 
     /**
-     * Get command
+     * Get command.
      *
      * @return string
      */
@@ -53,8 +53,10 @@ class CliLog implements Translatable
     }
 
     /**
-     * Set command
-     * @param  string $command
+     * Set command.
+     *
+     * @param string $command
+     *
      * @return CliLog
      */
     public function setCommand($command)
@@ -65,7 +67,8 @@ class CliLog implements Translatable
     }
 
     /**
-     * Get output
+     * Get output.
+     *
      * @return string
      */
     public function getOutput()
@@ -74,8 +77,10 @@ class CliLog implements Translatable
     }
 
     /**
-     * Set output
-     * @param  string $output
+     * Set output.
+     *
+     * @param string $output
+     *
      * @return CliLog
      */
     public function setOutput($output)
@@ -86,8 +91,9 @@ class CliLog implements Translatable
     }
 
     /**
-     * Get isSuccess
-     * @return boolean
+     * Get isSuccess.
+     *
+     * @return bool
      */
     public function getIsSuccess()
     {
@@ -95,8 +101,10 @@ class CliLog implements Translatable
     }
 
     /**
-     * Set isSuccess
-     * @param  boolean $isSuccess
+     * Set isSuccess.
+     *
+     * @param bool $isSuccess
+     *
      * @return CliLog
      */
     public function setIsSuccess($isSuccess)

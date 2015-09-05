@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * MailTemplate
+ * MailTemplate.
+ *
  * @GRID\Source(columns="id,journal,type,languages.code, subject")
  */
 class MailTemplate implements Translatable
@@ -23,12 +23,12 @@ class MailTemplate implements Translatable
      */
     protected $languages;
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      */
     private $id;
     /**
-     * @var integer
+     * @var int
      */
     private $journalId;
     /**
@@ -49,7 +49,6 @@ class MailTemplate implements Translatable
      */
     private $template;
     /**
-     *
      * @var Journal
      * @GRID\Column(title="journal")
      */
@@ -61,9 +60,9 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -71,9 +70,9 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -81,9 +80,10 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer      $journalId
+     * @param int $journalId
+     *
      * @return MailTemplate
      */
     public function setJournalId($journalId)
@@ -94,7 +94,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -104,9 +104,10 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param  string       $type
+     * @param string $type
+     *
      * @return MailTemplate
      */
     public function setType($type)
@@ -117,7 +118,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get subject
+     * Get subject.
      *
      * @return string
      */
@@ -127,9 +128,10 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set subject
+     * Set subject.
      *
-     * @param  string       $subject
+     * @param string $subject
+     *
      * @return MailTemplate
      */
     public function setSubject($subject)
@@ -140,7 +142,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get lang
+     * Get lang.
      *
      * @return string
      */
@@ -150,9 +152,10 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set lang
+     * Set lang.
      *
-     * @param  string       $lang
+     * @param string $lang
+     *
      * @return MailTemplate
      */
     public function setLang($lang)
@@ -163,7 +166,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get template
+     * Get template.
      *
      * @return string
      */
@@ -173,9 +176,10 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set template
+     * Set template.
      *
-     * @param  string       $template
+     * @param string $template
+     *
      * @return MailTemplate
      */
     public function setTemplate($template)
@@ -186,7 +190,6 @@ class MailTemplate implements Translatable
     }
 
     /**
-     *
      * @return Journal
      */
     public function getJournal()
@@ -195,8 +198,8 @@ class MailTemplate implements Translatable
     }
 
     /**
+     * @param Journal $journal
      *
-     * @param  Journal      $journal
      * @return MailTemplate
      */
     public function setJournal(Journal $journal)
@@ -207,9 +210,10 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Add languages
+     * Add languages.
      *
-     * @param  Lang         $languages
+     * @param Lang $languages
+     *
      * @return MailTemplate
      */
     public function addLanguage(Lang $languages)
@@ -220,7 +224,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Remove languages
+     * Remove languages.
      *
      * @param Lang $languages
      */
@@ -230,7 +234,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Get languages
+     * Get languages.
      *
      * @return Collection
      */
@@ -240,7 +244,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -254,7 +258,7 @@ class MailTemplate implements Translatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

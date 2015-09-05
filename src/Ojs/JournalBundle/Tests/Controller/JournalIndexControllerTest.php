@@ -5,8 +5,7 @@ namespace Ojs\JournalBundle\Tests\Controller;
 use Ojs\CoreBundle\Tests\BaseTestCase;
 
 /**
- * Class JournalIndexControllerTest
- * @package Ojs\JournalBundle\Tests\Controller
+ * Class JournalIndexControllerTest.
  */
 class JournalIndexControllerTest extends BaseTestCase
 {
@@ -15,9 +14,9 @@ class JournalIndexControllerTest extends BaseTestCase
         $this->logIn();
         $crawler = $this->client->request('GET', $this->router->generate('ojs_admin_index_new'));
         $form = $crawler->selectButton('Create')->form();
-        $form['ojs_journalbundle_journalindex[name]'] = "Demo Index";
-        $form['ojs_journalbundle_journalindex[status]'] = "1";
-        $form['ojs_journalbundle_journalindex[logo]'] = "image.jpg";
+        $form['ojs_journalbundle_journalindex[name]'] = 'Demo Index';
+        $form['ojs_journalbundle_journalindex[status]'] = '1';
+        $form['ojs_journalbundle_journalindex[logo]'] = 'image.jpg';
         $crawler = $this->client->submit($form);
         $this->assertTrue((boolean) preg_match('~(Redirecting to .*)~', $crawler->text()));
     }

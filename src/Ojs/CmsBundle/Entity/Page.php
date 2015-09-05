@@ -9,14 +9,15 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * Page
+ * Page.
+ *
  * @GRID\Source(columns="id, title, body")
  */
 abstract class Page extends AbstractTranslatable
 {
     use GenericEntityTrait;
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
@@ -40,7 +41,7 @@ abstract class Page extends AbstractTranslatable
     private $slug;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -48,9 +49,9 @@ abstract class Page extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -58,7 +59,7 @@ abstract class Page extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -68,9 +69,10 @@ abstract class Page extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Page
      */
     public function setTitle($title)
@@ -81,8 +83,10 @@ abstract class Page extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\CmsBundle\Entity\PageTranslation
      */
     public function translate($locale = null)
@@ -112,7 +116,7 @@ abstract class Page extends AbstractTranslatable
     }
 
     /**
-     * Get body
+     * Get body.
      *
      * @return string
      */
@@ -122,9 +126,10 @@ abstract class Page extends AbstractTranslatable
     }
 
     /**
-     * Set body
+     * Set body.
      *
-     * @param  string $body
+     * @param string $body
+     *
      * @return Page
      */
     public function setBody($body)

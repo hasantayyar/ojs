@@ -7,7 +7,7 @@ use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Ojs\UserBundle\Entity\User;
 
 /**
- * Journal Setup Progress
+ * Journal Setup Progress.
  */
 class JournalSetupProgress implements Translatable
 {
@@ -19,7 +19,7 @@ class JournalSetupProgress implements Translatable
     private $journal;
 
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -34,9 +34,9 @@ class JournalSetupProgress implements Translatable
     private $currentStep;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -44,9 +44,9 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Get currentStep
+     * Get currentStep.
      *
-     * @return integer
+     * @return int
      */
     public function getCurrentStep()
     {
@@ -54,9 +54,10 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Set currentStep
+     * Set currentStep.
      *
-     * @param  string         $currentStep
+     * @param string $currentStep
+     *
      * @return $this
      */
     public function setCurrentStep($currentStep)
@@ -67,7 +68,7 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -77,9 +78,10 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal        $journal
+     * @param Journal $journal
+     *
      * @return JournalSetupProgress
      */
     public function setJournal(Journal $journal)
@@ -90,7 +92,7 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -100,9 +102,10 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  User     $user
+     * @param User $user
+     *
      * @return $this
      */
     public function setUser(User $user)
@@ -113,7 +116,7 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -127,7 +130,7 @@ class JournalSetupProgress implements Translatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

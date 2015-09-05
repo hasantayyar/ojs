@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\SiteBundle\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -7,7 +8,6 @@ use Ojs\UserBundle\Entity\User;
 
 class CommonExtension extends \Twig_Extension
 {
-
     /**
      * @var EntityManagerInterface
      */
@@ -43,7 +43,8 @@ class CommonExtension extends \Twig_Extension
 
     /**
      * @param $id
-     * @param  bool        $object
+     * @param bool $object
+     *
      * @return User|string
      */
     public function getUserByIdOrUsername($id, $object = false)

@@ -5,27 +5,26 @@ namespace Ojs\JournalBundle\Entity;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * CitationSetting
+ * CitationSetting.
+ *
  * @GRID\Source(columns="id,setting,value")
  */
 class CitationSetting implements Translatable
 {
     use GenericEntityTrait;
     /**
-     *
      * @var Citation
      */
     protected $citation;
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="citation.id")
      */
     private $id;
     /**
-     * @var integer
+     * @var int
      */
     private $citationId;
     /**
@@ -40,7 +39,6 @@ class CitationSetting implements Translatable
     private $value;
 
     /**
-     *
      * @return Citation
      */
     public function getCitation()
@@ -49,8 +47,8 @@ class CitationSetting implements Translatable
     }
 
     /**
+     * @param Citation $citation
      *
-     * @param  Citation        $citation
      * @return CitationSetting
      */
     public function setCitation($citation)
@@ -61,9 +59,9 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -71,9 +69,9 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Get citationId
+     * Get citationId.
      *
-     * @return integer
+     * @return int
      */
     public function getCitationId()
     {
@@ -81,9 +79,10 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Set citationId
+     * Set citationId.
      *
-     * @param  integer         $citationId
+     * @param int $citationId
+     *
      * @return CitationSetting
      */
     public function setCitationId($citationId)
@@ -94,7 +93,7 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Get setting
+     * Get setting.
      *
      * @return string
      */
@@ -104,9 +103,10 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Set setting
+     * Set setting.
      *
-     * @param  string          $setting
+     * @param string $setting
+     *
      * @return CitationSetting
      */
     public function setSetting($setting)
@@ -117,7 +117,7 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -127,9 +127,10 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param  string          $value
+     * @param string $value
+     *
      * @return CitationSetting
      */
     public function setValue($value)
@@ -140,7 +141,7 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -154,7 +155,7 @@ class CitationSetting implements Translatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

@@ -29,6 +29,7 @@ class JournalSetupController extends Controller
     /**
      * Admin can create new journal.
      * admin can resume from where he/she left.
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function indexAction()
@@ -37,7 +38,7 @@ class JournalSetupController extends Controller
         $em = $this->getDoctrine()->getManager();
         $journalCreatePermission = $this->isGranted('CREATE', new Journal());
         /** @var Journal $selectedJournal */
-        $selectedJournal = $this->get("ojs.journal_service")->getSelectedJournal();
+        $selectedJournal = $this->get('ojs.journal_service')->getSelectedJournal();
         $selectedJournalEditPermission = $this->isGranted('EDIT', $selectedJournal);
 
         if (!$journalCreatePermission && !$selectedJournalEditPermission) {
@@ -66,10 +67,9 @@ class JournalSetupController extends Controller
             }
         } elseif (!$selectedJournal->getSetupStatus()) {
 
-            /** @var JournalSetupProgress $userSetup */
+            /* @var JournalSetupProgress $userSetup */
             $journalSetup = $em->getRepository('OjsJournalBundle:JournalSetupProgress')->findOneByJournal($selectedJournal);
         } elseif ($selectedJournal->getSetupStatus()) {
-
             $selectedJournal->setSetupStatus(false);
             $journalSetup->setUser($user);
             $journalSetup->setJournal($selectedJournal);
@@ -77,20 +77,23 @@ class JournalSetupController extends Controller
             $em->persist($journalSetup);
             $em->flush();
         }
+
         return $this->redirect(
             $this->generateUrl(
                 'ojs_journal_setup_resume',
                 [
                     'setupId' => $journalSetup->getId(),
                 ]
-            ) . '#' .
+            ).'#'.
             $journalSetup->getCurrentStep()
         );
     }
 
     /**
      * if admin have not finished journal setup resumes from there.
+     *
      * @param $setupId
+     *
      * @return Response
      */
     public function resumeAction($setupId)
@@ -105,12 +108,12 @@ class JournalSetupController extends Controller
         $stepsForms = array();
         //for 6 step create update forms
         foreach (range(1, 6) as $stepValue) {
-            $stepsForms['step' . $stepValue] = $this->createFormView($journal, $stepValue);
+            $stepsForms['step'.$stepValue] = $this->createFormView($journal, $stepValue);
         }
         $yamlParser = new Parser();
         $default_pages = $yamlParser->parse(
             file_get_contents(
-                $this->container->getParameter('kernel.root_dir') .
+                $this->container->getParameter('kernel.root_dir').
                 '/../src/Ojs/JournalBundle/Resources/data/pagetemplates.yml'
             )
         );
@@ -129,11 +132,12 @@ class JournalSetupController extends Controller
     /**
      * @param $setup
      * @param $stepCount
+     *
      * @return FormView
      */
     private function createFormView($setup, $stepCount)
     {
-        $stepClassName = 'Ojs\JournalBundle\Form\Type\JournalSetup\Step' . $stepCount;
+        $stepClassName = 'Ojs\JournalBundle\Form\Type\JournalSetup\Step'.$stepCount;
 
         return $this->createForm(
             new $stepClassName(),
@@ -148,6 +152,7 @@ class JournalSetupController extends Controller
      * @param Request $request
      * @param $setupId
      * @param $step
+     *
      * @return JsonResponse
      */
     public function stepControlAction(Request $request, $setupId, $step)
@@ -171,9 +176,11 @@ class JournalSetupController extends Controller
     }
 
     /**
-     * Journal Setup Wizard Step 1 - Saves Journal 's step 1 data
-     * @param  Request $request
+     * Journal Setup Wizard Step 1 - Saves Journal 's step 1 data.
+     *
+     * @param Request $request
      * @param $setupId
+     *
      * @return JsonResponse
      */
     private function step1Control(Request $request, $setupId)
@@ -191,6 +198,7 @@ class JournalSetupController extends Controller
         if ($step1Form->isValid()) {
             $setup->setCurrentStep(2);
             $em->flush();
+
             return new JsonResponse(['success' => '1']);
         } else {
             return new JsonResponse(['success' => '0']);
@@ -198,9 +206,11 @@ class JournalSetupController extends Controller
     }
 
     /**
-     * Journal Setup Wizard Step 2 - Saves Journal 's step 2 data
-     * @param  Request $request
-     * @param  null $setupId
+     * Journal Setup Wizard Step 2 - Saves Journal 's step 2 data.
+     *
+     * @param Request $request
+     * @param null    $setupId
+     *
      * @return JsonResponse
      */
     private function step2Control(Request $request, $setupId)
@@ -219,6 +229,7 @@ class JournalSetupController extends Controller
         if ($step2Form->isValid()) {
             $setup->setCurrentStep(3);
             $em->flush();
+
             return new JsonResponse(['success' => '1']);
         } else {
             return new JsonResponse(['success' => '0']);
@@ -226,9 +237,11 @@ class JournalSetupController extends Controller
     }
 
     /**
-     * Journal Setup Wizard Step 3 - Saves Journal 's step 3 data
-     * @param  Request $request
-     * @param  null $setupId
+     * Journal Setup Wizard Step 3 - Saves Journal 's step 3 data.
+     *
+     * @param Request $request
+     * @param null    $setupId
+     *
      * @return JsonResponse
      */
     private function step3Control(Request $request, $setupId)
@@ -246,6 +259,7 @@ class JournalSetupController extends Controller
         if ($step3Form->isValid()) {
             $setup->setCurrentStep(4);
             $em->flush();
+
             return new JsonResponse(['success' => '1']);
         } else {
             return new JsonResponse(['success' => '0']);
@@ -253,9 +267,11 @@ class JournalSetupController extends Controller
     }
 
     /**
-     * Journal Setup Wizard Step 4 - Saves Journal 's step 4 data
-     * @param  Request $request
-     * @param  null $setupId
+     * Journal Setup Wizard Step 4 - Saves Journal 's step 4 data.
+     *
+     * @param Request $request
+     * @param null    $setupId
+     *
      * @return JsonResponse
      */
     private function step4Control(Request $request, $setupId)
@@ -288,13 +304,16 @@ class JournalSetupController extends Controller
             $em->persist($page_);
         }
         $em->flush();
+
         return new JsonResponse(['success' => '1']);
     }
 
     /**
-     * Journal Setup Wizard Step 5 - Saves Journal 's step 5 data
-     * @param  Request $request
-     * @param  null $setupId
+     * Journal Setup Wizard Step 5 - Saves Journal 's step 5 data.
+     *
+     * @param Request $request
+     * @param null    $setupId
+     *
      * @return JsonResponse
      */
     private function step5Control(Request $request, $setupId)
@@ -312,6 +331,7 @@ class JournalSetupController extends Controller
         if ($step5Form->isValid()) {
             $setup->setCurrentStep(6);
             $em->flush();
+
             return new JsonResponse(['success' => '1']);
         } else {
             return new JsonResponse(['success' => '0']);
@@ -319,9 +339,11 @@ class JournalSetupController extends Controller
     }
 
     /**
-     * Journal Setup Wizard Step 6 - Saves Journal 's step 6 data
-     * @param  Request $request
+     * Journal Setup Wizard Step 6 - Saves Journal 's step 6 data.
+     *
+     * @param Request $request
      * @param $setupId
+     *
      * @return JsonResponse
      */
     private function step6Control(Request $request, $setupId)
@@ -346,6 +368,7 @@ class JournalSetupController extends Controller
             $em->flush();
 
             $journalLink = $journalService->generateUrl($journal);
+
             return new JsonResponse(
                 [
                     'success' => '1',

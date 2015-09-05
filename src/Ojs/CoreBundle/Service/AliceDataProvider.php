@@ -7,7 +7,6 @@ namespace Ojs\CoreBundle\Service;
 */
 class AliceDataProvider
 {
-
     protected $defaultPublisherSlug;
 
     protected $systemEmail;
@@ -23,7 +22,8 @@ class AliceDataProvider
     }
 
     /**
-     * get default publisher record
+     * get default publisher record.
+     *
      * @return string
      */
     public function defaultPublisherSlug()

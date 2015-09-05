@@ -1,9 +1,9 @@
 <?php
+
 namespace Ojs\InstallerBundle\Manager;
 
 /**
- * Class InstallerManager
- * @package Ojs\InstallerBundle\Manager
+ * Class InstallerManager.
  */
 class InstallerManager
 {

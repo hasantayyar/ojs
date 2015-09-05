@@ -8,9 +8,7 @@ use Ojs\UserBundle\Entity\User;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- *
- * Class UsersToPropertyTransformer
- * @package Ojs\UserBundle\Form\DataTransformer
+ * Class UsersToPropertyTransformer.
  */
 class UsersToPropertyTransformer implements DataTransformerInterface
 {
@@ -23,29 +21,30 @@ class UsersToPropertyTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transform initial entities as json with id and text
+     * Transform initial entities as json with id and text.
      *
      * @param User[]|null $users
+     *
      * @return string
      */
     public function transform($users)
     {
-        if(is_null($users)) {
+        if (is_null($users)) {
             return array();
         }
         // return an array of initial values as html encoded json
         $data = array();
 
-        foreach($users as $user) {
-            $data[$user->getId()] = (string)$user;
+        foreach ($users as $user) {
+            $data[$user->getId()] = (string) $user;
         }
 
         return $data;
     }
 
     /**
-     *
      * @param array $values
+     *
      * @return User[]|ArrayCollection
      */
     public function reverseTransform($values)

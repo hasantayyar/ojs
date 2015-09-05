@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Common methods for journal
+ * Common methods for journal.
  */
 class JournalService
 {
@@ -46,11 +46,11 @@ class JournalService
     private $defaultPublisherSlug;
 
     /**
-     * @param EntityManager $em
-     * @param Session $session
-     * @param Router $router
+     * @param EntityManager         $em
+     * @param Session               $session
+     * @param Router                $router
      * @param TokenStorageInterface $tokenStorage
-     * @param RequestStack $requestStack
+     * @param RequestStack          $requestStack
      * @param $defaultPublisherSlug
      */
     public function __construct(
@@ -60,8 +60,7 @@ class JournalService
         TokenStorageInterface $tokenStorage,
         RequestStack $requestStack,
         $defaultPublisherSlug
-    )
-    {
+    ) {
         $this->session = $session;
         $this->em = $em;
         $this->router = $router;
@@ -71,7 +70,8 @@ class JournalService
     }
 
     /**
-     * @param  Journal $journal
+     * @param Journal $journal
+     *
      * @return bool|Journal
      */
     public function setSelectedJournal(Journal $journal = null)
@@ -109,6 +109,7 @@ class JournalService
         foreach ($submissionLangObjects as $submissionLangObject) {
             $locales[] = $submissionLangObject->getCode();
         }
+
         return $locales;
     }
 
@@ -133,9 +134,11 @@ class JournalService
     }
 
     /**
-     * @param string $checkRoles
-     * @param  Journal $journal
+     * @param string  $checkRoles
+     * @param Journal $journal
+     *
      * @return bool
+     *
      * @deprecated
      */
     public function hasJournalRole($checkRoles, Journal $journal = null)
@@ -156,7 +159,8 @@ class JournalService
     }
 
     /**
-     * @param  Journal $journal
+     * @param Journal $journal
+     *
      * @return Collection
      */
     public function getSelectedJournalRoles(Journal $journal = null)
@@ -168,7 +172,7 @@ class JournalService
             return array();
         }
 
-        /** @var JournalUser $journalUser */
+        /* @var JournalUser $journalUser */
         $user = $token->getUser();
         $journalUserRepo = $this->em->getRepository('OjsJournalBundle:JournalUser');
         $journalUser = $journalUserRepo->findOneBy(['journal' => $journal, 'user' => $user]);
@@ -181,7 +185,8 @@ class JournalService
     }
 
     /**
-     * get default publisher record
+     * get default publisher record.
+     *
      * @return Publisher
      */
     public function getDefaultPublisher()
@@ -193,8 +198,8 @@ class JournalService
     }
 
     /**
+     * @param Journal $journal
      *
-     * @param  Journal $journal
      * @return string
      */
     public function generateUrl(Journal $journal)
@@ -211,11 +216,11 @@ class JournalService
     }
 
     /**
+     * @param int $journalId
+     * @param int $page
+     * @param int $limit
      *
-     * @param  integer $journalId
-     * @param  integer $page
-     * @param  integer $limit
-     * @return mixed   user list
+     * @return mixed user list
      */
     public function getUsers($journalId, $page, $limit)
     {

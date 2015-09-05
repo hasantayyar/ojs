@@ -198,8 +198,8 @@ class InstallCommand extends ContainerAwareCommand
 
         $output->writeln("\nDONE\n");
         $output->writeln(
-            "You can run"
-            ." <info>php app/console ojs:install:samples</info> "
+            'You can run'
+            .' <info>php app/console ojs:install:samples</info> '
             ."to add some sample data.\n"
         );
     }
@@ -308,9 +308,9 @@ class InstallCommand extends ContainerAwareCommand
                 'pages',
                 'posts',
                 'submissionSettings',
-                'mailSettings'
+                'mailSettings',
             ],
-            
+
             'OjsUserBundle:User' => null,
             'OjsUserBundle:Role' => null,
             'OjsJournalBundle:Publisher' => null,
@@ -451,12 +451,12 @@ class InstallCommand extends ContainerAwareCommand
 
             $aclManager->on($journal)
                 ->field('mailSettings')
-                ->to(new JournalRoleSecurityIdentity($journal,'ROLE_JOURNAL_MANAGER'))
+                ->to(new JournalRoleSecurityIdentity($journal, 'ROLE_JOURNAL_MANAGER'))
                 ->permit(MaskBuilder::MASK_OWNER)->save();
 
             $aclManager->on($journal)
                 ->field('mailSettings')
-                ->to(new JournalRoleSecurityIdentity($journal,'ROLE_JOURNAL_MANAGER'))
+                ->to(new JournalRoleSecurityIdentity($journal, 'ROLE_JOURNAL_MANAGER'))
                 ->permit(MaskBuilder::MASK_OWNER)->save();
 
             $aclManager->on($journal)->to(new JournalRoleSecurityIdentity($journal, 'ROLE_EDITOR'))

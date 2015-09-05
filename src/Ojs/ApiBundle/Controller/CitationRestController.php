@@ -9,9 +9,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CitationRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Citation Action",
@@ -22,6 +20,7 @@ class CitationRestController extends FOSRestController
      * @Get("/journal/{id}/citations")
      *
      * @param $id
+     *
      * @return object
      */
     public function getCitationAction($id)
@@ -35,7 +34,6 @@ class CitationRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Delete a citation with it's settings" ,

@@ -16,6 +16,7 @@ class PublisherType extends AbstractType
 
     /**
      * PublisherType constructor.
+     *
      * @param $selfId
      */
     public function __construct($selfId = null)
@@ -39,7 +40,7 @@ class PublisherType extends AbstractType
                     'label' => 'name',
                     'required' => true,
                     'attr' => [
-                        'class' => "validate[required]",
+                        'class' => 'validate[required]',
                     ],
                 ]
             )
@@ -50,7 +51,7 @@ class PublisherType extends AbstractType
                 [
                     'label' => 'publisher.slug',
                     'attr' => [
-                        'class' => "validate[required]",
+                        'class' => 'validate[required]',
                     ],
                 ]
             )
@@ -61,7 +62,7 @@ class PublisherType extends AbstractType
                     'label' => 'publishertype',
                     'class' => 'Ojs\JournalBundle\Entity\PublisherTypes',
                     'attr' => [
-                        'class' => "validate[required]",
+                        'class' => 'validate[required]',
                     ],
                 ]
             )
@@ -72,10 +73,10 @@ class PublisherType extends AbstractType
                     'label' => 'parent',
                     'class' => 'Ojs\JournalBundle\Entity\Publisher',
                     'attr' => [
-                        'class' => "select2-element",
+                        'class' => 'select2-element',
                     ],
                     'placeholder' => 'none',
-                    'empty_data'  => null,
+                    'empty_data' => null,
                     'query_builder' => function (PublisherRepository $repository) use ($selfId) {
                         if ($selfId != null) {
                             return $repository
@@ -83,7 +84,7 @@ class PublisherType extends AbstractType
                                 ->andWhere('publisher.id != :selfId')
                                 ->setParameter('selfId', $selfId);
                         }
-                    }
+                    },
                 ]
             )
             ->add(
@@ -100,13 +101,14 @@ class PublisherType extends AbstractType
                         $query = $er->createQueryBuilder('t');
                         if (is_null($publisherId)) {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE');
-                        }else{
+                        } else {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE OR t.publisher = :publisherId')
                                 ->setParameter('publisherId', $publisherId);
                         }
+
                         return $query;
                     },
-                    'error_bubbling'=>true,
+                    'error_bubbling' => true,
                 )
             )
             ->add(
@@ -123,13 +125,14 @@ class PublisherType extends AbstractType
                         $query = $er->createQueryBuilder('t');
                         if (is_null($publisherId)) {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE');
-                        }else{
+                        } else {
                             $query->where('t.isPublic IS NULL OR t.isPublic = TRUE OR t.publisher = :publisherId')
                                 ->setParameter('publisherId', $publisherId);
                         }
+
                         return $query;
                     },
-                    'error_bubbling'=>true,
+                    'error_bubbling' => true,
                 )
             )
             ->add('address', 'textarea', ['label' => 'address'])
@@ -144,8 +147,8 @@ class PublisherType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 200 / 200,
-                    'maxSize' => "[200, 200]"
-                )
+                    'maxSize' => '[200, 200]',
+                ),
             ))
             ->add('domain')
             ->add('header', 'jb_crop_image_ajax', array(
@@ -154,8 +157,8 @@ class PublisherType extends AbstractType
                 'img_height' => 200,
                 'crop_options' => array(
                     'aspect-ratio' => 960 / 200,
-                    'maxSize' => "[960, 200]"
-                )
+                    'maxSize' => '[960, 200]',
+                ),
             ))
             ->add(
                 'verified',
@@ -163,7 +166,7 @@ class PublisherType extends AbstractType
                 [
                     'label' => 'verified',
                     'attr' => [
-                        'class' => "checkbox",
+                        'class' => 'checkbox',
                     ],
                 ]
             )

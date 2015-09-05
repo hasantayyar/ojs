@@ -4,10 +4,9 @@ namespace Ojs\JournalBundle\Entity;
 
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * Article key-value attributes
+ * Article key-value attributes.
  */
 class ArticleAttribute implements Translatable
 {
@@ -27,7 +26,7 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -35,7 +34,7 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * @param integer $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -51,7 +50,8 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * @param  mixed $article_id
+     * @param mixed $article_id
+     *
      * @return $this
      */
     public function setArticleId($article_id)
@@ -62,7 +62,7 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * Get attribute
+     * Get attribute.
      *
      * @return string
      */
@@ -72,9 +72,10 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * Set attribute
+     * Set attribute.
      *
-     * @param  string           $attribute
+     * @param string $attribute
+     *
      * @return ArticleAttribute
      */
     public function setAttribute($attribute)
@@ -85,7 +86,7 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -95,9 +96,10 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param  string           $value
+     * @param string $value
+     *
      * @return ArticleAttribute
      */
     public function setValue($value)
@@ -108,7 +110,7 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * Get article
+     * Get article.
      *
      * @return Article
      */
@@ -118,9 +120,10 @@ class ArticleAttribute implements Translatable
     }
 
     /**
-     * Set article
+     * Set article.
      *
-     * @param  Article          $article
+     * @param Article $article
+     *
      * @return ArticleAttribute
      */
     public function setArticle(Article $article)

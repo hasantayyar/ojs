@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class AclChainManager extends AclManager
 {
-
     private $_to = null;
 
     private $_on = null;
@@ -28,7 +27,8 @@ class AclChainManager extends AclManager
     private $_mask = null;
 
     /**
-     * @param  null  $securityIdentity
+     * @param null $securityIdentity
+     *
      * @return $this
      */
     public function to($securityIdentity = null)
@@ -40,6 +40,7 @@ class AclChainManager extends AclManager
 
     /**
      * @param $domainObject
+     *
      * @return $this
      */
     public function on($domainObject)
@@ -55,6 +56,7 @@ class AclChainManager extends AclManager
 
     /**
      * @param ObjectIdentity $domainObject
+     *
      * @return $this
      */
     public function onClass($domainObject)
@@ -67,6 +69,7 @@ class AclChainManager extends AclManager
 
     /**
      * @param $field
+     *
      * @return $this
      */
     public function field($field)
@@ -78,6 +81,7 @@ class AclChainManager extends AclManager
 
     /**
      * @param $mask
+     *
      * @return $this
      */
     public function permit($mask)
@@ -88,7 +92,8 @@ class AclChainManager extends AclManager
     }
 
     /**
-     * @param  bool  $replace
+     * @param bool $replace
+     *
      * @return $this
      */
     public function save($replace = false)

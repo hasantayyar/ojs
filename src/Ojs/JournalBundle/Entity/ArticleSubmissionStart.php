@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * This collection holds article submission start data
+ * This collection holds article submission start data.
  */
 class ArticleSubmissionStart
 {
@@ -21,7 +21,7 @@ class ArticleSubmissionStart
     private $checks;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -37,14 +37,15 @@ class ArticleSubmissionStart
     }
 
     /**
-     * Add submissionFiles
+     * Add submissionFiles.
      *
-     * @param  SubmissionFile $articleFile
+     * @param SubmissionFile $articleFile
+     *
      * @return $this
      */
     public function addSubmissionFile(SubmissionFile $articleFile)
     {
-        if(!$this->submissionFiles->contains($articleFile)){
+        if (!$this->submissionFiles->contains($articleFile)) {
             $this->submissionFiles->add($articleFile);
         }
 
@@ -52,13 +53,13 @@ class ArticleSubmissionStart
     }
 
     /**
-     * Remove submissionFiles
+     * Remove submissionFiles.
      *
      * @param SubmissionFile $articleFile
      */
     public function removeSubmissionFile(SubmissionFile $articleFile)
     {
-        if($this->submissionFiles->contains($articleFile)){
+        if ($this->submissionFiles->contains($articleFile)) {
             $this->submissionFiles->removeElement($articleFile);
         }
     }

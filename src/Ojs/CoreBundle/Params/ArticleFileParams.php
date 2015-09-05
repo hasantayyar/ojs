@@ -4,7 +4,6 @@ namespace Ojs\CoreBundle\Params;
 
 class ArticleFileParams
 {
-
     const FULL_TEXT = 0;
     const SUPPLEMENTARY_FILE = 1;
     const RESEARCH_METARIALS = 2;
@@ -18,7 +17,6 @@ class ArticleFileParams
     const COPYRIGHT_TRANSFER_FORM = 10;
     const COMPETING_OF_INSTEREST_FILE = 11;
     /**
-     *
      * @var array
      */
     public static $FILE_TYPES = array(
@@ -38,8 +36,8 @@ class ArticleFileParams
     );
 
     /**
+     * @param int $typeNum
      *
-     * @param  integer $typeNum
      * @return string
      */
     public static function fileType($typeNum)

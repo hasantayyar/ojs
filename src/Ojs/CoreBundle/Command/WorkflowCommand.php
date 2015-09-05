@@ -23,8 +23,8 @@ class WorkflowCommand extends ContainerAwareCommand
         'bundlePath' => 'OkulBilisim\WorkflowBundle\WorkflowBundle',
         'routing' => array(
             'resource' => '@WorkflowBundle/Resources/config/routing.yml',
-            'prefix' => '/'
-        )
+            'prefix' => '/',
+        ),
     );
 
     protected function configure()
@@ -47,13 +47,11 @@ class WorkflowCommand extends ContainerAwareCommand
         );
         $composerFile = $kernel->getRootDir().'/../composer.json';
 
-
         $this->composerUpdate($output, $composerFile);
         $this->kernelManipulate($output, $kernel);
         $this->routingSet($output, $kernel);
         $this->schemaUpdate($output, $kernel, $composerFile);
         $this->asseticDump($output, $kernel, $composerFile);
-
     }
 
     private function composerUpdate(OutputInterface $output, $composerFile)
@@ -78,7 +76,7 @@ class WorkflowCommand extends ContainerAwareCommand
         if ($addRepository) {
             $composer['repositories'][] = array(
                 'type' => 'vcs',
-                'url' => $this->workflowData['vcs']
+                'url' => $this->workflowData['vcs'],
             );
         }
         if (!array_key_exists('require', $composer)) {
@@ -149,7 +147,7 @@ class WorkflowCommand extends ContainerAwareCommand
             } else {
                 $routingYml['workflow'] = array(
                     'resource' => $this->workflowData['routing']['resource'],
-                    'prefix' => $this->workflowData['routing']['prefix']
+                    'prefix' => $this->workflowData['routing']['prefix'],
                 );
                 $dumper = new Dumper();
                 $dumper->setIndentation(2);
@@ -157,11 +155,10 @@ class WorkflowCommand extends ContainerAwareCommand
 
                 file_put_contents($routingFile, $yaml);
             }
-
         } catch (ParseException $e) {
             $output->writeln(
                 '<error>'.
-                "Unable to parse the routing YAML string: ".$e->getMessage().
+                'Unable to parse the routing YAML string: '.$e->getMessage().
                 '</error>'
             );
         }
@@ -169,7 +166,6 @@ class WorkflowCommand extends ContainerAwareCommand
 
     private function schemaUpdate(OutputInterface $output, KernelInterface $kernel, $composerFile)
     {
-
         $consolePath = $kernel->getRootDir().'/console';
         $schemaProcess = new Process(
             'php '.$consolePath.' doctrine:schema:update --force',
@@ -215,11 +211,10 @@ class WorkflowCommand extends ContainerAwareCommand
 
                 file_put_contents($asseticFile, $yaml);
             }
-
         } catch (ParseException $e) {
             $output->writeln(
                 '<error>'.
-                "Unable to parse the assetic YAML string: ".$e->getMessage().
+                'Unable to parse the assetic YAML string: '.$e->getMessage().
                 '</error>'
             );
         }

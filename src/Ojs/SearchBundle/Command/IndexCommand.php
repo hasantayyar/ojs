@@ -20,7 +20,7 @@ class IndexCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $articleId = $input->getArgument('articleId');
-        $output->writeln("Indexing".($articleId ? " articleId:".$articleId."" : " all articles"));
+        $output->writeln('Indexing'.($articleId ? ' articleId:'.$articleId.'' : ' all articles'));
         $output->writeln("\nResults\n");
     }
 }

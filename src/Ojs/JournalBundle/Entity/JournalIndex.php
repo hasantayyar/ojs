@@ -5,16 +5,16 @@ namespace Ojs\JournalBundle\Entity;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * JournalIndex
+ * JournalIndex.
+ *
  * @GRID\Source(columns="id,name,status")
  */
 class JournalIndex
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
     /**
@@ -26,7 +26,7 @@ class JournalIndex
      */
     private $logo;
     /**
-     * @var boolean
+     * @var bool
      */
     private $status;
     /**
@@ -35,7 +35,7 @@ class JournalIndex
     private $journals_indexs;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -43,9 +43,9 @@ class JournalIndex
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -53,7 +53,7 @@ class JournalIndex
     }
 
     /**
-     * Get logo
+     * Get logo.
      *
      * @return string
      */
@@ -63,9 +63,10 @@ class JournalIndex
     }
 
     /**
-     * Set logo
+     * Set logo.
      *
-     * @param  string       $logo
+     * @param string $logo
+     *
      * @return JournalIndex
      */
     public function setLogo($logo)
@@ -76,9 +77,9 @@ class JournalIndex
     }
 
     /**
-     * Get status
+     * Get status.
      *
-     * @return boolean
+     * @return bool
      */
     public function getStatus()
     {
@@ -86,9 +87,10 @@ class JournalIndex
     }
 
     /**
-     * Set status
+     * Set status.
      *
-     * @param  boolean      $status
+     * @param bool $status
+     *
      * @return JournalIndex
      */
     public function setStatus($status)
@@ -99,9 +101,10 @@ class JournalIndex
     }
 
     /**
-     * Add journals_indexs
+     * Add journals_indexs.
      *
-     * @param  JournalsIndex $journalsIndexs
+     * @param JournalsIndex $journalsIndexs
+     *
      * @return JournalIndex
      */
     public function addJournalsIndex(JournalsIndex $journalsIndexs)
@@ -112,7 +115,7 @@ class JournalIndex
     }
 
     /**
-     * Remove journals_indexs
+     * Remove journals_indexs.
      *
      * @param JournalsIndex $journalsIndexs
      */
@@ -122,7 +125,7 @@ class JournalIndex
     }
 
     /**
-     * Get journals_indexs
+     * Get journals_indexs.
      *
      * @return Collection
      */
@@ -137,7 +140,7 @@ class JournalIndex
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -147,9 +150,10 @@ class JournalIndex
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string       $name
+     * @param string $name
+     *
      * @return JournalIndex
      */
     public function setName($name)

@@ -38,7 +38,7 @@ class TagsType extends AbstractType
 
         $view->vars['remote_path'] = $this->router->generate($options['remote_route'], $options['remote_params']);
         $varNames = array('minimum_input_length', 'placeholder');
-        foreach($varNames as $varName) {
+        foreach ($varNames as $varName) {
             $view->vars[$varName] = $options[$varName];
         }
         $view->vars['full_name'] .= '[]';

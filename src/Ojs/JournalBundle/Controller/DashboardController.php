@@ -7,7 +7,7 @@ use Ojs\CoreBundle\Controller\OjsController;
 
 class DashboardController extends OjsController
 {
-    const DATE_FORMAT = "Y-m-d";
+    const DATE_FORMAT = 'Y-m-d';
 
     public function indexAction()
     {
@@ -15,7 +15,8 @@ class DashboardController extends OjsController
     }
 
     /**
-     *  Arranges statistics
+     *  Arranges statistics.
+     *
      *  @return array
      */
     private function createStats()
@@ -24,8 +25,8 @@ class DashboardController extends OjsController
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         $lastMonth = ['x'];
-        for($i = 0; $i < 30; $i++) {
-            $lastMonth[] = date($this::DATE_FORMAT, strtotime('-' . $i . ' days'));
+        for ($i = 0; $i < 30; ++$i) {
+            $lastMonth[] = date($this::DATE_FORMAT, strtotime('-'.$i.' days'));
         }
 
         $slicedLastMonth = array_slice($lastMonth, 1);
@@ -56,7 +57,7 @@ class DashboardController extends OjsController
             'issueFilesMonthly' => $generator->generateIssueFileDownloadsData($issues, $slicedLastMonth),
             'articleFilesMonthly' => $generator->generateArticleFileDownloadsData($articles, $slicedLastMonth),
         ];
-        
+
         return $data;
     }
 }

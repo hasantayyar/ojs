@@ -10,7 +10,7 @@ class PublisherDesignType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,7 +32,7 @@ class PublisherDesignType extends AbstractType
                 'title',
                 'text',
                 [
-                    'label' => 'Title'
+                    'label' => 'Title',
                 ]
             )
             ->add('editableContent', 'hidden')
@@ -40,7 +40,7 @@ class PublisherDesignType extends AbstractType
                 'isPublic',
                 'checkbox',
                 [
-                    'label' => 'ojs.is_public'
+                    'label' => 'ojs.is_public',
                 ]
             );
     }

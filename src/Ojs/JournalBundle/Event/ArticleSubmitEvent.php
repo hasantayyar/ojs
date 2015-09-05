@@ -7,19 +7,18 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class ArticleSubmitEvent extends Event
 {
     /** @var Article */
     private $article;
 
     /**
-     * @var Request $request
+     * @var Request
      */
     private $request;
 
     /**
-     * @var Response $response
+     * @var Response
      */
     private $response;
 

@@ -6,13 +6,14 @@ use Doctrine\Common\Collections\Collection;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * $this
+ * $this.
+ *
  * @JMS\ExclusionPolicy("all")
  */
 class Country
 {
     /**
-     * @var integer
+     * @var int
      * @JMS\Expose
      */
     private $id;
@@ -29,9 +30,9 @@ class Country
     private $provinces;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -39,9 +40,10 @@ class Country
     }
 
     /**
-     * Add Province
+     * Add Province.
      *
-     * @param  Province $province
+     * @param Province $province
+     *
      * @return $this
      */
     public function addProvince(Province $province)
@@ -52,7 +54,7 @@ class Country
     }
 
     /**
-     * Remove province
+     * Remove province.
      *
      * @param Province $province
      */
@@ -75,7 +77,7 @@ class Country
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -85,9 +87,10 @@ class Country
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return $this
      */
     public function setName($name)

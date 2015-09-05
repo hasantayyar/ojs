@@ -14,14 +14,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Journal & Publisher Hosting pages controller
- * Class HostingController
- * @package Ojs\SiteBundle\Controller
+ * Class HostingController.
  */
 class HostingController extends Controller
 {
-
     /**
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
@@ -35,24 +34,27 @@ class HostingController extends Controller
             /** @var Journal $getJournalByDomain */
             $getJournalByDomain = $em->getRepository('OjsJournalBundle:Journal')->findOneByDomain($currentHost);
             $this->throw404IfNotFound($getJournalByDomain);
+
             return $this->journalIndexAction($request, $getJournalByDomain->getSlug(), true);
         }
         /** @var Journal $journal */
         foreach ($getPublisherByDomain->getJournals() as $journal) {
             $journalPublicURI = $this->generateUrl('publisher_hosting_journal_index', [
-                'slug' => $journal->getSlug()
-            ],true);
+                'slug' => $journal->getSlug(),
+            ], true);
             $journal->setPublicURI($journalPublicURI);
         }
+
         return $this->render('OjsSiteBundle::Publisher/publisher_index.html.twig', [
-            'entity' => $getPublisherByDomain
+            'entity' => $getPublisherByDomain,
         ]);
     }
 
     /**
      * @param Request $request
-     * @param string $slug
-     * @param bool $isJournalHosting
+     * @param string  $slug
+     * @param bool    $isJournalHosting
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function journalIndexAction(Request $request, $slug, $isJournalHosting = false)
@@ -71,12 +73,12 @@ class HostingController extends Controller
         $data['journal'] = $journal;
         $data['page'] = 'journal';
         $data['blocks'] = $blockRepo->journalBlocks($journal);
-        if($isJournalHosting){
+        if ($isJournalHosting) {
             $journal->setPublicURI($this->generateUrl('journal_publisher_hosting', [], true));
             $data['archive_uri'] = $this->generateUrl('journal_hosting_archive', [], true);
-        }else{
+        } else {
             $journal->setPublicURI($this->generateUrl('publisher_hosting_journal_index', [
-                'slug', $journal->getSlug()
+                'slug', $journal->getSlug(),
             ], true)
             );
             $data['archive_uri'] = $this->generateUrl('publisher_hosting_journal_archive', [], true);
@@ -88,33 +90,36 @@ class HostingController extends Controller
     /**
      * @param Issue $last_issue
      * @param $isJournalHosting
+     *
      * @return mixed
      */
     private function setupArticleURIs($last_issue, $isJournalHosting)
     {
         /** @var Article $article */
-        foreach($last_issue->getArticles() as $article){
-            if($isJournalHosting){
-                $article->setPublicURI($this->generateUrl('journal_hosting_issue_article',[
+        foreach ($last_issue->getArticles() as $article) {
+            if ($isJournalHosting) {
+                $article->setPublicURI($this->generateUrl('journal_hosting_issue_article', [
                     'issue_id' => $article->getIssue()->getId(),
                     'article_id' => $article->getId(),
-                    ],true)
+                    ], true)
                 );
-            }else{
+            } else {
                 $article->setPublicURI($this->generateUrl('publisher_hosting_journal_issue_article', [
                     'slug' => $article->getIssue()->getJournal()->getSlug(),
                     'issue_id' => $article->getIssue()->getId(),
                     'article_id' => $article->getId(),
-                ],true)
+                ], true)
                 );
             }
         }
+
         return $last_issue;
     }
 
     /**
      * @param $years
      * @param $isJournalHosting
+     *
      * @return mixed
      */
     private function setupIssueURIsByYear($years, $isJournalHosting)
@@ -127,7 +132,7 @@ class HostingController extends Controller
                         $this->generateUrl(
                             'journal_hosting_issue',
                             [
-                                'id' => $issue->getId()
+                                'id' => $issue->getId(),
                             ],
                             true
                         )
@@ -138,7 +143,7 @@ class HostingController extends Controller
                             'publisher_hosting_journal_issue',
                             [
                                 'journal_slug' => $issue->getJournal()->getSlug(),
-                                'id' => $issue->getId()
+                                'id' => $issue->getId(),
                             ],
                             true
                         )
@@ -153,6 +158,7 @@ class HostingController extends Controller
     /**
      * @param $id
      * @param bool $isJournalHosting
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function issuePageAction($id, $isJournalHosting = false)
@@ -167,9 +173,9 @@ class HostingController extends Controller
         $this->throw404IfNotFound($issue);
         $data['issue'] = $issue;
         $data['blocks'] = $blockRepo->journalBlocks($issue->getJournal());
-        if($isJournalHosting){
+        if ($isJournalHosting) {
             $data['isJournalHosting'] = true;
-        }else{
+        } else {
             $data['isPublisherHosting'] = true;
         }
 
@@ -181,6 +187,7 @@ class HostingController extends Controller
      * @param $article_id
      * @param null $issue_id
      * @param bool $isJournalHosting
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function articlePageAction($slug = null, $article_id, $issue_id = null, $isJournalHosting = false)
@@ -196,15 +203,15 @@ class HostingController extends Controller
         $data['journal'] = $data['article']->getJournal();
         $data['page'] = 'journals';
         $data['blocks'] = $em->getRepository('OjsSiteBundle:Block')->journalBlocks($data['journal']);
-        if($isJournalHosting){
+        if ($isJournalHosting) {
             $data['journal']->setPublicURI($this->generateUrl('publisher_hosting_journal_index', [], true));
             $data['archive_uri'] = $this->generateUrl('journal_hosting_archive', [], true);
-        }else{
+        } else {
             $data['journal']->setPublicURI($this->generateUrl('publisher_hosting_journal_index', [
-                'slug' => $data['article']->getJournal()->getSlug()
+                'slug' => $data['article']->getJournal()->getSlug(),
             ], true));
             $data['archive_uri'] = $this->generateUrl('publisher_hosting_journal_archive', [
-                'slug' => $data['journal']->getSlug()
+                'slug' => $data['journal']->getSlug(),
             ], true);
         }
 
@@ -213,8 +220,9 @@ class HostingController extends Controller
 
     /**
      * @param Request $request
-     * @param null $slug
-     * @param bool $isJournalHosting
+     * @param null    $slug
+     * @param bool    $isJournalHosting
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function archiveIndexAction(Request $request, $slug = null, $isJournalHosting = false)
@@ -223,10 +231,10 @@ class HostingController extends Controller
         $currentHost = $request->getHttpHost();
         /** @var BlockRepository $blockRepo */
         $blockRepo = $em->getRepository('OjsSiteBundle:Block');
-        /** @var Journal $journal */
-        if(is_null($slug)){
+        /* @var Journal $journal */
+        if (is_null($slug)) {
             $journal = $em->getRepository('OjsJournalBundle:Journal')->findOneByDomain($currentHost);
-        }else{
+        } else {
             $journal = $em->getRepository('OjsJournalBundle:Journal')->findOneBy(['slug' => $slug]);
         }
         $this->throw404IfNotFound($journal);
@@ -244,9 +252,9 @@ class HostingController extends Controller
         $data['page'] = 'archive';
         $data['blocks'] = $blockRepo->journalBlocks($journal);
         $data['journal'] = $journal;
-        if($isJournalHosting){
+        if ($isJournalHosting) {
             $data['isJournalHosting'] = true;
-        }else{
+        } else {
             $data['isPublisherHosting'] = true;
         }
 

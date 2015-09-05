@@ -21,7 +21,9 @@ class BlockController extends Controller
      * @param $object
      * @param $type
      * @param int $id
+     *
      * @return RedirectResponse|Response
+     *
      * @throws AccessDeniedException
      */
     public function createAction(Request $request, $object, $type, $id = 0)
@@ -35,7 +37,7 @@ class BlockController extends Controller
                 throw new NotFoundHttpException();
         }
         if (!$this->isGranted('CREATE', $object, 'block')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $data = [];
         $Block = $id ? $em->find('OjsSiteBundle:Block', $id) : new Block();
@@ -53,13 +55,14 @@ class BlockController extends Controller
         }
         $data['form'] = $form->createView();
 
-        return $this->render("OjsSiteBundle:Block:create.html.twig", $data);
+        return $this->render('OjsSiteBundle:Block:create.html.twig', $data);
     }
 
     /**
-     * @param  Request $request
-     * @param  Block $block
-     * @param  int $id
+     * @param Request $request
+     * @param Block   $block
+     * @param int     $id
+     *
      * @return RedirectResponse|Response
      */
     public function newLinkAction(Request $request, Block $block, $id = 0)
@@ -91,19 +94,19 @@ class BlockController extends Controller
     /**
      * @param $object
      * @param $type
-     * @param  Block $block
+     * @param Block $block
+     *
      * @return RedirectResponse
      */
     public function deleteAction($object, $type, Block $block)
     {
-
         $em = $this->getDoctrine()->getManager();
-        /**
+        /*
          * only journals has blocks for now
          */
         $journal = $em->find('OjsJournalBundle:Journal', $object);
         if (!$this->isGranted('DELETE', $journal, 'block')) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
         $em->remove($block);
         $em->flush();
@@ -114,7 +117,8 @@ class BlockController extends Controller
     /**
      * @param $object
      * @param $type
-     * @param  BlockLink $block_link
+     * @param BlockLink $block_link
+     *
      * @return RedirectResponse
      */
     public function deleteLinkAction($object, $type, BlockLink $block_link)
@@ -127,8 +131,9 @@ class BlockController extends Controller
     }
 
     /**
-     * @param  Block $block
+     * @param Block $block
      * @param $order
+     *
      * @return Response
      */
     public function orderAction(Block $block, $order)
@@ -143,15 +148,16 @@ class BlockController extends Controller
     }
 
     /**
-     * @param  BlockLink $block_link
+     * @param BlockLink $block_link
      * @param $order
+     *
      * @return JsonResponse
      */
     public function orderLinkAction(BlockLink $block_link, $order)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $block_link->setLinkOrder((int)$order);
+        $block_link->setLinkOrder((int) $order);
         $em->persist($block_link);
         $em->flush();
 

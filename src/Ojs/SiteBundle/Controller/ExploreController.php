@@ -32,7 +32,6 @@ class ExploreController extends Controller
         $boolQuery->addMust($match);
 
         if (!empty($typeFilters) || !empty($subjectFilters) || !empty($publisherFilters)) {
-
             foreach ($typeFilters as $type) {
                 $match = new Query\Match();
                 $match->setField('publisher.publisher_type.name', $type);
@@ -91,7 +90,7 @@ class ExploreController extends Controller
             'publisher_filters' => $publisherFilters,
             'journals' => $journals,
             'pagerfanta' => $pagerfanta,
-            'page' => 'explore'
+            'page' => 'explore',
         ];
 
         return $this->render('OjsSiteBundle:Explore:index.html.twig', $data);

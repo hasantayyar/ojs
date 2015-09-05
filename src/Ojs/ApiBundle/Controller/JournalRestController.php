@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class JournalRestController extends FOSRestController
 {
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Journal detail"
@@ -31,13 +30,11 @@ class JournalRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Journal Issues"
      * )
      * @Get("/journal/{id}/issues")
-     *
      */
     public function getJournalIssuesAction($id)
     {
@@ -50,7 +47,6 @@ class JournalRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Specific Journal Of Users Action",
@@ -71,8 +67,9 @@ class JournalRestController extends FOSRestController
      * )
      * @Get("/journal/{id}/users")
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return mixed
      */
     public function getJournalUsersAction(Request $request, $id)

@@ -13,7 +13,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * Subject
+ * Subject.
+ *
  * @ExclusionPolicy("all")
  * @GRID\Source(columns="id,subject,description")
  */
@@ -22,7 +23,7 @@ class Subject extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @GRID\Column(title="id")
      */
@@ -59,7 +60,8 @@ class Subject extends AbstractTranslatable
      */
     private $users;
     /**
-     * This data will be pre-calculated with scheduled tasks
+     * This data will be pre-calculated with scheduled tasks.
+     *
      * @var int
      */
     private $totalJournalCount;
@@ -80,7 +82,6 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     *
      * @return Subject
      */
     public function getParent()
@@ -104,9 +105,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set root
+     * Set root.
      *
-     * @param integer $root
+     * @param int $root
      *
      * @return Subject
      */
@@ -118,9 +119,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -128,8 +129,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get totalJournalCount
-     * @return integer
+     * Get totalJournalCount.
+     *
+     * @return int
      */
     public function getTotalJournalCount()
     {
@@ -137,8 +139,10 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set totalJournalCount
-     * @param  integer $totalJournalCount
+     * Set totalJournalCount.
+     *
+     * @param int $totalJournalCount
+     *
      * @return Subject
      */
     public function setTotalJournalCount($totalJournalCount)
@@ -149,7 +153,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -159,9 +163,10 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string  $description
+     * @param string $description
+     *
      * @return Subject
      */
     public function setDescription($description)
@@ -172,9 +177,10 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Add users
+     * Add users.
      *
-     * @param  User  $users
+     * @param User $users
+     *
      * @return $this
      */
     public function addUser(User $users)
@@ -185,7 +191,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Remove users
+     * Remove users.
      *
      * @param User $users
      */
@@ -195,7 +201,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get users
+     * Get users.
      *
      * @return Collection
      */
@@ -205,7 +211,8 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get subjects
+     * Get subjects.
+     *
      * @return Collection|Journal[]
      */
     public function getJournals()
@@ -214,9 +221,10 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Add subject
+     * Add subject.
      *
-     * @param  Journal $journal
+     * @param Journal $journal
+     *
      * @return Subject
      */
     public function addJournal(Journal $journal)
@@ -227,7 +235,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Remove journal
+     * Remove journal.
      *
      * @param Journal $journal
      */
@@ -255,7 +263,8 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * @param  mixed $slug
+     * @param mixed $slug
+     *
      * @return $this
      */
     public function setSlug($slug)
@@ -267,15 +276,15 @@ class Subject extends AbstractTranslatable
 
     public function __toString()
     {
-        if(!is_string($this->getSubject())){
+        if (!is_string($this->getSubject())) {
             return $this->translations->first()->getSubject();
-        }else{
+        } else {
             return $this->getSubject();
         }
     }
 
     /**
-     * Get subject
+     * Get subject.
      *
      * @return string
      */
@@ -285,9 +294,10 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set subject
+     * Set subject.
      *
-     * @param  string $subject
+     * @param string $subject
+     *
      * @return Subject
      */
     public function setSubject($subject)
@@ -298,8 +308,10 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\SubjectTranslation
      */
     public function translate($locale = null)
@@ -340,9 +352,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get lft
+     * Get lft.
      *
-     * @return integer
+     * @return int
      */
     public function getLft()
     {
@@ -350,9 +362,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set lft
+     * Set lft.
      *
-     * @param integer $lft
+     * @param int $lft
      *
      * @return Subject
      */
@@ -364,9 +376,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get rgt
+     * Get rgt.
      *
-     * @return integer
+     * @return int
      */
     public function getRgt()
     {
@@ -374,9 +386,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set rgt
+     * Set rgt.
      *
-     * @param integer $rgt
+     * @param int $rgt
      *
      * @return Subject
      */
@@ -388,9 +400,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Get lvl
+     * Get lvl.
      *
-     * @return integer
+     * @return int
      */
     public function getLvl()
     {
@@ -398,9 +410,9 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set lvl
+     * Set lvl.
      *
-     * @param integer $lvl
+     * @param int $lvl
      *
      * @return Subject
      */
@@ -412,7 +424,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -426,7 +438,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -440,7 +452,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Add child
+     * Add child.
      *
      * @param \Ojs\JournalBundle\Entity\Subject $child
      *
@@ -454,7 +466,7 @@ class Subject extends AbstractTranslatable
     }
 
     /**
-     * Remove child
+     * Remove child.
      *
      * @param \Ojs\JournalBundle\Entity\Subject $child
      */

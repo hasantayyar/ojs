@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AuthorType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -29,18 +28,18 @@ class AuthorType extends AbstractType
             ->add('address', 'textarea')
             ->add('publisher', null, [
                 'attr' => [
-                    'class' => 'publisher'
-                ]
+                    'class' => 'publisher',
+                ],
             ])
             ->add('publisherNotListed', null, [
                 'attr' => [
-                    'class' => 'publisherNotListed'
-                ]
+                    'class' => 'publisherNotListed',
+                ],
             ])
             ->add('publisherName', null, [
                 'attr' => [
-                    'class' => 'publisherName'
-                ]
+                    'class' => 'publisherName',
+                ],
             ])
             ->add('country')
             ->add('authorDetails', 'textarea');

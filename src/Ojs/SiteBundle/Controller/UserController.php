@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Ojs\SiteBundle\Controller;
 
 use Elastica\Exception\NotFoundException;
@@ -16,14 +15,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends Controller
 {
-
     public function profileAction($slug)
     {
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
         /** @var User $user */
-        $user = ($slug == "me") ?
+        $user = ($slug == 'me') ?
             $this->getUser() :
             $em->getRepository('OjsUserBundle:User')->findOneBy(['username' => $slug]);
         $this->throw404IfNotFound($user);
@@ -40,7 +38,6 @@ class UserController extends Controller
             ->getDoctrine()
             ->getRepository('OjsJournalBundle:Article')
             ->findBy(['submitterUser' => $user], ['pubdate' => 'DESC']);
-
 
         return $this->render('OjsSiteBundle:User:profile_index.html.twig', $data);
     }
@@ -62,6 +59,7 @@ class UserController extends Controller
             $em->persist($user);
 
             $em->flush();
+
             return $this->redirectToRoute('ojs_user_edit_profile');
         }
 
@@ -113,14 +111,14 @@ class UserController extends Controller
             } else {
                 $session = $this->get('session');
                 $bag = $session->getFlashBag();
-                $bag->add('error', $this->get('translator')->trans("An error has occured!"));
+                $bag->add('error', $this->get('translator')->trans('An error has occured!'));
                 $session->save();
             }
         }
         $data = [];
         $data['form'] = $customFieldForm->createView();
 
-        return $this->render("OjsSiteBundle:User:create_custom_field.html.twig", $data);
+        return $this->render('OjsSiteBundle:User:create_custom_field.html.twig', $data);
     }
 
     public function deleteCustomFieldAction(Request $request, $id)
@@ -165,8 +163,8 @@ class UserController extends Controller
         $code = $request->get('code');
         $orcid->setRedirectUri(
             'http://'
-            . $this->container->getParameter('base_host')
-            . $this->get('router')->generate('ojs_user_add_orcid_account')
+            .$this->container->getParameter('base_host')
+            .$this->get('router')->generate('ojs_user_add_orcid_account')
         );
         if (!$code) {
             return new RedirectResponse($orcid->loginUrl());
@@ -187,7 +185,7 @@ class UserController extends Controller
 
             return $this->redirect($this->get('router')->generate('ojs_user_connected_account'));
         }
-        throw new \ErrorException("An error", serialize($post));
+        throw new \ErrorException('An error', serialize($post));
     }
 
     public function deleteConnectedAccountAction($id)

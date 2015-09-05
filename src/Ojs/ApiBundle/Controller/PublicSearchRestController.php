@@ -18,13 +18,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * PublicSearchRest may contain similar actions with SearchRest
+ * PublicSearchRest may contain similar actions with SearchRest.
  */
 class PublicSearchRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="search Publishers",
@@ -51,7 +49,8 @@ class PublicSearchRestController extends FOSRestController
      * )
      * @Get("/public/search/publisher")
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return array
      */
     public function getPublishersAction(Request $request)
@@ -76,7 +75,6 @@ class PublicSearchRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="search Publishers for autocomplete",
@@ -103,7 +101,8 @@ class PublicSearchRestController extends FOSRestController
      * )
      * @Get("/public/search/institute")
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return array
      */
     public function getInstitutesAction(Request $request)
@@ -131,7 +130,9 @@ class PublicSearchRestController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @ApiDoc(
      *                                    resource=true,
@@ -172,7 +173,8 @@ class PublicSearchRestController extends FOSRestController
      * )
      * @Get("/public/search/tags")
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return array
      */
     public function getTagsAction(Request $request)
@@ -198,7 +200,7 @@ class PublicSearchRestController extends FOSRestController
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
      * @ApiDoc(
      *                          resource=true,
      *                          description="search users",
@@ -218,6 +220,7 @@ class PublicSearchRestController extends FOSRestController
      *                          }
      *                          )
      * @Get("/public/search/user")
+     *
      * @return array
      */
     public function getUsersAction(Request $request)
@@ -236,7 +239,7 @@ class PublicSearchRestController extends FOSRestController
         foreach ($results as $result) {
             $data[] = [
                 'id' => $result->getId(),
-                'text' => $result->getData()['username']." - ".$result->getData()['email'],
+                'text' => $result->getData()['username'].' - '.$result->getData()['email'],
             ];
         }
 
@@ -244,7 +247,7 @@ class PublicSearchRestController extends FOSRestController
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
      * @ApiDoc(
      *                          resource=true,
      *                          description="search journals",
@@ -264,6 +267,7 @@ class PublicSearchRestController extends FOSRestController
      *                          }
      *                          )
      * @Get("/public/search/journal")
+     *
      * @return array
      */
     public function getJournalsAction(Request $request)
@@ -288,7 +292,9 @@ class PublicSearchRestController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
@@ -311,7 +317,7 @@ class PublicSearchRestController extends FOSRestController
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
      * @ApiDoc(
      *                          resource=true,
      *                          description="search citation",
@@ -331,6 +337,7 @@ class PublicSearchRestController extends FOSRestController
      *                          }
      *                          )
      * @Get("/public/search/citation")
+     *
      * @return array
      */
     public function getCitationsAction(Request $request)
@@ -357,7 +364,9 @@ class PublicSearchRestController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
@@ -380,7 +389,7 @@ class PublicSearchRestController extends FOSRestController
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
      * @ApiDoc(
      *                          resource=true,
      *                          description="search provinces",
@@ -400,6 +409,7 @@ class PublicSearchRestController extends FOSRestController
      *                          }
      *                          )
      * @Get("/public/search/province")
+     *
      * @return array
      */
     public function getProvincesAction(Request $request)
@@ -426,7 +436,9 @@ class PublicSearchRestController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
@@ -449,7 +461,7 @@ class PublicSearchRestController extends FOSRestController
     }
 
     /**
-     * @param  Request $request
+     * @param Request $request
      * @ApiDoc(
      *                          resource=true,
      *                          description="search articles",
@@ -469,6 +481,7 @@ class PublicSearchRestController extends FOSRestController
      *                          }
      *                          )
      * @Get("/public/search/article")
+     *
      * @return array
      */
     public function getArticlesAction(Request $request)
@@ -483,7 +496,7 @@ class PublicSearchRestController extends FOSRestController
 
         $results = $search->search($prefix);
         $data = [];
-/** @var User $user */
+/* @var User $user */
         # $user = $this->getUser();
 
         #$articleRepo = $this->getDoctrine()->getManager()->getRepository('OjsJournalBundle:Article');
@@ -516,7 +529,9 @@ class PublicSearchRestController extends FOSRestController
 
     /**
      * @param $id
+     *
      * @return Response
+     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\TransactionRequiredException
@@ -530,7 +545,7 @@ class PublicSearchRestController extends FOSRestController
     {
         /** @var EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-        /** @var Journal $journal */
+        /* @var Journal $journal */
         $article = $em->find('OjsJournalBundle:Article', $id);
         //$user = $this->getUser();
         //$data = [];

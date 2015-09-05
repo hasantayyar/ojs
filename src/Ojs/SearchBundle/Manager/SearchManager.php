@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\SearchBundle\Manager;
 
 use Elastica\Result;
@@ -7,8 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class $this
- * @package Ojs\SearchBundle\Manager
+ * Class $this.
  */
 class SearchManager
 {
@@ -55,13 +55,14 @@ class SearchManager
     /**
      * @param ResultSet $resultSet
      * @param $section
+     *
      * @return array
      */
     public function buildResultsObject(ResultSet $resultSet, $section)
     {
         $results = [];
         /**
-         * @var Result $object
+         * @var Result
          */
         foreach ($resultSet as $object) {
             $objectType = $object->getType();
@@ -70,7 +71,7 @@ class SearchManager
                 $results[$objectType]['total_item'] = 1;
                 $results[$objectType]['type'] = $this->translator->trans($object->getType());
             } else {
-                $results[$objectType]['total_item']++;
+                ++$results[$objectType]['total_item'];
             }
             if ($section == $objectType) {
                 $result['detail'] = $this->getObjectDetail($object);
@@ -79,7 +80,6 @@ class SearchManager
                     $results[$objectType]['data'][] = $result;
                 }
             }
-
         }
         //set only acceptable count for selected section
         if (!empty($section) && isset($results[$section])) {
@@ -94,6 +94,7 @@ class SearchManager
 
     /**
      * @param Result $object
+     *
      * @return mixed
      */
     private function getObjectDetail(Result $object)
@@ -148,7 +149,8 @@ class SearchManager
     }
 
     /**
-     * @param  Result $issueObject
+     * @param Result $issueObject
+     *
      * @return string
      */
     private function generateIssueUrl(Result $issueObject)
@@ -168,7 +170,8 @@ class SearchManager
     }
 
     /**
-     * @param  Result $journalObject
+     * @param Result $journalObject
+     *
      * @return string
      */
     private function generateJournalUrl(Result $journalObject)
@@ -180,14 +183,15 @@ class SearchManager
                 'ojs_journal_index',
                 [
                     'slug' => $source['slug'],
-                    'publisher' => $source['publisher']['slug']
+                    'publisher' => $source['publisher']['slug'],
                 ],
                 true
             );
     }
 
     /**
-     * @param  Result $articleObject
+     * @param Result $articleObject
+     *
      * @return string
      */
     private function generateArticleUrl(Result $articleObject)
@@ -211,7 +215,8 @@ class SearchManager
     }
 
     /**
-     * @param  Result $authorObject
+     * @param Result $authorObject
+     *
      * @return string
      */
     private function generateAuthorUrl(Result $authorObject)
@@ -222,7 +227,7 @@ class SearchManager
                 ->generate(
                     'ojs_user_profile',
                     [
-                        'slug' => $source['user']['username']
+                        'slug' => $source['user']['username'],
                     ],
                     true
                 );
@@ -250,7 +255,7 @@ class SearchManager
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getTotalHit()
     {
@@ -258,7 +263,8 @@ class SearchManager
     }
 
     /**
-     * @param integer $totalHit
+     * @param int $totalHit
+     *
      * @return $this
      */
     public function setTotalHit($totalHit)

@@ -13,8 +13,9 @@ class UserRepository extends EntityRepository implements UserProviderInterface
 {
     /**
      * @param $query
-     * @param integer|Journal $journal
-     * @param integer $limit
+     * @param int|Journal $journal
+     * @param int         $limit
+     *
      * @return User[]
      */
     public function searchJournalUser($query, $journal, $limit)
@@ -34,7 +35,8 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         return $query->getResult();
     }
     /**
-     * @param  string                      $username
+     * @param string $username
+     *
      * @return \Ojs\UserBundle\Entity\User
      */
     public function loadUserByUsername($username)
@@ -65,7 +67,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
 
     public function refreshUser(UserInterface $user)
     {
-        /** @var User $user */
+        /* @var User $user */
         $class = get_class($user);
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(
@@ -82,9 +84,10 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     }
 
     /**
-     * @param  User    $user
-     * @param  Role    $role
-     * @param  Journal $journal
+     * @param User    $user
+     * @param Role    $role
+     * @param Journal $journal
+     *
      * @return bool
      */
     public function hasJournalRole(User $user, Role $role, Journal $journal)
@@ -104,7 +107,9 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     /**
      * @param $id string
      * @param string $provider string
+     *
      * @return User
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getByOauthId($id, $provider)
@@ -129,20 +134,23 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     }
 
     /**
-     * Return user count by condition
+     * Return user count by condition.
+     *
      * @param $field
      * @param $value
+     *
      * @return mixed
      */
     public function getCountBy($field, $value)
     {
-        $qb = $this->createQueryBuilder("u");
-        $qb->select("count(u.id)")
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('count(u.id)')
             ->where(
                 $qb->expr()->eq("u.$field", ':value')
             )
-            ->setParameter("value", $value)
+            ->setParameter('value', $value)
         ;
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 }

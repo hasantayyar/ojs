@@ -9,17 +9,16 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PublisherRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Publishers"
      * )
      * @Get("/publisher/bulk/{page}/{limit}")
      *
-     * @param  int   $page
-     * @param  int   $limit
+     * @param int $page
+     * @param int $limit
+     *
      * @return mixed
      */
     public function getPublishersAction($page = 0, $limit = 10)
@@ -37,7 +36,6 @@ class PublisherRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Specific Publisher"
@@ -45,6 +43,7 @@ class PublisherRestController extends FOSRestController
      * @Get("/publisher/{id}")
      *
      * @param $id
+     *
      * @return object
      */
     public function getPublisherAction($id)

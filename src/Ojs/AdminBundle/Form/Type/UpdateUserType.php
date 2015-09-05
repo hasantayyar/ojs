@@ -7,7 +7,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UpdateUserType extends UserType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

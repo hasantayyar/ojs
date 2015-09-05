@@ -4,7 +4,6 @@ namespace Ojs\AdminBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Ojs\AdminBundle\Form\Type\ContactType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\JournalContact;
@@ -23,27 +22,27 @@ class AdminContactController extends Controller
     /**
      * Lists all JournalContact entities.
      * 
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new JournalContact())) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
 
         $source = new Entity('OjsJournalBundle:JournalContact');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var JournalContact $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var JournalContact
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
 
-                if (!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                     $row->setField('contactTypeName', $entity->getContactType()->getName());
                 }
@@ -61,7 +60,7 @@ class AdminContactController extends Controller
         $rowAction[] = $gridAction->editAction('ojs_admin_contact_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_contact_delete', 'id');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $actionColumn->setRowActions($rowAction);
         $grid->addColumn($actionColumn);
 
@@ -71,7 +70,8 @@ class AdminContactController extends Controller
     /**
      * Creates a new JournalContact entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -80,7 +80,7 @@ class AdminContactController extends Controller
         $entity = new JournalContact();
 
         if (!$this->isGranted('CREATE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
 
         $form = $this->createCreateForm($entity);
@@ -110,7 +110,8 @@ class AdminContactController extends Controller
     /**
      * Creates a form to create a JournalContact entity.
      *
-     * @param  JournalContact $entity The entity
+     * @param JournalContact $entity The entity
+     *
      * @return Form The form
      */
     private function createCreateForm(JournalContact $entity)
@@ -119,7 +120,7 @@ class AdminContactController extends Controller
             'action' => $this->generateUrl('ojs_admin_contact_create'),
             'method' => 'POST',
         );
-        
+
         $form = $this->createForm(new ContactType(), $entity, $options);
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -134,11 +135,11 @@ class AdminContactController extends Controller
     public function newAction()
     {
         $entity = new JournalContact();
-        
+
         if (!$this->isGranted('CREATE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
-        
+
         $form = $this->createCreateForm($entity);
 
         return $this->render(
@@ -153,27 +154,28 @@ class AdminContactController extends Controller
     /**
      * Finds and displays a JournalContact entity.
      *
-     * @param  Request $request
-     * @param  int $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return Response
      */
     public function showAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        
+
         /** @var JournalContact $entity */
         $entity = $em
             ->getRepository('OjsJournalBundle:JournalContact')
             ->findOneBy(['id' => $id]);
 
         $this->throw404IfNotFound($entity);
-        
+
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
-        
+
         $entity->setDefaultLocale($request->getDefaultLocale());
-        
+
         $token = $this
             ->get('security.csrf.token_manager')
             ->refreshToken('ojs_admin_contact'.$entity->getId());
@@ -182,7 +184,7 @@ class AdminContactController extends Controller
             'OjsAdminBundle:AdminContact:show.html.twig',
             array(
                 'entity' => $entity,
-                'token'  => $token,
+                'token' => $token,
             )
         );
     }
@@ -190,7 +192,8 @@ class AdminContactController extends Controller
     /**
      * Displays a form to edit an existing JournalContact entity.
      *
-     * @param  integer $id
+     * @param int $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -203,11 +206,11 @@ class AdminContactController extends Controller
             ->findOneBy(['id' => $id]);
 
         $this->throw404IfNotFound($entity);
-        
+
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
-        
+
         $editForm = $this->createEditForm($entity);
         $token = $this
             ->get('security.csrf.token_manager')
@@ -227,6 +230,7 @@ class AdminContactController extends Controller
      * Creates a form to edit a JournalContact entity.
      *
      * @param JournalContact $entity The entity
+     *
      * @return Form The form
      */
     private function createEditForm(JournalContact $entity)
@@ -244,14 +248,16 @@ class AdminContactController extends Controller
         );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
+
         return $form;
     }
 
     /**
      * Edits an existing JournalContact entity.
      *
-     * @param  Request $request
-     * @param  integer $id
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -264,9 +270,9 @@ class AdminContactController extends Controller
             ->findOneBy(['id' => $id]);
 
         $this->throw404IfNotFound($entity);
-        
+
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -293,8 +299,10 @@ class AdminContactController extends Controller
 
     /**
      * Deletes a JournalContact entity.
-     * @param  Request $request
-     * @param  integer $id
+     *
+     * @param Request $request
+     * @param int     $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -309,16 +317,16 @@ class AdminContactController extends Controller
         $this->throw404IfNotFound($entity);
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for view this page!");
+            throw new AccessDeniedException('You are not authorized for view this page!');
         }
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_contact'.$entity->getId());
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
-        
+
         $em->remove($entity);
         $em->flush();
         $this->successFlashBag('Successfully removed');

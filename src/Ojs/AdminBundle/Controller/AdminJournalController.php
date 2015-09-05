@@ -5,7 +5,6 @@ namespace Ojs\AdminBundle\Controller;
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\AdminBundle\Form\Type\JournalType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
@@ -28,29 +27,29 @@ class AdminJournalController extends Controller
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new Journal())) {
-            throw new AccessDeniedException("You not authorized for list journals!");
+            throw new AccessDeniedException('You not authorized for list journals!');
         }
 
         $source = new Entity('OjsJournalBundle:Journal');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var Journal $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var Journal
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                 }
+
                 return $row;
             }
         );
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_admin_journal_show', 'id');
         $rowAction[] = $gridAction
             ->editAction('ojs_journal_settings_index', 'id')
@@ -64,7 +63,7 @@ class AdminJournalController extends Controller
                 array(
                     'class' => 'btn btn-success btn-xs',
                     'data-toggle' => 'tooltip',
-                    'title' => "Manage"
+                    'title' => 'Manage',
                 )
             );
 
@@ -78,44 +77,44 @@ class AdminJournalController extends Controller
     }
 
     /**
-     * Returns setupStatus == false journals
+     * Returns setupStatus == false journals.
+     *
      * @return Response
      */
     public function notFinishedAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new Journal())) {
-            throw new AccessDeniedException("You not authorized for list journals!");
+            throw new AccessDeniedException('You not authorized for list journals!');
         }
         $source = new Entity('OjsJournalBundle:Journal');
         $tableAlias = $source->getTableAlias();
 
         $source->manipulateQuery(
-            function (QueryBuilder $query) use ($tableAlias)
-            {
-                $query->andWhere($tableAlias . '.setup_status = 0');
+            function (QueryBuilder $query) use ($tableAlias) {
+                $query->andWhere($tableAlias.'.setup_status = 0');
             }
         );
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var Journal $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var Journal
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                     $row->setField('subtitle', $entity->getSubtitle());
                     $row->setField('description', $entity->getDescription());
                 }
+
                 return $row;
             }
         );
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_journal_show', 'id');
         $rowAction[] = $gridAction
@@ -127,7 +126,7 @@ class AdminJournalController extends Controller
             ->setRouteParameters('id')
             ->setRouteParametersMapping(array('id' => 'journalId'))
             ->setAttributes(
-                array('class' => 'btn btn-success btn-xs', 'data-toggle' => 'tooltip', 'title' => "Manage")
+                array('class' => 'btn btn-success btn-xs', 'data-toggle' => 'tooltip', 'title' => 'Manage')
             );
 
         $actionColumn->setRowActions($rowAction);
@@ -140,7 +139,8 @@ class AdminJournalController extends Controller
     }
 
     /**
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -148,7 +148,7 @@ class AdminJournalController extends Controller
         $entity = new Journal();
         $entity->setCurrentLocale($request->getDefaultLocale());
         if (!$this->isGranted('CREATE', $entity)) {
-            throw new AccessDeniedException("You not authorized for create a journal!");
+            throw new AccessDeniedException('You not authorized for create a journal!');
         }
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -172,8 +172,10 @@ class AdminJournalController extends Controller
 
     /**
      * Creates a form to create a Journal entity.
-     * @param  Journal $entity The entity
-     * @return Form    The form
+     *
+     * @param Journal $entity The entity
+     *
+     * @return Form The form
      */
     private function createCreateForm(Journal $entity)
     {
@@ -214,13 +216,15 @@ class AdminJournalController extends Controller
      *
      * @param Request $request
      * @param Journal $entity
+     *
      * @return Response
      */
     public function showAction(Request $request, Journal $entity)
     {
         $this->throw404IfNotFound($entity);
-        if (!$this->isGranted('VIEW', $entity))
-            throw new AccessDeniedException("You not authorized for view this journal!");
+        if (!$this->isGranted('VIEW', $entity)) {
+            throw new AccessDeniedException('You not authorized for view this journal!');
+        }
 
         $entity->setDefaultLocale($request->getDefaultLocale());
         $token = $this
@@ -234,8 +238,9 @@ class AdminJournalController extends Controller
     }
 
     /**
-     * @param  Request          $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -244,14 +249,14 @@ class AdminJournalController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:Journal')->find($id);
 
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You not authorized for delete this journal!");
+            throw new AccessDeniedException('You not authorized for delete this journal!');
         }
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_journal'.$id);
         if ($token->getValue() !== $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

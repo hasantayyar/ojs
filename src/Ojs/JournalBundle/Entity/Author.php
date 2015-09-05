@@ -16,7 +16,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * Author
+ * Author.
+ *
  * @ExclusionPolicy("all")
  * @GRID\Source(columns="id,title,firstName,lastName,initials,email")
  */
@@ -43,7 +44,7 @@ class Author extends  AbstractTranslatable
     protected $billing_address;
 
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      * @GRID\Column(title="id")
@@ -108,7 +109,7 @@ class Author extends  AbstractTranslatable
      */
     private $address;
     /**
-     * @var integer
+     * @var int
      * @JMS\Expose
      */
     private $publisherId;
@@ -129,7 +130,7 @@ class Author extends  AbstractTranslatable
      */
     private $authorDetails;
     /**
-     * @var integer
+     * @var int
      * @JMS\Expose
      */
     private $userId;
@@ -139,7 +140,8 @@ class Author extends  AbstractTranslatable
      */
     private $user;
     /**
-     * title + firstname + middlename + lastname
+     * title + firstname + middlename + lastname.
+     *
      * @var string
      * @GRID\Column(title="fullname",field="fullname")
      * @Expose
@@ -153,7 +155,7 @@ class Author extends  AbstractTranslatable
      */
     private $orcid;
     /**
-     * @var boolean
+     * @var bool
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      */
@@ -191,7 +193,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  string $orcid
+     * @param string $orcid
+     *
      * @return $this
      */
     public function setOrcid($orcid)
@@ -210,7 +213,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -220,9 +223,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  User   $user
+     * @param User $user
+     *
      * @return Author
      */
     public function setUser(User $user = null)
@@ -233,9 +237,9 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -243,7 +247,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
@@ -253,9 +257,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set firstName
+     * Set firstName.
      *
-     * @param  string $firstName
+     * @param string $firstName
+     *
      * @return Author
      */
     public function setFirstName($firstName)
@@ -266,7 +271,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get middleName
+     * Get middleName.
      *
      * @return string
      */
@@ -276,9 +281,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set middleName
+     * Set middleName.
      *
-     * @param  string $middleName
+     * @param string $middleName
+     *
      * @return Author
      */
     public function setMiddleName($middleName)
@@ -289,7 +295,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get lastName
+     * Get lastName.
      *
      * @return string
      */
@@ -299,9 +305,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set lastName
+     * Set lastName.
      *
-     * @param  string $lastName
+     * @param string $lastName
+     *
      * @return Author
      */
     public function setLastName($lastName)
@@ -312,7 +319,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -322,12 +329,13 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set email
+     * Set email.
      *
-     * @param  string $email
+     * @param string $email
+     *
      * @return Author
      */
-    public function setEmail($email=null)
+    public function setEmail($email = null)
     {
         $this->email = $email;
 
@@ -335,8 +343,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     *
-     * @return integer
+     * @return int
      */
     public function getUserId()
     {
@@ -344,7 +351,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  int   $userId
+     * @param int $userId
+     *
      * @return $this
      */
     public function setUserId($userId)
@@ -355,7 +363,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get firstNameTransliterated
+     * Get firstNameTransliterated.
      *
      * @return string
      */
@@ -365,9 +373,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set firstNameTransliterated
+     * Set firstNameTransliterated.
      *
-     * @param  string $firstNameTransliterated
+     * @param string $firstNameTransliterated
+     *
      * @return Author
      */
     public function setFirstNameTransliterated($firstNameTransliterated)
@@ -378,7 +387,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get middleNameTransliterated
+     * Get middleNameTransliterated.
      *
      * @return string
      */
@@ -388,9 +397,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set middleNameTransliterated
+     * Set middleNameTransliterated.
      *
-     * @param  string $middleNameTransliterated
+     * @param string $middleNameTransliterated
+     *
      * @return Author
      */
     public function setMiddleNameTransliterated($middleNameTransliterated)
@@ -401,7 +411,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get lastNameTransliterated
+     * Get lastNameTransliterated.
      *
      * @return string
      */
@@ -411,9 +421,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set lastNameTransliterated
+     * Set lastNameTransliterated.
      *
-     * @param  string $lastNameTransliterated
+     * @param string $lastNameTransliterated
+     *
      * @return Author
      */
     public function setLastNameTransliterated($lastNameTransliterated)
@@ -424,7 +435,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get initials
+     * Get initials.
      *
      * @return string
      */
@@ -434,9 +445,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set initials
+     * Set initials.
      *
-     * @param  string $initials
+     * @param string $initials
+     *
      * @return Author
      */
     public function setInitials($initials)
@@ -447,7 +459,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get address
+     * Get address.
      *
      * @return string
      */
@@ -457,9 +469,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set address
+     * Set address.
      *
-     * @param  string $address
+     * @param string $address
+     *
      * @return Author
      */
     public function setAddress($address)
@@ -470,9 +483,9 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get publisherId
+     * Get publisherId.
      *
-     * @return integer
+     * @return int
      */
     public function getPublisherId()
     {
@@ -480,9 +493,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set publisherId
+     * Set publisherId.
      *
-     * @param  integer $publisherId
+     * @param int $publisherId
+     *
      * @return Author
      */
     public function setPublisherId($publisherId)
@@ -493,7 +507,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get summary
+     * Get summary.
      *
      * @return string
      */
@@ -503,9 +517,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set summary
+     * Set summary.
      *
-     * @param  string $summary
+     * @param string $summary
+     *
      * @return Author
      */
     public function setSummary($summary)
@@ -516,8 +531,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\AuthorTranslation
      */
     public function translate($locale = null)
@@ -547,14 +564,15 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Add articleAuthor
+     * Add articleAuthor.
      *
-     * @param  ArticleAuthor $articleAuthor
+     * @param ArticleAuthor $articleAuthor
+     *
      * @return Author
      */
     public function addArticleAuthor(ArticleAuthor $articleAuthor)
     {
-        if(!$this->articleAuthors->contains($articleAuthor)){
+        if (!$this->articleAuthors->contains($articleAuthor)) {
             $this->articleAuthors->add($articleAuthor);
             $articleAuthor->setAuthor($this);
         }
@@ -563,16 +581,18 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Remove articleAuthor
+     * Remove articleAuthor.
      *
      * @param ArticleAuthor $articleAuthor
+     *
      * @return Author
      */
     public function removeArticleAuthor(ArticleAuthor $articleAuthor)
     {
-        if($this->articleAuthors->contains($articleAuthor)){
+        if ($this->articleAuthors->contains($articleAuthor)) {
             $this->articleAuthors->removeElement($articleAuthor);
         }
+
         return $this;
     }
 
@@ -585,7 +605,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  mixed $title
+     * @param mixed $title
+     *
      * @return $this
      */
     public function setTitle($title)
@@ -608,7 +629,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Get publisher
+     * Get publisher.
      *
      * @return Publisher
      */
@@ -618,9 +639,10 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set publisher
+     * Set publisher.
      *
-     * @param  Publisher $publisher
+     * @param Publisher $publisher
+     *
      * @return Author
      */
     public function setPublisher(Publisher $publisher = null)
@@ -639,7 +661,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  string $billing_address
+     * @param string $billing_address
+     *
      * @return $this
      */
     public function setBillingAddress($billing_address)
@@ -658,7 +681,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  Province $city
+     * @param Province $city
+     *
      * @return $this
      */
     public function setCity(Province $city)
@@ -677,7 +701,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  Country $country
+     * @param Country $country
+     *
      * @return $this
      */
     public function setCountry(Country $country)
@@ -696,7 +721,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  string $fax
+     * @param string $fax
+     *
      * @return $this
      */
     public function setFax($fax)
@@ -715,7 +741,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  string $phone
+     * @param string $phone
+     *
      * @return $this
      */
     public function setPhone($phone)
@@ -734,7 +761,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param  string $url
+     * @param string $url
+     *
      * @return $this
      */
     public function setUrl($url)
@@ -761,7 +789,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -775,7 +803,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -798,6 +826,7 @@ class Author extends  AbstractTranslatable
 
     /**
      * @param string $publisherName
+     *
      * @return $this
      */
     public function setPublisherName($publisherName)
@@ -808,7 +837,7 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPublisherNotListed()
     {
@@ -816,7 +845,8 @@ class Author extends  AbstractTranslatable
     }
 
     /**
-     * @param boolean $publisherNotListed
+     * @param bool $publisherNotListed
+     *
      * @return $this
      */
     public function setPublisherNotListed($publisherNotListed)

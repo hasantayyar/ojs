@@ -6,7 +6,7 @@ use Ojs\AnalyticsBundle\Traits\ViewableTrait;
 use Ojs\JournalBundle\Entity\Article;
 
 /**
- * ArticleStatistic
+ * ArticleStatistic.
  */
 class ArticleStatistic extends Statistic
 {
@@ -33,4 +33,3 @@ class ArticleStatistic extends Statistic
         $this->article = $article;
     }
 }
-

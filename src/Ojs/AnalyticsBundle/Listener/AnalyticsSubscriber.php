@@ -26,6 +26,7 @@ class AnalyticsSubscriber implements EventSubscriberInterface
 
     /**
      * AnalyticsSubscriber constructor.
+     *
      * @param EntityManager $em
      */
     public function __construct(EntityManager $em)
@@ -56,11 +57,11 @@ class AnalyticsSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            SiteEvents::VIEW_ISSUE              => 'onIssueView',
-            SiteEvents::VIEW_JOURNAL            => 'onJournalView',
-            SiteEvents::VIEW_ARTICLE            => 'onArticleView',
-            SiteEvents::DOWNLOAD_ISSUE_FILE     => 'onIssueFileDownload',
-            SiteEvents::DOWNLOAD_ARTICLE_FILE   => 'onArticleFileDownload',
+            SiteEvents::VIEW_ISSUE => 'onIssueView',
+            SiteEvents::VIEW_JOURNAL => 'onJournalView',
+            SiteEvents::VIEW_ARTICLE => 'onArticleView',
+            SiteEvents::DOWNLOAD_ISSUE_FILE => 'onIssueFileDownload',
+            SiteEvents::DOWNLOAD_ARTICLE_FILE => 'onArticleFileDownload',
         );
     }
 
@@ -126,13 +127,12 @@ class AnalyticsSubscriber implements EventSubscriberInterface
         $stat = $this->em
             ->getRepository('OjsAnalyticsBundle:ArticleFileStatistic')
             ->findOneBy(['date' => new \DateTime(), 'articleFile' => $event->getArticleFile()]);
-        
+
         if (!$stat) {
             $stat = new ArticleFileStatistic();
             $stat->setDate(new \DateTime());
             $stat->setArticleFile($event->getArticleFile());
             $stat->setDownload(1);
-
         } else {
             $stat->setDownload($stat->getDownload() + 1);
         }

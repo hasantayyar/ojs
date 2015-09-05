@@ -5,8 +5,7 @@ namespace Ojs\ApiBundle\Tests\Controller;
 use Ojs\CoreBundle\Tests\BaseTestCase;
 
 /**
- * Class AnalyticsRestControllerTest
- * @package Ojs\ApiBundle\Tests\Controller
+ * Class AnalyticsRestControllerTest.
  */
 class AnalyticsRestControllerTest extends BaseTestCase
 {
@@ -74,7 +73,7 @@ class AnalyticsRestControllerTest extends BaseTestCase
             ['HTTP_ACCEPT' => 'application/json']
         );
 
-        $this->command("ojs:analytics:update", ['type' => 'download']);
+        $this->command('ojs:analytics:update', ['type' => 'download']);
         $response = $this->client->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode(), $response->getContent());

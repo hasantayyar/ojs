@@ -9,12 +9,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RedirectController extends Controller
 {
-
     /**
-     * /redirect/{type}/id  will redirect to related page after checking user login status
-     * @param  string $type
-     * @param  string|integer $id
+     * /redirect/{type}/id  will redirect to related page after checking user login status.
+     *
+     * @param string     $type
+     * @param string|int $id
+     *
      * @return RedirectResponse
+     *
      * @throws NoResultException
      */
     public function redirectAction($type, $id)
@@ -33,10 +35,11 @@ class RedirectController extends Controller
     }
 
     /**
+     * @param Registry   $doctrine
+     * @param string|int $id
      *
-     * @param  Registry $doctrine
-     * @param  string|integer $id
      * @return RedirectResponse
+     *
      * @throws NoResultException
      */
     private function redirectArticle($doctrine, $id)
@@ -57,10 +60,11 @@ class RedirectController extends Controller
     }
 
     /**
+     * @param Registry   $doctrine
+     * @param string|int $id
      *
-     * @param  Registry $doctrine
-     * @param  string|integer $id
      * @return RedirectResponse
+     *
      * @throws NoResultException
      */
     private function redirectJournal($doctrine, $id)

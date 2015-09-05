@@ -21,7 +21,7 @@ class JournalUserType extends AbstractType implements FormTypeInterface
                     'label' => 'user',
                     'multiple' => false,
                     'expanded' => false,
-                    'attr' => array("class" => "select2-element"),
+                    'attr' => array('class' => 'select2-element'),
                 ]
             )
             ->add(
@@ -33,7 +33,7 @@ class JournalUserType extends AbstractType implements FormTypeInterface
                     'property' => 'name',
                     'multiple' => true,
                     'expanded' => false,
-                    'attr' => array("class" => "select2-element"),
+                    'attr' => array('class' => 'select2-element'),
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('journal_user_role');
                     },
@@ -43,6 +43,7 @@ class JournalUserType extends AbstractType implements FormTypeInterface
 
     /**
      * Returns the name of this type.
+     *
      * @return string The name of this type
      */
     public function getName()

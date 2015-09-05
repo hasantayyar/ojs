@@ -5,7 +5,6 @@ namespace Ojs\AdminBundle\Controller;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\AdminBundle\Form\Type\JournalApplicationType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
@@ -20,7 +19,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * Publisher controller.
- *
  */
 class AdminJournalApplicationController extends Controller
 {
@@ -29,17 +27,17 @@ class AdminJournalApplicationController extends Controller
         $data = array();
         $source = new Entity('OjsJournalBundle:Journal');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var Journal $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var Journal
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                 }
+
                 return $row;
             }
         );
@@ -47,8 +45,9 @@ class AdminJournalApplicationController extends Controller
         $source->manipulateQuery(
             function (QueryBuilder $query) use ($alias) {
                 $query
-                    ->andWhere($alias . '.status = :status')
+                    ->andWhere($alias.'.status = :status')
                     ->setParameter('status', '0');
+
                 return $query;
             }
         );
@@ -59,7 +58,7 @@ class AdminJournalApplicationController extends Controller
         $rowAction[] = $gridAction->editAction('ojs_admin_application_journal_edit', 'id');
         $rowAction[] = $gridAction->showAction('ojs_admin_application_journal_show', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_application_journal_delete', 'id');
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $actionColumn->setRowActions($rowAction);
 
         $grid->addColumn($actionColumn);
@@ -71,7 +70,6 @@ class AdminJournalApplicationController extends Controller
     public function detailAction($id)
     {
         /** @var EntityManager $em */
-
         $em = $this->getDoctrine()->getManager();
         $entity = $this->getDoctrine()->getRepository('OjsJournalBundle:Journal')->find($id);
 
@@ -83,13 +81,13 @@ class AdminJournalApplicationController extends Controller
         $languages = [];
         $subjects = [];
 
-        /** @var Lang $lang */
+        /* @var Lang $lang */
         foreach ($entity->getLanguages() as $key => $language) {
             $lang = $em->find('OjsJournalBundle:Lang', $language);
             $languages[] = $lang->getName();
         }
 
-        /** @var Subject $subj */
+        /* @var Subject $subj */
         foreach ($entity->getSubjects() as $subject) {
             $subj = $em->find('OjsJournalBundle:Subject', $subject);
             $subjects[] = "{$subj->getSubject()}";
@@ -103,7 +101,7 @@ class AdminJournalApplicationController extends Controller
 
         $data['entity'] = $entity;
         $data['languages'] = implode(',', $languages);
-        $data['publisher'] = $publisher->getName() . "[" . $publisher->getSlug() . "]";
+        $data['publisher'] = $publisher->getName().'['.$publisher->getSlug().']';
         $data['country'] = $country->getName();
         $data['subjects'] = implode(',', $subjects);
 
@@ -126,7 +124,7 @@ class AdminJournalApplicationController extends Controller
 
         return $this->render('OjsAdminBundle:AdminApplication:journal_edit.html.twig', [
             'form' => $form->createView(),
-            'entity' => $entity
+            'entity' => $entity,
         ]);
     }
 
@@ -164,10 +162,10 @@ class AdminJournalApplicationController extends Controller
         }
 
         $csrf = $this->get('security.csrf.token_manager');
-        $token = $csrf->getToken('ojs_admin_application' . $id);
+        $token = $csrf->getToken('ojs_admin_application'.$id);
 
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);
@@ -178,7 +176,7 @@ class AdminJournalApplicationController extends Controller
 
     public function saveAction($id)
     {
-        /** @var Journal $entity */
+        /* @var Journal $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Journal')->find($id);
 

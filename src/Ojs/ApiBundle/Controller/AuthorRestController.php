@@ -1,4 +1,5 @@
 <?php
+
 namespace Ojs\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -9,7 +10,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class AuthorRestController extends FOSRestController
 {
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Authors"

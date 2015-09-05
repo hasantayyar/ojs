@@ -15,7 +15,8 @@ trait TagsTrait
     }
 
     /**
-     * @param  string $tags
+     * @param string $tags
+     *
      * @return $this
      */
     public function setTags($tags)

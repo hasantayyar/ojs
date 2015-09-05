@@ -4,8 +4,8 @@ namespace Ojs\CoreBundle\Service\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ActionExtension extends \Twig_Extension {
-
+class ActionExtension extends \Twig_Extension
+{
     /**
      * @var TranslatorInterface
      */
@@ -14,13 +14,14 @@ class ActionExtension extends \Twig_Extension {
     /**
      * @param TranslatorInterface $translator
      */
-    function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
     /**
      * Returns the name of the extension.
+     *
      * @return string The extension name
      */
     public function getName()
@@ -30,6 +31,7 @@ class ActionExtension extends \Twig_Extension {
 
     /**
      * Returns a list of functions to add to the existing list.
+     *
      * @return \Twig_SimpleFunction[] An array of functions
      */
     public function getFunctions()
@@ -40,8 +42,10 @@ class ActionExtension extends \Twig_Extension {
     }
 
     /**
-     * Generates action buttons with Bootstrap theming
+     * Generates action buttons with Bootstrap theming.
+     *
      * @param array $actions
+     *
      * @return string
      */
     public function actions($actions)
@@ -54,8 +58,8 @@ class ActionExtension extends \Twig_Extension {
             'back' => [
                 'options' => [
                     'class' => 'btn-default',
-                    'icon'  => 'fa-arrow-left',
-                    'title' => $this->translator->trans('back')
+                    'icon' => 'fa-arrow-left',
+                    'title' => $this->translator->trans('back'),
                 ],
 
                 'attributes' => [],
@@ -64,8 +68,8 @@ class ActionExtension extends \Twig_Extension {
             'show' => [
                 'options' => [
                     'class' => 'btn-primary',
-                    'icon'  => 'fa-info-circle',
-                    'title' => $this->translator->trans('show')
+                    'icon' => 'fa-info-circle',
+                    'title' => $this->translator->trans('show'),
                 ],
 
                 'attributes' => [],
@@ -74,8 +78,8 @@ class ActionExtension extends \Twig_Extension {
             'create' => [
                 'options' => [
                     'class' => 'btn-success',
-                    'icon'  => 'fa-plus-circle',
-                    'title' => $this->translator->trans('create')
+                    'icon' => 'fa-plus-circle',
+                    'title' => $this->translator->trans('create'),
                 ],
 
                 'attributes' => [],
@@ -84,8 +88,8 @@ class ActionExtension extends \Twig_Extension {
             'edit' => [
                 'options' => [
                     'class' => 'btn-warning',
-                    'icon'  => 'fa-pencil',
-                    'title' => $this->translator->trans('edit')
+                    'icon' => 'fa-pencil',
+                    'title' => $this->translator->trans('edit'),
                 ],
 
                 'attributes' => [],
@@ -94,13 +98,13 @@ class ActionExtension extends \Twig_Extension {
             'delete' => [
                 'options' => [
                     'class' => 'btn-danger',
-                    'icon'  => 'fa-trash-o',
-                    'title' => $this->translator->trans('delete')
+                    'icon' => 'fa-trash-o',
+                    'title' => $this->translator->trans('delete'),
                 ],
 
                 'attributes' => [
-                    'data-method'   => 'delete',
-                    'data-role'     => 'delete',
+                    'data-method' => 'delete',
+                    'data-role' => 'delete',
                 ],
             ],
         ];
@@ -116,7 +120,7 @@ class ActionExtension extends \Twig_Extension {
             $options = [
                 'class' => null,
                 'title' => null,
-                'icon' => null
+                'icon' => null,
             ];
 
             if (array_key_exists('href', $parameters)) {

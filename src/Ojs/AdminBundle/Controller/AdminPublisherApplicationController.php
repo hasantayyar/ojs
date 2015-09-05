@@ -5,7 +5,6 @@ namespace Ojs\AdminBundle\Controller;
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\AdminBundle\Form\Type\PublisherApplicationType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
@@ -17,7 +16,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * Publisher controller.
- *
  */
 class AdminPublisherApplicationController extends Controller
 {
@@ -30,8 +28,9 @@ class AdminPublisherApplicationController extends Controller
         $source->manipulateQuery(
             function (QueryBuilder $query) use ($tableAlias) {
                 $query
-                    ->andWhere($tableAlias . ".status = :status")
+                    ->andWhere($tableAlias.'.status = :status')
                     ->setParameter('status', 0);
+
                 return $query;
             }
         );
@@ -51,7 +50,7 @@ class AdminPublisherApplicationController extends Controller
         $saveAction->setRouteParameters(['id']);
         $saveAction->setAttributes([
             'class' => 'btn btn-primary btn-xs',
-            'title' => $this->get('translator')->trans('institute.merge_as_new_institute')
+            'title' => $this->get('translator')->trans('institute.merge_as_new_institute'),
         ]);
 
         $rowAction[] = $saveAction;
@@ -59,7 +58,7 @@ class AdminPublisherApplicationController extends Controller
         $rowAction[] = $gridAction->editAction('ojs_admin_application_publisher_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_application_publisher_delete', 'id');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $actionColumn->setRowActions($rowAction);
 
         $grid->addColumn($actionColumn);
@@ -84,7 +83,7 @@ class AdminPublisherApplicationController extends Controller
 
     public function editAction($id)
     {
-        /** @var Publisher $entity */
+        /* @var Publisher $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Publisher')->find($id);
 
@@ -103,7 +102,7 @@ class AdminPublisherApplicationController extends Controller
 
     public function updateAction(Request $request, $id)
     {
-        /** @var Publisher $entity */
+        /* @var Publisher $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Publisher')->find($id);
         $this->throw404IfNotFound($entity);
@@ -114,6 +113,7 @@ class AdminPublisherApplicationController extends Controller
         if ($form->isValid()) {
             $em->flush();
             $this->successFlashBag('successful.update');
+
             return $this->redirect($this->generateUrl('ojs_admin_application_publisher_index'));
         }
 
@@ -132,9 +132,9 @@ class AdminPublisherApplicationController extends Controller
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
-        $token = $csrf->getToken('ojs_admin_application' . $id);
+        $token = $csrf->getToken('ojs_admin_application'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);
@@ -145,7 +145,7 @@ class AdminPublisherApplicationController extends Controller
 
     public function saveAction($id)
     {
-        /** @var Publisher $entity */
+        /* @var Publisher $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Publisher')->find($id);
 
@@ -162,7 +162,7 @@ class AdminPublisherApplicationController extends Controller
 
     public function rejectAction($id)
     {
-        /** @var Publisher $entity */
+        /* @var Publisher $entity */
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Publisher')->find($id);
 

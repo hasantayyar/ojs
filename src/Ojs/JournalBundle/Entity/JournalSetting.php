@@ -4,10 +4,9 @@ namespace Ojs\JournalBundle\Entity;
 
 use Gedmo\Translatable\Translatable;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * Journal key-value settings
+ * Journal key-value settings.
  */
 class JournalSetting implements Translatable
 {
@@ -27,7 +26,6 @@ class JournalSetting implements Translatable
     private $value;
 
     /**
-     *
      * @param string  $setting
      * @param string  $value
      * @param Journal $journal
@@ -40,7 +38,7 @@ class JournalSetting implements Translatable
     }
 
     /**
-     * Get setting
+     * Get setting.
      *
      * @return string
      */
@@ -50,9 +48,10 @@ class JournalSetting implements Translatable
     }
 
     /**
-     * Set setting
+     * Set setting.
      *
-     * @param  string         $setting
+     * @param string $setting
+     *
      * @return JournalSetting
      */
     public function setSetting($setting)
@@ -63,7 +62,7 @@ class JournalSetting implements Translatable
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -73,9 +72,10 @@ class JournalSetting implements Translatable
     }
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param  string         $value
+     * @param string $value
+     *
      * @return JournalSetting
      */
     public function setValue($value)
@@ -86,7 +86,7 @@ class JournalSetting implements Translatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -96,9 +96,10 @@ class JournalSetting implements Translatable
     }
 
     /**
-     * Set journal
+     * Set journal.
      *
-     * @param  Journal        $journal
+     * @param Journal $journal
+     *
      * @return JournalSetting
      */
     public function setJournal(Journal $journal)

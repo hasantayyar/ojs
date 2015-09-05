@@ -5,14 +5,15 @@ namespace Ojs\JournalBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class ArticleRepository
- * @package Ojs\JournalBundle\Entity
+ * Class ArticleRepository.
  */
 class ArticleRepository extends EntityRepository
 {
     /**
-     * Get articles that has no issue_id
-     * @param  int $status
+     * Get articles that has no issue_id.
+     *
+     * @param int $status
+     *
      * @return Article[]
      */
     public function getArticlesUnissued($status = 1)
@@ -28,10 +29,12 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * Get article list by issue_id with orderNum attribute ordered
-     * @param  Issue $issue
-     * @param  bool $asc
-     * @param  int $status default 3 (published)  see Ojs\CoreBundle\CommonParams
+     * Get article list by issue_id with orderNum attribute ordered.
+     *
+     * @param Issue $issue
+     * @param bool  $asc
+     * @param int   $status default 3 (published)  see Ojs\CoreBundle\CommonParams
+     *
      * @return Article[]
      */
     public function getOrderedArticlesByIssue(Issue $issue, $asc = false, $status = 3)
@@ -52,6 +55,7 @@ class ArticleRepository extends EntityRepository
     /**
      * @param $page
      * @param $limit
+     *
      * @return array
      */
     public function findAllByLimits($page, $limit)
@@ -61,23 +65,27 @@ class ArticleRepository extends EntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+
         return $result;
     }
 
     /**
-     * Return article count by condition
+     * Return article count by condition.
+     *
      * @param $field
      * @param $value
+     *
      * @return mixed
      */
     public function getCountBy($field, $value)
     {
-        $qb = $this->createQueryBuilder("a");
-        $qb->select("count(a.id)")
+        $qb = $this->createQueryBuilder('a');
+        $qb->select('count(a.id)')
             ->where(
                 $qb->expr()->eq("a.$field", ':value')
             )
-            ->setParameter("value", $value);
+            ->setParameter('value', $value);
+
         return $qb->getQuery()->getSingleScalarResult();
     }
 }

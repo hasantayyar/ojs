@@ -9,8 +9,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManager;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Class GridAction
- * @package Ojs\CoreBundle\Service
+ * Class GridAction.
  */
 class GridAction
 {
@@ -39,7 +38,8 @@ class GridAction
     }
 
     /**
-     * @param  null      $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function userBanAction($role = null)
@@ -77,8 +77,9 @@ class GridAction
     /**
      * @param $route
      * @param $key
-     * @param  null      $role
+     * @param null $role
      * @param $mapping_key
+     *
      * @return RowAction
      */
     public function switchUserAction($route, $key = 'id', $role = null, $mapping_key = 'username')
@@ -103,7 +104,8 @@ class GridAction
     /**
      * @param string $route
      * @param $key
-     * @param  null      $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function showAction($route, $key = 'id', $role = null)
@@ -113,7 +115,7 @@ class GridAction
             [
                 'class' => 'btn btn-success btn-xs  ',
                 'data-toggle' => 'tooltip',
-                'title' => $this->translator->trans("show"),
+                'title' => $this->translator->trans('show'),
             ]
         );
         $rowAction->setRouteParameters($key);
@@ -127,7 +129,8 @@ class GridAction
     /**
      * @param string $route
      * @param $key
-     * @param  null      $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function editAction($route, $key = 'id', $role = null)
@@ -137,7 +140,7 @@ class GridAction
             [
                 'class' => 'btn btn-warning btn-xs  ',
                 'data-toggle' => 'tooltip',
-                'title' => $this->translator->trans("edit"),
+                'title' => $this->translator->trans('edit'),
             ]
         );
         $rowAction->setRouteParameters($key);
@@ -150,7 +153,8 @@ class GridAction
 
     /**
      * @param $route
-     * @param  null      $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function sendMailAction($route, $role = null)
@@ -160,7 +164,7 @@ class GridAction
             [
                 'class' => 'btn-xs btn btn-primary',
                 'data-toggle' => 'tooltip',
-                'title' => $this->translator->trans("send.mail"),
+                'title' => $this->translator->trans('send.mail'),
             ]
         );
         $rowAction->setRouteParameters(['id']);
@@ -180,6 +184,7 @@ class GridAction
      * @param $route
      * @param $key
      * @param $role
+     *
      * @return RowAction
      */
     public function copyAction($route, $key = 'id', $role = '')
@@ -189,7 +194,7 @@ class GridAction
             [
                 'class' => 'btn btn-info btn-xs  ',
                 'data-toggle' => 'tooltip',
-                'title' => $this->translator->trans("copy"),
+                'title' => $this->translator->trans('copy'),
             ]
         );
         $rowAction->setRouteParameters($key);
@@ -203,7 +208,8 @@ class GridAction
     /**
      * @param string $route
      * @param $key
-     * @param  null      $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function submissionResumeAction($route, $key = 'id')
@@ -219,7 +225,6 @@ class GridAction
         $rowAction->setRouteParameters($key);
         $rowAction->setRouteParametersMapping(['id' => 'id']);
 
-
         return $rowAction;
     }
 
@@ -234,7 +239,8 @@ class GridAction
     /**
      * @param string $route
      * @param $key
-     * @param  null $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function deleteAction($route, $key = 'id', $role = null)
@@ -245,9 +251,9 @@ class GridAction
         $csrfTokenManager = $this->csrfTokenManager;
         $rowAction->manipulateRender(
 
-        /**
-         * @param string $action
-         */
+            /**
+             * @param string $action
+             */
             function (RowAction $action, Row $row) use ($translator, $csrfTokenManager, $route) {
                 $route = str_replace('_delete', '', $route);
                 $token = $csrfTokenManager->refreshToken($route.$row->getPrimaryFieldValue());
@@ -255,10 +261,10 @@ class GridAction
                     [
                         'class' => 'btn btn-danger btn-xs delete',
                         'data-toggle' => 'tooltip',
-                        'title' => $translator->trans("delete"),
+                        'title' => $translator->trans('delete'),
                         'data-token' => $token,
                         'data-method' => 'delete',
-                        'data-confirm' => $this->translator->trans("sure")
+                        'data-confirm' => $this->translator->trans('sure'),
                     ]
                 );
 
@@ -273,14 +279,15 @@ class GridAction
     }
 
     /**
-     * @param  null      $role
+     * @param null $role
+     *
      * @return RowAction
      */
     public function cmsAction($role = null)
     {
         $route = 'ojs_admin_page_index';
         $rowAction = new RowAction('<i class="fa fa-anchor"></i>', $route);
-        $rowAction->setAttributes(['class' => 'btn btn-info btn-xs  ', 'data-toggle' => 'tooltip', 'title' => "CMS"]);
+        $rowAction->setAttributes(['class' => 'btn btn-info btn-xs  ', 'data-toggle' => 'tooltip', 'title' => 'CMS']);
 
         $rowAction->setRouteParameters(['id', 'object']);
         $rowAction->setRoute($route);

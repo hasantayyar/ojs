@@ -17,28 +17,27 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 /**
  * Subject controller.
- *
  */
 class AdminSubjectController extends Controller
 {
-
     /**
      * Lists all Subject entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new Subject())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
-        $source = new Entity("OjsJournalBundle:Subject");
+        $source = new Entity('OjsJournalBundle:Subject');
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var Subject $entity
+                 * @var Subject
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
@@ -55,7 +54,7 @@ class AdminSubjectController extends Controller
         $grid = $this->get('grid')->setSource($source);
 
         $gridAction = $this->get('grid_action');
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_admin_subject_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_subject_edit', 'id');
         $rowAction[] = $gridAction->deleteAction('ojs_admin_subject_delete', 'id');
@@ -70,7 +69,7 @@ class AdminSubjectController extends Controller
 
         $data = [
             'grid' => $grid,
-            'tree' => $this->createTreeView($all)
+            'tree' => $this->createTreeView($all),
         ];
 
         return $grid->getGridResponse('OjsAdminBundle:AdminSubject:index.html.twig', $data);
@@ -78,7 +77,8 @@ class AdminSubjectController extends Controller
 
     /**
      * @param ArrayCollection $subjects
-     * @param int|null $parentId
+     * @param int|null        $parentId
+     *
      * @return string
      */
     private function createTreeView($subjects, $parentId = null)
@@ -86,11 +86,11 @@ class AdminSubjectController extends Controller
         $tree = '<ul>%s</ul>';
         $item = '<li>%s</li>';
         $link = '<a href="%s">%s</a>';
-        $items = "";
+        $items = '';
 
         /**
-         * @var Subject $subject
-         * @var ArrayCollection $children
+         * @var Subject
+         * @var ArrayCollection
          */
         foreach ($subjects as $subject) {
             if ($subject->getParent() == null || $subject->getParent()->getId() == $parentId) {
@@ -112,13 +112,14 @@ class AdminSubjectController extends Controller
     /**
      * Creates a new Subject entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new Subject())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new Subject();
         $entity->setCurrentLocale($request->getDefaultLocale());
@@ -166,12 +167,11 @@ class AdminSubjectController extends Controller
 
     /**
      * Displays a form to create a new Subject entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new Subject())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new Subject();
         $form = $this->createCreateForm($entity);
@@ -190,13 +190,14 @@ class AdminSubjectController extends Controller
      *
      * @param Request $request
      * @param Subject $entity
+     *
      * @return Response
      */
     public function showAction(Request $request, Subject $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity->setDefaultLocale($request->getDefaultLocale());
@@ -213,14 +214,15 @@ class AdminSubjectController extends Controller
     /**
      * Displays a form to edit an existing Subject entity.
      *
-     * @param  Subject $entity
+     * @param Subject $entity
+     *
      * @return Response
      */
     public function editAction(Subject $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
 
@@ -259,15 +261,16 @@ class AdminSubjectController extends Controller
     /**
      * Edits an existing Subject entity.
      *
-     * @param  Request $request
-     * @param  Subject $entity
+     * @param Request $request
+     * @param Subject $entity
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, Subject $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $em = $this->getDoctrine()->getManager();
         $editForm = $this->createEditForm($entity);
@@ -289,22 +292,23 @@ class AdminSubjectController extends Controller
     }
 
     /**
-     * @param  Request $request
-     * @param  Subject $entity
+     * @param Request $request
+     * @param Subject $entity
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, Subject $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $em = $this->getDoctrine()->getManager();
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_subject'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);

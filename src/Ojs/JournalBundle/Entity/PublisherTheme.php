@@ -4,10 +4,10 @@ namespace Ojs\JournalBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * PublisherTheme
+ * PublisherTheme.
+ *
  * @GRID\Source(columns="id,journal.title,title")
  */
 class PublisherTheme
@@ -15,7 +15,7 @@ class PublisherTheme
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     private $id;
@@ -31,20 +31,19 @@ class PublisherTheme
     private $css;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $isPublic;
 
     /**
-     *
      * @var Publisher
      */
     private $publisher;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -52,7 +51,7 @@ class PublisherTheme
     }
 
     /**
-     * Get Publisher
+     * Get Publisher.
      *
      * @return Publisher
      */
@@ -62,8 +61,10 @@ class PublisherTheme
     }
 
     /**
-     * Set Publisher
-     * @param  Publisher $publisher
+     * Set Publisher.
+     *
+     * @param Publisher $publisher
+     *
      * @return PublisherTheme
      */
     public function setPublisher(Publisher $publisher)
@@ -106,7 +107,7 @@ class PublisherTheme
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsPublic()
     {
@@ -114,7 +115,7 @@ class PublisherTheme
     }
 
     /**
-     * @param boolean $isPublic
+     * @param bool $isPublic
      */
     public function setIsPublic($isPublic)
     {

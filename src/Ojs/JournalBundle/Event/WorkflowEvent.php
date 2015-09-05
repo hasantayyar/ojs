@@ -6,16 +6,15 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class WorkflowEvent extends Event
 {
     /**
-     * @var Request $request
+     * @var Request
      */
     private $request;
 
     /**
-     * @var Response $response
+     * @var Response
      */
     private $response;
 

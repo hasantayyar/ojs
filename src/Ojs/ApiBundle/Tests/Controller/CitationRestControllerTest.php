@@ -6,7 +6,6 @@ use Ojs\CoreBundle\Tests\BaseTestCase;
 
 class CitationRestControllerTest extends BaseTestCase
 {
-
     public function testGetCitation()
     {
         $response = $this->apiRequest('/api/journal/1/citations');

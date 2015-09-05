@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * PublisherTypes controller.
- *
  */
 class AdminPublisherTypeController extends Controller
 {
@@ -24,18 +23,19 @@ class AdminPublisherTypeController extends Controller
      * Lists all PublisherTypes entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new PublisherTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $source = new Entity('OjsJournalBundle:PublisherTypes');
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var PublisherTypes $entity
+                 * @var PublisherTypes
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
@@ -50,7 +50,7 @@ class AdminPublisherTypeController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_publisher_type_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_publisher_type_edit', 'id');
@@ -67,13 +67,14 @@ class AdminPublisherTypeController extends Controller
     /**
      * Creates a new PublisherTypes entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new PublisherTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherTypes();
         $form = $this->createCreateForm($entity);
@@ -120,12 +121,11 @@ class AdminPublisherTypeController extends Controller
 
     /**
      * Displays a form to create a new PublisherTypes entity.
-     *
      */
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new PublisherTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherTypes();
         $form = $this->createCreateForm($entity);
@@ -142,15 +142,16 @@ class AdminPublisherTypeController extends Controller
     /**
      * Finds and displays a PublisherTypes entity.
      *
-     * @param Request $request
+     * @param Request        $request
      * @param PublisherTypes $entity
+     *
      * @return Response
      */
     public function showAction(Request $request, PublisherTypes $entity)
     {
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $entity->setDefaultLocale($request->getDefaultLocale());
@@ -168,6 +169,7 @@ class AdminPublisherTypeController extends Controller
      * Displays a form to edit an existing PublisherTypes entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -177,7 +179,7 @@ class AdminPublisherTypeController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:PublisherTypes')->find($id);
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
 
@@ -215,8 +217,9 @@ class AdminPublisherTypeController extends Controller
     /**
      * Edits an existing PublisherTypes entity.
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -226,7 +229,7 @@ class AdminPublisherTypeController extends Controller
         $entity = $em->getRepository('OjsJournalBundle:PublisherTypes')->find($id);
         $this->throw404IfNotFound($entity);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
@@ -247,15 +250,17 @@ class AdminPublisherTypeController extends Controller
     }
 
     /**
-     * @param  Request $request
-     * @param  PublisherTypes $entity
+     * @param Request        $request
+     * @param PublisherTypes $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws TokenNotFoundException
      */
     public function deleteAction(Request $request, PublisherTypes $entity)
     {
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $em = $this->getDoctrine()->getManager();
@@ -263,7 +268,7 @@ class AdminPublisherTypeController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_publisher_type'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

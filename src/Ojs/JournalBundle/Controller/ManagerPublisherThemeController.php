@@ -4,7 +4,6 @@ namespace Ojs\JournalBundle\Controller;
 
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\AdminBundle\Form\Type\PublisherThemeType;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
@@ -16,10 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
-
 /**
  * PublisherThemes controller.
- *
  */
 class ManagerPublisherThemeController extends Controller
 {
@@ -27,6 +24,7 @@ class ManagerPublisherThemeController extends Controller
      * Lists all PublisherThemes entities.
      *
      * @param $publisherId
+     *
      * @return Response
      */
     public function indexAction($publisherId)
@@ -35,7 +33,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $source = new Entity('OjsJournalBundle:PublisherTheme');
         $alias = $source->getTableAlias();
@@ -48,7 +46,7 @@ class ManagerPublisherThemeController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction(
             'ojs_publisher_manager_theme_show',
@@ -75,7 +73,8 @@ class ManagerPublisherThemeController extends Controller
     /**
      * Creates a new PublisherTheme entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction($publisherId, Request $request)
@@ -84,7 +83,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherTheme();
         $form = $this->createCreateForm($entity, $publisher);
@@ -100,7 +99,7 @@ class ManagerPublisherThemeController extends Controller
                 'ojs_publisher_manager_theme_show',
                 [
                     'publisherId' => $publisher->getId(),
-                    'id' => $entity->getId()
+                    'id' => $entity->getId(),
                 ]
             );
         }
@@ -118,8 +117,8 @@ class ManagerPublisherThemeController extends Controller
     /**
      * Creates a form to create a PublisherTypes entity.
      *
-     * @param PublisherTheme $entity The entity
-     * @param Publisher $publisher
+     * @param PublisherTheme $entity    The entity
+     * @param Publisher      $publisher
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -146,6 +145,7 @@ class ManagerPublisherThemeController extends Controller
      * Displays a form to create a new PublisherTheme entity.
      *
      * @param $publisherId
+     *
      * @return Response
      */
     public function newAction($publisherId)
@@ -154,7 +154,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new PublisherTheme();
         $form = $this->createCreateForm($entity, $publisher);
@@ -173,6 +173,7 @@ class ManagerPublisherThemeController extends Controller
      * Finds and displays a PublisherTheme entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function showAction($publisherId, PublisherTheme $entity)
@@ -181,7 +182,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
 
         $token = $this
@@ -193,7 +194,7 @@ class ManagerPublisherThemeController extends Controller
             [
                 'entity' => $entity,
                 'publisher' => $publisher,
-                'token' => $token
+                'token' => $token,
             ]
         );
     }
@@ -202,6 +203,7 @@ class ManagerPublisherThemeController extends Controller
      * Displays a form to edit an existing PublisherTheme entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($publisherId, PublisherTheme $entity)
@@ -210,7 +212,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity, $publisher);
 
@@ -253,8 +255,9 @@ class ManagerPublisherThemeController extends Controller
     /**
      * Edits an existing PublisherThemes entity.
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $publisherId, PublisherTheme $entity)
@@ -263,7 +266,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $editForm = $this->createEditForm($entity, $publisher);
         $editForm->handleRequest($request);
@@ -289,9 +292,11 @@ class ManagerPublisherThemeController extends Controller
     }
 
     /**
-     * @param  Request $request
-     * @param  PublisherTheme $entity
+     * @param Request        $request
+     * @param PublisherTheme $entity
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @throws TokenNotFoundException
      */
     public function deleteAction(Request $request, PublisherTheme $entity, $publisherId)
@@ -300,7 +305,7 @@ class ManagerPublisherThemeController extends Controller
         $publisher = $em->getRepository('OjsJournalBundle:Publisher')->find($publisherId);
         $this->throw404IfNotFound($publisher);
         if (!$this->isGrantedForPublisher($publisher)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $em = $this->getDoctrine()->getManager();
@@ -308,7 +313,7 @@ class ManagerPublisherThemeController extends Controller
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_publisher_manager_theme'.$entity->getId());
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

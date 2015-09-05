@@ -10,7 +10,6 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use Ojs\AnalyticsBundle\Entity\ArticleStatistic;
-use Ojs\CoreBundle\Entity as CommonTraits;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Ojs\CoreBundle\Params\CommonParams;
 use Ojs\UserBundle\Entity\User;
@@ -18,7 +17,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * Article
+ * Article.
+ *
  * @GRID\Source(columns="id ,title, issue, doi, journal.title, pubdate, section.title")
  * @GRID\Source(columns="id, status, title, journal.title", groups={"submission"})
  * @ExclusionPolicy("all")
@@ -27,14 +27,16 @@ class Article extends AbstractTranslatable
 {
     use GenericEntityTrait;
     /**
-     * auto-incremented article unique id
+     * auto-incremented article unique id.
+     *
      * @GRID\Column(title="id")
      * @Expose
      * @Groups({"JournalDetail","IssueDetail","ArticleDetail"})
      */
     protected $id;
     /**
-     * (optional) English transliterated abstract
+     * (optional) English transliterated abstract.
+     *
      * @var string
      * @Expose
      */
@@ -44,18 +46,19 @@ class Article extends AbstractTranslatable
      */
     protected $translations;
     /**
-     * @var integer
+     * @var int
      * @Expose
      */
     private $articleTypeId;
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @GRID\Column(type="text", groups={"submission"})
      */
     private $status;
     /**
-     * (optional)
+     * (optional).
+     *
      * @var string
      * @GRID\Column(title="OAI")
      * @Expose
@@ -63,17 +66,19 @@ class Article extends AbstractTranslatable
      */
     private $doi;
     /**
-     * Could contain any article ID used by the provider
+     * Could contain any article ID used by the provider.
+     *
      * @var string
      */
     private $otherId;
     /**
-     * @var integer
+     * @var int
      * @Expose
      */
     private $journalId;
     /**
-     * Original article title
+     * Original article title.
+     *
      * @var string
      * @GRID\Column(title="title")
      * @Expose
@@ -81,7 +86,8 @@ class Article extends AbstractTranslatable
      */
     private $title;
     /**
-     * Roman transliterated title
+     * Roman transliterated title.
+     *
      * @var string
      * @Expose
      * @Groups({"JournalDetail","IssueDetail","ArticleDetail"})
@@ -100,8 +106,9 @@ class Article extends AbstractTranslatable
      */
     private $keywords;
     /**
-     * Some articles carries no authorship
-     * @var boolean
+     * Some articles carries no authorship.
+     *
+     * @var bool
      * @Expose
      * @Groups({"JournalDetail","IssueDetail","ArticleDetail"})
      */
@@ -131,13 +138,13 @@ class Article extends AbstractTranslatable
      */
     private $part;
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      */
     private $firstPage;
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      */
@@ -148,21 +155,20 @@ class Article extends AbstractTranslatable
      */
     private $uri;
     /**
-     *
      * @var string
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      */
     private $primaryLanguage;
     /**
-     *
-     * @var integer
+     * @var int
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
      */
     private $orderNum;
     /**
-     * Original abstract
+     * Original abstract.
+     *
      * @var string
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
@@ -207,14 +213,13 @@ class Article extends AbstractTranslatable
      */
     private $submitterUser;
     /**
-     *
      * @var int
      * @Expose
      */
     private $sectionId;
     /**
+     * arbitrary attributes.
      *
-     * arbitrary attributes
      * @var Collection|ArticleAttribute[]
      */
     private $attributes;
@@ -237,7 +242,7 @@ class Article extends AbstractTranslatable
      */
     private $slug;
     /**
-     * @var boolean
+     * @var bool
      */
     private $setupStatus;
 
@@ -255,7 +260,7 @@ class Article extends AbstractTranslatable
     private $publicURI;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -291,7 +296,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * @param  string $header
+     * @param string $header
+     *
      * @return $this
      */
     public function setHeader($header)
@@ -304,6 +310,7 @@ class Article extends AbstractTranslatable
     /**
      * @param $name
      * @param $value
+     *
      * @return $this
      */
     public function addAttribute($name, $value)
@@ -315,6 +322,7 @@ class Article extends AbstractTranslatable
 
     /**
      * @param $name
+     *
      * @return bool|ArticleAttribute
      */
     public function getAttribute($name)
@@ -323,7 +331,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get subjects
+     * Get subjects.
      *
      * @return string
      */
@@ -333,9 +341,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set subjects
+     * Set subjects.
      *
-     * @param  string $subjects
+     * @param string $subjects
+     *
      * @return $this
      */
     public function setSubjects($subjects = null)
@@ -346,8 +355,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\ArticleTranslation
      */
     public function translate($locale = null)
@@ -381,7 +392,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * @param  Lang  $language
+     * @param Lang $language
+     *
      * @return $this
      */
     public function addLanguage(Lang $language)
@@ -392,7 +404,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * @param  Lang  $language
+     * @param Lang $language
+     *
      * @return $this
      */
     public function removeLanguage(Lang $language)
@@ -419,8 +432,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
+     * @param Issue $issue
      *
-     * @param  Issue $issue
      * @return $this
      */
     public function setIssue(Issue $issue = null)
@@ -439,8 +452,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
+     * @param ArticleTypes $articleType
      *
-     * @param  ArticleTypes $articleType
      * @return $this
      */
     public function setArticleType(ArticleTypes $articleType)
@@ -467,14 +480,15 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Add citation
+     * Add citation.
      *
-     * @param  Citation $citation
+     * @param Citation $citation
+     *
      * @return $this
      */
     public function addCitation(Citation $citation)
     {
-        if(!$this->citations->contains($citation)){
+        if (!$this->citations->contains($citation)) {
             $this->citations->add($citation);
             $citation->addArticle($this);
         }
@@ -483,14 +497,15 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Remove citation
+     * Remove citation.
      *
-     * @param  Citation $citation
+     * @param Citation $citation
+     *
      * @return $this
      */
     public function removeCitation(Citation $citation)
     {
-        if($this->citations->contains($citation)){
+        if ($this->citations->contains($citation)) {
             $this->citations->removeElement($citation);
             $citation->removeArticle($this);
         }
@@ -499,7 +514,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get citations
+     * Get citations.
      *
      * @return Collection|Citation[]
      */
@@ -509,7 +524,6 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     *
      * @return string
      */
     public function getStatusText()
@@ -518,7 +532,6 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     *
      * @return string
      */
     public function getStatusColor()
@@ -535,7 +548,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * @param  int   $status
+     * @param int $status
+     *
      * @return $this
      */
     public function setStatus($status)
@@ -546,8 +560,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     *
-     * @return integer
+     * @return int
      */
     public function getOrderNum()
     {
@@ -555,8 +568,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
+     * @param int $orderNum
      *
-     * @param  integer $orderNum
      * @return $this
      */
     public function setOrderNum($orderNum)
@@ -567,7 +580,6 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     *
      * @return string
      */
     public function getPrimaryLanguage()
@@ -576,8 +588,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
+     * @param string $primaryLanguage
      *
-     * @param  string $primaryLanguage
      * @return $this
      */
     public function setPrimaryLanguage($primaryLanguage)
@@ -597,6 +609,7 @@ class Article extends AbstractTranslatable
 
     /**
      * @param User $submitterUser
+     *
      * @return $this
      */
     public function setSubmitterUser(User $submitterUser)
@@ -616,6 +629,7 @@ class Article extends AbstractTranslatable
 
     /**
      * @param $keywords
+     *
      * @return $this
      */
     public function setKeywords($keywords)
@@ -626,7 +640,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get doi
+     * Get doi.
      *
      * @return string
      */
@@ -636,9 +650,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set doi
+     * Set doi.
      *
-     * @param  string $doi
+     * @param string $doi
+     *
      * @return $this
      */
     public function setDoi($doi)
@@ -649,7 +664,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get otherId
+     * Get otherId.
      *
      * @return string
      */
@@ -659,9 +674,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set otherId
+     * Set otherId.
      *
-     * @param  string $otherId
+     * @param string $otherId
+     *
      * @return $this
      */
     public function setOtherId($otherId)
@@ -672,8 +688,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get articleTypeId
-     * @return integer
+     * Get articleTypeId.
+     *
+     * @return int
      */
     public function getArticleTypeId()
     {
@@ -681,9 +698,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set articleTypeId
+     * Set articleTypeId.
      *
-     * @param  integer $articleTypeId
+     * @param int $articleTypeId
+     *
      * @return $this
      */
     public function setArticleTypeId($articleTypeId)
@@ -694,9 +712,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
-     * @return integer
+     * @return int
      */
     public function getJournalId()
     {
@@ -704,9 +722,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  integer $journalId
+     * @param int $journalId
+     *
      * @return $this
      */
     public function setJournalId($journalId)
@@ -717,7 +736,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -727,8 +746,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set journal
-     * @param  Journal $journal
+     * Set journal.
+     *
+     * @param Journal $journal
+     *
      * @return $this
      */
     public function setJournal(Journal $journal)
@@ -739,9 +760,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get sectionId
+     * Get sectionId.
      *
-     * @return integer
+     * @return int
      */
     public function getSectionId()
     {
@@ -749,9 +770,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set sectionId
+     * Set sectionId.
      *
-     * @param  integer $sectionId
+     * @param int $sectionId
+     *
      * @return $this
      */
     public function setSectionId($sectionId)
@@ -762,7 +784,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get section
+     * Get section.
      *
      * @return JournalSection
      */
@@ -772,8 +794,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set section
-     * @param  JournalSection $section
+     * Set section.
+     *
+     * @param JournalSection $section
+     *
      * @return $this
      */
     public function setSection($section)
@@ -784,9 +808,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get setupStatus
+     * Get setupStatus.
      *
-     * @return boolean
+     * @return bool
      */
     public function getSetupStatus()
     {
@@ -794,9 +818,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set setupStatus
+     * Set setupStatus.
      *
-     * @param  string $setupStatus
+     * @param string $setupStatus
+     *
      * @return $this
      */
     public function setSetupStatus($setupStatus)
@@ -807,7 +832,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get titleTransliterated
+     * Get titleTransliterated.
      *
      * @return string
      */
@@ -817,9 +842,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set titleTransliterated
+     * Set titleTransliterated.
      *
-     * @param  string $titleTransliterated
+     * @param string $titleTransliterated
+     *
      * @return $this
      */
     public function setTitleTransliterated($titleTransliterated)
@@ -830,7 +856,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get subtitle
+     * Get subtitle.
      *
      * @return string
      */
@@ -840,9 +866,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set subtitle
+     * Set subtitle.
      *
-     * @param  string $subtitle
+     * @param string $subtitle
+     *
      * @return $this
      */
     public function setSubtitle($subtitle)
@@ -853,9 +880,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get isAnonymous
+     * Get isAnonymous.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsAnonymous()
     {
@@ -863,9 +890,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set isAnonymous
+     * Set isAnonymous.
      *
-     * @param  boolean $isAnonymous
+     * @param bool $isAnonymous
+     *
      * @return $this
      */
     public function setIsAnonymous($isAnonymous)
@@ -876,7 +904,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get pubdate
+     * Get pubdate.
      *
      * @return \DateTime
      */
@@ -886,9 +914,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set pubdate
+     * Set pubdate.
      *
-     * @param  \DateTime $pubdate
+     * @param \DateTime $pubdate
+     *
      * @return $this
      */
     public function setPubdate($pubdate)
@@ -899,7 +928,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get submissionDate
+     * Get submissionDate.
      *
      * @return \DateTime
      */
@@ -909,9 +938,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set submissionDate
+     * Set submissionDate.
      *
-     * @param  \DateTime $submissionDate
+     * @param \DateTime $submissionDate
+     *
      * @return $this
      */
     public function setSubmissionDate($submissionDate)
@@ -922,7 +952,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get pubdateSeason
+     * Get pubdateSeason.
      *
      * @return string
      */
@@ -932,9 +962,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set pubDateSeason
+     * Set pubDateSeason.
      *
-     * @param  string $pubDateSeason
+     * @param string $pubDateSeason
+     *
      * @return $this
      */
     public function setPubdateSeason($pubDateSeason)
@@ -945,7 +976,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get part
+     * Get part.
      *
      * @return string
      */
@@ -955,9 +986,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set part
+     * Set part.
      *
-     * @param  string $part
+     * @param string $part
+     *
      * @return $this
      */
     public function setPart($part)
@@ -968,9 +1000,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get firstPage
+     * Get firstPage.
      *
-     * @return integer
+     * @return int
      */
     public function getFirstPage()
     {
@@ -978,9 +1010,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set firstPage
+     * Set firstPage.
      *
-     * @param  integer $firstPage
+     * @param int $firstPage
+     *
      * @return $this
      */
     public function setFirstPage($firstPage)
@@ -991,9 +1024,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get lastPage
+     * Get lastPage.
      *
-     * @return integer
+     * @return int
      */
     public function getLastPage()
     {
@@ -1001,9 +1034,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set lastPage
+     * Set lastPage.
      *
-     * @param  integer $lastPage
+     * @param int $lastPage
+     *
      * @return $this
      */
     public function setLastPage($lastPage)
@@ -1014,7 +1048,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get uri
+     * Get uri.
      *
      * @return string
      */
@@ -1024,9 +1058,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set uri
+     * Set uri.
      *
-     * @param  string $uri
+     * @param string $uri
+     *
      * @return $this
      */
     public function setUri($uri)
@@ -1037,7 +1072,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get abstract
+     * Get abstract.
      *
      * @return string
      */
@@ -1047,9 +1082,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set abstract
+     * Set abstract.
      *
-     * @param  string $abstract
+     * @param string $abstract
+     *
      * @return $this
      */
     public function setAbstract($abstract)
@@ -1060,7 +1096,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get abstractTransliterated
+     * Get abstractTransliterated.
      *
      * @return string
      */
@@ -1070,9 +1106,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set abstractTransliterated
+     * Set abstractTransliterated.
      *
-     * @param  string $abstractTransliterated
+     * @param string $abstractTransliterated
+     *
      * @return $this
      */
     public function setAbstractTransliterated($abstractTransliterated)
@@ -1083,7 +1120,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Remove attributes
+     * Remove attributes.
      *
      * @param ArticleAttribute $attributes
      */
@@ -1093,7 +1130,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get attributes
+     * Get attributes.
      *
      * @return Collection
      */
@@ -1103,14 +1140,15 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Add articleAuthor
+     * Add articleAuthor.
      *
-     * @param  ArticleAuthor $articleAuthor
+     * @param ArticleAuthor $articleAuthor
+     *
      * @return $this
      */
     public function addArticleAuthor(ArticleAuthor $articleAuthor)
     {
-        if(!$this->articleAuthors->contains($articleAuthor)){
+        if (!$this->articleAuthors->contains($articleAuthor)) {
             $this->articleAuthors->add($articleAuthor);
             $articleAuthor->setArticle($this);
         }
@@ -1119,28 +1157,31 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Remove articleAuthor
+     * Remove articleAuthor.
      *
      * @param ArticleAuthor $articleAuthor
+     *
      * @return $this
      */
     public function removeArticleAuthor(ArticleAuthor $articleAuthor)
     {
-        if($this->articleAuthors->contains($articleAuthor)){
+        if ($this->articleAuthors->contains($articleAuthor)) {
             $this->articleAuthors->removeElement($articleAuthor);
         }
+
         return $this;
     }
 
     /**
-     * Add articleFiles
+     * Add articleFiles.
      *
-     * @param  ArticleFile $articleFile
+     * @param ArticleFile $articleFile
+     *
      * @return $this
      */
     public function addArticleFile(ArticleFile $articleFile)
     {
-        if(!$this->articleFiles->contains($articleFile)){
+        if (!$this->articleFiles->contains($articleFile)) {
             $this->articleFiles->add($articleFile);
             $articleFile->setArticle($this);
         }
@@ -1149,13 +1190,13 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Remove articleFiles
+     * Remove articleFiles.
      *
      * @param ArticleFile $articleFile
      */
     public function removeArticleFile(ArticleFile $articleFile)
     {
-        if($this->articleFiles->contains($articleFile)){
+        if ($this->articleFiles->contains($articleFile)) {
             $this->articleFiles->removeElement($articleFile);
         }
     }
@@ -1169,7 +1210,8 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * @param  mixed $slug
+     * @param mixed $slug
+     *
      * @return $this
      */
     public function setSlug($slug)
@@ -1185,7 +1227,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -1195,9 +1237,10 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return $this
      */
     public function setTitle($title)
@@ -1208,9 +1251,9 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -1218,7 +1261,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -1232,7 +1275,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -1262,7 +1305,7 @@ class Article extends AbstractTranslatable
     }
 
     /**
-     * Returns the article's view count
+     * Returns the article's view count.
      *
      * @return int
      */

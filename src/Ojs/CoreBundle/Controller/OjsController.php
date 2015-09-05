@@ -8,11 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Ojs Base Controller controller.
- *
  */
 class OjsController extends Controller
 {
-
     /**
      * Checks if the attributes are granted against the current authentication token and optionally supplied object.
      *
@@ -21,6 +19,7 @@ class OjsController extends Controller
      * @param $field
      *
      * @throws \LogicException
+     *
      * @return bool
      */
     protected function isGranted($attributes, $object = null, $field = null)
@@ -33,10 +32,11 @@ class OjsController extends Controller
     }
 
     /**
+     * @param mixed  $entity
+     * @param string $message custom not found message
      *
-     * @param  mixed             $entity
-     * @param  string            $message custom not found message
-     * @return boolean
+     * @return bool
+     *
      * @throws NoResultException
      */
     protected function throw404IfNotFound($entity, $message = 'Not Found')
@@ -50,6 +50,7 @@ class OjsController extends Controller
 
     /**
      * @param $text
+     *
      * @return bool
      */
     protected function successFlashBag($text)
@@ -64,6 +65,7 @@ class OjsController extends Controller
 
     /**
      * @param $text
+     *
      * @return bool
      */
     protected function errorFlashBag($text)
@@ -80,10 +82,11 @@ class OjsController extends Controller
     {
         $user = $this->getUser();
         foreach ($publisher->getPublisherManagers() as $manager) {
-            if($manager->getUser()->getId() == $user->getId()){
+            if ($manager->getUser()->getId() == $user->getId()) {
                 return true;
             }
         }
+
         return false;
     }
 }

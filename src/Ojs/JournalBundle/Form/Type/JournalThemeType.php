@@ -8,10 +8,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class JournalThemeType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -20,14 +19,14 @@ class JournalThemeType extends AbstractType
                 'title',
                 'text',
                 [
-                    'label' => 'Title'
+                    'label' => 'Title',
                 ]
             )
             ->add(
                 'isPublic',
                 'checkbox',
                 [
-                    'label' => 'ojs.is_public'
+                    'label' => 'ojs.is_public',
                 ]
             )
             ->add(
@@ -45,7 +44,7 @@ class JournalThemeType extends AbstractType
                     'use_soft_tabs' => null,
                     'use_wrap_mode' => null,
                     'show_print_margin' => null,
-                    'highlight_active_line' => null
+                    'highlight_active_line' => null,
                 )
             );
     }

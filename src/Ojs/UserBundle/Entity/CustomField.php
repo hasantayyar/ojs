@@ -3,12 +3,12 @@
 namespace Ojs\UserBundle\Entity;
 
 /**
- * CustomField
+ * CustomField.
  */
 class CustomField
 {
     /**
-     * @var integer
+     * @var int
      */
     private $id;
 
@@ -23,12 +23,12 @@ class CustomField
     private $value;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $is_url;
 
     /**
-     * @var integer
+     * @var int
      */
     private $user_id;
 
@@ -38,9 +38,9 @@ class CustomField
     private $user;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -48,7 +48,7 @@ class CustomField
     }
 
     /**
-     * Get label
+     * Get label.
      *
      * @return string
      */
@@ -58,9 +58,10 @@ class CustomField
     }
 
     /**
-     * Set label
+     * Set label.
      *
-     * @param  string $label
+     * @param string $label
+     *
      * @return CustomField
      */
     public function setLabel($label)
@@ -71,7 +72,7 @@ class CustomField
     }
 
     /**
-     * Get value
+     * Get value.
      *
      * @return string
      */
@@ -81,9 +82,10 @@ class CustomField
     }
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param  string $value
+     * @param string $value
+     *
      * @return CustomField
      */
     public function setValue($value)
@@ -94,9 +96,9 @@ class CustomField
     }
 
     /**
-     * Get is_url
+     * Get is_url.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsUrl()
     {
@@ -104,9 +106,10 @@ class CustomField
     }
 
     /**
-     * Set is_url
+     * Set is_url.
      *
-     * @param  boolean $isUrl
+     * @param bool $isUrl
+     *
      * @return CustomField
      */
     public function setIsUrl($isUrl)
@@ -117,9 +120,9 @@ class CustomField
     }
 
     /**
-     * Get user_id
+     * Get user_id.
      *
-     * @return integer
+     * @return int
      */
     public function getUserId()
     {
@@ -127,9 +130,10 @@ class CustomField
     }
 
     /**
-     * Set user_id
+     * Set user_id.
      *
-     * @param  integer $userId
+     * @param int $userId
+     *
      * @return CustomField
      */
     public function setUserId($userId)
@@ -140,7 +144,7 @@ class CustomField
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -150,9 +154,10 @@ class CustomField
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  User $user
+     * @param User $user
+     *
      * @return CustomField
      */
     public function setUser(User $user = null)

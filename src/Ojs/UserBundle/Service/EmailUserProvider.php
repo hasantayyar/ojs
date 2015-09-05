@@ -25,8 +25,10 @@ class EmailUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param integer $id
+     * @param int $id
+     *
      * @return mixed
+     *
      * @throws NoResultException
      * @throws ORMException
      */
@@ -45,8 +47,10 @@ class EmailUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param  string       $username
+     * @param string $username
+     *
      * @return mixed
+     *
      * @throws ORMException
      */
     public function loadUserByUsername($username)
@@ -76,12 +80,13 @@ class EmailUserProvider implements UserProviderInterface
     }
 
     /**
-     * @param  UserInterface $user
+     * @param UserInterface $user
+     *
      * @return User
      */
     public function refreshUser(UserInterface $user)
     {
-        /** @var User $user */
+        /* @var User $user */
         $class = get_class($user);
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(

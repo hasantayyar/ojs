@@ -4,7 +4,6 @@ namespace Ojs\JournalBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
-use JMS\Serializer\Annotation as JMS;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
@@ -12,7 +11,8 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 /**
- * ArticleTypes
+ * ArticleTypes.
+ *
  * @GRID\Source(columns="id,name,description")
  * @ExclusionPolicy("all")
  */
@@ -21,7 +21,7 @@ class ArticleTypes extends AbstractTranslatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      * @Expose
      */
@@ -45,7 +45,7 @@ class ArticleTypes extends AbstractTranslatable
     private $description;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -53,9 +53,9 @@ class ArticleTypes extends AbstractTranslatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class ArticleTypes extends AbstractTranslatable
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -75,20 +75,24 @@ class ArticleTypes extends AbstractTranslatable
     // Proxy getters and setters
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->translate()->setDescription($description);
+
         return $this;
     }
 
     /**
-     * Translation helper method
+     * Translation helper method.
+     *
      * @param null $locale
+     *
      * @return mixed|null|\Ojs\JournalBundle\Entity\ArticleTypesTranslation
      */
     public function translate($locale = null)
@@ -127,7 +131,7 @@ class ArticleTypes extends AbstractTranslatable
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -137,14 +141,16 @@ class ArticleTypes extends AbstractTranslatable
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
     {
         $this->translate()->setName($name);
+
         return $this;
     }
 }

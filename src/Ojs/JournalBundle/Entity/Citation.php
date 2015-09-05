@@ -10,10 +10,10 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use Ojs\CoreBundle\Entity\GenericEntityTrait;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 
 /**
- * Citation
+ * Citation.
+ *
  * @ExclusionPolicy("all")
  * @GRID\Source(columns="id,raw,type")
  */
@@ -25,7 +25,7 @@ class Citation implements Translatable
      */
     protected $settings;
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="ID")
      * @Expose
      * @Groups({"IssueDetail","ArticleDetail"})
@@ -44,7 +44,7 @@ class Citation implements Translatable
      */
     private $type;
     /**
-     * @var integer
+     * @var int
      */
     private $orderNum;
     /**
@@ -62,14 +62,15 @@ class Citation implements Translatable
     }
 
     /**
-     * Add article
+     * Add article.
      *
-     * @param  Article $article
+     * @param Article $article
+     *
      * @return Citation
      */
     public function addArticle(Article $article)
     {
-        if(!$this->articles->contains($article)){
+        if (!$this->articles->contains($article)) {
             $this->articles->add($article);
             $article->addCitation($this);
         }
@@ -78,20 +79,20 @@ class Citation implements Translatable
     }
 
     /**
-     * Remove articles
+     * Remove articles.
      *
      * @param Article $article
      */
     public function removeArticle(Article $article)
     {
-        if($this->articles->contains($article)){
+        if ($this->articles->contains($article)) {
             $this->articles->removeElement($article);
             $article->removeCitation($this);
         }
     }
 
     /**
-     * Get articles
+     * Get articles.
      *
      * @return Collection
      */
@@ -101,7 +102,7 @@ class Citation implements Translatable
     }
 
     /**
-     * Remove setting
+     * Remove setting.
      *
      * @param CitationSetting $setting
      */
@@ -111,7 +112,7 @@ class Citation implements Translatable
     }
 
     /**
-     * Get settings
+     * Get settings.
      *
      * @return Collection
      */
@@ -126,9 +127,10 @@ class Citation implements Translatable
     }
 
     /**
-     * Add setting
+     * Add setting.
      *
-     * @param  CitationSetting $setting
+     * @param CitationSetting $setting
+     *
      * @return Citation
      */
     public function addSetting(CitationSetting $setting)
@@ -139,9 +141,9 @@ class Citation implements Translatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -149,7 +151,7 @@ class Citation implements Translatable
     }
 
     /**
-     * Get raw
+     * Get raw.
      *
      * @return string
      */
@@ -159,9 +161,10 @@ class Citation implements Translatable
     }
 
     /**
-     * Set raw
+     * Set raw.
      *
-     * @param  string   $raw
+     * @param string $raw
+     *
      * @return Citation
      */
     public function setRaw($raw)
@@ -172,7 +175,7 @@ class Citation implements Translatable
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -182,9 +185,10 @@ class Citation implements Translatable
     }
 
     /**
-     * Set type
+     * Set type.
      *
-     * @param  string   $type
+     * @param string $type
+     *
      * @return Citation
      */
     public function setType($type)
@@ -195,9 +199,9 @@ class Citation implements Translatable
     }
 
     /**
-     * Get orderNum
+     * Get orderNum.
      *
-     * @return integer
+     * @return int
      */
     public function getOrderNum()
     {
@@ -205,9 +209,10 @@ class Citation implements Translatable
     }
 
     /**
-     * Set orderNum
+     * Set orderNum.
      *
-     * @param  integer  $orderNum
+     * @param int $orderNum
+     *
      * @return Citation
      */
     public function setOrderNum($orderNum)
@@ -218,7 +223,7 @@ class Citation implements Translatable
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -232,7 +237,7 @@ class Citation implements Translatable
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *

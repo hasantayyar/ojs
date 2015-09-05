@@ -14,6 +14,7 @@ class ViewIssueEvent extends Event
 
     /**
      * ViewIssueEvent constructor.
+     *
      * @param Issue $issue
      */
     public function __construct($issue)

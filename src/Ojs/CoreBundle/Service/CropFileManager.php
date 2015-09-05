@@ -7,10 +7,10 @@ use Jb\Bundle\FileUploaderBundle\Service\CropFileManager as BaseCropFileManager;
 class CropFileManager extends BaseCropFileManager
 {
     /**
-     * Transform the file
+     * Transform the file.
      *
      * @param string $endpoint
-     * @param array $data
+     * @param array  $data
      *
      * @return \Liip\ImagineBundle\Binary\BinaryInterface
      */
@@ -19,9 +19,7 @@ class CropFileManager extends BaseCropFileManager
         try {
             $loaderName = $endpoint.'_original';
             $this->dataManager->getLoader($loaderName);
-
-        }
-        catch(\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException $e) {
             $loaderName = 'original';
         }
 
@@ -29,11 +27,11 @@ class CropFileManager extends BaseCropFileManager
             $binaryFile = $this->dataManager->find($loaderName, $data['filename']),
             array(
                 'filters' => array(
-                    'crop'=> array(
+                    'crop' => array(
                         'start' => array($data['x'], $data['y']),
-                        'size' => array($data['width'], $data['height'])
-                    )
-                )
+                        'size' => array($data['width'], $data['height']),
+                    ),
+                ),
             )
         );
     }

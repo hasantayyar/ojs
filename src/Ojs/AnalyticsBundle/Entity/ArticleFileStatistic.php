@@ -6,7 +6,7 @@ use Ojs\AnalyticsBundle\Traits\DownloadableTrait;
 use Ojs\JournalBundle\Entity\ArticleFile;
 
 /**
- * ArticleFileStatistic
+ * ArticleFileStatistic.
  */
 class ArticleFileStatistic extends Statistic
 {
@@ -33,4 +33,3 @@ class ArticleFileStatistic extends Statistic
         $this->articleFile = $articleFile;
     }
 }
-

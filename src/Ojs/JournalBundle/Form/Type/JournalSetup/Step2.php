@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Step2 extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options

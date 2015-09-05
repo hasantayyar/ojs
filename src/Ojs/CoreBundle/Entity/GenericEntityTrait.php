@@ -3,8 +3,7 @@
 namespace Ojs\CoreBundle\Entity;
 
 /**
- * Class GenericEntityInterface
- * @package Ojs\CoreBundle\Entity
+ * Class GenericEntityInterface.
  */
 trait GenericEntityTrait
 {

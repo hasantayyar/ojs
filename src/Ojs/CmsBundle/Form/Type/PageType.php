@@ -32,9 +32,9 @@ class PageType extends AbstractType
                         'use_soft_tabs' => null,
                         'use_wrap_mode' => null,
                         'show_print_margin' => null,
-                        'highlight_active_line' => null
-                    )
-                )
+                        'highlight_active_line' => null,
+                    ),
+                ),
             )
         )->add('tags', 'tags');
     }

@@ -14,6 +14,7 @@ class DownloadIssueFileEvent extends Event
 
     /**
      * DownloadIssueFileEvent constructor.
+     *
      * @param IssueFile $issueFile
      */
     public function __construct($issueFile)

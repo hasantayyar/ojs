@@ -37,7 +37,7 @@ class InstallTestCommand extends ContainerAwareCommand
         $locationSql = \file_get_contents($location);
         $command3 = 'doctrine:query:sql "'.$locationSql.'"';
         $application->run(new \Symfony\Component\Console\Input\StringInput($command3));
-        $output->writeln("Locations inserted.");
+        $output->writeln('Locations inserted.');
 
         $output->writeln($sb.'Inserting roles to db'.$se);
         $installCommand = new InstallCommand();
@@ -47,8 +47,8 @@ class InstallTestCommand extends ContainerAwareCommand
         $installCommand->insertAdmin($admin_username, $admin_email, $admin_password);
         $output->writeln("\nDONE\n");
         $output->writeln(
-            "You can run "
-            ."<info>sudo php app/console ojs:install:initial-data</info> "
+            'You can run '
+            .'<info>sudo php app/console ojs:install:initial-data</info> '
             ."to add sample data\n"
         );
     }

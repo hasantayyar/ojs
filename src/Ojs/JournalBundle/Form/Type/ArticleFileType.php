@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleFileType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -20,7 +19,7 @@ class ArticleFileType extends AbstractType
         array_shift($fileTypes);
         $builder
             ->add('file', 'jb_file_ajax', array(
-                'endpoint' => 'articlefiles'
+                'endpoint' => 'articlefiles',
             ))
             ->add('type', 'choice',
                 [

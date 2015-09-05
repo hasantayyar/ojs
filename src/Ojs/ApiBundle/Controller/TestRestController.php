@@ -8,9 +8,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class TestRestController extends FOSRestController
 {
-
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="Get Test Action",
@@ -21,11 +19,12 @@ class TestRestController extends FOSRestController
      * @Get("/test/{id}")
      *
      * @param $id
+     *
      * @return array
      */
     public function getTestAction($id)
     {
-        $res = array("status" => $id);
+        $res = array('status' => $id);
 
         return $res;
     }

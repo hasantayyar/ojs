@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Common methods for article
+ * Common methods for article.
  */
 class ArticleService
 {
@@ -42,8 +42,10 @@ class ArticleService
     }
 
     /**
-     * @param  Article       $article
+     * @param Article $article
+     *
      * @throws HttpException
+     *
      * @return Meta
      */
     public function generateMetaTags(Article $article)
@@ -55,7 +57,7 @@ class ArticleService
 
             $meta->meta('DC.Source', $article->getJournal()->getTitle());
             !is_null($article->getJournal()) && $meta->meta('DC.Source.ISSN', $article->getJournal()->getIssn());
-            !is_null($article->getIssue()) && $meta->meta('DC.Source.Issue', $article->getIssue()->getNumber()."");
+            !is_null($article->getIssue()) && $meta->meta('DC.Source.Issue', $article->getIssue()->getNumber().'');
             $meta->meta('DC.Source.URI', $this->journalService->generateUrl($article->getJournal()));
             !is_null($article->getIssue()) && $meta->meta('DC.Source.Volume', $article->getIssue()->getVolume());
 
@@ -95,7 +97,7 @@ class ArticleService
             $meta->meta('DC.Identifier.pageNumber', $article->getFirstPage().'-'.$article->getLastPage());
             $meta->meta('DC.Identifier.DOI', $article->getDoi());
             $meta->meta('DC.Identifier.URI', $this->generateUrl($article));
-            $meta->meta('DC.Language', $article->getPrimaryLanguage(). ' scheme="ISO639-1"');
+            $meta->meta('DC.Language', $article->getPrimaryLanguage().' scheme="ISO639-1"');
             $meta->meta('DC.Rights', '');
 
             $articleAuthors = $article->getArticleAuthors();
@@ -125,8 +127,8 @@ class ArticleService
     }
 
     /**
+     * @param Article $article
      *
-     * @param  Article $article
      * @return string
      */
     public function generateUrl(Article $article)
@@ -137,7 +139,8 @@ class ArticleService
     }
 
     /**
-     * @param  Article       $article
+     * @param Article $article
+     *
      * @return ArticleFile[]
      */
     public function getFullTextFiles(Article $article)

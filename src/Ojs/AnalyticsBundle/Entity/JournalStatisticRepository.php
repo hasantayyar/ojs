@@ -9,10 +9,11 @@ use Ojs\JournalBundle\Entity\Journal;
 class JournalStatisticRepository extends EntityRepository
 {
     /**
-     * Gets statistics of given journals on given dates
+     * Gets statistics of given journals on given dates.
      *
      * @param array $journals
      * @param array $dates
+     *
      * @return ArrayCollection
      */
     public function findByJournals($journals, $dates = null)
@@ -34,11 +35,12 @@ class JournalStatisticRepository extends EntityRepository
     }
 
     /**
-     * Gets statistics of most viewed amongst given journals
+     * Gets statistics of most viewed amongst given journals.
      *
      * @param array|Journal $journals
-     * @param array $dates
-     * @param int $limit
+     * @param array         $dates
+     * @param int           $limit
+     *
      * @return ArrayCollection
      */
     public function getMostViewed($journals, $dates = null, $limit = null)

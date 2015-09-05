@@ -10,10 +10,9 @@ use Symfony\Component\Validator\Constraints\EqualTo;
 
 class ArticleStartType extends AbstractType
 {
-
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,7 +22,7 @@ class ArticleStartType extends AbstractType
                     'allow_add' => false,
                     'allow_delete' => false,
                     'options' => array(
-                    )
+                    ),
                 )
             )
             ->add(
@@ -40,10 +39,10 @@ class ArticleStartType extends AbstractType
                         new EqualTo(
                             array(
                                 'value' => array_values($options['checkListsChoices']),
-                                'message' => 'All fields must be selected'
+                                'message' => 'All fields must be selected',
                             )
-                        )
-                    )
+                        ),
+                    ),
                 )
             )
         ;

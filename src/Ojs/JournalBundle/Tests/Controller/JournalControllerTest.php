@@ -6,7 +6,6 @@ use Ojs\CoreBundle\Tests\BaseTestCase;
 
 class JournalControllerTest extends BaseTestCase
 {
-
     public function testStatus()
     {
         $this->logIn('admin', array('ROLE_SUPER_ADMIN'));
@@ -23,7 +22,7 @@ class JournalControllerTest extends BaseTestCase
         $this->logIn();
         $crawler = $this->client->request('GET', $this->router->generate('ojs_admin_journal_new'));
         $form = $crawler->selectButton('Create')->form();
-        $form['ojs_journalbundle_journal[title]'] = "Test Content";
+        $form['ojs_journalbundle_journal[title]'] = 'Test Content';
         $form['ojs_journalbundle_journal[titleAbbr]'] = 'Content';
         $form['ojs_journalbundle_journal[titleTransliterated]'] = 'Content';
         $form['ojs_journalbundle_journal[languages]'] = [1, 2];

@@ -8,7 +8,8 @@ use Ojs\CoreBundle\Entity\GenericEntityTrait;
 use Ojs\UserBundle\Entity\User;
 
 /**
- * This collection holds resumable article submission data
+ * This collection holds resumable article submission data.
+ *
  * @GRID\Source(columns="id, currentStep, journalId , journal")
  */
 class ArticleSubmissionProgress implements Translatable
@@ -16,13 +17,13 @@ class ArticleSubmissionProgress implements Translatable
     use GenericEntityTrait;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="id")
      */
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      * @GRID\Column(title="current.step")
      */
     protected $currentStep;
@@ -56,7 +57,7 @@ class ArticleSubmissionProgress implements Translatable
     private $article;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $submitted;
 
@@ -74,7 +75,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get currentStep
+     * Get currentStep.
      *
      * @return int $currentStep
      */
@@ -84,9 +85,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set currentStep
+     * Set currentStep.
      *
-     * @param  int  $currentStep
+     * @param int $currentStep
+     *
      * @return self
      */
     public function setCurrentStep($currentStep)
@@ -97,7 +99,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get journalId
+     * Get journalId.
      *
      * @return int $journalId
      */
@@ -107,9 +109,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set journalId
+     * Set journalId.
      *
-     * @param  int  $journalId
+     * @param int $journalId
+     *
      * @return self
      */
     public function setJournalId($journalId)
@@ -120,7 +123,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get userId
+     * Get userId.
      *
      * @return int $userId
      */
@@ -130,9 +133,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set userId
+     * Set userId.
      *
-     * @param  int  $userId
+     * @param int $userId
+     *
      * @return self
      */
     public function setUserId($userId)
@@ -143,9 +147,9 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get submitted
+     * Get submitted.
      *
-     * @return boolean $submitted
+     * @return bool $submitted
      */
     public function getSubmitted()
     {
@@ -153,9 +157,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set submitted
+     * Set submitted.
      *
-     * @param  boolean $submitted
+     * @param bool $submitted
+     *
      * @return self
      */
     public function setSubmitted($submitted)
@@ -182,7 +187,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get competingOfInterest
+     * Get competingOfInterest.
      *
      * @return string $competingOfInterest
      */
@@ -192,9 +197,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set competingOfInterest
+     * Set competingOfInterest.
      *
-     * @param  string $competingOfInterest
+     * @param string $competingOfInterest
+     *
      * @return self
      */
     public function setCompetingOfInterest($competingOfInterest)
@@ -205,7 +211,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get journal
+     * Get journal.
      *
      * @return Journal
      */
@@ -215,8 +221,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set journal
-     * @param  Journal $journal
+     * Set journal.
+     *
+     * @param Journal $journal
+     *
      * @return $this
      */
     public function setJournal(Journal $journal)
@@ -227,7 +235,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return User
      */
@@ -237,9 +245,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set user
+     * Set user.
      *
-     * @param  User     $user
+     * @param User $user
+     *
      * @return $this
      */
     public function setUser(User $user)
@@ -250,7 +259,7 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Get article
+     * Get article.
      *
      * @return Article
      */
@@ -260,9 +269,10 @@ class ArticleSubmissionProgress implements Translatable
     }
 
     /**
-     * Set article
+     * Set article.
      *
-     * @param  Article     $article
+     * @param Article $article
+     *
      * @return $this
      */
     public function setArticle(Article $article)

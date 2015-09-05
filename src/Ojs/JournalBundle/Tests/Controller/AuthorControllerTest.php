@@ -6,7 +6,6 @@ use Ojs\CoreBundle\Tests\BaseTestCase;
 
 class AuthorControllerTest extends BaseTestCase
 {
-
     public function testStatus()
     {
         $this->logIn('admin', array('ROLE_SUPER_ADMIN'));

@@ -17,40 +17,41 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * ArticleTypes controller.
- *
  */
 class AdminArticleTypeController extends Controller
 {
     /**
      * Lists all ArticleTypes entities.
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
         if (!$this->isGranted('VIEW', new ArticleTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $source = new Entity('OjsJournalBundle:ArticleTypes');
         $source->manipulateRow(
-            function (Row $row) use ($request)
-            {
+            function (Row $row) use ($request) {
                 /**
-                 * @var ArticleTypes $entity
+                 * @var ArticleTypes
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
-                        $row->setField('name', $entity->getName());
-                        $row->setField('description', $entity->getDescription());
+                if (!is_null($entity)) {
+                    $row->setField('name', $entity->getName());
+                    $row->setField('description', $entity->getDescription());
                 }
+
                 return $row;
             }
         );
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
 
         $rowAction[] = $gridAction->showAction('ojs_admin_article_type_show', 'id');
         $rowAction[] = $gridAction->editAction('ojs_admin_article_type_edit', 'id');
@@ -67,13 +68,14 @@ class AdminArticleTypeController extends Controller
     /**
      * Creates a new ArticleTypes entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
     {
         if (!$this->isGranted('CREATE', new ArticleTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new ArticleTypes();
         $form = $this->createCreateForm($entity);
@@ -126,7 +128,7 @@ class AdminArticleTypeController extends Controller
     public function newAction()
     {
         if (!$this->isGranted('CREATE', new ArticleTypes())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new ArticleTypes();
         $form = $this->createCreateForm($entity);
@@ -143,14 +145,16 @@ class AdminArticleTypeController extends Controller
     /**
      * Finds and displays a ArticleTypes entity.
      *
-     * @param Request $request
+     * @param Request      $request
      * @param ArticleTypes $entity
+     *
      * @return Response
      */
-    public function showAction(Request $request , ArticleTypes $entity)
+    public function showAction(Request $request, ArticleTypes $entity)
     {
-        if (!$this->isGranted('VIEW', $entity))
-            throw new AccessDeniedException("You are not authorized for this page!");
+        if (!$this->isGranted('VIEW', $entity)) {
+            throw new AccessDeniedException('You are not authorized for this page!');
+        }
 
         $this->throw404IfNotFound($entity);
 
@@ -169,6 +173,7 @@ class AdminArticleTypeController extends Controller
      * Displays a form to edit an existing ArticleTypes entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -176,7 +181,7 @@ class AdminArticleTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:ArticleTypes')->find($id);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity);
@@ -215,8 +220,9 @@ class AdminArticleTypeController extends Controller
     /**
      * Edits an existing ArticleTypes entity.
      *
-     * @param  Request                   $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -224,7 +230,7 @@ class AdminArticleTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:ArticleTypes')->find($id);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity);
@@ -248,8 +254,9 @@ class AdminArticleTypeController extends Controller
     /**
      * Deletes a ArticleTypes entity.
      *
-     * @param  Request          $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -257,14 +264,14 @@ class AdminArticleTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:ArticleTypes')->find($id);
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_admin_article_type'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

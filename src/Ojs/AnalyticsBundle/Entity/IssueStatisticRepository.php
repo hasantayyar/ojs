@@ -8,10 +8,11 @@ use Doctrine\ORM\EntityRepository;
 class IssueStatisticRepository extends EntityRepository
 {
     /**
-     * Gets statistics of given issues on given dates
+     * Gets statistics of given issues on given dates.
      *
      * @param array $issues
      * @param array $dates
+     *
      * @return ArrayCollection
      */
     public function findByIssues($issues, $dates = null)
@@ -33,11 +34,12 @@ class IssueStatisticRepository extends EntityRepository
     }
 
     /**
-     * Gets statistics of most viewed amongst given issues
+     * Gets statistics of most viewed amongst given issues.
      *
      * @param array $issues
      * @param array $dates
-     * @param int $limit
+     * @param int   $limit
+     *
      * @return ArrayCollection
      */
     public function getMostViewed($issues, $dates = null, $limit = null)

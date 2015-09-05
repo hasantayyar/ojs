@@ -41,6 +41,7 @@ class AdminController extends Controller
     {
         if ($this->isGranted('VIEW', new Journal())) {
             $switcher = $this->createForm(new QuickSwitchType())->createView();
+
             return $this->render('OjsAdminBundle:Admin:dashboard.html.twig', ['switcher' => $switcher]);
         } else {
             return $this->redirect($this->generateUrl('ojs_user_index'));
@@ -63,8 +64,8 @@ class AdminController extends Controller
         $journals = $this->getDoctrine()->getRepository('OjsJournalBundle:Journal')->findAll();
 
         $lastMonth = ['x'];
-        for($i = 0; $i < 30; $i++) {
-            $lastMonth[] = date($generator->getDateFormat(), strtotime('-' . $i . ' days'));
+        for ($i = 0; $i < 30; ++$i) {
+            $lastMonth[] = date($generator->getDateFormat(), strtotime('-'.$i.' days'));
         }
 
         $slicedLastMonth = array_slice($lastMonth, 1);

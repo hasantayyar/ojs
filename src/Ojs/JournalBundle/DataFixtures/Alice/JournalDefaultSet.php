@@ -1,4 +1,5 @@
 <?php
+
 $set = new \h4cc\AliceFixturesBundle\Fixtures\FixtureSet(
     [
         'seed' => 1,
@@ -8,15 +9,15 @@ $set = new \h4cc\AliceFixturesBundle\Fixtures\FixtureSet(
 
 $set->addFile(__DIR__.'/subject.yml', 'yaml');
 $set->addFile(__DIR__.'/lang.yml', 'yaml');
-$set->addFile(__DIR__ . '/publisher_type.yml', 'yaml');
-$set->addFile(__DIR__ . '/publisher.yml', 'yaml');
+$set->addFile(__DIR__.'/publisher_type.yml', 'yaml');
+$set->addFile(__DIR__.'/publisher.yml', 'yaml');
 $set->addFile(__DIR__.'/journal.yml', 'yaml');
 $set->addFile(__DIR__.'/journal_section.yml', 'yaml');
 $set->addFile(__DIR__.'/issue.yml', 'yaml');
 $set->addFile(__DIR__.'/article.yml', 'yaml');
 $set->addFile(__DIR__.'/author.yml', 'yaml');
 $set->addFile(__DIR__.'/article_author.yml', 'yaml'); //Article Author
-$set->addFile(__DIR__ .'/article_type.yml', 'yaml'); //Article Types
+$set->addFile(__DIR__.'/article_type.yml', 'yaml'); //Article Types
 $set->addFile(__DIR__.'/article_file.yml', 'yaml'); //Article File
 $set->addFile(__DIR__.'/citation.yml', 'yaml');
 $set->addFile(__DIR__.'/contact_type.yml', 'yaml'); //Contact Types

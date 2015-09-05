@@ -12,13 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SearchRestController extends FOSRestController
 {
-
     /**
      * @Rest\QueryParam(name="q", nullable=false, description="Query text")
      * @Rest\QueryParam(name="page_limit", nullable=true, requirements="\d+", description="Query limit", default="10")
      *
-     * @param  ParamFetcher $paramFetcher
-     * @param  integer $journalId
+     * @param ParamFetcher $paramFetcher
+     * @param int          $journalId
+     *
      * @return Response
      *
      * @Rest\Get("/search/journal/{journalId}/users")
@@ -52,7 +52,6 @@ class SearchRestController extends FOSRestController
     }
 
     /**
-     *
      * @ApiDoc(
      *  resource=true,
      *  description="search users in username-email-tags and subjects (accepts regex inputs)",
@@ -67,7 +66,8 @@ class SearchRestController extends FOSRestController
      * )
      * @Rest\Get("/search/user")
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return array
      */
     public function getUsersAction(Request $request)

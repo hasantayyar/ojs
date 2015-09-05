@@ -5,7 +5,6 @@ namespace Ojs\JournalBundle\Controller;
 use APY\DataGridBundle\Grid\Column\ActionsColumn;
 use APY\DataGridBundle\Grid\Source\Entity;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Ojs\CoreBundle\Controller\OjsController as Controller;
 use Ojs\JournalBundle\Entity\Issue;
@@ -29,23 +28,23 @@ class IssueFileController extends Controller
         $this->throw404IfNotFound($journal);
 
         if (!$this->isGranted('VIEW', $journal, 'issues')) {
-            throw new AccessDeniedException("You not authorized for this page!");
+            throw new AccessDeniedException('You not authorized for this page!');
         }
 
         $source = new Entity('OjsJournalBundle:IssueFile');
         $source->manipulateRow(
-            function ($row) use ($request)
-            {
+            function ($row) use ($request) {
                 /**
-                 * @var \APY\DataGridBundle\Grid\Row $row
-                 * @var IssueFile $entity
+                 * @var \APY\DataGridBundle\Grid\Row
+                 * @var IssueFile
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
-                if(!is_null($entity)){
+                if (!is_null($entity)) {
                     $row->setField('title', $entity->getTitle());
                     $row->setField('description', $entity->getDescription());
                 }
+
                 return $row;
             }
         );
@@ -54,7 +53,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $issueId
+                'id' => $issueId,
             )
         );
         $this->throw404IfNotFound($issue);
@@ -70,7 +69,7 @@ class IssueFileController extends Controller
 
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_journal_issue_file_show', ['id', 'journalId' => $journal->getId(), 'issueId' => $issueId]);
         $rowAction[] = $gridAction->editAction('ojs_journal_issue_file_edit', ['id', 'journalId' => $journal->getId(), 'issueId' => $issueId]);
         $rowAction[] = $gridAction->deleteAction('ojs_journal_issue_file_delete', ['id', 'journalId' => $journal->getId(), 'issueId' => $issueId]);
@@ -89,7 +88,9 @@ class IssueFileController extends Controller
      *
      * @param Request $request
      * @param $issueId
+     *
      * @return RedirectResponse|Response
+     *
      * @throws \Doctrine\ORM\ORMException
      */
     public function createAction(Request $request, $issueId)
@@ -103,7 +104,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $issueId
+                'id' => $issueId,
             )
         );
         $this->throw404IfNotFound($issue);
@@ -135,6 +136,7 @@ class IssueFileController extends Controller
     /**
      * @param IssueFile $entity
      * @param $journalId
+     *
      * @return \Symfony\Component\Form\Form
      */
     private function createCreateForm(IssueFile $entity, $journalId)
@@ -158,6 +160,7 @@ class IssueFileController extends Controller
      * Displays a form to create a new IssueFile entity.
      *
      * @param $issueId
+     *
      * @return Response
      */
     public function newAction($issueId)
@@ -171,7 +174,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $issueId
+                'id' => $issueId,
             )
         );
         $this->throw404IfNotFound($issue);
@@ -192,6 +195,7 @@ class IssueFileController extends Controller
      * Finds and displays a IssueFile entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function showAction(Request $request, $id)
@@ -209,7 +213,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $entity->getIssue()->getId()
+                'id' => $entity->getIssue()->getId(),
             )
         );
         $this->throw404IfNotFound($issue);
@@ -223,7 +227,7 @@ class IssueFileController extends Controller
 
         return $this->render('OjsJournalBundle:IssueFile:show.html.twig', array(
             'entity' => $entity,
-            'token'  => $token,
+            'token' => $token,
         ));
     }
 
@@ -231,6 +235,7 @@ class IssueFileController extends Controller
      * Displays a form to edit an existing IssueFile entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -249,7 +254,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $entity->getIssue()->getId()
+                'id' => $entity->getIssue()->getId(),
             )
         );
         $this->throw404IfNotFound($issue);
@@ -293,6 +298,7 @@ class IssueFileController extends Controller
      *
      * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -312,7 +318,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $entity->getIssue()->getId()
+                'id' => $entity->getIssue()->getId(),
             )
         );
         $this->throw404IfNotFound($issue);
@@ -339,6 +345,7 @@ class IssueFileController extends Controller
      *
      * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -355,7 +362,7 @@ class IssueFileController extends Controller
         $issue = $em->getRepository('OjsJournalBundle:Issue')->findOneBy(
             array(
                 'journal' => $journal,
-                'id' => $entity->getIssue()->getId()
+                'id' => $entity->getIssue()->getId(),
             )
         );
         $this->throw404IfNotFound($issue);
@@ -363,14 +370,15 @@ class IssueFileController extends Controller
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
-        $token = $csrf->getToken('ojs_journal_issue_file' . $id);
+        $token = $csrf->getToken('ojs_journal_issue_file'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
 
         $em->remove($entity);
         $em->flush();
         $this->successFlashBag('successful.remove');
+
         return $this->redirect($this->generateUrl('ojs_journal_issue_file_index', ['journalId' => $journal->getId(), 'issueId' => $entity->getIssue()->getId()]));
     }
 }

@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * Author controller.
- *
  */
 class AuthorController extends Controller
 {
@@ -24,6 +23,7 @@ class AuthorController extends Controller
      * Lists all Author entities.
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
@@ -31,13 +31,13 @@ class AuthorController extends Controller
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('VIEW', new Author())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $source = new Entity('OjsJournalBundle:Author');
         $source->manipulateRow(
             function (Row $row) use ($request) {
                 /**
-                 * @var Author $entity
+                 * @var Author
                  */
                 $entity = $row->getEntity();
                 $entity->setDefaultLocale($request->getDefaultLocale());
@@ -51,7 +51,7 @@ class AuthorController extends Controller
         $grid = $this->get('grid')->setSource($source);
         $gridAction = $this->get('grid_action');
 
-        $actionColumn = new ActionsColumn("actions", 'actions');
+        $actionColumn = new ActionsColumn('actions', 'actions');
         $rowAction[] = $gridAction->showAction('ojs_journal_author_show', ['id', 'journalId' => $journal->getId()]);
         if ($this->isGranted('EDIT', new Author())) {
             $rowAction[] = $gridAction->editAction('ojs_journal_author_edit', ['id', 'journalId' => $journal->getId()]);
@@ -74,7 +74,8 @@ class AuthorController extends Controller
     /**
      * Creates a new Author entity.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function createAction(Request $request)
@@ -82,7 +83,7 @@ class AuthorController extends Controller
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('CREATE', new Author())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new Author();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -115,6 +116,7 @@ class AuthorController extends Controller
      *
      * @param Author $entity
      * @param $journalId
+     *
      * @return \Symfony\Component\Form\Form
      */
     private function createCreateForm(Author $entity, $journalId)
@@ -142,7 +144,7 @@ class AuthorController extends Controller
         $journal = $this->get('ojs.journal_service')->getSelectedJournal();
 
         if (!$this->isGranted('CREATE', new Author())) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $entity = new Author();
         $form = $this->createCreateForm($entity, $journal->getId());
@@ -160,6 +162,7 @@ class AuthorController extends Controller
      * Finds and displays a Author entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function showAction($id)
@@ -167,7 +170,7 @@ class AuthorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Author')->find($id);
         if (!$this->isGranted('VIEW', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
 
@@ -182,6 +185,7 @@ class AuthorController extends Controller
      * Displays a form to edit an existing Author entity.
      *
      * @param $id
+     *
      * @return Response
      */
     public function editAction($id)
@@ -192,7 +196,7 @@ class AuthorController extends Controller
         /** @var Author $entity */
         $entity = $em->getRepository('OjsJournalBundle:Author')->find($id);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity, $journal->getId());
@@ -216,6 +220,7 @@ class AuthorController extends Controller
      *
      * @param Author $entity
      * @param $journalId
+     *
      * @return \Symfony\Component\Form\Form
      */
     private function createEditForm(Author $entity, $journalId)
@@ -239,8 +244,9 @@ class AuthorController extends Controller
     /**
      * Edits an existing Author entity.
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse|Response
      */
     public function updateAction(Request $request, $id)
@@ -251,7 +257,7 @@ class AuthorController extends Controller
         /** @var Author $entity */
         $entity = $em->getRepository('OjsJournalBundle:Author')->find($id);
         if (!$this->isGranted('EDIT', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
         $editForm = $this->createEditForm($entity, $journal->getId());
@@ -282,8 +288,9 @@ class AuthorController extends Controller
     /**
      * Deletes a Author entity.
      *
-     * @param  Request $request
+     * @param Request $request
      * @param $id
+     *
      * @return RedirectResponse
      */
     public function deleteAction(Request $request, $id)
@@ -293,14 +300,14 @@ class AuthorController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('OjsJournalBundle:Author')->find($id);
         if (!$this->isGranted('DELETE', $entity)) {
-            throw new AccessDeniedException("You are not authorized for this page!");
+            throw new AccessDeniedException('You are not authorized for this page!');
         }
         $this->throw404IfNotFound($entity);
 
         $csrf = $this->get('security.csrf.token_manager');
         $token = $csrf->getToken('ojs_journal_author'.$id);
         if ($token != $request->get('_token')) {
-            throw new TokenNotFoundException("Token Not Found!");
+            throw new TokenNotFoundException('Token Not Found!');
         }
         $em->remove($entity);
         $em->flush();

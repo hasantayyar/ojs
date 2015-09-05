@@ -12,7 +12,6 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 class ORMQueryBuilderLoader implements EntityLoaderInterface
 {
-
     /** @var QueryBuilder */
     private $queryBuilder;
 

@@ -19,7 +19,6 @@ use Ojs\JournalBundle\Entity\JournalUser;
 use Ojs\JournalBundle\Entity\Subject;
 use Ojs\LocationBundle\Entity\Country;
 use Ojs\LocationBundle\Entity\Province;
-use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -27,7 +26,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * User
+ * User.
+ *
  * @ExclusionPolicy("all")
  * @UniqueEntity(fields="username", message="That username is taken!")
  * @UniqueEntity(fields="email", message="That email is taken!")
@@ -41,12 +41,11 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
-     * @var integer
+     * @var int
      * @Expose
      * @GRID\Column(title="user.id")
      */
     protected $id;
-
 
     /**
      * @var string
@@ -64,8 +63,6 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
      */
     protected $lastName;
 
-
-
     /**
      * @var string
      */
@@ -76,11 +73,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
      */
     protected $apiKey;
 
-
     /** @var  ArrayCollection */
     protected $restrictedJournals;
-
-
 
     /** @var  string */
     protected $gender;
@@ -107,7 +101,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     private $subjects;
 
     /**
-     * Json encoded settings string
+     * Json encoded settings string.
+     *
      * @var String
      * @Expose
      */
@@ -138,12 +133,11 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
      */
     private $oauthAccounts;
 
-    /** @var  boolean */
+    /** @var  bool */
     private $privacy;
 
     /** @var Collection */
     private $journalUsers;
-
 
     public function __construct()
     {
@@ -154,9 +148,9 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -165,6 +159,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
 
     /**
      * @param $key
+     *
      * @return mixed
      */
     public function getSetting($key)
@@ -183,8 +178,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
+     * @param array $settings
      *
-     * @param  array $settings
      * @return User
      */
     public function setSettings($settings)
@@ -203,7 +198,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $apiKey
+     * @param string $apiKey
+     *
      * @return User
      */
     public function setApiKey($apiKey)
@@ -211,9 +207,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
         $this->apiKey = $apiKey;
     }
 
-
     /**
-     *
      * @return Collection
      */
     public function getSubjects()
@@ -222,7 +216,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  Subject $subject
+     * @param Subject $subject
+     *
      * @return $this
      */
     public function addSubject(Subject $subject)
@@ -240,15 +235,13 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
         $this->subjects->removeElement($subject);
     }
 
-
     public function generateToken()
     {
         return md5($this->getEmail()).md5(uniqid($this->getUsername(), true));
     }
 
-
     /**
-     * Generates an API Key
+     * Generates an API Key.
      */
     public function generateApiKey()
     {
@@ -256,9 +249,10 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Add restrictedJournals
+     * Add restrictedJournals.
      *
-     * @param  Journal $restrictedJournals
+     * @param Journal $restrictedJournals
+     *
      * @return User
      */
     public function addRestrictedJournal(Journal $restrictedJournals)
@@ -269,7 +263,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Remove restrictedJournals
+     * Remove restrictedJournals.
      *
      * @param Journal $restrictedJournals
      */
@@ -279,7 +273,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Get restrictedJournals
+     * Get restrictedJournals.
      *
      * @return Collection
      */
@@ -289,9 +283,10 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Add customFields
+     * Add customFields.
      *
-     * @param  CustomField $customFields
+     * @param CustomField $customFields
+     *
      * @return User
      */
     public function addCustomField(CustomField $customFields)
@@ -302,7 +297,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Remove customFields
+     * Remove customFields.
      *
      * @param \Ojs\UserBundle\Entity\CustomField $customFields
      */
@@ -312,7 +307,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Get customFields
+     * Get customFields.
      *
      * @return Collection
      */
@@ -322,9 +317,10 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Add oauthAccounts
+     * Add oauthAccounts.
      *
-     * @param  UserOauthAccount $oauthAccounts
+     * @param UserOauthAccount $oauthAccounts
+     *
      * @return User
      */
     public function addOauthAccount(UserOauthAccount $oauthAccounts)
@@ -335,7 +331,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Remove oauthAccounts
+     * Remove oauthAccounts.
      *
      * @param UserOauthAccount $oauthAccounts
      */
@@ -345,7 +341,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Get oauthAccounts
+     * Get oauthAccounts.
      *
      * @return Collection
      */
@@ -355,7 +351,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPrivacy()
     {
@@ -363,9 +359,9 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Get privacy
+     * Get privacy.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPrivacy()
     {
@@ -373,7 +369,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  boolean $privacy
+     * @param bool $privacy
+     *
      * @return $this
      */
     public function setPrivacy($privacy)
@@ -392,7 +389,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $address
+     * @param string $address
+     *
      * @return $this
      */
     public function setAddress($address)
@@ -411,7 +409,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  Author $author
+     * @param Author $author
+     *
      * @return $this
      */
     public function addAuthorDetail(Author $author)
@@ -422,7 +421,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  Author $author
+     * @param Author $author
+     *
      * @return $this
      */
     public function removeAuthorDetail(Author $author)
@@ -441,7 +441,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $billing_address
+     * @param string $billing_address
+     *
      * @return $this
      */
     public function setBillingAddress($billing_address)
@@ -460,7 +461,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $fax
+     * @param string $fax
+     *
      * @return $this
      */
     public function setFax($fax)
@@ -479,7 +481,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $gender
+     * @param string $gender
+     *
      * @return $this
      */
     public function setGender($gender)
@@ -498,7 +501,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $initials
+     * @param string $initials
+     *
      * @return $this
      */
     public function setInitials($initials)
@@ -517,7 +521,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  mixed $locale
+     * @param mixed $locale
+     *
      * @return $this
      */
     public function setLocale($locale)
@@ -536,7 +541,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $phone
+     * @param string $phone
+     *
      * @return $this
      */
     public function setPhone($phone)
@@ -555,7 +561,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $url
+     * @param string $url
+     *
      * @return $this
      */
     public function setUrl($url)
@@ -584,9 +591,10 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Set firstName
+     * Set firstName.
      *
-     * @param  string $firstName
+     * @param string $firstName
+     *
      * @return User
      */
     public function setFirstName($firstName)
@@ -605,7 +613,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $lastName
+     * @param string $lastName
+     *
      * @return $this
      */
     public function setLastName($lastName)
@@ -646,7 +655,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $avatar
+     * @param string $avatar
+     *
      * @return User
      */
     public function setAvatar($avatar)
@@ -665,7 +675,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  string $header
+     * @param string $header
+     *
      * @return $this
      */
     public function setHeader($header)
@@ -684,7 +695,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  mixed $title
+     * @param mixed $title
+     *
      * @return $this
      */
     public function setTitle($title)
@@ -703,7 +715,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  Country $country
+     * @param Country $country
+     *
      * @return User
      */
     public function setCountry(Country $country)
@@ -722,7 +735,8 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * @param  Province $city
+     * @param Province $city
+     *
      * @return User
      */
     public function setCity(Province $city)
@@ -769,7 +783,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Set created
+     * Set created.
      *
      * @param \DateTime $created
      *
@@ -783,7 +797,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Set updated
+     * Set updated.
      *
      * @param \DateTime $updated
      *
@@ -797,7 +811,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Add journalUser
+     * Add journalUser.
      *
      * @param \Ojs\JournalBundle\Entity\JournalUser $journalUser
      *
@@ -811,7 +825,7 @@ class User extends BaseUser implements Translatable, UserInterface, \Serializabl
     }
 
     /**
-     * Remove journalUser
+     * Remove journalUser.
      *
      * @param \Ojs\JournalBundle\Entity\JournalUser $journalUser
      */
